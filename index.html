@@ -2245,6 +2245,8 @@ s0.parentNode.insertBefore(s1,s0);
     .ad-badge-red{background:rgba(255,107,107,0.12);color:#ff6b6b;}
     .ad-accept-btn{background:linear-gradient(135deg,var(--fiber),#2bc4b8);color:#fff;border:none;padding:6px 14px;border-radius:8px;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
     .ad-accept-btn:hover{transform:scale(1.05);box-shadow:0 4px 12px rgba(62,211,199,0.3);}
+    .ad-delete-btn{background:none;border:none;color:#ff6b6b;cursor:pointer;font-size:1rem;opacity:0.7;transition:all 0.2s;padding:4px 8px;border-radius:8px;}
+    .ad-delete-btn:hover{opacity:1;background:rgba(255,107,107,0.15);transform:scale(1.15);}
     .ad-empty{text-align:center;padding:40px 20px;color:var(--muted);font-size:0.88rem;}
     .ad-empty .ad-empty-icon{font-size:2rem;margin-bottom:8px;opacity:0.5;}
     .ad-chat-box{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
@@ -2323,8 +2325,8 @@ s0.parentNode.insertBefore(s1,s0);
     <div class="ad-panel active" id="panelWateja">
       <div class="ad-table-wrap">
         <table class="ad-table">
-          <thead><tr><th>Jina</th><th>Email</th><th>Huduma</th><th>Tarehe</th></tr></thead>
-          <tbody id="adminClientsBody"><tr><td colspan="4" class="ad-empty"><div class="ad-empty-icon">👥</div>Inapakia wateja...</td></tr></tbody>
+          <thead><tr><th>Jina</th><th>Email</th><th>Huduma</th><th>Tarehe</th><th data-label="admin-cu-kitendo">Kitendo</th></tr></thead>
+          <tbody id="adminClientsBody"><tr><td colspan="5" class="ad-empty"><div class="ad-empty-icon">👥</div>Inapakia wateja...</td></tr></tbody>
         </table>
       </div>
     </div>
@@ -2752,16 +2754,16 @@ s0.parentNode.insertBefore(s1,s0);
     db.collection('clients').orderBy('createdAt','desc').get().then((snap) => {
       document.getElementById('statClients').textContent = snap.size;
       document.getElementById('tabCountClients').textContent = snap.size;
-      if(snap.empty){ tBody.innerHTML = '<tr><td colspan="4" class="ad-empty"><div class="ad-empty-icon">👥</div>'+translations[currentLang]['admin-clients-empty']+'</td></tr>'; return; }
+      if(snap.empty){ tBody.innerHTML = '<tr><td colspan="5" class="ad-empty"><div class="ad-empty-icon">👥</div>'+translations[currentLang]['admin-clients-empty']+'</td></tr>'; return; }
       let rows = '';
       snap.forEach((doc) => {
         const d = doc.data();
         const dt = d.createdAt ? d.createdAt.toDate().toLocaleDateString('sw-TZ') : '—';
         const badge = d.huduma ? '<span class="ad-badge ad-badge-green">'+d.huduma+'</span>' : '—';
-        rows += '<tr><td><strong>'+(d.jina||'—')+'</strong></td><td style="color:var(--muted)">'+(d.email||'—')+'</td><td>'+badge+'</td><td style="font-family:JetBrains Mono,monospace;font-size:0.82rem;color:var(--muted)">'+dt+'</td></tr>';
+        rows += '<tr><td><strong>'+(d.jina||'—')+'</strong></td><td style="color:var(--muted)">'+(d.email||'—')+'</td><td>'+badge+'</td><td style="font-family:JetBrains Mono,monospace;font-size:0.82rem;color:var(--muted)">'+dt+'</td><td><button class="ad-delete-btn" onclick="deleteClient(\''+doc.id+'\',\''+((d.jina||'').replace(/'/g,"\\'"))+'\')">🗑️</button></td></tr>';
       });
       tBody.innerHTML = rows;
-    }).catch((e) => { tBody.innerHTML = '<tr><td colspan="4" class="ad-empty" style="color:#ff6b6b">'+e.message+'</td></tr>'; });
+    }).catch((e) => { tBody.innerHTML = '<tr><td colspan="5" class="ad-empty" style="color:#ff6b6b">'+e.message+'</td></tr>'; });
 
     if(_unsubAdminOrders) _unsubAdminOrders();
     _unsubAdminOrders = db.collection('orders').onSnapshot((snap) => {
@@ -2859,6 +2861,18 @@ s0.parentNode.insertBefore(s1,s0);
       showOrderAcceptedPopup();
     }).catch((e) => {
       console.error('Accept order error:', e);
+      alert('Hitilafu imetokea: ' + e.message);
+    });
+  }
+
+  function deleteClient(id, name){
+    const at = translations[currentLang];
+    if(!confirm((at['admin-cu-delete-confirm'] || 'Futa mteja') + ' "' + name + '"?')) return;
+    db.collection('clients').doc(id).delete().then(() => {
+      document.getElementById('statClients').textContent = Math.max(0, parseInt(document.getElementById('statClients').textContent) - 1);
+      document.getElementById('tabCountClients').textContent = document.getElementById('statClients').textContent;
+    }).catch((e) => {
+      console.error('Delete client error:', e);
       alert('Hitilafu imetokea: ' + e.message);
     });
   }
@@ -3468,6 +3482,8 @@ s0.parentNode.insertBefore(s1,s0);
       'cu-status-imekamilika': 'Imekamilika',
       'admin-orders-empty': 'Hakuna maombi bado.',
       'admin-clients-empty': 'Hakuna wateja bado.',
+      'admin-cu-kitendo': 'Kitendo',
+      'admin-cu-delete-confirm': 'Futa mteja',
       'admin-loading': 'Inapakia...',
       'cu-orders-empty': 'Hujawahi kuomba huduma bado.',
       'cu-loading': 'Inapakia...',
@@ -3879,6 +3895,8 @@ s0.parentNode.insertBefore(s1,s0);
       'cu-status-imekamilika': 'Completed',
       'admin-orders-empty': 'No orders yet.',
       'admin-clients-empty': 'No clients yet.',
+      'admin-cu-kitendo': 'Action',
+      'admin-cu-delete-confirm': 'Delete client',
       'admin-loading': 'Loading...',
       'cu-orders-empty': 'You have not requested any service yet.',
       'cu-loading': 'Loading...',
