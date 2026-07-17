@@ -716,6 +716,7 @@
     .ad-top-right{gap:6px !important;}
     .ad-top-right .admin-tag{font-size:0.6rem !important; padding:3px 8px !important;}
     .ad-top-logout{font-size:0.78rem !important; padding:6px 12px !important;}
+    .ad-notif-panel,.cu-notif-panel{width:260px !important;right:-10px !important;}
     .ad-wrap{padding:14px 12px 28px !important;}
     .ad-greeting{font-size:1.05rem !important; margin-bottom:4px;}
     .ad-greeting-sub{font-size:0.78rem; margin-bottom:16px;}
@@ -825,6 +826,16 @@
     <div class="diamond-icon">👁️</div>
     <div class="diamond-title">Order Imekubaliwa!</div>
     <div class="diamond-sub">Mteja atapata taarifa kuwa order yake imeona na inashughulikiwa.</div>
+    <div class="diamond-bar"><div class="diamond-bar-inner"></div></div>
+  </div>
+</div>
+
+<div class="diamond-popup-overlay order-success" id="orderCompletedPopup">
+  <div class="diamond-popup">
+    <div class="diamond-shape"></div>
+    <div class="diamond-icon">✅</div>
+    <div class="diamond-title">Order Imekamilika!</div>
+    <div class="diamond-sub">Mteja atapata taarifa kuwa order yake imekamilika.</div>
     <div class="diamond-bar"><div class="diamond-bar-inner"></div></div>
   </div>
 </div>
@@ -1995,6 +2006,10 @@ s0.parentNode.insertBefore(s1,s0);
       <div class="cu-page active" id="cuPageNyumbani">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:8px;">
           <h2 class="cu-page-title" id="cuHeroTitle" style="margin-bottom:0;">👋 Karibu!</h2>
+          <div class="cu-notif-wrap" id="cuNotifWrap">
+            <button class="cu-notif-bell" id="cuNotifBell" onclick="toggleNotifPanel('customer')">🔔 <span class="cu-notif-badge" id="cuNotifBadge">0</span></button>
+            <div class="cu-notif-panel" id="cuNotifPanel"></div>
+          </div>
           <button id="cuLogoutBtnTop" onclick="firebase.auth().signOut()" style="background:none;border:1px solid rgba(255,107,107,0.3);color:#ff6b6b;padding:8px 16px;border-radius:10px;font-size:0.82rem;cursor:pointer;font-weight:600;display:flex;align-items:center;gap:6px;transition:all 0.2s;"><span style="display:inline-block;transition:transform 0.3s;">🚪</span> Out</button>
         </div>
         <p class="cu-page-sub" data-label="cu-page-sub">Ungependa kufanya nini leo?</p>
@@ -2265,6 +2280,32 @@ s0.parentNode.insertBefore(s1,s0);
     .ad-edit-cancel:hover{background:rgba(255,107,107,0.1);color:#ff6b6b;border-color:#ff6b6b;}
     .ad-edit-save{padding:10px 18px;border-radius:10px;border:none;background:linear-gradient(135deg,var(--fiber),#2bc4b8);color:#fff;font-size:0.85rem;font-weight:600;cursor:pointer;transition:all 0.2s;}
     .ad-edit-save:hover{transform:scale(1.03);box-shadow:0 4px 14px rgba(62,211,199,0.3);}
+    .ad-analytics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;padding:10px 0;}
+    .ad-chart-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;transition:all 0.2s;}
+    .ad-chart-card:hover{border-color:var(--fiber);box-shadow:0 4px 16px rgba(62,211,199,0.1);}
+    .ad-chart-card h4{margin:0 0 14px 0;font-size:0.9rem;color:var(--text);font-weight:600;}
+    .ad-toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px;}
+    .ad-search{flex:1;min-width:180px;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--text);font-size:0.85rem;font-family:'Inter',sans-serif;transition:border-color 0.2s;}
+    .ad-search:focus{outline:none;border-color:var(--fiber);}
+    .ad-filter-group{display:flex;gap:4px;flex-wrap:wrap;}
+    .ad-filter-btn{padding:7px 12px;border-radius:8px;border:1px solid var(--line);background:none;color:var(--muted);font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.2s;}
+    .ad-filter-btn:hover{border-color:var(--fiber);color:var(--fiber);}
+    .ad-filter-btn.active{background:var(--fiber);color:#fff;border-color:var(--fiber);}
+    .ad-export-btn{padding:8px 14px;border-radius:8px;border:1px solid var(--line);background:none;color:var(--muted);font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+    .ad-export-btn:hover{border-color:var(--fiber);color:var(--fiber);background:rgba(62,211,199,0.08);}
+    .ad-notif-wrap,.cu-notif-wrap{position:relative;display:inline-block;}
+    .ad-notif-bell,.cu-notif-bell{background:none;border:none;font-size:1.1rem;cursor:pointer;position:relative;padding:6px;border-radius:8px;transition:all 0.2s;}
+    .ad-notif-bell:hover,.cu-notif-bell:hover{background:rgba(255,255,255,0.1);}
+    .ad-notif-badge,.cu-notif-badge{position:absolute;top:0;right:0;background:#ff6b6b;color:#fff;font-size:0.6rem;font-weight:700;min-width:16px;height:16px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 4px;transform:translate(4px,-4px);display:none;}
+    .ad-notif-badge.show,.cu-notif-badge.show{display:flex;}
+    .ad-notif-panel,.cu-notif-panel{display:none;position:absolute;top:100%;right:0;width:320px;max-height:380px;overflow-y:auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.3);z-index:999;padding:8px;}
+    .ad-notif-panel.show,.cu-notif-panel.show{display:block;}
+    .notif-item{padding:10px 12px;border-radius:8px;cursor:pointer;transition:background 0.15s;border-bottom:1px solid var(--line);font-size:0.82rem;color:var(--text);}
+    .notif-item:last-child{border-bottom:none;}
+    .notif-item:hover{background:rgba(62,211,199,0.08);}
+    .notif-item.unread{background:rgba(62,211,199,0.06);font-weight:600;}
+    .notif-item .notif-time{font-size:0.7rem;color:var(--muted);margin-top:4px;}
+    .notif-empty{text-align:center;padding:20px;color:var(--muted);font-size:0.82rem;}
     .ad-empty{text-align:center;padding:40px 20px;color:var(--muted);font-size:0.88rem;}
     .ad-empty .ad-empty-icon{font-size:2rem;margin-bottom:8px;opacity:0.5;}
     .ad-chat-box{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
@@ -2317,6 +2358,10 @@ s0.parentNode.insertBefore(s1,s0);
     <div class="ad-brand"><span class="dot"></span>PLATINUMZ Admin</div>
     <div class="ad-top-right">
       <span class="admin-tag">🛡️ ADMIN</span>
+      <div class="ad-notif-wrap" id="adminNotifWrap">
+        <button class="ad-notif-bell" id="adminNotifBell" onclick="toggleNotifPanel('admin')">🔔 <span class="ad-notif-badge" id="adminNotifBadge">0</span></button>
+        <div class="ad-notif-panel" id="adminNotifPanel"></div>
+      </div>
       <button class="ad-top-logout" id="langToggleAdmin" style="padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:none;color:var(--paper);cursor:pointer;font-size:0.78rem;font-weight:700;letter-spacing:0.5px;">SW</button>
       <button class="ad-top-logout" id="adminLogoutBtn" onclick="firebase.auth().signOut()">🚪 Out</button>
     </div>
@@ -2338,9 +2383,14 @@ s0.parentNode.insertBefore(s1,s0);
       <button class="ad-tab" data-tab="orders" data-label="admin-tab-orders">📋 Orders <span class="count" id="tabCountOrders">0</span></button>
       <button class="ad-tab" data-tab="chat" data-label="admin-tab-chat">💬 Chat <span class="count" id="tabCountChats">0</span></button>
       <button class="ad-tab" data-tab="maoni" data-label="admin-tab-maoni">⭐ Maoni <span class="count" id="tabCountReviews">0</span></button>
+      <button class="ad-tab" data-tab="analytics" data-label="admin-tab-analytics">📊 Analytics</button>
     </div>
 
     <div class="ad-panel active" id="panelWateja">
+      <div class="ad-toolbar">
+        <input type="text" id="clientSearchInput" class="ad-search" placeholder="🔍 Tafuta mteja..." oninput="filterClients()">
+        <button class="ad-export-btn" onclick="exportClientsCSV()">📥 CSV</button>
+      </div>
       <div class="ad-table-wrap">
         <table class="ad-table">
           <thead><tr><th>Jina</th><th>Email</th><th>Huduma</th><th>Tarehe</th><th data-label="admin-cu-kitendo">Kitendo</th></tr></thead>
@@ -2350,6 +2400,16 @@ s0.parentNode.insertBefore(s1,s0);
     </div>
 
     <div class="ad-panel" id="panelOrders">
+      <div class="ad-toolbar">
+        <input type="text" id="orderSearchInput" class="ad-search" placeholder="🔍 Tafuta order..." oninput="filterOrders()">
+        <div class="ad-filter-group">
+          <button class="ad-filter-btn active" onclick="filterByStatus('all',this)">All</button>
+          <button class="ad-filter-btn" onclick="filterByStatus('mpya',this)">🆕 Mpya</button>
+          <button class="ad-filter-btn" onclick="filterByStatus('inashughulikiwa',this)">⏳ Inashughulikiwa</button>
+          <button class="ad-filter-btn" onclick="filterByStatus('imekamilika',this)">✅ Imekamilika</button>
+        </div>
+        <button class="ad-export-btn" onclick="exportOrdersCSV()">📥 CSV</button>
+      </div>
       <div class="ad-table-wrap">
         <table class="ad-table">
           <thead><tr><th data-label="admin-order-jina">Jina</th><th data-label="admin-order-simu">Simu</th><th data-label="admin-order-huduma">Huduma</th><th data-label="admin-order-gharama">Gharama</th><th data-label="admin-order-maelezo">Maelezo</th><th data-label="admin-order-tarehe">Tarehe</th><th data-label="admin-order-hali">Hali</th><th data-label="admin-order-kitendo">Kitendo</th></tr></thead>
@@ -2370,6 +2430,27 @@ s0.parentNode.insertBefore(s1,s0);
 
     <div class="ad-panel" id="panelMaoni">
       <div id="adminReviewsList"><div class="ad-empty"><div class="ad-empty-icon">⭐</div>Inapakia maoni...</div></div>
+    </div>
+
+    <div class="ad-panel" id="panelAnalytics">
+      <div class="ad-analytics-grid">
+        <div class="ad-chart-card">
+          <h4>📋 Orders kwa Mwezi</h4>
+          <canvas id="ordersChart"></canvas>
+        </div>
+        <div class="ad-chart-card">
+          <h4>👥 Wateja wapya</h4>
+          <canvas id="clientsChart"></canvas>
+        </div>
+        <div class="ad-chart-card">
+          <h4>📊 Hali ya Orders</h4>
+          <canvas id="statusChart"></canvas>
+        </div>
+        <div class="ad-chart-card">
+          <h4>💼 Huduma Maalum</h4>
+          <canvas id="servicesChart"></canvas>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -2410,6 +2491,7 @@ s0.parentNode.insertBefore(s1,s0);
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
@@ -2838,15 +2920,15 @@ s0.parentNode.insertBefore(s1,s0);
           actionBtn = '<button class="ad-accept-btn" onclick="acceptOrder(\''+id+'\')">'+(at['order-accept-btn']||'✅ Kubali')+'</button>';
         } else if(st === 'inashughulikiwa'){
           statusBadge = '<span class="ad-badge ad-badge-blue">'+(at['order-status-inashughulikiwa']||'Inashughulikiwa')+'</span>';
-          actionBtn = '<span style="color:var(--fiber);font-size:0.82rem;">✔ '+(at['order-accepted-label']||'Imekubaliwa')+'</span>';
+          actionBtn = '<button class="ad-accept-btn" style="background:linear-gradient(135deg,#28a745,#5cb85c);" onclick="completeOrder(\''+id+'\')">'+(at['order-complete-btn']||'✅ Maliza')+'</button>';
         } else if(st === 'imekamilika'){
           statusBadge = '<span class="ad-badge ad-badge-green">'+(at['order-status-imekamilika']||'Imekamilika')+'</span>';
-          actionBtn = '<span style="color:var(--muted);font-size:0.82rem;">✅</span>';
+          actionBtn = '<span style="color:var(--fiber);font-size:0.82rem;">✔ '+(at['order-completed-label']||'Imekamilika')+'</span>';
         } else {
           statusBadge = '<span class="ad-badge ad-badge-red">'+st+'</span>';
           actionBtn = '—';
         }
-        rows += '<tr><td><strong>'+(d.jina||'—')+'</strong></td><td style="color:var(--muted)">'+(d.simu||'—')+'</td><td><span class="ad-badge ad-badge-green">'+(d.huduma||'—')+'</span></td><td style="color:var(--fiber);font-weight:600;font-size:0.82rem;">'+(d.gharama||'—')+'</td><td style="color:var(--muted)">'+(d.maelezo||'—')+'</td><td style="font-family:JetBrains Mono,monospace;font-size:0.82rem;color:var(--muted)">'+dt+'</td><td>'+statusBadge+'</td><td>'+actionBtn+'</td></tr>';
+        rows += '<tr data-status="'+st+'"><td><strong>'+(d.jina||'—')+'</strong></td><td style="color:var(--muted)">'+(d.simu||'—')+'</td><td><span class="ad-badge ad-badge-green">'+(d.huduma||'—')+'</span></td><td style="color:var(--fiber);font-weight:600;font-size:0.82rem;">'+(d.gharama||'—')+'</td><td style="color:var(--muted)">'+(d.maelezo||'—')+'</td><td style="font-family:JetBrains Mono,monospace;font-size:0.82rem;color:var(--muted)">'+dt+'</td><td>'+statusBadge+'</td><td>'+actionBtn+'</td></tr>';
       });
       oBody.innerHTML = rows;
     }, (e) => { oBody.innerHTML = '<tr><td colspan="8" class="ad-empty" style="color:#ff6b6b">'+e.message+'</td></tr>'; });
@@ -2892,6 +2974,67 @@ s0.parentNode.insertBefore(s1,s0);
       }).catch((e) => { reviewsList.innerHTML = '<div class="ad-empty" style="color:#ff6b6b">'+e.message+'</div>'; });
     }
     loadAdminReviews();
+    loadAdminAnalytics();
+    startAdminNotifications();
+  }
+
+  let _chartOrders = null, _chartClients = null, _chartStatus = null, _chartServices = null;
+
+  function loadAdminAnalytics(){
+    Promise.all([
+      db.collection('orders').get(),
+      db.collection('clients').orderBy('createdAt','desc').get()
+    ]).then(([orderSnap, clientSnap]) => {
+      const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      const now = new Date();
+      const monthCounts = new Array(12).fill(0);
+      const statusCounts = { mpya:0, inashughulikiwa:0, imekamilika:0 };
+      const serviceCounts = {};
+      orderSnap.forEach((doc) => {
+        const d = doc.data();
+        if(d.createdAt){
+          const m = d.createdAt.toDate().getMonth();
+          monthCounts[m]++;
+        }
+        const st = d.status || 'mpya';
+        statusCounts[st] = (statusCounts[st]||0)+1;
+        const svc = d.huduma || 'Nyingine';
+        serviceCounts[svc] = (serviceCounts[svc]||0)+1;
+      });
+      const clientMonthCounts = new Array(12).fill(0);
+      clientSnap.forEach((doc) => {
+        const d = doc.data();
+        if(d.createdAt){
+          const m = d.createdAt.toDate().getMonth();
+          clientMonthCounts[m]++;
+        }
+      });
+      const visibleMonths = months.slice(0, now.getMonth()+1);
+      const ordersData = monthCounts.slice(0, now.getMonth()+1);
+      const clientsData = clientMonthCounts.slice(0, now.getMonth()+1);
+      const chartColors = { fiber:'#3cd3c6', gold:'#ffd700', blue:'#4da6ff', green:'#5cb85c', red:'#ff6b6b', purple:'#9b59b6' };
+      const fontFamily = "'Inter',sans-serif";
+      const defaultOpts = { responsive:true, maintainAspectRatio:true, plugins:{ legend:{ labels:{ color:'var(--text)', font:{family:fontFamily,size:12} } } }, scales:{ x:{ ticks:{color:'var(--muted)',font:{family:fontFamily,size:11}}, grid:{color:'var(--line)'} }, y:{ ticks:{color:'var(--muted)',font:{family:fontFamily,size:11}}, grid:{color:'var(--line)'} } } };
+      if(_chartOrders) _chartOrders.destroy();
+      _chartOrders = new Chart(document.getElementById('ordersChart'),{
+        type:'bar', data:{ labels:visibleMonths, datasets:[{ label:'Orders', data:ordersData, backgroundColor:'rgba(60,211,198,0.6)', borderColor:'#3cd3c6', borderWidth:2, borderRadius:6 }] }, options:defaultOpts
+      });
+      if(_chartClients) _chartClients.destroy();
+      _chartClients = new Chart(document.getElementById('clientsChart'),{
+        type:'line', data:{ labels:visibleMonths, datasets:[{ label:'Wateja', data:clientsData, borderColor:'#ffd700', backgroundColor:'rgba(255,215,0,0.15)', fill:true, tension:0.4, borderWidth:2, pointRadius:4, pointBackgroundColor:'#ffd700' }] }, options:defaultOpts
+      });
+      if(_chartStatus) _chartStatus.destroy();
+      _chartStatus = new Chart(document.getElementById('statusChart'),{
+        type:'doughnut', data:{ labels:['Mpya','Inashughulikiwa','Imekamilika'], datasets:[{ data:[statusCounts.mpya||0, statusCounts.inashughulikiwa||0, statusCounts.imekamilika||0], backgroundColor:['#ffd700','#4da6ff','#5cb85c'], borderWidth:0 }] }, options:{ responsive:true, maintainAspectRatio:true, plugins:{ legend:{ labels:{ color:'var(--text)', font:{family:fontFamily,size:12} } } } }
+      });
+      if(_chartServices) _chartServices.destroy();
+      const svcLabels = Object.keys(serviceCounts);
+      const svcData = Object.values(serviceCounts);
+      const svcColors = ['#3cd3c6','#ffd700','#4da6ff','#5cb85c','#ff6b6b','#9b59b6','#f39c12','#e74c3c','#1abc9c','#3498db'];
+      _chartServices = new Chart(document.getElementById('servicesChart'),{
+        type:'pie', data:{ labels:svcLabels, datasets:[{ data:svcData, backgroundColor:svcColors.slice(0,svcLabels.length), borderWidth:0 }] }, options:{ responsive:true, maintainAspectRatio:true, plugins:{ legend:{ position:'right', labels:{ color:'var(--text)', font:{family:fontFamily,size:11}, padding:10 } } } }
+      });
+    }).catch((e) => { console.error('Analytics error:', e); });
   }
 
   function deleteReview(id){
@@ -2903,6 +3046,159 @@ s0.parentNode.insertBefore(s1,s0);
       document.getElementById('panelMaoni').classList.add('active');
     });
   }
+
+  let _activeOrderFilter = 'all';
+  function filterClients(){
+    const q = (document.getElementById('clientSearchInput').value||'').toLowerCase();
+    const rows = document.querySelectorAll('#adminClientsBody tr');
+    rows.forEach((r) => {
+      const text = r.textContent.toLowerCase();
+      r.style.display = text.includes(q) ? '' : 'none';
+    });
+  }
+
+  function filterOrders(){
+    const q = (document.getElementById('orderSearchInput').value||'').toLowerCase();
+    const rows = document.querySelectorAll('#adminOrdersBody tr');
+    rows.forEach((r) => {
+      const text = r.textContent.toLowerCase();
+      const matchSearch = text.includes(q);
+      const matchStatus = _activeOrderFilter === 'all' || r.getAttribute('data-status') === _activeOrderFilter;
+      r.style.display = (matchSearch && matchStatus) ? '' : 'none';
+    });
+  }
+
+  function filterByStatus(status, btn){
+    _activeOrderFilter = status;
+    document.querySelectorAll('.ad-filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    filterOrders();
+  }
+
+  function exportClientsCSV(){
+    const rows = document.querySelectorAll('#adminClientsBody tr');
+    let csv = 'Jina,Email,Huduma,Tarehe\n';
+    rows.forEach((r) => {
+      if(r.style.display === 'none') return;
+      const cells = r.querySelectorAll('td');
+      if(cells.length >= 4){
+        csv += '"'+cells[0].textContent.trim()+'","'+cells[1].textContent.trim()+'","'+cells[2].textContent.trim()+'","'+cells[3].textContent.trim()+'"\n';
+      }
+    });
+    downloadCSV(csv, 'wateja.csv');
+  }
+
+  function exportOrdersCSV(){
+    const rows = document.querySelectorAll('#adminOrdersBody tr');
+    let csv = 'Jina,Simu,Huduma,Gharama,Maelezo,Tarehe,Hali\n';
+    rows.forEach((r) => {
+      if(r.style.display === 'none') return;
+      const cells = r.querySelectorAll('td');
+      if(cells.length >= 7){
+        csv += '"'+cells[0].textContent.trim()+'","'+cells[1].textContent.trim()+'","'+cells[2].textContent.trim()+'","'+cells[3].textContent.trim()+'","'+cells[4].textContent.trim()+'","'+cells[5].textContent.trim()+'","'+cells[6].textContent.trim()+'"\n';
+      }
+    });
+    downloadCSV(csv, 'orders.csv');
+  }
+
+  function downloadCSV(csv, filename){
+    const blob = new Blob(['\uFEFF'+csv], {type:'text/csv;charset=utf-8;'});
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
+    URL.revokeObjectURL(link.href);
+  }
+
+  // --- Notification System ---
+  let _adminNotifs = [], _cuNotifs = [];
+  let _unsubAdminNotifs = null, _unsubCuNotifs = null;
+
+  function toggleNotifPanel(role){
+    const panel = document.getElementById(role === 'admin' ? 'adminNotifPanel' : 'cuNotifPanel');
+    const isShown = panel.classList.contains('show');
+    document.querySelectorAll('.ad-notif-panel,.cu-notif-panel').forEach(p => p.classList.remove('show'));
+    if(!isShown){
+      panel.classList.add('show');
+      const badge = document.getElementById(role === 'admin' ? 'adminNotifBadge' : 'cuNotifBadge');
+      if(badge){ badge.textContent = '0'; badge.classList.remove('show'); }
+      const key = role === 'admin' ? 'platinumz_admin_notif_read' : 'platinumz_cu_notif_read';
+      const now = Date.now().toString();
+      try{ localStorage.setItem(key, now); }catch(e){}
+    }
+  }
+
+  function renderNotifPanel(panelId, items){
+    const panel = document.getElementById(panelId);
+    if(!panel) return;
+    if(items.length === 0){ panel.innerHTML = '<div class="notif-empty">🔔 Hakuna arifa bado.</div>'; return; }
+    panel.innerHTML = items.map(n => '<div class="notif-item'+(n.unread?' unread':'')+'">'+n.text+'<div class="notif-time">'+n.time+'</div></div>').join('');
+  }
+
+  function startAdminNotifications(){
+    if(_unsubAdminNotifs) _unsubAdminNotifs();
+    const readKey = 'platinumz_admin_notif_read';
+    let lastRead = 0;
+    try{ lastRead = parseInt(localStorage.getItem(readKey)) || 0; }catch(e){}
+    _adminNotifs = [];
+    _unsubAdminNotifs = db.collection('orders').orderBy('createdAt','desc').limit(20).onSnapshot((snap) => {
+      const items = [];
+      snap.forEach((doc) => {
+        const d = doc.data();
+        const ts = d.createdAt ? d.createdAt.toDate().getTime() : 0;
+        const timeStr = d.createdAt ? d.createdAt.toDate().toLocaleString(currentLang==='sw'?'sw-TZ':'en-US',{hour:'2-digit',minute:'2-digit',day:'numeric',month:'short'}) : '';
+        const isNew = ts > lastRead;
+        let text = '';
+        const st = d.status || 'mpya';
+        if(st === 'mpya') text = '📋 Order mpya kutoka <strong>'+(d.jina||'Mteja')+'</strong> - '+(d.huduma||'');
+        else if(st === 'inashughulikiwa') text = '⏳ <strong>'+(d.jina||'Mteja')+' - '+(d.huduma||'')+'</strong> inashughulikiwa';
+        else if(st === 'imekamilika') text = '✅ <strong>'+(d.jina||'Mteja')+' - '+(d.huduma||'')+'</strong> imekamilika';
+        if(text) items.push({text, time:timeStr, unread:isNew});
+      });
+      _adminNotifs = items;
+      const unread = items.filter(n => n.unread).length;
+      const badge = document.getElementById('adminNotifBadge');
+      if(badge){ badge.textContent = unread; badge.classList.toggle('show', unread > 0); }
+      renderNotifPanel('adminNotifPanel', items);
+    });
+  }
+
+  function startCustomerNotifications(email){
+    if(_unsubCuNotifs) _unsubCuNotifs();
+    const readKey = 'platinumz_cu_notif_read';
+    let lastRead = 0;
+    try{ lastRead = parseInt(localStorage.getItem(readKey)) || 0; }catch(e){}
+    _cuNotifs = [];
+    _unsubCuNotifs = db.collection('orders').where('email','==',email).orderBy('createdAt','desc').limit(20).onSnapshot((snap) => {
+      const items = [];
+      snap.forEach((doc) => {
+        const d = doc.data();
+        const ts = d.createdAt ? d.createdAt.toDate().getTime() : 0;
+        const timeStr = d.createdAt ? d.createdAt.toDate().toLocaleString(currentLang==='sw'?'sw-TZ':'en-US',{hour:'2-digit',minute:'2-digit',day:'numeric',month:'short'}) : '';
+        const st = d.status || 'mpya';
+        let text = '';
+        if(st === 'inashughulikiwa'){
+          const isUnread = ts > lastRead;
+          text = '⏳ Order yako ya <strong>'+(d.huduma||'')+'</strong> imeanza kushughulikiwa';
+          items.push({text, time:timeStr, unread:isUnread});
+        } else if(st === 'imekamilika'){
+          const isUnread = ts > lastRead;
+          text = '✅ Order yako ya <strong>'+(d.huduma||'')+'</strong> imekamilika! Furaha!';
+          items.push({text, time:timeStr, unread:isUnread});
+        }
+      });
+      _cuNotifs = items;
+      const unread = items.filter(n => n.unread).length;
+      const badge = document.getElementById('cuNotifBadge');
+      if(badge){ badge.textContent = unread; badge.classList.toggle('show', unread > 0); }
+      renderNotifPanel('cuNotifPanel', items);
+    });
+  }
+
+  document.addEventListener('click', function(e){
+    if(!e.target.closest('.ad-notif-wrap')) document.getElementById('adminNotifPanel').classList.remove('show');
+    if(!e.target.closest('.cu-notif-wrap')) document.getElementById('cuNotifPanel').classList.remove('show');
+  });
 
   function acceptOrder(id){
     const at = translations[currentLang];
@@ -2916,6 +3212,53 @@ s0.parentNode.insertBefore(s1,s0);
       console.error('Accept order error:', e);
       alert('Hitilafu imetokea: ' + e.message);
     });
+  }
+
+  function completeOrder(id){
+    const at = translations[currentLang];
+    if(!confirm(at['order-complete-confirm'] || 'Maliza order hii?')) return;
+    const orderRef = db.collection('orders').doc(id);
+    orderRef.get().then((doc) => {
+      if(!doc.exists) return;
+      const orderData = doc.data();
+      return orderRef.update({
+        status: 'imekamilika',
+        completedAt: firebase.firestore.FieldValue.serverTimestamp()
+      }).then(() => {
+        showOrderCompletedPopup();
+        if(orderData.email){
+          sendOrderCompleteEmail(orderData);
+        }
+      });
+    }).catch((e) => {
+      console.error('Complete order error:', e);
+      alert('Hitilafu imetokea: ' + e.message);
+    });
+  }
+
+  function showOrderCompletedPopup(){
+    const at = translations[currentLang];
+    const popup = document.getElementById('orderCompletedPopup');
+    if(popup){
+      const title = popup.querySelector('.diamond-title');
+      const msg = popup.querySelector('.diamond-sub');
+      if(title) title.textContent = at['order-completed-title'] || 'Order Imekamilika!';
+      if(msg) msg.textContent = at['order-completed-msg'] || 'Mteja atapata taarifa kuwa order yake imekamilika.';
+      popup.classList.add('show');
+      setTimeout(() => { popup.classList.remove('show'); }, 3000);
+    }
+  }
+
+  function sendOrderCompleteEmail(orderData){
+    try {
+      if(typeof emailjs !== 'undefined'){
+        emailjs.send('service_r453frt', 'template_32lb4l9', {
+          to_email: orderData.email,
+          to_name: orderData.jina || 'Mteja',
+          message: 'Habari ' + (orderData.jina || 'Mteja') + ',\n\nOrder yako ya huduma ya ' + (orderData.huduma || '') + ' imekamilika! Tafadhali wasiliana nasi kwa maelezo zaidi.\n\nAsante,\nPLATINUMZ IT Support'
+        }, 'D_a8Phfg44i8U1Niz').catch(function(e){ console.log('Email send skipped:', e); });
+      }
+    } catch(e){ console.log('Email not available:', e); }
   }
 
   function deleteClient(id, name){
@@ -2979,6 +3322,7 @@ s0.parentNode.insertBefore(s1,s0);
     const chatInput = document.getElementById('cuChatInput');
     const chatSend = document.getElementById('cuChatSend');
     let orderCount = 0;
+    startCustomerNotifications(email);
 
     if(_unsubCustomerOrders) _unsubCustomerOrders();
     _unsubCustomerOrders = db.collection('orders').where('email','==',email).onSnapshot((snap) => {
@@ -3069,6 +3413,9 @@ s0.parentNode.insertBefore(s1,s0);
     if(e.target === this) this.classList.remove('show');
   });
   document.getElementById('orderAcceptedPopup').addEventListener('click', function(e){
+    if(e.target === this) this.classList.remove('show');
+  });
+  document.getElementById('orderCompletedPopup').addEventListener('click', function(e){
     if(e.target === this) this.classList.remove('show');
   });
 
@@ -3530,6 +3877,7 @@ s0.parentNode.insertBefore(s1,s0);
       'admin-tab-orders': '📋 Orders',
       'admin-tab-chat': '💬 Chat',
       'admin-tab-maoni': '⭐ Maoni',
+      'admin-tab-analytics': '📊 Analytics',
       'admin-send': 'Tuma 📤',
       'admin-chat-input-ph': 'Andika ujumbe kwa mteja...',
       'admin-no-reviews': 'Hakuna maoni bado.',
@@ -3549,6 +3897,11 @@ s0.parentNode.insertBefore(s1,s0);
       'order-accept-btn': '✅ Kubali',
       'order-accepted-label': '✔ Imekubaliwa',
       'order-accept-confirm': 'Kubali order hii na uonyeshe kuwa unaifanyia kazi?',
+      'order-complete-btn': '✅ Maliza',
+      'order-complete-confirm': 'Maliza order hii na umuarifu mteja?',
+      'order-completed-label': '✔ Imekamilika',
+      'order-completed-title': 'Order Imekamilika!',
+      'order-completed-msg': 'Mteja atapata taarifa kuwa order yake imekamilika.',
       'order-accepted-title': 'Order Imekubaliwa!',
       'order-accepted-msg': 'Mteja atapata taarifa kuwa order yake imeona na inashughulikiwa.',
       'order-price-label': 'Bei ya Takwimu:',
@@ -3949,6 +4302,7 @@ s0.parentNode.insertBefore(s1,s0);
       'admin-tab-orders': '📋 Orders',
       'admin-tab-chat': '💬 Chat',
       'admin-tab-maoni': '⭐ Reviews',
+      'admin-tab-analytics': '📊 Analytics',
       'admin-send': 'Send 📤',
       'admin-chat-input-ph': 'Type a message to customer...',
       'admin-no-reviews': 'No reviews yet.',
@@ -3968,6 +4322,11 @@ s0.parentNode.insertBefore(s1,s0);
       'order-accept-btn': '✅ Accept',
       'order-accepted-label': '✔ Accepted',
       'order-accept-confirm': 'Accept this order and confirm you are working on it?',
+      'order-complete-btn': '✅ Complete',
+      'order-complete-confirm': 'Mark this order as completed and notify the customer?',
+      'order-completed-label': '✔ Completed',
+      'order-completed-title': 'Order Completed!',
+      'order-completed-msg': 'The customer will be notified that their order is complete.',
       'order-accepted-title': 'Order Accepted!',
       'order-accepted-msg': 'The customer will be notified that their order has been seen and is being worked on.',
       'order-price-label': 'Estimated Price:',
