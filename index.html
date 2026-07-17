@@ -276,6 +276,55 @@
   .contact-links a:hover{color:var(--signal);}
   @media(max-width:800px){ .contact-banner{flex-direction:column; align-items:flex-start; padding:40px 28px;} }
 
+  /* ABOUT SECTION - MODERN */
+  .about-hero{text-align:center; max-width:700px; margin:0 auto 56px;}
+  .about-hero .eyebrow{margin-bottom:14px;}
+  .about-hero-title{font-size:clamp(2rem, 4vw, 3rem); font-weight:700; background:linear-gradient(135deg, var(--paper) 30%, var(--fiber)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; line-height:1.2; margin-bottom:18px;}
+  .about-hero-desc{color:var(--muted); font-size:clamp(0.95rem, 1.5vw, 1.1rem); line-height:1.7;}
+
+  .about-stats{display:flex; justify-content:center; align-items:center; gap:0; background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:36px 20px; margin-bottom:64px; flex-wrap:wrap;}
+  .about-stat{text-align:center; flex:1; min-width:120px; padding:8px 16px;}
+  .about-stat-val{font-family:'Space Grotesk', sans-serif; font-size:clamp(1.6rem, 3vw, 2.2rem); font-weight:700; color:var(--fiber); line-height:1.2;}
+  .about-stat-label{color:var(--muted); font-size:0.82rem; margin-top:6px; font-weight:500;}
+  .about-stat-divider{width:1px; height:48px; background:var(--line); flex-shrink:0;}
+
+  .about-story{display:grid; grid-template-columns:1.2fr 1fr; gap:48px; align-items:center; margin-bottom:72px; padding:0 12px;}
+  .about-story-badge{display:inline-block; background:rgba(62,211,199,0.1); color:var(--fiber); padding:6px 16px; border-radius:20px; font-size:0.78rem; font-weight:600; margin-bottom:16px; letter-spacing:0.5px;}
+  .about-story-title{font-size:clamp(1.4rem, 2.5vw, 1.8rem); font-weight:700; margin-bottom:18px; line-height:1.25;}
+  .about-story-text{color:var(--muted); font-size:0.95rem; line-height:1.75; margin-bottom:14px;}
+  .about-story-text:last-child{margin-bottom:0;}
+  .about-story-visual{display:flex; flex-direction:column; gap:16px;}
+  .about-visual-card{background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:28px 24px; display:flex; align-items:center; gap:16px; transition:all 0.3s ease;}
+  .about-visual-card:hover{border-color:var(--fiber); transform:translateX(6px); box-shadow:0 8px 32px rgba(62,211,199,0.08);}
+  .about-visual-icon{font-size:1.6rem; width:52px; height:52px; display:flex; align-items:center; justify-content:center; background:rgba(62,211,199,0.08); border-radius:14px; flex-shrink:0;}
+  .about-visual-label{font-weight:600; font-size:1rem; letter-spacing:-0.01em;}
+
+  .about-values-section{padding:0 12px;}
+  .about-values-head{text-align:center; margin-bottom:40px;}
+  .about-values-head .eyebrow{margin-bottom:10px;}
+  .about-values-head h3{font-size:clamp(1.3rem, 2.5vw, 1.7rem); font-weight:600;}
+  .about-values-grid{display:grid; grid-template-columns:repeat(4, 1fr); gap:20px;}
+  .about-value-card{background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:32px 24px; text-align:center; transition:all 0.3s ease; position:relative; overflow:hidden;}
+  .about-value-card::before{content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, var(--fiber), var(--signal)); opacity:0; transition:opacity 0.3s ease;}
+  .about-value-card:hover{border-color:rgba(62,211,199,0.3); transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,0.2);}
+  .about-value-card:hover::before{opacity:1;}
+  .about-value-icon-wrap{margin-bottom:18px;}
+  .about-value-icon{width:56px; height:56px; margin:0 auto; display:flex; align-items:center; justify-content:center; background:rgba(62,211,199,0.08); border-radius:16px; font-size:1.5rem;}
+  .about-value-card h4{font-size:1rem; font-weight:600; margin-bottom:10px; color:var(--fiber);}
+  .about-value-card p{color:var(--muted); font-size:0.88rem; line-height:1.65;}
+
+  @media(max-width:768px){
+    .about-stats{flex-direction:column; gap:0; padding:28px 20px;}
+    .about-stat-divider{width:60%; height:1px; margin:4px auto;}
+    .about-stat{min-width:100%; padding:12px 0;}
+    .about-story{grid-template-columns:1fr; gap:32px; padding:0;}
+    .about-values-grid{grid-template-columns:1fr 1fr; gap:16px;}
+    .about-hero-title{font-size:clamp(1.6rem, 6vw, 2.2rem);}
+  }
+  @media(max-width:480px){
+    .about-values-grid{grid-template-columns:1fr;}
+  }
+
   footer{
     border-top:1px solid var(--line);
     padding:32px 0; color:var(--muted); font-size:0.85rem;
@@ -589,10 +638,7 @@
     .trust-item .big{font-size:1.4rem; margin-bottom:0; margin-right:6px;}
     .trust-item .small{font-size:0.78rem;}
 
-    .about-grid{grid-template-columns:1fr !important; gap:0;}
-    .about-grid > div{padding:20px 18px !important;}
-    .about-grid h3{font-size:0.92rem !important;}
-    .about-grid p{font-size:0.82rem !important;}
+    .about-values-grid{grid-template-columns:1fr !important;}
 
     .contact-banner{padding:28px 18px; flex-direction:column; align-items:flex-start; gap:20px; border-radius:14px;}
     .contact-banner h2{font-size:1.1rem;}
@@ -1249,25 +1295,91 @@
 
 <section class="section" id="kuhusu">
   <div class="wrap">
-    <div class="section-head" style="margin-bottom:36px;">
-      <div class="eyebrow">Kuhusu Sisi</div>
-      <h2>PLATINUMZ IT Support</h2>
-      <p>Tumeanzishwa kwa dhumuni moja: kufanya huduma za TEHAMA kupatikana kwa urahisi, kwa uwazi wa gharama, na kwa ubora unaoweza kuutegemea — kwa watu binafsi na biashara ndogo hadi kubwa.</p>
+
+    <!-- HERO STATEMENT -->
+    <div class="about-hero">
+      <div class="eyebrow" data-label="about-eyebrow">Kuhusu Sisi</div>
+      <h2 class="about-hero-title" data-label="about-h2">PLATINUMZ IT Support</h2>
+      <p class="about-hero-desc" data-label="about-p">Tumeanzishwa kwa dhumuni moja: kufanya huduma za TEHAMA kupatikana kwa urahisi, kwa uwazi wa gharama, na kwa ubora unaoweza kuutegemea.</p>
     </div>
-    <div class="about-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:14px; overflow:hidden;">
-      <div style="background:var(--ink); padding:32px 28px;">
-        <h3 id="about-vision-title" style="font-size:1rem; font-weight:600; margin-bottom:10px; color:var(--fiber);">Dira Yetu</h3>
-        <p id="about-vision-desc" style="color:var(--muted); font-size:0.92rem;">Kuwa jina la kwanza linalokumbukwa kila mtu anapohitaji msaada wa TEHAMA nchini Tanzania.</p>
+
+    <!-- STATS BAR -->
+    <div class="about-stats">
+      <div class="about-stat">
+        <div class="about-stat-val" data-count="500">500+</div>
+        <div class="about-stat-label" data-label="about-stat-1-label">Wateja Waliopata Msaada</div>
       </div>
-      <div style="background:var(--ink); padding:32px 28px;">
-        <h3 id="about-mission-title" style="font-size:1rem; font-weight:600; margin-bottom:10px; color:var(--fiber);">Dhamira Yetu</h3>
-        <p id="about-mission-desc" style="color:var(--muted); font-size:0.92rem;">Kutoa huduma za haraka, za uwazi, na za ubora — bila lugha ngumu za kiufundi.</p>
+      <div class="about-stat-divider"></div>
+      <div class="about-stat">
+        <div class="about-stat-val" data-count="3">3+</div>
+        <div class="about-stat-label" data-label="about-stat-2-label">Miaka ya Uzoefu</div>
       </div>
-      <div style="background:var(--ink); padding:32px 28px;">
-        <h3 id="about-values-title" style="font-size:1rem; font-weight:600; margin-bottom:10px; color:var(--fiber);">Misingi Yetu</h3>
-        <p id="about-values-desc" style="color:var(--muted); font-size:0.92rem;">Uaminifu, ubora wa kazi, na kujali kila mteja kama wa kwanza.</p>
+      <div class="about-stat-divider"></div>
+      <div class="about-stat">
+        <div class="about-stat-val" data-count="24">24/7</div>
+        <div class="about-stat-label" data-label="about-stat-3-label">Msaada wa Wakati Wote</div>
+      </div>
+      <div class="about-stat-divider"></div>
+      <div class="about-stat">
+        <div class="about-stat-val" data-count="15">15+</div>
+        <div class="about-stat-label" data-label="about-stat-4-label">Huduma Mbalimbali</div>
       </div>
     </div>
+
+    <!-- STORY -->
+    <div class="about-story">
+      <div class="about-story-content">
+        <div class="about-story-badge" data-label="about-story-badge">Hadithi Yetu</div>
+        <h3 class="about-story-title" data-label="about-story-title">Kuanzia ndoto hadi suluhisho la kweli</h3>
+        <p class="about-story-text" data-label="about-story-text-1">PLATINUMZ IT Support ilianzishwa na kuona changamoto kubwa: watu wengi na biashara nchini Tanzania wanapata matatizo ya TEHAMA lakini hawajui kwa nani wa kuomba, na wanakutana na bei zisizoeleweka.</p>
+        <p class="about-story-text" data-label="about-story-text-2">Tuliamua kubadilisha hali hii. Timu yetu ya wasanifu TEHAMA wenye ujuzi wa kina inatoa suluhisho za haraka, za moja kwa moja, na zenye thamani ya kweli — kutoka ukarabati wa kompyuta hadi miundombinu ya mitandao.</p>
+      </div>
+      <div class="about-story-visual">
+        <div class="about-visual-card">
+          <div class="about-visual-icon">⚡</div>
+          <div class="about-visual-label" data-label="about-visual-1">Haraka</div>
+        </div>
+        <div class="about-visual-card">
+          <div class="about-visual-icon">🛡️</div>
+          <div class="about-visual-label" data-label="about-visual-2">Salama</div>
+        </div>
+        <div class="about-visual-card">
+          <div class="about-visual-icon">💎</div>
+          <div class="about-visual-label" data-label="about-visual-3">Uaminifu</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VALUES -->
+    <div class="about-values-section">
+      <div class="about-values-head">
+        <div class="eyebrow" data-label="about-values-eyebrow">Misingi Yetu</div>
+        <h3 data-label="about-values-h2">Kwa nini watu wanatuamini?</h3>
+      </div>
+      <div class="about-values-grid">
+        <div class="about-value-card">
+          <div class="about-value-icon-wrap"><div class="about-value-icon">🎯</div></div>
+          <h4 id="about-vision-title" data-label="about-vision-title">Dira Yetu</h4>
+          <p id="about-vision-desc" data-label="about-vision-desc">Kuwa jina la kwanza linalokumbukwa kila mtu anapohitaji msaada wa TEHAMA nchini Tanzania.</p>
+        </div>
+        <div class="about-value-card">
+          <div class="about-value-icon-wrap"><div class="about-value-icon">🚀</div></div>
+          <h4 id="about-mission-title" data-label="about-mission-title">Dhamira Yetu</h4>
+          <p id="about-mission-desc" data-label="about-mission-desc">Kutoa huduma za haraka, za uwazi, na za ubora — bila lugha ngumu za kiufundi.</p>
+        </div>
+        <div class="about-value-card">
+          <div class="about-value-icon-wrap"><div class="about-value-icon">💎</div></div>
+          <h4 id="about-values-title" data-label="about-values-title">Misingi Yetu</h4>
+          <p id="about-values-desc" data-label="about-values-desc">Uaminifu, ubora wa kazi, na kujali kila mteja kama wa kwanza.</p>
+        </div>
+        <div class="about-value-card">
+          <div class="about-value-icon-wrap"><div class="about-value-icon">🌍</div></div>
+          <h4 data-label="about-impact-title">Athari Yetu</h4>
+          <p data-label="about-impact-desc">Tumehudumia wateja kutoka kila kona ya Tanzania — kutoka Arusha hadi Mwanza, Dar es Salaam hadi Mbeya.</p>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -3006,6 +3118,21 @@ s0.parentNode.insertBefore(s1,s0);
       'about-eyebrow': 'Kuhusu Sisi',
       'about-h2': 'PLATINUMZ IT Support',
       'about-p': 'Tumeanzishwa kwa dhumuni moja: kufanya huduma za TEHAMA kupatikana kwa urahisi, kwa uwazi wa gharama, na kwa ubora unaoweza kuutegemea.',
+      'about-stat-1-label': 'Wateja Waliopata Msaada',
+      'about-stat-2-label': 'Miaka ya Uzoefu',
+      'about-stat-3-label': 'Msaada wa Wakati Wote',
+      'about-stat-4-label': 'Huduma Mbalimbali',
+      'about-story-badge': 'Hadithi Yetu',
+      'about-story-title': 'Kuanzia ndoto hadi suluhisho la kweli',
+      'about-story-text-1': 'PLATINUMZ IT Support ilianzishwa na kuona changamoto kubwa: watu wengi na biashara nchini Tanzania wanapata matatizo ya TEHAMA lakini hawajui kwa nani wa kuomba, na wanakutana na bei zisizoeleweka.',
+      'about-story-text-2': 'Tuliamua kubadilisha hali hii. Timu yetu ya wasanifu TEHAMA wenye ujuzi wa kina inatoa suluhisho za haraka, za moja kwa moja, na zenye thamani ya kweli — kutoka ukarabati wa kompyuta hadi miundombinu ya mitandao.',
+      'about-visual-1': 'Haraka',
+      'about-visual-2': 'Salama',
+      'about-visual-3': 'Uaminifu',
+      'about-values-eyebrow': 'Misingi Yetu',
+      'about-values-h2': 'Kwa nini watu wanatuamini?',
+      'about-impact-title': 'Athari Yetu',
+      'about-impact-desc': 'Tumehudumia wateja kutoka kila kona ya Tanzania — kutoka Arusha hadi Mwanza, Dar es Salaam hadi Mbeya.',
       'faq-eyebrow': 'Maswali',
       'faq-h2': 'Maswali Yanayoulizwa Mara Nyingi',
       'contact-eyebrow': 'Wasiliana Nasi',
@@ -3381,6 +3508,21 @@ s0.parentNode.insertBefore(s1,s0);
       'about-eyebrow': 'About Us',
       'about-h2': 'PLATINUMZ IT Support',
       'about-p': 'Founded with one purpose: to make IT services accessible, transparent in cost, and reliable for individuals and businesses of all sizes.',
+      'about-stat-1-label': 'Clients Served',
+      'about-stat-2-label': 'Years of Experience',
+      'about-stat-3-label': '24/7 Support',
+      'about-stat-4-label': 'Different Services',
+      'about-story-badge': 'Our Story',
+      'about-story-title': 'From a dream to a real solution',
+      'about-story-text-1': 'PLATINUMZ IT Support was founded by seeing a big challenge: many people and businesses in Tanzania face IT problems but don\'t know who to ask, and encounter unclear pricing.',
+      'about-story-text-2': 'We decided to change this. Our team of skilled IT professionals delivers fast, straightforward, and real value solutions — from computer repair to network infrastructure.',
+      'about-visual-1': 'Fast',
+      'about-visual-2': 'Secure',
+      'about-visual-3': 'Trusted',
+      'about-values-eyebrow': 'Our Foundation',
+      'about-values-h2': 'Why do people trust us?',
+      'about-impact-title': 'Our Impact',
+      'about-impact-desc': 'We have served clients from every corner of Tanzania — from Arusha to Mwanza, Dar es Salaam to Mbeya.',
       'faq-eyebrow': 'FAQ',
       'faq-h2': 'Frequently Asked Questions',
       'contact-eyebrow': 'Contact Us',
@@ -3859,9 +4001,9 @@ s0.parentNode.insertBefore(s1,s0);
     set('#huduma .section-head p', t['services-p']);
     set('#jinsi .section-head .eyebrow', t['process-eyebrow']);
     set('#jinsi .section-head h2', t['process-h2']);
-    set('#kuhusu .section-head .eyebrow', t['about-eyebrow']);
-    set('#kuhusu .section-head h2', t['about-h2']);
-    set('#kuhusu .section-head p', t['about-p']);
+    set('#kuhusu .about-hero .eyebrow', t['about-eyebrow']);
+    set('#kuhusu .about-hero-title', t['about-h2']);
+    set('#kuhusu .about-hero-desc', t['about-p']);
     set('#faq .section-head .eyebrow', t['faq-eyebrow']);
     set('#faq .section-head h2', t['faq-h2']);
     set('.nav-links a[href="#huduma"]', t['nav-services']);
