@@ -771,6 +771,16 @@
   </div>
 </div>
 
+<div class="diamond-popup-overlay admin-login" id="orderAcceptedPopup">
+  <div class="diamond-popup">
+    <div class="diamond-shape"></div>
+    <div class="diamond-icon">👁️</div>
+    <div class="diamond-title">Order Imekubaliwa!</div>
+    <div class="diamond-sub">Mteja atapata taarifa kuwa order yake imeona na inashughulikiwa.</div>
+    <div class="diamond-bar"><div class="diamond-bar-inner"></div></div>
+  </div>
+</div>
+
 <!-- Forgot Password Verification Modal -->
 <div class="modal-overlay" id="forgotModal" style="z-index:250;">
   <div class="modal-box" style="max-width:440px;">
@@ -2054,8 +2064,11 @@ s0.parentNode.insertBefore(s1,s0);
     .ad-badge{padding:5px 12px;border-radius:20px;font-size:0.72rem;font-weight:600;display:inline-block;letter-spacing:0.3px;}
     .ad-badge-green{background:rgba(62,211,199,0.12);color:var(--fiber);}
     .ad-badge-gold{background:rgba(242,169,59,0.12);color:var(--signal);}
+    .ad-badge-blue{background:rgba(59,130,246,0.12);color:#3B82F6;}
     .ad-badge-purple{background:rgba(108,92,231,0.12);color:#a29bfe;}
     .ad-badge-red{background:rgba(255,107,107,0.12);color:#ff6b6b;}
+    .ad-accept-btn{background:linear-gradient(135deg,var(--fiber),#2bc4b8);color:#fff;border:none;padding:6px 14px;border-radius:8px;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+    .ad-accept-btn:hover{transform:scale(1.05);box-shadow:0 4px 12px rgba(62,211,199,0.3);}
     .ad-empty{text-align:center;padding:40px 20px;color:var(--muted);font-size:0.88rem;}
     .ad-empty .ad-empty-icon{font-size:2rem;margin-bottom:8px;opacity:0.5;}
     .ad-chat-box{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
@@ -2143,8 +2156,8 @@ s0.parentNode.insertBefore(s1,s0);
     <div class="ad-panel" id="panelOrders">
       <div class="ad-table-wrap">
         <table class="ad-table">
-          <thead><tr><th>Jina</th><th>Simu</th><th>Huduma</th><th>Maelezo</th><th>Tarehe</th></tr></thead>
-          <tbody id="adminOrdersBody"><tr><td colspan="5" class="ad-empty"><div class="ad-empty-icon">📋</div>Inapakia orders...</td></tr></tbody>
+          <thead><tr><th>Jina</th><th>Simu</th><th>Huduma</th><th>Maelezo</th><th>Tarehe</th><th>Hali</th><th>Kitendo</th></tr></thead>
+          <tbody id="adminOrdersBody"><tr><td colspan="7" class="ad-empty"><div class="ad-empty-icon">📋</div>Inapakia orders...</td></tr></tbody>
         </table>
       </div>
     </div>
@@ -2571,17 +2584,33 @@ s0.parentNode.insertBefore(s1,s0);
     db.collection('orders').onSnapshot((snap) => {
       document.getElementById('statOrders').textContent = snap.size;
       document.getElementById('tabCountOrders').textContent = snap.size;
-      if(snap.empty){ oBody.innerHTML = '<tr><td colspan="5" class="ad-empty"><div class="ad-empty-icon">📋</div>Hakuna maombi bado.</td></tr>'; return; }
+      if(snap.empty){ oBody.innerHTML = '<tr><td colspan="7" class="ad-empty"><div class="ad-empty-icon">📋</div>Hakuna maombi bado.</td></tr>'; return; }
       let docs = [];
-      snap.forEach((doc) => { const d = doc.data(); docs.push({d, ts: d.createdAt ? d.createdAt.toDate().getTime() : 0}); });
+      snap.forEach((doc) => { const d = doc.data(); docs.push({id:doc.id, d, ts: d.createdAt ? d.createdAt.toDate().getTime() : 0}); });
       docs.sort((a,b) => b.ts - a.ts);
       let rows = '';
-      docs.forEach(({d}) => {
+      docs.forEach(({id, d}) => {
         const dt = d.createdAt ? d.createdAt.toDate().toLocaleDateString('sw-TZ') : '—';
-        rows += '<tr><td><strong>'+(d.jina||'—')+'</strong></td><td style="color:var(--muted)">'+(d.simu||'—')+'</td><td><span class="ad-badge ad-badge-green">'+(d.huduma||'—')+'</span></td><td style="color:var(--muted)">'+(d.maelezo||'—')+'</td><td style="font-family:JetBrains Mono,monospace;font-size:0.82rem;color:var(--muted)">'+dt+'</td></tr>';
+        const st = d.status || 'mpya';
+        let statusBadge = '';
+        let actionBtn = '';
+        if(st === 'mpya'){
+          statusBadge = '<span class="ad-badge ad-badge-gold">Mpya</span>';
+          actionBtn = '<button class="ad-accept-btn" onclick="acceptOrder(\''+id+'\')">✅ Kubali</button>';
+        } else if(st === 'inashughulikiwa'){
+          statusBadge = '<span class="ad-badge ad-badge-blue">Inashughulikiwa</span>';
+          actionBtn = '<span style="color:var(--fiber);font-size:0.82rem;">✔ Imekubaliwa</span>';
+        } else if(st === 'imekamilika'){
+          statusBadge = '<span class="ad-badge ad-badge-green">Imekamilika</span>';
+          actionBtn = '<span style="color:var(--muted);font-size:0.82rem;">✅</span>';
+        } else {
+          statusBadge = '<span class="ad-badge ad-badge-red">'+st+'</span>';
+          actionBtn = '—';
+        }
+        rows += '<tr><td><strong>'+(d.jina||'—')+'</strong></td><td style="color:var(--muted)">'+(d.simu||'—')+'</td><td><span class="ad-badge ad-badge-green">'+(d.huduma||'—')+'</span></td><td style="color:var(--muted)">'+(d.maelezo||'—')+'</td><td style="font-family:JetBrains Mono,monospace;font-size:0.82rem;color:var(--muted)">'+dt+'</td><td>'+statusBadge+'</td><td>'+actionBtn+'</td></tr>';
       });
       oBody.innerHTML = rows;
-    }, (e) => { oBody.innerHTML = '<tr><td colspan="5" class="ad-empty" style="color:#ff6b6b">'+e.message+'</td></tr>'; });
+    }, (e) => { oBody.innerHTML = '<tr><td colspan="7" class="ad-empty" style="color:#ff6b6b">'+e.message+'</td></tr>'; });
 
     db.collection('chats').orderBy('createdAt','asc').limit(200).onSnapshot((snap) => {
       document.getElementById('statChats').textContent = snap.size;
@@ -2636,6 +2665,27 @@ s0.parentNode.insertBefore(s1,s0);
     });
   }
 
+  function acceptOrder(id){
+    if(!confirm('Kubali order hii na uonyeshe kuwa unaifanyia kazi?')) return;
+    db.collection('orders').doc(id).update({
+      status: 'inashughulikiwa',
+      acceptedAt: firebase.firestore.FieldValue.serverTimestamp()
+    }).then(() => {
+      showOrderAcceptedPopup();
+    }).catch((e) => {
+      console.error('Accept order error:', e);
+      alert('Hitilafu imetokea: ' + e.message);
+    });
+  }
+
+  function showOrderAcceptedPopup(){
+    const popup = document.getElementById('orderAcceptedPopup');
+    if(popup){
+      popup.classList.add('show');
+      setTimeout(() => { popup.classList.remove('show'); }, 3000);
+    }
+  }
+
   function loadCustomerDashboard(user){
     const email = user.email;
     const oBody = document.getElementById('cuOrdersBody');
@@ -2644,11 +2694,11 @@ s0.parentNode.insertBefore(s1,s0);
     const chatSend = document.getElementById('cuChatSend');
     let orderCount = 0;
 
-    db.collection('orders').where('email','==',email).get().then((snap) => {
+    db.collection('orders').where('email','==',email).onSnapshot((snap) => {
       orderCount = snap.size;
       document.getElementById('cuStatOrders').textContent = orderCount;
       document.getElementById('cuStatPending').textContent = orderCount;
-      document.getElementById('cuStatDone').textContent = '0';
+      let doneCount = 0;
       if(snap.empty){ oBody.innerHTML = '<tr><td colspan="5" class="cu-empty">Hujawahi kuomba huduma bado.</td></tr>'; return; }
       let docs = [];
       snap.forEach((doc) => { const d = doc.data(); docs.push({d, ts: d.createdAt ? d.createdAt.toDate().getTime() : 0}); });
@@ -2656,9 +2706,22 @@ s0.parentNode.insertBefore(s1,s0);
       let rows = '';
       docs.forEach(({d}) => {
         const dt = d.createdAt ? d.createdAt.toDate().toLocaleDateString('sw-TZ') : '—';
-        rows += '<tr><td><span class="cu-badge cu-badge-green">'+(d.huduma||'—')+'</span></td><td style="color:var(--muted)">'+(d.simu||'—')+'</td><td style="color:var(--muted)">'+(d.maelezo||'—')+'</td><td style="font-family:JetBrains Mono,monospace;font-size:0.82rem;color:var(--muted)">'+dt+'</td><td><span class="cu-badge cu-badge-gold">Inasubiri</span></td></tr>';
+        const st = d.status || 'mpya';
+        let statusBadge = '';
+        if(st === 'mpya'){
+          statusBadge = '<span class="cu-badge cu-badge-gold">Inasubiri</span>';
+        } else if(st === 'inashughulikiwa'){
+          statusBadge = '<span class="cu-badge cu-badge-blue">Inashughulikiwa</span>';
+        } else if(st === 'imekamilika'){
+          statusBadge = '<span class="cu-badge cu-badge-green">Imekamilika</span>';
+          doneCount++;
+        } else {
+          statusBadge = '<span class="cu-badge cu-badge-red">'+st+'</span>';
+        }
+        rows += '<tr><td><span class="cu-badge cu-badge-green">'+(d.huduma||'—')+'</span></td><td style="color:var(--muted)">'+(d.simu||'—')+'</td><td style="color:var(--muted)">'+(d.maelezo||'—')+'</td><td style="font-family:JetBrains Mono,monospace;font-size:0.82rem;color:var(--muted)">'+dt+'</td><td>'+statusBadge+'</td></tr>';
       });
       oBody.innerHTML = rows;
+      document.getElementById('cuStatDone').textContent = doneCount;
     }).catch((e) => { oBody.innerHTML = '<tr><td colspan="5" class="cu-empty" style="color:#ff6b6b">Hitilafu: '+e.message+'</td></tr>'; });
 
     db.collection('clients').doc(user.uid).get().then((doc) => {
@@ -2715,6 +2778,9 @@ s0.parentNode.insertBefore(s1,s0);
     setTimeout(() => { popup.classList.remove('show'); }, 4000);
   }
   document.getElementById('orderSuccessPopup').addEventListener('click', function(e){
+    if(e.target === this) this.classList.remove('show');
+  });
+  document.getElementById('orderAcceptedPopup').addEventListener('click', function(e){
     if(e.target === this) this.classList.remove('show');
   });
 
