@@ -2247,6 +2247,24 @@ s0.parentNode.insertBefore(s1,s0);
     .ad-accept-btn:hover{transform:scale(1.05);box-shadow:0 4px 12px rgba(62,211,199,0.3);}
     .ad-delete-btn{background:none;border:none;color:#ff6b6b;cursor:pointer;font-size:1rem;opacity:0.7;transition:all 0.2s;padding:4px 8px;border-radius:8px;}
     .ad-delete-btn:hover{opacity:1;background:rgba(255,107,107,0.15);transform:scale(1.15);}
+    .ad-edit-btn{background:none;border:none;color:var(--fiber);cursor:pointer;font-size:1rem;opacity:0.7;transition:all 0.2s;padding:4px 8px;border-radius:8px;}
+    .ad-edit-btn:hover{opacity:1;background:rgba(62,211,199,0.15);transform:scale(1.15);}
+    .ad-edit-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);z-index:9999;justify-content:center;align-items:center;}
+    .ad-edit-overlay.show{display:flex;}
+    .ad-edit-modal{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;width:90%;max-width:420px;animation:slideUp 0.3s ease;}
+    .ad-edit-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+    .ad-edit-head h3{margin:0;font-size:1.05rem;color:var(--text);}
+    .ad-edit-close{background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer;padding:4px 8px;border-radius:8px;transition:all 0.2s;}
+    .ad-edit-close:hover{background:rgba(255,107,107,0.15);color:#ff6b6b;}
+    .ad-edit-field{margin-bottom:14px;}
+    .ad-edit-field label{display:block;font-size:0.8rem;color:var(--muted);margin-bottom:6px;font-weight:600;}
+    .ad-edit-field input,.ad-edit-field select{width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--text);font-size:0.88rem;box-sizing:border-box;transition:border-color 0.2s;}
+    .ad-edit-field input:focus,.ad-edit-field select:focus{outline:none;border-color:var(--fiber);}
+    .ad-edit-actions{display:flex;gap:10px;margin-top:20px;justify-content:flex-end;}
+    .ad-edit-cancel{padding:10px 18px;border-radius:10px;border:1px solid var(--line);background:none;color:var(--muted);font-size:0.85rem;font-weight:600;cursor:pointer;transition:all 0.2s;}
+    .ad-edit-cancel:hover{background:rgba(255,107,107,0.1);color:#ff6b6b;border-color:#ff6b6b;}
+    .ad-edit-save{padding:10px 18px;border-radius:10px;border:none;background:linear-gradient(135deg,var(--fiber),#2bc4b8);color:#fff;font-size:0.85rem;font-weight:600;cursor:pointer;transition:all 0.2s;}
+    .ad-edit-save:hover{transform:scale(1.03);box-shadow:0 4px 14px rgba(62,211,199,0.3);}
     .ad-empty{text-align:center;padding:40px 20px;color:var(--muted);font-size:0.88rem;}
     .ad-empty .ad-empty-icon{font-size:2rem;margin-bottom:8px;opacity:0.5;}
     .ad-chat-box{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
@@ -2355,6 +2373,41 @@ s0.parentNode.insertBefore(s1,s0);
     </div>
   </div>
 
+</div>
+
+<!-- Edit Client Modal -->
+<div class="ad-edit-overlay" id="editClientOverlay" onclick="if(event.target===this)closeEditClient()">
+  <div class="ad-edit-modal">
+    <div class="ad-edit-head">
+      <h3>✏️ <span data-label="ad-edit-title">Rekebisha Taarifa za Mteja</span></h3>
+      <button class="ad-edit-close" onclick="closeEditClient()">✕</button>
+    </div>
+    <input type="hidden" id="editClientId">
+    <div class="ad-edit-field">
+      <label data-label="ad-edit-name">Jina</label>
+      <input type="text" id="editClientName" placeholder="Jina la mteja">
+    </div>
+    <div class="ad-edit-field">
+      <label data-label="ad-edit-email">Email</label>
+      <input type="email" id="editClientEmail" placeholder="Email ya mteja">
+    </div>
+    <div class="ad-edit-field">
+      <label data-label="ad-edit-service">Huduma</label>
+      <select id="editClientService">
+        <option value="">-- Chagua Huduma --</option>
+        <option value="Uundaji Website">Uundaji Website</option>
+        <option value="Uendeshaji Mitandao">Uendeshaji Mitandao</option>
+        <option value="Usalama wa Mtandao">Usalama wa Mtandao</option>
+        <option value="Urekebishaji Kompyuta">Urekebishaji Kompyuta</option>
+        <option value="Cloud Hosting">Cloud Hosting</option>
+        <option value="IT Consultancy">IT Consultancy</option>
+      </select>
+    </div>
+    <div class="ad-edit-actions">
+      <button class="ad-edit-cancel" onclick="closeEditClient()" data-label="ad-edit-cancel">Ghairi</button>
+      <button class="ad-edit-save" onclick="saveClient()" data-label="ad-edit-save">💾 Hifadhi</button>
+    </div>
+  </div>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
@@ -2760,7 +2813,7 @@ s0.parentNode.insertBefore(s1,s0);
         const d = doc.data();
         const dt = d.createdAt ? d.createdAt.toDate().toLocaleDateString('sw-TZ') : '—';
         const badge = d.huduma ? '<span class="ad-badge ad-badge-green">'+d.huduma+'</span>' : '—';
-        rows += '<tr><td><strong>'+(d.jina||'—')+'</strong></td><td style="color:var(--muted)">'+(d.email||'—')+'</td><td>'+badge+'</td><td style="font-family:JetBrains Mono,monospace;font-size:0.82rem;color:var(--muted)">'+dt+'</td><td><button class="ad-delete-btn" onclick="deleteClient(\''+doc.id+'\',\''+((d.jina||'').replace(/'/g,"\\'"))+'\')">🗑️</button></td></tr>';
+        rows += '<tr><td><strong>'+(d.jina||'—')+'</strong></td><td style="color:var(--muted)">'+(d.email||'—')+'</td><td>'+badge+'</td><td style="font-family:JetBrains Mono,monospace;font-size:0.82rem;color:var(--muted)">'+dt+'</td><td><button class="ad-edit-btn" onclick="editClient(\''+doc.id+'\',\''+((d.jina||'').replace(/'/g,"\\'"))+'\',\''+((d.email||'').replace(/'/g,"\\'"))+'\',\''+((d.huduma||'').replace(/'/g,"\\'"))+'\')">✏️</button> <button class="ad-delete-btn" onclick="deleteClient(\''+doc.id+'\',\''+((d.jina||'').replace(/'/g,"\\'"))+'\')">🗑️</button></td></tr>';
       });
       tBody.innerHTML = rows;
     }).catch((e) => { tBody.innerHTML = '<tr><td colspan="5" class="ad-empty" style="color:#ff6b6b">'+e.message+'</td></tr>'; });
@@ -2873,6 +2926,34 @@ s0.parentNode.insertBefore(s1,s0);
       document.getElementById('tabCountClients').textContent = document.getElementById('statClients').textContent;
     }).catch((e) => {
       console.error('Delete client error:', e);
+      alert('Hitilafu imetokea: ' + e.message);
+    });
+  }
+
+  function editClient(id, name, email, huduma){
+    document.getElementById('editClientId').value = id;
+    document.getElementById('editClientName').value = name || '';
+    document.getElementById('editClientEmail').value = email || '';
+    document.getElementById('editClientService').value = huduma || '';
+    document.getElementById('editClientOverlay').classList.add('show');
+  }
+
+  function closeEditClient(){
+    document.getElementById('editClientOverlay').classList.remove('show');
+  }
+
+  function saveClient(){
+    const id = document.getElementById('editClientId').value;
+    const jina = document.getElementById('editClientName').value.trim();
+    const email = document.getElementById('editClientEmail').value.trim();
+    const huduma = document.getElementById('editClientService').value;
+    if(!id) return;
+    if(!jina || !email){ alert('Jina na Email ni lazima!'); return; }
+    db.collection('clients').doc(id).update({ jina, email, huduma }).then(() => {
+      closeEditClient();
+      loadAdminDashboard(_adminUser);
+    }).catch((e) => {
+      console.error('Save client error:', e);
       alert('Hitilafu imetokea: ' + e.message);
     });
   }
@@ -3484,6 +3565,12 @@ s0.parentNode.insertBefore(s1,s0);
       'admin-clients-empty': 'Hakuna wateja bado.',
       'admin-cu-kitendo': 'Kitendo',
       'admin-cu-delete-confirm': 'Futa mteja',
+      'ad-edit-title': 'Rekebisha Taarifa za Mteja',
+      'ad-edit-name': 'Jina',
+      'ad-edit-email': 'Email',
+      'ad-edit-service': 'Huduma',
+      'ad-edit-cancel': 'Ghairi',
+      'ad-edit-save': '💾 Hifadhi',
       'admin-loading': 'Inapakia...',
       'cu-orders-empty': 'Hujawahi kuomba huduma bado.',
       'cu-loading': 'Inapakia...',
@@ -3897,6 +3984,12 @@ s0.parentNode.insertBefore(s1,s0);
       'admin-clients-empty': 'No clients yet.',
       'admin-cu-kitendo': 'Action',
       'admin-cu-delete-confirm': 'Delete client',
+      'ad-edit-title': 'Edit Client Details',
+      'ad-edit-name': 'Name',
+      'ad-edit-email': 'Email',
+      'ad-edit-service': 'Service',
+      'ad-edit-cancel': 'Cancel',
+      'ad-edit-save': '💾 Save',
       'admin-loading': 'Loading...',
       'cu-orders-empty': 'You have not requested any service yet.',
       'cu-loading': 'Loading...',
