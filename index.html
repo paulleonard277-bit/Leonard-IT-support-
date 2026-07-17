@@ -1794,6 +1794,7 @@ s0.parentNode.insertBefore(s1,s0);
     <button class="close-x" id="closeOrderBtn">&times;</button>
     <div class="eyebrow" style="margin-bottom:10px;" data-label="order-modal-eyebrow">Omba Huduma</div>
     <h3 id="orderServiceName" style="margin-bottom:6px; color:var(--fiber);" data-label="order-svc-name"></h3>
+    <div id="orderPriceDisplay" style="display:none; background:rgba(62,211,199,0.08); border:1px solid rgba(62,211,199,0.2); border-radius:10px; padding:10px 16px; margin-bottom:14px; font-size:0.92rem;"><span style="color:var(--muted);" data-label="order-price-label">Bei ya Takwimu:</span> <strong id="orderPriceVal" style="color:var(--fiber);"></strong></div>
     <p class="sub" style="margin-bottom:20px;" data-label="order-modal-sub">Jaza maelezo yako - tutawasiliana nawe haraka iwezekanavyo.</p>
     <form id="orderForm">
       <label data-label="order-label-name">Jina Kamili</label>
@@ -2048,8 +2049,8 @@ s0.parentNode.insertBefore(s1,s0);
         </div>
         <div class="cu-table-wrap">
           <table class="cu-table">
-            <thead><tr><th data-label="cu-order-huduma">Huduma</th><th data-label="cu-order-simu">Simu</th><th data-label="cu-order-maelezo">Maelezo</th><th data-label="cu-order-tarehe">Tarehe</th><th data-label="cu-order-hali">Hali</th></tr></thead>
-            <tbody id="cuOrdersBody"><tr><td colspan="5" class="cu-empty">Inapakia...</td></tr></tbody>
+            <thead><tr><th data-label="cu-order-huduma">Huduma</th><th data-label="cu-order-gharama">Gharama</th><th data-label="cu-order-simu">Simu</th><th data-label="cu-order-maelezo">Maelezo</th><th data-label="cu-order-tarehe">Tarehe</th><th data-label="cu-order-hali">Hali</th></tr></thead>
+            <tbody id="cuOrdersBody"><tr><td colspan="6" class="cu-empty">Inapakia...</td></tr></tbody>
           </table>
         </div>
       </div>
@@ -2331,8 +2332,8 @@ s0.parentNode.insertBefore(s1,s0);
     <div class="ad-panel" id="panelOrders">
       <div class="ad-table-wrap">
         <table class="ad-table">
-          <thead><tr><th data-label="admin-order-jina">Jina</th><th data-label="admin-order-simu">Simu</th><th data-label="admin-order-huduma">Huduma</th><th data-label="admin-order-maelezo">Maelezo</th><th data-label="admin-order-tarehe">Tarehe</th><th data-label="admin-order-hali">Hali</th><th data-label="admin-order-kitendo">Kitendo</th></tr></thead>
-          <tbody id="adminOrdersBody"><tr><td colspan="7" class="ad-empty"><div class="ad-empty-icon">📋</div>Inapakia orders...</td></tr></tbody>
+          <thead><tr><th data-label="admin-order-jina">Jina</th><th data-label="admin-order-simu">Simu</th><th data-label="admin-order-huduma">Huduma</th><th data-label="admin-order-gharama">Gharama</th><th data-label="admin-order-maelezo">Maelezo</th><th data-label="admin-order-tarehe">Tarehe</th><th data-label="admin-order-hali">Hali</th><th data-label="admin-order-kitendo">Kitendo</th></tr></thead>
+          <tbody id="adminOrdersBody"><tr><td colspan="8" class="ad-empty"><div class="ad-empty-icon">📋</div>Inapakia orders...</td></tr></tbody>
         </table>
       </div>
     </div>
@@ -2766,7 +2767,7 @@ s0.parentNode.insertBefore(s1,s0);
     _unsubAdminOrders = db.collection('orders').onSnapshot((snap) => {
       document.getElementById('statOrders').textContent = snap.size;
       document.getElementById('tabCountOrders').textContent = snap.size;
-      if(snap.empty){ oBody.innerHTML = '<tr><td colspan="7" class="ad-empty"><div class="ad-empty-icon">📋</div>'+translations[currentLang]['admin-orders-empty']+'</td></tr>'; return; }
+      if(snap.empty){ oBody.innerHTML = '<tr><td colspan="8" class="ad-empty"><div class="ad-empty-icon">📋</div>'+translations[currentLang]['admin-orders-empty']+'</td></tr>'; return; }
       let docs = [];
       snap.forEach((doc) => { const d = doc.data(); docs.push({id:doc.id, d, ts: d.createdAt ? d.createdAt.toDate().getTime() : 0}); });
       docs.sort((a,b) => b.ts - a.ts);
@@ -2790,10 +2791,10 @@ s0.parentNode.insertBefore(s1,s0);
           statusBadge = '<span class="ad-badge ad-badge-red">'+st+'</span>';
           actionBtn = '—';
         }
-        rows += '<tr><td><strong>'+(d.jina||'—')+'</strong></td><td style="color:var(--muted)">'+(d.simu||'—')+'</td><td><span class="ad-badge ad-badge-green">'+(d.huduma||'—')+'</span></td><td style="color:var(--muted)">'+(d.maelezo||'—')+'</td><td style="font-family:JetBrains Mono,monospace;font-size:0.82rem;color:var(--muted)">'+dt+'</td><td>'+statusBadge+'</td><td>'+actionBtn+'</td></tr>';
+        rows += '<tr><td><strong>'+(d.jina||'—')+'</strong></td><td style="color:var(--muted)">'+(d.simu||'—')+'</td><td><span class="ad-badge ad-badge-green">'+(d.huduma||'—')+'</span></td><td style="color:var(--fiber);font-weight:600;font-size:0.82rem;">'+(d.gharama||'—')+'</td><td style="color:var(--muted)">'+(d.maelezo||'—')+'</td><td style="font-family:JetBrains Mono,monospace;font-size:0.82rem;color:var(--muted)">'+dt+'</td><td>'+statusBadge+'</td><td>'+actionBtn+'</td></tr>';
       });
       oBody.innerHTML = rows;
-    }, (e) => { oBody.innerHTML = '<tr><td colspan="7" class="ad-empty" style="color:#ff6b6b">'+e.message+'</td></tr>'; });
+    }, (e) => { oBody.innerHTML = '<tr><td colspan="8" class="ad-empty" style="color:#ff6b6b">'+e.message+'</td></tr>'; });
 
     db.collection('chats').orderBy('createdAt','asc').limit(200).onSnapshot((snap) => {
       document.getElementById('statChats').textContent = snap.size;
@@ -2890,7 +2891,7 @@ s0.parentNode.insertBefore(s1,s0);
       document.getElementById('cuStatOrders').textContent = orderCount;
       document.getElementById('cuStatPending').textContent = orderCount;
       let doneCount = 0;
-      if(snap.empty){ oBody.innerHTML = '<tr><td colspan="5" class="cu-empty">'+translations[currentLang]['cu-orders-empty']+'</td></tr>'; return; }
+      if(snap.empty){ oBody.innerHTML = '<tr><td colspan="6" class="cu-empty">'+translations[currentLang]['cu-orders-empty']+'</td></tr>'; return; }
       let docs = [];
       snap.forEach((doc) => { const d = doc.data(); docs.push({d, ts: d.createdAt ? d.createdAt.toDate().getTime() : 0}); });
       docs.sort((a,b) => b.ts - a.ts);
@@ -2910,7 +2911,7 @@ s0.parentNode.insertBefore(s1,s0);
         } else {
           statusBadge = '<span class="cu-badge cu-badge-red">'+st+'</span>';
         }
-        rows += '<tr><td><span class="cu-badge cu-badge-green">'+(d.huduma||'—')+'</span></td><td style="color:var(--muted)">'+(d.simu||'—')+'</td><td style="color:var(--muted)">'+(d.maelezo||'—')+'</td><td style="font-family:JetBrains Mono,monospace;font-size:0.82rem;color:var(--muted)">'+dt+'</td><td>'+statusBadge+'</td></tr>';
+        rows += '<tr><td><span class="cu-badge cu-badge-green">'+(d.huduma||'—')+'</span></td><td style="color:var(--fiber);font-weight:600;font-size:0.82rem;">'+(d.gharama||'—')+'</td><td style="color:var(--muted)">'+(d.simu||'—')+'</td><td style="color:var(--muted)">'+(d.maelezo||'—')+'</td><td style="font-family:JetBrains Mono,monospace;font-size:0.82rem;color:var(--muted)">'+dt+'</td><td>'+statusBadge+'</td></tr>';
       });
       oBody.innerHTML = rows;
       document.getElementById('cuStatDone').textContent = doneCount;
@@ -3021,33 +3022,41 @@ s0.parentNode.insertBefore(s1,s0);
 
   let currentOrderService = '';
   const serviceTranslations = {
-    'Ukarabati wa Kompyuta/Laptop': { sw: 'Ukarabati wa Kompyuta/Laptop', en: 'Computer/Laptop Repair' },
-    'Utatuzi wa Simu': { sw: 'Utatuzi wa Simu', en: 'Phone Fixing' },
-    'Usanidi wa Mtandao': { sw: 'Usanidi wa Mtandao', en: 'Network Setup' },
-    'Mifumo ya Biashara (Excel)': { sw: 'Mifumo ya Biashara (Excel)', en: 'Business Systems (Excel)' },
-    'Hifadhi/Vifaa vya Nje': { sw: 'Hifadhi/Vifaa vya Nje', en: 'Storage/External Drives' },
-    'Msaada wa Mbali (Remote)': { sw: 'Msaada wa Mbali (Remote)', en: 'Remote Support' },
-    'Usalama wa Mtandao (Cybersecurity)': { sw: 'Usalama wa Mtandao (Cybersecurity)', en: 'Cybersecurity' },
-    'Huduma za Wingu (Cloud Services)': { sw: 'Huduma za Wingu (Cloud Services)', en: 'Cloud Services' },
-    'Uwekaji wa Tovuti (Web Hosting)': { sw: 'Uwekaji wa Tovuti (Web Hosting)', en: 'Web Hosting' },
-    'Mafunzo ya TEHAMA (IT Training)': { sw: 'Mafunzo ya TEHAMA (IT Training)', en: 'IT Training' },
-    'Ushauri wa TEHAMA (IT Consulting)': { sw: 'Ushauri wa TEHAMA (IT Consulting)', en: 'IT Consulting' },
-    'Uendelezaji wa Programu (Software Development)': { sw: 'Uendelezaji wa Programu (Software Development)', en: 'Software Development' },
-    'Usimamizi wa Seva (Server Management)': { sw: 'Usimamizi wa Seva (Server Management)', en: 'Server Management' },
-    'Uchambuzi wa Takwimu (Data Analytics)': { sw: 'Uchambuzi wa Takwimu (Data Analytics)', en: 'Data Analytics' },
-    'Akili Mnemba (AI & Machine Learning)': { sw: 'Akili Mnemba (AI & Machine Learning)', en: 'AI & Machine Learning' },
-    'Mifumo ya ERP na CRM': { sw: 'Mifumo ya ERP na CRM', en: 'ERP & CRM Systems' },
-    'Mawasiliano ya VoIP': { sw: 'Mawasiliano ya VoIP', en: 'VoIP Communications' },
-    'Suluhisho za IoT': { sw: 'Suluhisho za IoT', en: 'IoT Solutions' },
-    'Uhifadhi na Urejeshaji wa Data (Backup & Recovery)': { sw: 'Uhifadhi na Urejeshaji wa Data (Backup & Recovery)', en: 'Backup & Recovery' },
-    'Usimamizi wa Miradi ya TEHAMA': { sw: 'Usimamizi wa Miradi ya TEHAMA', en: 'IT Project Management' },
-    'Ukaguzi wa Kufuata Sheria za TEHAMA (IT Compliance)': { sw: 'Ukaguzi wa Kufuata Sheria za TEHAMA (IT Compliance)', en: 'IT Compliance Auditing' },
+    'Ukarabati wa Kompyuta/Laptop': { sw: 'Ukarabati wa Kompyuta/Laptop', en: 'Computer/Laptop Repair', price: 'Tsh 30,000 - 150,000' },
+    'Utatuzi wa Simu': { sw: 'Utatuzi wa Simu', en: 'Phone Fixing', price: 'Tsh 20,000 - 80,000' },
+    'Usanidi wa Mtandao': { sw: 'Usanidi wa Mtandao', en: 'Network Setup', price: 'Tsh 50,000 - 200,000' },
+    'Mifumo ya Biashara (Excel)': { sw: 'Mifumo ya Biashara (Excel)', en: 'Business Systems (Excel)', price: 'Tsh 100,000 - 500,000' },
+    'Hifadhi/Vifaa vya Nje': { sw: 'Hifadhi/Vifaa vya Nje', en: 'Storage/External Drives', price: 'Tsh 20,000 - 100,000' },
+    'Msaada wa Mbali (Remote)': { sw: 'Msaada wa Mbali (Remote)', en: 'Remote Support', price: 'Tsh 15,000 - 50,000' },
+    'Usalama wa Mtandao (Cybersecurity)': { sw: 'Usalama wa Mtandao (Cybersecurity)', en: 'Cybersecurity', price: 'Tsh 100,000 - 1,000,000' },
+    'Huduma za Wingu (Cloud Services)': { sw: 'Huduma za Wingu (Cloud Services)', en: 'Cloud Services', price: 'Tsh 200,000 - 2,000,000' },
+    'Uwekaji wa Tovuti (Web Hosting)': { sw: 'Uwekaji wa Tovuti (Web Hosting)', en: 'Web Hosting', price: 'Tsh 100,000 - 500,000' },
+    'Mafunzo ya TEHAMA (IT Training)': { sw: 'Mafunzo ya TEHAMA (IT Training)', en: 'IT Training', price: 'Tsh 50,000 - 300,000' },
+    'Ushauri wa TEHAMA (IT Consulting)': { sw: 'Ushauri wa TEHAMA (IT Consulting)', en: 'IT Consulting', price: 'Tsh 50,000 - 200,000' },
+    'Uendelezaji wa Programu (Software Development)': { sw: 'Uendelezaji wa Programu (Software Development)', en: 'Software Development', price: 'Tsh 500,000 - 5,000,000' },
+    'Usimamizi wa Seva (Server Management)': { sw: 'Usimamizi wa Seva (Server Management)', en: 'Server Management', price: 'Tsh 200,000 - 1,000,000' },
+    'Uchambuzi wa Takwimu (Data Analytics)': { sw: 'Uchambuzi wa Takwimu (Data Analytics)', en: 'Data Analytics', price: 'Tsh 150,000 - 800,000' },
+    'Akili Mnemba (AI & Machine Learning)': { sw: 'Akili Mnemba (AI & Machine Learning)', en: 'AI & Machine Learning', price: 'Tsh 500,000 - 5,000,000' },
+    'Mifumo ya ERP na CRM': { sw: 'Mifumo ya ERP na CRM', en: 'ERP & CRM Systems', price: 'Tsh 1,000,000 - 10,000,000' },
+    'Mawasiliano ya VoIP': { sw: 'Mawasiliano ya VoIP', en: 'VoIP Communications', price: 'Tsh 100,000 - 500,000' },
+    'Suluhisho za IoT': { sw: 'Suluhisho za IoT', en: 'IoT Solutions', price: 'Tsh 200,000 - 2,000,000' },
+    'Uhifadhi na Urejeshaji wa Data (Backup & Recovery)': { sw: 'Uhifadhi na Urejeshaji wa Data (Backup & Recovery)', en: 'Backup & Recovery', price: 'Tsh 50,000 - 300,000' },
+    'Usimamizi wa Miradi ya TEHAMA': { sw: 'Usimamizi wa Miradi ya TEHAMA', en: 'IT Project Management', price: 'Tsh 200,000 - 1,500,000' },
+    'Ukaguzi wa Kufuata Sheria za TEHAMA (IT Compliance)': { sw: 'Ukaguzi wa Kufuata Sheria za TEHAMA (IT Compliance)', en: 'IT Compliance Auditing', price: 'Tsh 150,000 - 800,000' },
   };
   function openOrder(serviceName){
     currentOrderService = serviceName;
     const t = serviceTranslations[serviceName];
     const lang = currentLang || 'sw';
     document.getElementById('orderServiceName').textContent = t ? t[lang] : serviceName;
+    const priceEl = document.getElementById('orderPriceDisplay');
+    const priceVal = document.getElementById('orderPriceVal');
+    if(t && t.price){
+      priceVal.textContent = t.price;
+      priceEl.style.display = 'block';
+    } else {
+      priceEl.style.display = 'none';
+    }
     orderForm.reset();
     orderErr.style.display = 'none';
     orderOk.style.display = 'none';
@@ -3089,6 +3098,7 @@ s0.parentNode.insertBefore(s1,s0);
       simu: phone,
       maelezo: desc,
       email: user ? user.email : 'Mgeni',
+      gharama: (serviceTranslations[service] && serviceTranslations[service].price) ? serviceTranslations[service].price : 'Bei ya mkutano',
       status: 'mpya',
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     }).then(() => {
@@ -3433,6 +3443,7 @@ s0.parentNode.insertBefore(s1,s0);
       'admin-order-jina': 'Jina',
       'admin-order-simu': 'Simu',
       'admin-order-huduma': 'Huduma',
+      'admin-order-gharama': 'Gharama',
       'admin-order-maelezo': 'Maelezo',
       'admin-order-tarehe': 'Tarehe',
       'admin-order-hali': 'Hali',
@@ -3445,7 +3456,9 @@ s0.parentNode.insertBefore(s1,s0);
       'order-accept-confirm': 'Kubali order hii na uonyeshe kuwa unaifanyia kazi?',
       'order-accepted-title': 'Order Imekubaliwa!',
       'order-accepted-msg': 'Mteja atapata taarifa kuwa order yake imeona na inashughulikiwa.',
+      'order-price-label': 'Bei ya Takwimu:',
       'cu-order-huduma': 'Huduma',
+      'cu-order-gharama': 'Gharama',
       'cu-order-simu': 'Simu',
       'cu-order-maelezo': 'Maelezo',
       'cu-order-tarehe': 'Tarehe',
@@ -3841,6 +3854,7 @@ s0.parentNode.insertBefore(s1,s0);
       'admin-order-jina': 'Name',
       'admin-order-simu': 'Phone',
       'admin-order-huduma': 'Service',
+      'admin-order-gharama': 'Price',
       'admin-order-maelezo': 'Details',
       'admin-order-tarehe': 'Date',
       'admin-order-hali': 'Status',
@@ -3853,7 +3867,9 @@ s0.parentNode.insertBefore(s1,s0);
       'order-accept-confirm': 'Accept this order and confirm you are working on it?',
       'order-accepted-title': 'Order Accepted!',
       'order-accepted-msg': 'The customer will be notified that their order has been seen and is being worked on.',
+      'order-price-label': 'Estimated Price:',
       'cu-order-huduma': 'Service',
+      'cu-order-gharama': 'Price',
       'cu-order-simu': 'Phone',
       'cu-order-maelezo': 'Details',
       'cu-order-tarehe': 'Date',
