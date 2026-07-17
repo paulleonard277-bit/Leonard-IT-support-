@@ -707,6 +707,8 @@
     .cu-offer-card .discount{font-size:1.3rem !important;}
     .cu-review-form{padding:18px 14px !important; border-radius:12px;}
     .cu-review-form textarea{font-size:0.82rem; min-height:70px;}
+    .cu-about-stats{grid-template-columns:repeat(2,1fr);padding:18px 12px;}
+    .cu-about-values-grid{grid-template-columns:1fr;}
     .cu-btn{padding:9px 18px; font-size:0.8rem;}
 
     .ad-topbar{padding:12px 14px !important; flex-wrap:wrap; gap:8px;}
@@ -1904,6 +1906,23 @@ s0.parentNode.insertBefore(s1,s0);
     .cu-review-form .stars-input span:hover{transform:scale(1.2);}
     .cu-mobile-topbar{display:none;}
     .cu-mb-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:199;}
+    /* CU ABOUT PAGE */
+    .cu-about-hero{text-align:center;padding:24px 0 32px;}
+    .cu-about-badge{display:inline-block;background:rgba(62,211,199,0.1);color:var(--fiber);padding:6px 16px;border-radius:20px;font-size:0.78rem;font-weight:600;margin-bottom:12px;letter-spacing:0.5px;}
+    .cu-about-title{font-size:1.6rem;font-weight:700;background:linear-gradient(135deg,var(--paper) 30%,var(--fiber));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px;}
+    .cu-about-desc{color:var(--muted);font-size:0.92rem;line-height:1.7;max-width:520px;margin:0 auto;}
+    .cu-about-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:32px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px 16px;}
+    .cu-about-stat{text-align:center;}
+    .cu-about-stat-val{font-family:'Space Grotesk',sans-serif;font-size:1.4rem;font-weight:700;color:var(--fiber);}
+    .cu-about-stat-lbl{font-size:0.78rem;color:var(--muted);margin-top:4px;}
+    .cu-about-values h3{text-align:center;font-size:1.15rem;font-weight:600;margin-bottom:20px;}
+    .cu-about-values-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:28px;}
+    .cu-about-val-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px 20px;text-align:center;transition:all 0.3s;}
+    .cu-about-val-card:hover{border-color:rgba(62,211,199,0.3);transform:translateY(-2px);}
+    .cu-about-val-icon{font-size:1.5rem;margin-bottom:10px;width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:rgba(62,211,199,0.08);border-radius:12px;margin:0 auto 12px;}
+    .cu-about-val-card h4{font-size:0.92rem;font-weight:600;color:var(--fiber);margin-bottom:8px;}
+    .cu-about-val-card p{font-size:0.82rem;color:var(--muted);line-height:1.6;}
+    .cu-about-contact{text-align:center;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;font-size:0.9rem;color:var(--muted);}
     @media(max-width:760px){
       .cu-layout{grid-template-columns:1fr;}
       .cu-sidebar{display:none;position:fixed;top:0;left:0;width:260px;height:100vh;z-index:200;}
@@ -1952,6 +1971,7 @@ s0.parentNode.insertBefore(s1,s0);
         <a class="cu-sb-link" data-page="chat" data-label="cu-sb-chat"><span class="icon">💬</span>Live Chat</a>
         <a class="cu-sb-link" data-page="offa" data-label="cu-sb-offa"><span class="icon">🎁</span>Offa</a>
         <a class="cu-sb-link" data-page="maoni" data-label="cu-sb-maoni"><span class="icon">⭐</span>Maoni</a>
+        <a class="cu-sb-link" data-page="about" data-label="cu-sb-about"><span class="icon">ℹ️</span>Kuhusu Sisi</a>
       </nav>
       <div class="cu-sb-logout">
         <button class="cu-sb-lang" id="langToggleCustomer" style="width:100%;padding:10px 16px;border-radius:12px;border:1px solid var(--line);background:none;color:var(--paper);cursor:pointer;font-size:0.85rem;font-weight:700;margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;"><span>🌐</span> SW</button>
@@ -2120,6 +2140,49 @@ s0.parentNode.insertBefore(s1,s0);
           <button class="cu-btn cu-btn-primary" style="margin-top:12px;" onclick="submitReview()">Tuma Maoni →</button>
         </div>
         <div id="cuReviewsList"></div>
+      </div>
+
+      <!-- ABOUT US PAGE -->
+      <div class="cu-page" id="cuPageAbout">
+        <div class="cu-about-hero">
+          <div class="cu-about-badge" data-label="cu-about-badge">Kuhusu Sisi</div>
+          <h2 class="cu-about-title" data-label="cu-about-title">PLATINUMZ IT Support</h2>
+          <p class="cu-about-desc" data-label="cu-about-desc">Tumeanzishwa kwa dhumuni moja: kufanya huduma za TEHAMA kupatikana kwa urahisi, kwa uwazi wa gharama, na kwa ubora unaoweza kuutegemea.</p>
+        </div>
+        <div class="cu-about-stats">
+          <div class="cu-about-stat"><div class="cu-about-stat-val">500+</div><div class="cu-about-stat-lbl" data-label="cu-about-stat1">Wateja</div></div>
+          <div class="cu-about-stat"><div class="cu-about-stat-val">3+</div><div class="cu-about-stat-lbl" data-label="cu-about-stat2">Miaka</div></div>
+          <div class="cu-about-stat"><div class="cu-about-stat-val">24/7</div><div class="cu-about-stat-lbl" data-label="cu-about-stat3">Msaada</div></div>
+          <div class="cu-about-stat"><div class="cu-about-stat-val">15+</div><div class="cu-about-stat-lbl" data-label="cu-about-stat4">Huduma</div></div>
+        </div>
+        <div class="cu-about-values">
+          <h3 data-label="cu-about-values-h2">Kwa nini watu wanatuamini?</h3>
+          <div class="cu-about-values-grid">
+            <div class="cu-about-val-card">
+              <div class="cu-about-val-icon">🎯</div>
+              <h4 data-label="cu-about-vision">Dira Yetu</h4>
+              <p data-label="cu-about-vision-desc">Kuwa jina la kwanza linalokumbukwa kila mtu anapohitaji msaada wa TEHAMA nchini Tanzania.</p>
+            </div>
+            <div class="cu-about-val-card">
+              <div class="cu-about-val-icon">🚀</div>
+              <h4 data-label="cu-about-mission">Dhamira Yetu</h4>
+              <p data-label="cu-about-mission-desc">Kutoa huduma za haraka, za uwazi, na za ubora — bila lugha ngumu za kiufundi.</p>
+            </div>
+            <div class="cu-about-val-card">
+              <div class="cu-about-val-icon">💎</div>
+              <h4 data-label="cu-about-values">Misingi Yetu</h4>
+              <p data-label="cu-about-values-desc">Uaminifu, ubora wa kazi, na kujali kila mteja kama wa kwanza.</p>
+            </div>
+            <div class="cu-about-val-card">
+              <div class="cu-about-val-icon">🌍</div>
+              <h4 data-label="cu-about-impact">Athari Yetu</h4>
+              <p data-label="cu-about-impact-desc">Tumehudumia wateja kutoka kila kona ya Tanzania — kutoka Arusha hadi Mwanza, Dar es Salaam hadi Mbeya.</p>
+            </div>
+          </div>
+        </div>
+        <div class="cu-about-contact">
+          <p data-label="cu-about-contact">Una maswali? Wasiliana nasi kupitia Live Chat au piga simu: <strong>0786 868 069</strong></p>
+        </div>
       </div>
 
     </div>
@@ -3396,6 +3459,23 @@ s0.parentNode.insertBefore(s1,s0);
       'cu-orders-empty': 'Hujawahi kuomba huduma bado.',
       'cu-loading': 'Inapakia...',
       'cu-orders-new-btn': '+ Omba Mpya',
+      'cu-about-badge': 'Kuhusu Sisi',
+      'cu-about-title': 'PLATINUMZ IT Support',
+      'cu-about-desc': 'Tumeanzishwa kwa dhumuni moja: kufanya huduma za TEHAMA kupatikana kwa urahisi, kwa uwazi wa gharama, na kwa ubora unaoweza kuutegemea.',
+      'cu-about-stat1': 'Wateja',
+      'cu-about-stat2': 'Miaka',
+      'cu-about-stat3': 'Msaada',
+      'cu-about-stat4': 'Huduma',
+      'cu-about-values-h2': 'Kwa nini watu wanatuamini?',
+      'cu-about-vision': 'Dira Yetu',
+      'cu-about-vision-desc': 'Kuwa jina la kwanza linalokumbukwa kila mtu anapohitaji msaada wa TEHAMA nchini Tanzania.',
+      'cu-about-mission': 'Dhamira Yetu',
+      'cu-about-mission-desc': 'Kutoa huduma za haraka, za uwazi, na za ubora — bila lugha ngumu za kiufundi.',
+      'cu-about-values': 'Misingi Yetu',
+      'cu-about-values-desc': 'Uaminifu, ubora wa kazi, na kujali kila mteja kama wa kwanza.',
+      'cu-about-impact': 'Athari Yetu',
+      'cu-about-impact-desc': 'Tumehudumia wateja kutoka kila kona ya Tanzania — kutoka Arusha hadi Mwanza, Dar es Salaam hadi Mbeya.',
+      'cu-about-contact': 'Una maswali? Wasiliana nasi kupitia Live Chat au piga simu: 0786 868 069',
       'cu-sb-nyumbani': 'Nyumbani',
       'cu-sb-huduma': 'Huduma',
       'cu-sb-orders': 'Orders',
@@ -3403,6 +3483,7 @@ s0.parentNode.insertBefore(s1,s0);
       'cu-sb-chat': 'Live Chat',
       'cu-sb-offa': 'Offa',
       'cu-sb-maoni': 'Maoni',
+      'cu-sb-about': 'Kuhusu Sisi',
       'cu-hero-title': '👋 Karibu, ',
       'cu-page-sub': 'Ungependa kufanya nini leo?',
       'cu-stat-orders': 'Orders',
@@ -3786,6 +3867,23 @@ s0.parentNode.insertBefore(s1,s0);
       'cu-orders-empty': 'You have not requested any service yet.',
       'cu-loading': 'Loading...',
       'cu-orders-new-btn': '+ New Request',
+      'cu-about-badge': 'About Us',
+      'cu-about-title': 'PLATINUMZ IT Support',
+      'cu-about-desc': 'Founded with one purpose: to make IT services accessible, transparent in cost, and reliable for individuals and businesses of all sizes.',
+      'cu-about-stat1': 'Clients',
+      'cu-about-stat2': 'Years',
+      'cu-about-stat3': 'Support',
+      'cu-about-stat4': 'Services',
+      'cu-about-values-h2': 'Why do people trust us?',
+      'cu-about-vision': 'Our Vision',
+      'cu-about-vision-desc': 'To be the first name everyone remembers when they need IT support in Tanzania.',
+      'cu-about-mission': 'Our Mission',
+      'cu-about-mission-desc': 'To deliver fast, transparent, and high-quality services — without complicated technical jargon.',
+      'cu-about-values': 'Our Values',
+      'cu-about-values-desc': 'Honesty, quality work, and treating every customer as our first.',
+      'cu-about-impact': 'Our Impact',
+      'cu-about-impact-desc': 'We have served clients from every corner of Tanzania — from Arusha to Mwanza, Dar es Salaam to Mbeya.',
+      'cu-about-contact': 'Have questions? Contact us via Live Chat or call: 0786 868 069',
       'cu-sb-nyumbani': 'Home',
       'cu-sb-huduma': 'Services',
       'cu-sb-orders': 'Orders',
@@ -3793,6 +3891,7 @@ s0.parentNode.insertBefore(s1,s0);
       'cu-sb-chat': 'Live Chat',
       'cu-sb-offa': 'Offers',
       'cu-sb-maoni': 'Reviews',
+      'cu-sb-about': 'About Us',
       'cu-hero-title': '👋 Welcome, ',
       'cu-page-sub': 'What would you like to do today?',
       'cu-stat-orders': 'Orders',
@@ -4267,7 +4366,8 @@ s0.parentNode.insertBefore(s1,s0);
         malipo: 'cuPageMalipo',
         chat: 'cuPageChat',
         offa: 'cuPageOffa',
-        maoni: 'cuPageMaoni'
+        maoni: 'cuPageMaoni',
+        about: 'cuPageAbout'
       };
       const target = document.getElementById(pageMap[page]);
       if(target) target.classList.add('active');
