@@ -988,6 +988,7 @@
       <div id="authArea"></div>
       <a href="#wasiliana" class="nav-cta">Piga Simu</a>
       <button id="langToggle" aria-label="Badilisha lugha" title="SW / EN" style="background:none; border:1px solid var(--line); color:var(--paper); padding:8px 12px; border-radius:8px; font-size:0.75rem; cursor:pointer; font-family:'JetBrains Mono',monospace;">SW</button>
+      <button id="currencyToggle" onclick="toggleCurrency()" aria-label="Badilisha sarafu" title="TSH / USD" style="background:none; border:1px solid var(--line); color:var(--paper); padding:8px 12px; border-radius:8px; font-size:0.75rem; cursor:pointer; font-family:'JetBrains Mono',monospace;">$ USD</button>
       <button id="themeToggle" aria-label="Badilisha mandhari" title="Badilisha Dark/Light" style="background:none; border:1px solid var(--line); color:var(--paper); width:38px; height:38px; border-radius:8px; font-size:1rem; cursor:pointer; display:flex; align-items:center; justify-content:center;">🌙</button>
       <button class="menu-toggle" id="menuToggle" aria-label="Fungua menyu">☰</button>
     </div>
@@ -1526,6 +1527,29 @@
   </div>
 </section>
 
+<section class="section" id="testimonials" style="background:var(--ink);padding:60px 0;">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow" data-label="testi-eyebrow">Wateja Wetu Wanasema</div>
+      <h2 data-label="testi-h2">Maposti Kutoka kwa Wateja</h2>
+      <p data-label="testi-desc">Sikiliza wateja wetu walivyopata huduma bora kutoka PLATINUMZ IT Support.</p>
+    </div>
+    <div class="testi-carousel" id="testiCarousel">
+      <button class="testi-arrow testi-prev" onclick="moveTesti(-1)">◀</button>
+      <div class="testi-track" id="testiTrack">
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><div class="testi-text" data-label="testi-1-text">"Timu ya PLATINUMZ ilisasisha mfumo wangu wa biashara ndani ya siku 3. Sasa naenda na kasi kubwa!"</div><div class="testi-author"><div class="testi-avatar">J</div><div><strong>Juma M.</strong><br><span data-label="testi-1-role">Mmiliki wa Duka — Dar es Salaam</span></div></div></div>
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><div class="testi-text" data-label="testi-2-text">"Nilikuwa nimepoteza data yote kwenye laptop yangu. PLATINUMZ walinirudishia kila kitu!"</div><div class="testi-author"><div class="testi-avatar">A</div><div><strong>Amina K.</strong><br><span data-label="testi-2-role">Mwanafunzi — DSM</span></div></div></div>
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><div class="testi-text" data-label="testi-3-text">"Mtandao wa ofisi yetu ulikuwa unakatika kila siku. Baada ya kusasishwa, hakuna tena hitilafu!"</div><div class="testi-author"><div class="testi-avatar">P</div><div><strong>Peter L.</strong><br><span data-label="testi-3-role">Meneja IT — Kampuni ya Nishati</span></div></div></div>
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><div class="testi-text" data-label="testi-4-text">"Usaidizi wa mbali umenibadilisha maisha — nimekomboa kompyuta yangu kutoka nyumbani bila kusafiri."</div><div class="testi-author"><div class="testi-avatar">F</div><div><strong>Fatuma H.</strong><br><span data-label="testi-4-role">Biashara ndogo — Arusha</span></div></div></div>
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><div class="testi-text" data-label="testi-5-text">"Bei yao ni nafuu na huduma ni ya haraka sana. Nishawapendekeza kwa rafiki zangu wote!"</div><div class="testi-author"><div class="testi-avatar">M</div><div><strong>Mohamed S.</strong><br><span data-label="testi-5-role">Mjasiriamali — Mwanza</span></div></div></div>
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><div class="testi-text" data-label="testi-6-text">"Cloud hosting yao ni imara sana. Tovuti yangu haijawaianguka tangu nianze kulipa."  </div><div class="testi-author"><div class="testi-avatar">R</div><div><strong>Rehema N.</strong><br><span data-label="testi-6-role">Msimamizi wa Tovuti — DSM</span></div></div></div>
+      </div>
+      <button class="testi-arrow testi-next" onclick="moveTesti(1)">▶</button>
+    </div>
+    <div class="testi-dots" id="testiDots"></div>
+  </div>
+</section>
+
 <section class="section">
   <div class="wrap">
     <div class="trust-row">
@@ -1608,6 +1632,42 @@
   </div>
 </section>
 
+<section class="section" id="blog" style="background:var(--ink);">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow" data-label="blog-eyebrow">Blog / Vidokezo</div>
+      <h2 data-label="blog-h2">Jinsi ya Kujilinda Mtandaoni</h2>
+      <p data-label="blog-desc">Soma vidokezo muhimu kuhusu usalama na matumizi ya TEHAMA kwa kila siku.</p>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-card">
+        <div class="blog-icon">🔒</div>
+        <h3 data-label="blog-1-title">Jinsi ya Kulinda Password Yako</h3>
+        <p data-label="blog-1-desc">Usitumie password moja kwa kila akaunti. Tumia password ndefu yenye herufi, nambari, na alama. Weka kwenye password manager kama LastPass au Bitwarden.</p>
+        <span class="blog-tag" data-label="blog-1-tag">Usalama</span>
+      </div>
+      <div class="blog-card">
+        <div class="blog-icon">📧</div>
+        <h3 data-label="blog-2-title">Jinsi ya Kuepuka Phishing</h3>
+        <p data-label="blog-2-desc">Usibofye viungo kwenye barua pepe usiyotambua. Angalia anwani ya mtumaji kabla ya kufungua. Kamwe usijaze taarifa za siri kwenye tovuti isiyojulikana.</p>
+        <span class="blog-tag" data-label="blog-2-tag">Ujanja wa Mtandao</span>
+      </div>
+      <div class="blog-card">
+        <div class="blog-icon">💾</div>
+        <h3 data-label="blog-3-title">Umuhimu wa Backup</h3>
+        <p data-label="blog-3-desc">Hifadhi nakala ya data yako kwa angalau sehemu mbili: kwenye USB na kwenye wingu (cloud). Programu ya Google Drive ni bora na bure.</p>
+        <span class="blog-tag" data-label="blog-3-tag">Hifadhi</span>
+      </div>
+      <div class="blog-card">
+        <div class="blog-icon">📶</div>
+        <h3 data-label="blog-4-title">Kuboresha Mtandao wa Nyumbani</h3>
+        <p data-label="blog-4-desc">Weka router katikati ya nyumba, sio pembeni. Sasisha firmware yake mara kwa mara. Tumia kifaa cha 5GHz kwa kazi nzito kama video calls.</p>
+        <span class="blog-tag" data-label="blog-4-tag">Mtandao</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section" id="wasiliana">
   <div class="wrap">
     <div class="contact-banner">
@@ -1626,7 +1686,14 @@
 </section>
 
 <footer>
-  <div class="wrap" style="display:flex; flex-direction:column; gap:10px; align-items:center;">
+  <div class="wrap" style="display:flex; flex-direction:column; gap:12px; align-items:center;">
+    <div style="display:flex; gap:14px; flex-wrap:wrap; justify-content:center;">
+      <a href="https://facebook.com/" target="_blank" rel="noopener" class="social-link" title="Facebook" style="color:var(--muted);font-size:1.2rem;transition:color 0.2s;">📘 Facebook</a>
+      <a href="https://instagram.com/" target="_blank" rel="noopener" class="social-link" title="Instagram" style="color:var(--muted);font-size:1.2rem;transition:color 0.2s;">📸 Instagram</a>
+      <a href="https://linkedin.com/" target="_blank" rel="noopener" class="social-link" title="LinkedIn" style="color:var(--muted);font-size:1.2rem;transition:color 0.2s;">💼 LinkedIn</a>
+      <a href="https://twitter.com/" target="_blank" rel="noopener" class="social-link" title="X / Twitter" style="color:var(--muted);font-size:1.2rem;transition:color 0.2s;">✖ X</a>
+      <a href="https://youtube.com/" target="_blank" rel="noopener" class="social-link" title="YouTube" style="color:var(--muted);font-size:1.2rem;transition:color 0.2s;">▶ YouTube</a>
+    </div>
     <div>© 2026 PLATINUMZ IT Support · Huduma za TEHAMA, Tanzania</div>
     <div style="display:flex; gap:20px;">
       <a id="openPrivacy" style="cursor:pointer; color:var(--muted); font-size:0.82rem;">Sera ya Faragha</a>
@@ -2114,6 +2181,8 @@ s0.parentNode.insertBefore(s1,s0);
         <div class="cu-chat-box">
           <div class="cu-chat-messages" id="cuChatMessages"><div class="cu-empty">💬 Andika ujumbe wako hapa...</div></div>
           <div class="cu-chat-input">
+            <input type="file" id="cuChatFile" accept="image/*" style="display:none;" onchange="handleChatFile(this,'customer')">
+            <button class="chat-attach-btn" onclick="document.getElementById('cuChatFile').click()" title="Attach image">📎</button>
             <input id="cuChatInput" type="text" placeholder="Andika ujumbe...">
             <button id="cuChatSend">Tuma ➤</button>
           </div>
@@ -2306,6 +2375,45 @@ s0.parentNode.insertBefore(s1,s0);
     .notif-item.unread{background:rgba(62,211,199,0.06);font-weight:600;}
     .notif-item .notif-time{font-size:0.7rem;color:var(--muted);margin-top:4px;}
     .notif-empty{text-align:center;padding:20px;color:var(--muted);font-size:0.82rem;}
+    .testi-carousel{position:relative;overflow:hidden;padding:0 50px;max-width:900px;margin:0 auto;}
+    .testi-track{display:flex;transition:transform 0.5s ease;gap:20px;}
+    .testi-card{min-width:calc(33.333% - 14px);background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:28px 24px;flex-shrink:0;transition:all 0.3s;}
+    .testi-card:hover{border-color:var(--fiber);transform:translateY(-4px);box-shadow:0 8px 24px rgba(62,211,199,0.12);}
+    .testi-stars{color:#ffd700;font-size:1rem;margin-bottom:12px;letter-spacing:2px;}
+    .testi-text{font-size:0.9rem;color:var(--text);line-height:1.6;margin-bottom:18px;font-style:italic;}
+    .testi-author{display:flex;align-items:center;gap:10px;}
+    .testi-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--fiber),#2bc4b8);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.85rem;flex-shrink:0;}
+    .testi-author strong{font-size:0.85rem;color:var(--text);}
+    .testi-author span{font-size:0.75rem;color:var(--muted);}
+    .testi-arrow{position:absolute;top:50%;transform:translateY(-50%);background:var(--panel);border:1px solid var(--line);color:var(--text);width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:0.9rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s;z-index:2;}
+    .testi-arrow:hover{background:var(--fiber);color:#fff;border-color:var(--fiber);}
+    .testi-prev{left:0;}
+    .testi-next{right:0;}
+    .testi-dots{display:flex;justify-content:center;gap:8px;margin-top:20px;}
+    .testi-dot{width:10px;height:10px;border-radius:50%;background:var(--line);cursor:pointer;transition:all 0.2s;}
+    .testi-dot.active{background:var(--fiber);transform:scale(1.2);}
+    @media(max-width:700px){ .testi-card{min-width:calc(100% - 0px);} .testi-carousel{padding:0 40px;} }
+    @media(max-width:500px){ .testi-carousel{padding:0 35px;} .testi-arrow{width:32px;height:32px;font-size:0.8rem;} }
+    .typing-indicator{display:flex;align-items:center;gap:8px;padding:8px 14px;color:var(--muted);font-size:0.78rem;font-style:italic;animation:fadeIn 0.3s;}
+    .typing-indicator.cu{justify-content:flex-start;}
+    .typing-dots{display:flex;gap:3px;}
+    .typing-dots span{width:6px;height:6px;border-radius:50%;background:var(--fiber);opacity:0.5;animation:typingBounce 1.2s infinite;}
+    .typing-dots span:nth-child(2){animation-delay:0.2s;}
+    .typing-dots span:nth-child(3){animation-delay:0.4s;}
+    @keyframes typingBounce{0%,80%,100%{transform:translateY(0);opacity:0.5;} 40%{transform:translateY(-6px);opacity:1;}}
+    .read-tick{font-size:0.7rem;color:var(--muted);}
+    .read-tick.read{color:var(--fiber);}
+    .chat-attach-btn{background:none;border:none;font-size:1.1rem;cursor:pointer;padding:6px;border-radius:8px;transition:all 0.2s;flex-shrink:0;}
+    .chat-attach-btn:hover{background:rgba(62,211,199,0.15);}
+    .bubble img.chat-img{max-width:200px;max-height:180px;border-radius:8px;margin-top:6px;cursor:pointer;}
+    .social-link:hover{color:var(--fiber) !important;transform:translateY(-2px);}
+    .blog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;}
+    .blog-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px;transition:all 0.3s;cursor:default;}
+    .blog-card:hover{border-color:var(--fiber);transform:translateY(-4px);box-shadow:0 8px 24px rgba(62,211,199,0.1);}
+    .blog-icon{font-size:2rem;margin-bottom:12px;}
+    .blog-card h3{font-size:1rem;color:var(--text);margin:0 0 10px 0;font-weight:700;}
+    .blog-card p{font-size:0.85rem;color:var(--muted);line-height:1.6;margin:0 0 14px 0;}
+    .blog-tag{display:inline-block;padding:4px 10px;border-radius:6px;background:rgba(62,211,199,0.1);color:var(--fiber);font-size:0.72rem;font-weight:600;}
     .ad-empty{text-align:center;padding:40px 20px;color:var(--muted);font-size:0.88rem;}
     .ad-empty .ad-empty-icon{font-size:2rem;margin-bottom:8px;opacity:0.5;}
     .ad-chat-box{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
@@ -2422,6 +2530,8 @@ s0.parentNode.insertBefore(s1,s0);
       <div class="ad-chat-box">
         <div class="ad-chat-messages" id="adminChatMessages"><div class="ad-empty"><div class="ad-empty-icon">💬</div>Hakuna ujumbe bado.</div></div>
         <div class="ad-chat-input">
+          <input type="file" id="adminChatFile" accept="image/*" style="display:none;" onchange="handleChatFile(this,'admin')">
+          <button class="chat-attach-btn" onclick="document.getElementById('adminChatFile').click()" title="Attach image">📎</button>
           <input id="adminChatInput" type="text" placeholder="Andika ujumbe kwa mteja...">
           <button id="adminChatSend">Tuma 📤</button>
         </div>
@@ -2943,7 +3053,9 @@ s0.parentNode.insertBefore(s1,s0);
         const time = d.createdAt ? d.createdAt.toDate().toLocaleTimeString('sw-TZ',{hour:'2-digit',minute:'2-digit'}) : '';
         const isAdmin = d.sender === 'admin';
         const cls = isAdmin ? 'admin' : 'customer';
-        html += '<div class="ad-chat-msg '+cls+'"><div><div class="bubble">'+(d.message||'')+'</div><div class="meta">'+(d.name||(isAdmin?'Admin':'Mteja'))+' · '+time+'</div></div></div>';
+        const readTick = isAdmin ? (d.read ? ' ✓✓' : ' ✓') : '';
+        const imgHtml = d.image ? '<img class="chat-img" src="'+d.image+'" onclick="window.open(this.src)" alt="image">' : '';
+        html += '<div class="ad-chat-msg '+cls+'"><div><div class="bubble">'+(d.message||'')+imgHtml+'</div><div class="meta">'+(d.name||(isAdmin?'Admin':'Mteja'))+' · '+time+' <span class="read-tick'+(d.read?' read':'')+'">'+readTick+'</span></div></div></div>';
       });
       chatBox.innerHTML = html;
       chatBox.scrollTop = chatBox.scrollHeight;
@@ -2952,10 +3064,40 @@ s0.parentNode.insertBefore(s1,s0);
     chatSend.onclick = () => {
       const msg = chatInput.value.trim();
       if(!msg) return;
-      db.collection('chats').add({ sender:'admin', name:'Admin', message:msg, createdAt:firebase.firestore.FieldValue.serverTimestamp() });
+      db.collection('chats').add({ sender:'admin', name:'Admin', message:msg, read:false, createdAt:firebase.firestore.FieldValue.serverTimestamp() });
+      db.collection('typing').doc('admin').set({sender:'admin',timestamp:firebase.firestore.FieldValue.serverTimestamp()}).catch(()=>{});
       chatInput.value = '';
     };
     chatInput.addEventListener('keydown', (e) => { if(e.key === 'Enter') chatSend.click(); });
+    chatInput.addEventListener('input', function(){
+      db.collection('typing').doc('admin').set({sender:'admin',timestamp:firebase.firestore.FieldValue.serverTimestamp()}).catch(()=>{});
+    });
+    db.collection('typing').doc('customer').onSnapshot((doc) => {
+      const existing = chatBox.querySelector('.typing-indicator');
+      if(doc.exists){
+        const ts = doc.data().timestamp;
+        if(ts){
+          const diff = Date.now() - ts.toDate().getTime();
+          if(diff < 5000){
+            if(!existing){
+              const div = document.createElement('div');
+              div.className = 'typing-indicator';
+              div.innerHTML = '<span class="typing-dots"><span></span><span></span><span></span></span> Mteja anaandika...';
+              chatBox.appendChild(div);
+              chatBox.scrollTop = chatBox.scrollHeight;
+            }
+            return;
+          }
+        }
+      }
+      if(existing) existing.remove();
+    });
+    // Mark customer messages as read
+    db.collection('chats').where('sender','==','customer').where('read','==',false).get().then((snap) => {
+      const batch = db.batch();
+      snap.forEach((doc) => { batch.update(doc.ref, {read:true}); });
+      return batch.commit();
+    }).catch(()=>{});
 
     function loadAdminReviews(){
       db.collection('reviews').orderBy('createdAt','desc').get().then((snap) => {
@@ -3200,6 +3342,55 @@ s0.parentNode.insertBefore(s1,s0);
     if(!e.target.closest('.cu-notif-wrap')) document.getElementById('cuNotifPanel').classList.remove('show');
   });
 
+  // --- File Attachments ---
+  function handleChatFile(input, role){
+    const file = input.files[0];
+    if(!file) return;
+    if(file.size > 500000){ alert('Picha ni kubwa sana. Chagua picha ndogo ya GB 500 au chini.'); input.value=''; return; }
+    const reader = new FileReader();
+    reader.onload = function(e){
+      const imgData = e.target.result;
+      const chatData = {
+        sender: role,
+        name: role === 'admin' ? 'Admin' : (_customerUser ? (_customerUser.displayName || _customerUser.email.split('@')[0]) : 'Mteja'),
+        email: role === 'customer' && _customerUser ? _customerUser.email : '',
+        message: '📷 Picha',
+        image: imgData,
+        read: false,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      };
+      db.collection('chats').add(chatData).catch((err) => { console.error('File send error:', err); alert('Imeshindwa kutuma picha.'); });
+    };
+    reader.readAsDataURL(file);
+    input.value = '';
+  }
+
+  // --- Testimonials Carousel ---
+  let testiIdx = 0;
+  function moveTesti(dir){
+    const track = document.getElementById('testiTrack');
+    if(!track) return;
+    const cards = track.children;
+    const total = cards.length;
+    const cardW = cards[0].offsetWidth + 20;
+    const visible = window.innerWidth > 700 ? 3 : 1;
+    const maxIdx = Math.max(0, total - visible);
+    testiIdx = Math.max(0, Math.min(maxIdx, testiIdx + dir));
+    track.style.transform = 'translateX(-' + (testiIdx * cardW) + 'px)';
+    document.querySelectorAll('.testi-dot').forEach((d,i) => d.classList.toggle('active', i === testiIdx));
+  }
+  (function initTestiDots(){
+    const track = document.getElementById('testiTrack');
+    const dotsEl = document.getElementById('testiDots');
+    if(!track || !dotsEl) return;
+    const total = track.children.length;
+    const visible = window.innerWidth > 700 ? 3 : 1;
+    const dots = Math.max(1, total - visible + 1);
+    let html = '';
+    for(let i=0; i<dots; i++) html += '<div class="testi-dot'+(i===0?' active':'')+'" onclick="testiIdx='+i+';moveTesti(0)"></div>';
+    dotsEl.innerHTML = html;
+  })();
+
   function acceptOrder(id){
     const at = translations[currentLang];
     if(!confirm(at['order-accept-confirm'] || 'Kubali order hii na uonyeshe kuwa unaifanyia kazi?')) return;
@@ -3374,7 +3565,9 @@ s0.parentNode.insertBefore(s1,s0);
         const time = d.createdAt ? d.createdAt.toDate().toLocaleTimeString('sw-TZ',{hour:'2-digit',minute:'2-digit'}) : '';
         const isMe = d.sender === 'customer';
         const cls = isMe ? 'customer' : 'admin';
-        html += '<div class="cu-chat-msg '+cls+'"><div><div class="bubble">'+(d.message||'')+'</div><div class="meta">'+(d.name||(isMe?'Wewe':'Admin'))+' · '+time+'</div></div></div>';
+        const readTick = isMe ? (d.read ? ' ✓✓' : ' ✓') : '';
+        const imgHtml = d.image ? '<img class="chat-img" src="'+d.image+'" onclick="window.open(this.src)" alt="image">' : '';
+        html += '<div class="cu-chat-msg '+cls+'"><div><div class="bubble">'+(d.message||'')+imgHtml+'</div><div class="meta">'+(d.name||(isMe?'Wewe':'Admin'))+' · '+time+' <span class="read-tick'+(d.read?' read':'')+'">'+readTick+'</span></div></div></div>';
       });
       chatBox.innerHTML = html;
       chatBox.scrollTop = chatBox.scrollHeight;
@@ -3388,11 +3581,42 @@ s0.parentNode.insertBefore(s1,s0);
         email: user.email,
         name: user.displayName || user.email.split('@')[0],
         message: msg,
+        read: false,
         createdAt: firebase.firestore.FieldValue.serverTimestamp()
       });
+      db.collection('typing').doc('customer').set({sender:'customer',timestamp:firebase.firestore.FieldValue.serverTimestamp()}).catch(()=>{});
       chatInput.value = '';
     };
     chatInput.addEventListener('keydown', (e) => { if(e.key === 'Enter') chatSend.click(); });
+    chatInput.addEventListener('input', function(){
+      db.collection('typing').doc('customer').set({sender:'customer',timestamp:firebase.firestore.FieldValue.serverTimestamp()}).catch(()=>{});
+    });
+    db.collection('typing').doc('admin').onSnapshot((doc) => {
+      const existing = chatBox.querySelector('.typing-indicator');
+      if(doc.exists){
+        const ts = doc.data().timestamp;
+        if(ts){
+          const diff = Date.now() - ts.toDate().getTime();
+          if(diff < 5000){
+            if(!existing){
+              const div = document.createElement('div');
+              div.className = 'typing-indicator cu';
+              div.innerHTML = '<span class="typing-dots"><span></span><span></span><span></span></span> Admin anaandika...';
+              chatBox.appendChild(div);
+              chatBox.scrollTop = chatBox.scrollHeight;
+            }
+            return;
+          }
+        }
+      }
+      if(existing) existing.remove();
+    });
+    // Mark admin messages as read
+    db.collection('chats').where('sender','==','admin').where('read','==',false).get().then((snap) => {
+      const batch = db.batch();
+      snap.forEach((doc) => { batch.update(doc.ref, {read:true}); });
+      return batch.commit();
+    }).catch(()=>{});
   }
 </script>
 
@@ -3463,29 +3687,53 @@ s0.parentNode.insertBefore(s1,s0);
   const orderOk = document.getElementById('orderOk');
 
   let currentOrderService = '';
+  let currentCurrency = localStorage.getItem('platinumz-currency') || 'TSH';
+  const EXCHANGE_RATE = 2500;
   const serviceTranslations = {
-    'Ukarabati wa Kompyuta/Laptop': { sw: 'Ukarabati wa Kompyuta/Laptop', en: 'Computer/Laptop Repair', price: 'Tsh 30,000 - 150,000' },
-    'Utatuzi wa Simu': { sw: 'Utatuzi wa Simu', en: 'Phone Fixing', price: 'Tsh 20,000 - 80,000' },
-    'Usanidi wa Mtandao': { sw: 'Usanidi wa Mtandao', en: 'Network Setup', price: 'Tsh 50,000 - 200,000' },
-    'Mifumo ya Biashara (Excel)': { sw: 'Mifumo ya Biashara (Excel)', en: 'Business Systems (Excel)', price: 'Tsh 100,000 - 500,000' },
-    'Hifadhi/Vifaa vya Nje': { sw: 'Hifadhi/Vifaa vya Nje', en: 'Storage/External Drives', price: 'Tsh 20,000 - 100,000' },
-    'Msaada wa Mbali (Remote)': { sw: 'Msaada wa Mbali (Remote)', en: 'Remote Support', price: 'Tsh 15,000 - 50,000' },
-    'Usalama wa Mtandao (Cybersecurity)': { sw: 'Usalama wa Mtandao (Cybersecurity)', en: 'Cybersecurity', price: 'Tsh 100,000 - 1,000,000' },
-    'Huduma za Wingu (Cloud Services)': { sw: 'Huduma za Wingu (Cloud Services)', en: 'Cloud Services', price: 'Tsh 200,000 - 2,000,000' },
-    'Uwekaji wa Tovuti (Web Hosting)': { sw: 'Uwekaji wa Tovuti (Web Hosting)', en: 'Web Hosting', price: 'Tsh 100,000 - 500,000' },
-    'Mafunzo ya TEHAMA (IT Training)': { sw: 'Mafunzo ya TEHAMA (IT Training)', en: 'IT Training', price: 'Tsh 50,000 - 300,000' },
-    'Ushauri wa TEHAMA (IT Consulting)': { sw: 'Ushauri wa TEHAMA (IT Consulting)', en: 'IT Consulting', price: 'Tsh 50,000 - 200,000' },
-    'Uendelezaji wa Programu (Software Development)': { sw: 'Uendelezaji wa Programu (Software Development)', en: 'Software Development', price: 'Tsh 500,000 - 5,000,000' },
-    'Usimamizi wa Seva (Server Management)': { sw: 'Usimamizi wa Seva (Server Management)', en: 'Server Management', price: 'Tsh 200,000 - 1,000,000' },
-    'Uchambuzi wa Takwimu (Data Analytics)': { sw: 'Uchambuzi wa Takwimu (Data Analytics)', en: 'Data Analytics', price: 'Tsh 150,000 - 800,000' },
-    'Akili Mnemba (AI & Machine Learning)': { sw: 'Akili Mnemba (AI & Machine Learning)', en: 'AI & Machine Learning', price: 'Tsh 500,000 - 5,000,000' },
-    'Mifumo ya ERP na CRM': { sw: 'Mifumo ya ERP na CRM', en: 'ERP & CRM Systems', price: 'Tsh 1,000,000 - 10,000,000' },
-    'Mawasiliano ya VoIP': { sw: 'Mawasiliano ya VoIP', en: 'VoIP Communications', price: 'Tsh 100,000 - 500,000' },
-    'Suluhisho za IoT': { sw: 'Suluhisho za IoT', en: 'IoT Solutions', price: 'Tsh 200,000 - 2,000,000' },
-    'Uhifadhi na Urejeshaji wa Data (Backup & Recovery)': { sw: 'Uhifadhi na Urejeshaji wa Data (Backup & Recovery)', en: 'Backup & Recovery', price: 'Tsh 50,000 - 300,000' },
-    'Usimamizi wa Miradi ya TEHAMA': { sw: 'Usimamizi wa Miradi ya TEHAMA', en: 'IT Project Management', price: 'Tsh 200,000 - 1,500,000' },
-    'Ukaguzi wa Kufuata Sheria za TEHAMA (IT Compliance)': { sw: 'Ukaguzi wa Kufuata Sheria za TEHAMA (IT Compliance)', en: 'IT Compliance Auditing', price: 'Tsh 150,000 - 800,000' },
+    'Ukarabati wa Kompyuta/Laptop': { sw: 'Ukarabati wa Kompyuta/Laptop', en: 'Computer/Laptop Repair', price: 'Tsh 30,000 - 150,000', usdMin: 12, usdMax: 60 },
+    'Utatuzi wa Simu': { sw: 'Utatuzi wa Simu', en: 'Phone Fixing', price: 'Tsh 20,000 - 80,000', usdMin: 8, usdMax: 32 },
+    'Usanidi wa Mtandao': { sw: 'Usanidi wa Mtandao', en: 'Network Setup', price: 'Tsh 50,000 - 200,000', usdMin: 20, usdMax: 80 },
+    'Mifumo ya Biashara (Excel)': { sw: 'Mifumo ya Biashara (Excel)', en: 'Business Systems (Excel)', price: 'Tsh 100,000 - 500,000', usdMin: 40, usdMax: 200 },
+    'Hifadhi/Vifaa vya Nje': { sw: 'Hifadhi/Vifaa vya Nje', en: 'Storage/External Drives', price: 'Tsh 20,000 - 100,000', usdMin: 8, usdMax: 40 },
+    'Msaada wa Mbali (Remote)': { sw: 'Msaada wa Mbali (Remote)', en: 'Remote Support', price: 'Tsh 15,000 - 50,000', usdMin: 6, usdMax: 20 },
+    'Usalama wa Mtandao (Cybersecurity)': { sw: 'Usalama wa Mtandao (Cybersecurity)', en: 'Cybersecurity', price: 'Tsh 100,000 - 1,000,000', usdMin: 40, usdMax: 400 },
+    'Huduma za Wingu (Cloud Services)': { sw: 'Huduma za Wingu (Cloud Services)', en: 'Cloud Services', price: 'Tsh 200,000 - 2,000,000', usdMin: 80, usdMax: 800 },
+    'Uwekaji wa Tovuti (Web Hosting)': { sw: 'Uwekaji wa Tovuti (Web Hosting)', en: 'Web Hosting', price: 'Tsh 100,000 - 500,000', usdMin: 40, usdMax: 200 },
+    'Mafunzo ya TEHAMA (IT Training)': { sw: 'Mafunzo ya TEHAMA (IT Training)', en: 'IT Training', price: 'Tsh 50,000 - 300,000', usdMin: 20, usdMax: 120 },
+    'Ushauri wa TEHAMA (IT Consulting)': { sw: 'Ushauri wa TEHAMA (IT Consulting)', en: 'IT Consulting', price: 'Tsh 50,000 - 200,000', usdMin: 20, usdMax: 80 },
+    'Uendelezaji wa Programu (Software Development)': { sw: 'Uendelezaji wa Programu (Software Development)', en: 'Software Development', price: 'Tsh 500,000 - 5,000,000', usdMin: 200, usdMax: 2000 },
+    'Usimamizi wa Seva (Server Management)': { sw: 'Usimamizi wa Seva (Server Management)', en: 'Server Management', price: 'Tsh 200,000 - 1,000,000', usdMin: 80, usdMax: 400 },
+    'Uchambuzi wa Takwimu (Data Analytics)': { sw: 'Uchambuzi wa Takwimu (Data Analytics)', en: 'Data Analytics', price: 'Tsh 150,000 - 800,000', usdMin: 60, usdMax: 320 },
+    'Akili Mnemba (AI & Machine Learning)': { sw: 'Akili Mnemba (AI & Machine Learning)', en: 'AI & Machine Learning', price: 'Tsh 500,000 - 5,000,000', usdMin: 200, usdMax: 2000 },
+    'Mifumo ya ERP na CRM': { sw: 'Mifumo ya ERP na CRM', en: 'ERP & CRM Systems', price: 'Tsh 1,000,000 - 10,000,000', usdMin: 400, usdMax: 4000 },
+    'Mawasiliano ya VoIP': { sw: 'Mawasiliano ya VoIP', en: 'VoIP Communications', price: 'Tsh 100,000 - 500,000', usdMin: 40, usdMax: 200 },
+    'Suluhisho za IoT': { sw: 'Suluhisho za IoT', en: 'IoT Solutions', price: 'Tsh 200,000 - 2,000,000', usdMin: 80, usdMax: 800 },
+    'Uhifadhi na Urejeshaji wa Data (Backup & Recovery)': { sw: 'Uhifadhi na Urejeshaji wa Data (Backup & Recovery)', en: 'Backup & Recovery', price: 'Tsh 50,000 - 300,000', usdMin: 20, usdMax: 120 },
+    'Usimamizi wa Miradi ya TEHAMA': { sw: 'Usimamizi wa Miradi ya TEHAMA', en: 'IT Project Management', price: 'Tsh 200,000 - 1,500,000', usdMin: 80, usdMax: 600 },
+    'Ukaguzi wa Kufuata Sheria za TEHAMA (IT Compliance)': { sw: 'Ukaguzi wa Kufuata Sheria za TEHAMA (IT Compliance)', en: 'IT Compliance Auditing', price: 'Tsh 150,000 - 800,000', usdMin: 60, usdMax: 320 },
   };
+
+  function formatPrice(svc){
+    if(!svc) return '';
+    if(currentCurrency === 'USD') return '$'+svc.usdMin+' - $'+svc.usdMax;
+    return svc.price;
+  }
+
+  function toggleCurrency(){
+    currentCurrency = currentCurrency === 'TSH' ? 'USD' : 'TSH';
+    try{ localStorage.setItem('platinumz-currency', currentCurrency); }catch(e){}
+    const btn = document.getElementById('currencyToggle');
+    if(btn) btn.textContent = currentCurrency === 'TSH' ? '$ USD' : 'TSH';
+    if(currentOrderService && typeof serviceTranslations !== 'undefined'){
+      const svcT = serviceTranslations[currentOrderService];
+      if(svcT){
+        const priceEl = document.getElementById('orderPriceDisplay');
+        const priceVal = document.getElementById('orderPriceVal');
+        if(priceVal) priceVal.textContent = formatPrice(svcT);
+        else if(priceEl) priceEl.textContent = formatPrice(svcT);
+      }
+    }
+  }
   function openOrder(serviceName){
     currentOrderService = serviceName;
     const t = serviceTranslations[serviceName];
@@ -3494,7 +3742,7 @@ s0.parentNode.insertBefore(s1,s0);
     const priceEl = document.getElementById('orderPriceDisplay');
     const priceVal = document.getElementById('orderPriceVal');
     if(t && t.price){
-      priceVal.textContent = t.price;
+      priceVal.textContent = formatPrice(t);
       priceEl.style.display = 'block';
     } else {
       priceEl.style.display = 'none';
@@ -3945,6 +4193,36 @@ s0.parentNode.insertBefore(s1,s0);
       'cu-about-impact': 'Athari Yetu',
       'cu-about-impact-desc': 'Tumehudumia wateja kutoka kila kona ya Tanzania — kutoka Arusha hadi Mwanza, Dar es Salaam hadi Mbeya.',
       'cu-about-contact': 'Una maswali? Wasiliana nasi kupitia Live Chat au piga simu: 0786 868 069',
+      'testi-eyebrow': 'Wateja Wetu Wanasema',
+      'testi-h2': 'Maposti Kutoka kwa Wateja',
+      'testi-desc': 'Sikiliza wateja wetu walivyopata huduma bora kutoka PLATINUMZ IT Support.',
+      'testi-1-text': '"Timu ya PLATINUMZ ilisasisha mfumo wangu wa biashara ndani ya siku 3. Sasa naenda na kasi kubwa!"',
+      'testi-1-role': 'Mmiliki wa Duka — Dar es Salaam',
+      'testi-2-text': '"Nilikuwa nimepoteza data yote kwenye laptop yangu. PLATINUMZ walinirudishia kila kitu!"',
+      'testi-2-role': 'Mwanafunzi — DSM',
+      'testi-3-text': '"Mtandao wa ofisi yetu ulikuwa unakatika kila siku. Baada ya kusasishwa, hakuna tena hitilafu!"',
+      'testi-3-role': 'Meneja IT — Kampuni ya Nishati',
+      'testi-4-text': '"Usaidizi wa mbali umenibadilisha maisha — nimekomboa kompyuta yangu kutoka nyumbani bila kusafiri."',
+      'testi-4-role': 'Biashara ndogo — Arusha',
+      'testi-5-text': '"Bei yao ni nafuu na huduma ni ya haraka sana. Nishawapendekeza kwa rafiki zangu wote!"',
+      'testi-5-role': 'Mjasiriamali — Mwanza',
+      'testi-6-text': '"Cloud hosting yao ni imara sana. Tovuti yangu haijawaianguka tangu nianze kulipa."',
+      'testi-6-role': 'Msimamizi wa Tovuti — DSM',
+      'blog-eyebrow': 'Blog / Vidokezo',
+      'blog-h2': 'Jinsi ya Kujilinda Mtandaoni',
+      'blog-desc': 'Soma vidokezo muhimu kuhusu usalama na matumizi ya TEHAMA kwa kila siku.',
+      'blog-1-title': 'Jinsi ya Kulinda Password Yako',
+      'blog-1-desc': 'Usitumie password moja kwa kila akaunti. Tumia password ndefu yenye herufi, nambari, na alama. Weka kwenye password manager kama LastPass au Bitwarden.',
+      'blog-1-tag': 'Usalama',
+      'blog-2-title': 'Jinsi ya Kuepuka Phishing',
+      'blog-2-desc': 'Usibofye viungo kwenye barua pepe usiyotambua. Angalia anwani ya mtumaji kabla ya kufungua. Kamwe usijaze taarifa za siri kwenye tovuti isiyojulikana.',
+      'blog-2-tag': 'Ujanja wa Mtandao',
+      'blog-3-title': 'Umuhimu wa Backup',
+      'blog-3-desc': 'Hifadhi nakala ya data yako kwa angalau sehemu mbili: kwenye USB na kwenye wingu (cloud). Programu ya Google Drive ni bora na bure.',
+      'blog-3-tag': 'Hifadhi',
+      'blog-4-title': 'Kuboresha Mtandao wa Nyumbani',
+      'blog-4-desc': 'Weka router katikati ya nyumba, sio pembeni. Sasisha firmware yake mara kwa mara. Tumia kifaa cha 5GHz kwa kazi nzito kama video calls.',
+      'blog-4-tag': 'Mtandao',
       'cu-sb-nyumbani': 'Nyumbani',
       'cu-sb-huduma': 'Huduma',
       'cu-sb-orders': 'Orders',
@@ -4370,6 +4648,36 @@ s0.parentNode.insertBefore(s1,s0);
       'cu-about-impact': 'Our Impact',
       'cu-about-impact-desc': 'We have served clients from every corner of Tanzania — from Arusha to Mwanza, Dar es Salaam to Mbeya.',
       'cu-about-contact': 'Have questions? Contact us via Live Chat or call: 0786 868 069',
+      'testi-eyebrow': 'What Our Clients Say',
+      'testi-h2': 'Testimonials',
+      'testi-desc': 'Hear from our clients who have received excellent service from PLATINUMZ IT Support.',
+      'testi-1-text': '"The PLATINUMZ team upgraded my business system in just 3 days. I\'m now running at top speed!"',
+      'testi-1-role': 'Shop Owner — Dar es Salaam',
+      'testi-2-text': '"I had lost all my data on my laptop. PLATINUMZ recovered everything for me!"',
+      'testi-2-role': 'Student — DSM',
+      'testi-3-text': '"Our office network used to drop every day. After the upgrade, no more issues!"',
+      'testi-3-role': 'IT Manager — Energy Company',
+      'testi-4-text': '"Remote support changed my life — I got my computer fixed from home without traveling."',
+      'testi-4-role': 'Small Business — Arusha',
+      'testi-5-text': '"Their prices are affordable and the service is super fast. I\'ve recommended them to all my friends!"',
+      'testi-5-role': 'Entrepreneur — Mwanza',
+      'testi-6-text': '"Their cloud hosting is rock solid. My website hasn\'t gone down since I started paying."',
+      'testi-6-role': 'Website Manager — DSM',
+      'blog-eyebrow': 'Blog / Tips',
+      'blog-h2': 'How to Stay Safe Online',
+      'blog-desc': 'Read important tips about cybersecurity and everyday tech use.',
+      'blog-1-title': 'How to Protect Your Password',
+      'blog-1-desc': 'Don\'t use the same password for every account. Use a long password with letters, numbers, and symbols. Store it in a password manager like LastPass or Bitwarden.',
+      'blog-1-tag': 'Security',
+      'blog-2-title': 'How to Avoid Phishing',
+      'blog-2-desc': 'Don\'t click links in emails you don\'t recognize. Check the sender\'s address before opening. Never fill in sensitive information on unknown websites.',
+      'blog-2-tag': 'Cyber Safety',
+      'blog-3-title': 'The Importance of Backups',
+      'blog-3-desc': 'Keep a copy of your data in at least two places: on a USB and in the cloud. Google Drive is free and reliable.',
+      'blog-3-tag': 'Storage',
+      'blog-4-title': 'Improving Your Home Network',
+      'blog-4-desc': 'Place your router in the center of your home, not at the edge. Update its firmware regularly. Use the 5GHz band for heavy tasks like video calls.',
+      'blog-4-tag': 'Networking',
       'cu-sb-nyumbani': 'Home',
       'cu-sb-huduma': 'Services',
       'cu-sb-orders': 'Orders',
@@ -4667,6 +4975,8 @@ s0.parentNode.insertBefore(s1,s0);
       const svcEl = document.getElementById('orderServiceName');
       const svcT = serviceTranslations[currentOrderService];
       if(svcEl && svcT) svcEl.textContent = svcT[lang] || currentOrderService;
+      const pv = document.getElementById('orderPriceVal');
+      if(pv && svcT) pv.textContent = formatPrice(svcT);
     }
 
     // Customer dashboard specifics
