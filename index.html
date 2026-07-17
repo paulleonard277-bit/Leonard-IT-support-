@@ -1916,7 +1916,7 @@ s0.parentNode.insertBefore(s1,s0);
         </div>
         <div class="cu-table-wrap">
           <table class="cu-table">
-            <thead><tr><th>Huduma</th><th>Simu</th><th>Maelezo</th><th>Tarehe</th><th>Hali</th></tr></thead>
+            <thead><tr><th data-label="cu-order-huduma">Huduma</th><th data-label="cu-order-simu">Simu</th><th data-label="cu-order-maelezo">Maelezo</th><th data-label="cu-order-tarehe">Tarehe</th><th data-label="cu-order-hali">Hali</th></tr></thead>
             <tbody id="cuOrdersBody"><tr><td colspan="5" class="cu-empty">Inapakia...</td></tr></tbody>
           </table>
         </div>
@@ -2156,7 +2156,7 @@ s0.parentNode.insertBefore(s1,s0);
     <div class="ad-panel" id="panelOrders">
       <div class="ad-table-wrap">
         <table class="ad-table">
-          <thead><tr><th>Jina</th><th>Simu</th><th>Huduma</th><th>Maelezo</th><th>Tarehe</th><th>Hali</th><th>Kitendo</th></tr></thead>
+          <thead><tr><th data-label="admin-order-jina">Jina</th><th data-label="admin-order-simu">Simu</th><th data-label="admin-order-huduma">Huduma</th><th data-label="admin-order-maelezo">Maelezo</th><th data-label="admin-order-tarehe">Tarehe</th><th data-label="admin-order-hali">Hali</th><th data-label="admin-order-kitendo">Kitendo</th></tr></thead>
           <tbody id="adminOrdersBody"><tr><td colspan="7" class="ad-empty"><div class="ad-empty-icon">📋</div>Inapakia orders...</td></tr></tbody>
         </table>
       </div>
@@ -2545,7 +2545,13 @@ s0.parentNode.insertBefore(s1,s0);
     firstAuthLoad = false;
   });
 
+  let _adminUser = null;
+  let _customerUser = null;
+  let _unsubAdminOrders = null;
+  let _unsubCustomerOrders = null;
+
   function loadAdminDashboard(user){
+    _adminUser = user;
     const tBody = document.getElementById('adminClientsBody');
     const oBody = document.getElementById('adminOrdersBody');
     const chatBox = document.getElementById('adminChatMessages');
@@ -2570,7 +2576,7 @@ s0.parentNode.insertBefore(s1,s0);
     db.collection('clients').orderBy('createdAt','desc').get().then((snap) => {
       document.getElementById('statClients').textContent = snap.size;
       document.getElementById('tabCountClients').textContent = snap.size;
-      if(snap.empty){ tBody.innerHTML = '<tr><td colspan="4" class="ad-empty"><div class="ad-empty-icon">👥</div>Hakuna wateja bado.</td></tr>'; return; }
+      if(snap.empty){ tBody.innerHTML = '<tr><td colspan="4" class="ad-empty"><div class="ad-empty-icon">👥</div>'+translations[currentLang]['admin-clients-empty']+'</td></tr>'; return; }
       let rows = '';
       snap.forEach((doc) => {
         const d = doc.data();
@@ -2581,27 +2587,29 @@ s0.parentNode.insertBefore(s1,s0);
       tBody.innerHTML = rows;
     }).catch((e) => { tBody.innerHTML = '<tr><td colspan="4" class="ad-empty" style="color:#ff6b6b">'+e.message+'</td></tr>'; });
 
-    db.collection('orders').onSnapshot((snap) => {
+    if(_unsubAdminOrders) _unsubAdminOrders();
+    _unsubAdminOrders = db.collection('orders').onSnapshot((snap) => {
       document.getElementById('statOrders').textContent = snap.size;
       document.getElementById('tabCountOrders').textContent = snap.size;
-      if(snap.empty){ oBody.innerHTML = '<tr><td colspan="7" class="ad-empty"><div class="ad-empty-icon">📋</div>Hakuna maombi bado.</td></tr>'; return; }
+      if(snap.empty){ oBody.innerHTML = '<tr><td colspan="7" class="ad-empty"><div class="ad-empty-icon">📋</div>'+translations[currentLang]['admin-orders-empty']+'</td></tr>'; return; }
       let docs = [];
       snap.forEach((doc) => { const d = doc.data(); docs.push({id:doc.id, d, ts: d.createdAt ? d.createdAt.toDate().getTime() : 0}); });
       docs.sort((a,b) => b.ts - a.ts);
       let rows = '';
+      const at = translations[currentLang];
       docs.forEach(({id, d}) => {
-        const dt = d.createdAt ? d.createdAt.toDate().toLocaleDateString('sw-TZ') : '—';
+        const dt = d.createdAt ? d.createdAt.toDate().toLocaleDateString(currentLang === 'sw' ? 'sw-TZ' : 'en-US') : '—';
         const st = d.status || 'mpya';
         let statusBadge = '';
         let actionBtn = '';
         if(st === 'mpya'){
-          statusBadge = '<span class="ad-badge ad-badge-gold">Mpya</span>';
-          actionBtn = '<button class="ad-accept-btn" onclick="acceptOrder(\''+id+'\')">✅ Kubali</button>';
+          statusBadge = '<span class="ad-badge ad-badge-gold">'+(at['order-status-mpya']||'Mpya')+'</span>';
+          actionBtn = '<button class="ad-accept-btn" onclick="acceptOrder(\''+id+'\')">'+(at['order-accept-btn']||'✅ Kubali')+'</button>';
         } else if(st === 'inashughulikiwa'){
-          statusBadge = '<span class="ad-badge ad-badge-blue">Inashughulikiwa</span>';
-          actionBtn = '<span style="color:var(--fiber);font-size:0.82rem;">✔ Imekubaliwa</span>';
+          statusBadge = '<span class="ad-badge ad-badge-blue">'+(at['order-status-inashughulikiwa']||'Inashughulikiwa')+'</span>';
+          actionBtn = '<span style="color:var(--fiber);font-size:0.82rem;">✔ '+(at['order-accepted-label']||'Imekubaliwa')+'</span>';
         } else if(st === 'imekamilika'){
-          statusBadge = '<span class="ad-badge ad-badge-green">Imekamilika</span>';
+          statusBadge = '<span class="ad-badge ad-badge-green">'+(at['order-status-imekamilika']||'Imekamilika')+'</span>';
           actionBtn = '<span style="color:var(--muted);font-size:0.82rem;">✅</span>';
         } else {
           statusBadge = '<span class="ad-badge ad-badge-red">'+st+'</span>';
@@ -2666,7 +2674,8 @@ s0.parentNode.insertBefore(s1,s0);
   }
 
   function acceptOrder(id){
-    if(!confirm('Kubali order hii na uonyeshe kuwa unaifanyia kazi?')) return;
+    const at = translations[currentLang];
+    if(!confirm(at['order-accept-confirm'] || 'Kubali order hii na uonyeshe kuwa unaifanyia kazi?')) return;
     db.collection('orders').doc(id).update({
       status: 'inashughulikiwa',
       acceptedAt: firebase.firestore.FieldValue.serverTimestamp()
@@ -2679,14 +2688,20 @@ s0.parentNode.insertBefore(s1,s0);
   }
 
   function showOrderAcceptedPopup(){
+    const at = translations[currentLang];
     const popup = document.getElementById('orderAcceptedPopup');
     if(popup){
+      const title = popup.querySelector('.diamond-title');
+      const msg = popup.querySelector('.diamond-sub');
+      if(title) title.textContent = at['order-accepted-title'] || 'Order Imekubaliwa!';
+      if(msg) msg.textContent = at['order-accepted-msg'] || 'Mteja atapata taarifa kuwa order yake imeona na inashughulikiwa.';
       popup.classList.add('show');
       setTimeout(() => { popup.classList.remove('show'); }, 3000);
     }
   }
 
   function loadCustomerDashboard(user){
+    _customerUser = user;
     const email = user.email;
     const oBody = document.getElementById('cuOrdersBody');
     const chatBox = document.getElementById('cuChatMessages');
@@ -2694,26 +2709,28 @@ s0.parentNode.insertBefore(s1,s0);
     const chatSend = document.getElementById('cuChatSend');
     let orderCount = 0;
 
-    db.collection('orders').where('email','==',email).onSnapshot((snap) => {
+    if(_unsubCustomerOrders) _unsubCustomerOrders();
+    _unsubCustomerOrders = db.collection('orders').where('email','==',email).onSnapshot((snap) => {
       orderCount = snap.size;
       document.getElementById('cuStatOrders').textContent = orderCount;
       document.getElementById('cuStatPending').textContent = orderCount;
       let doneCount = 0;
-      if(snap.empty){ oBody.innerHTML = '<tr><td colspan="5" class="cu-empty">Hujawahi kuomba huduma bado.</td></tr>'; return; }
+      if(snap.empty){ oBody.innerHTML = '<tr><td colspan="5" class="cu-empty">'+translations[currentLang]['cu-orders-empty']+'</td></tr>'; return; }
       let docs = [];
       snap.forEach((doc) => { const d = doc.data(); docs.push({d, ts: d.createdAt ? d.createdAt.toDate().getTime() : 0}); });
       docs.sort((a,b) => b.ts - a.ts);
       let rows = '';
+      const ct = translations[currentLang];
       docs.forEach(({d}) => {
-        const dt = d.createdAt ? d.createdAt.toDate().toLocaleDateString('sw-TZ') : '—';
+        const dt = d.createdAt ? d.createdAt.toDate().toLocaleDateString(currentLang === 'sw' ? 'sw-TZ' : 'en-US') : '—';
         const st = d.status || 'mpya';
         let statusBadge = '';
         if(st === 'mpya'){
-          statusBadge = '<span class="cu-badge cu-badge-gold">Inasubiri</span>';
+          statusBadge = '<span class="cu-badge cu-badge-gold">'+(ct['cu-status-inasubiri']||'Inasubiri')+'</span>';
         } else if(st === 'inashughulikiwa'){
-          statusBadge = '<span class="cu-badge cu-badge-blue">Inashughulikiwa</span>';
+          statusBadge = '<span class="cu-badge cu-badge-blue">'+(ct['cu-status-inashughulikiwa']||'Inashughulikiwa')+'</span>';
         } else if(st === 'imekamilika'){
-          statusBadge = '<span class="cu-badge cu-badge-green">Imekamilika</span>';
+          statusBadge = '<span class="cu-badge cu-badge-green">'+(ct['cu-status-imekamilika']||'Imekamilika')+'</span>';
           doneCount++;
         } else {
           statusBadge = '<span class="cu-badge cu-badge-red">'+st+'</span>';
@@ -3223,6 +3240,34 @@ s0.parentNode.insertBefore(s1,s0);
       'admin-no-reviews': 'Hakuna maoni bado.',
       'admin-delete': '🗑️ Futa',
       'admin-logout': '🚪 Toka',
+      'admin-order-jina': 'Jina',
+      'admin-order-simu': 'Simu',
+      'admin-order-huduma': 'Huduma',
+      'admin-order-maelezo': 'Maelezo',
+      'admin-order-tarehe': 'Tarehe',
+      'admin-order-hali': 'Hali',
+      'admin-order-kitendo': 'Kitendo',
+      'order-status-mpya': 'Mpya',
+      'order-status-inashughulikiwa': 'Inashughulikiwa',
+      'order-status-imekamilika': 'Imekamilika',
+      'order-accept-btn': '✅ Kubali',
+      'order-accepted-label': '✔ Imekubaliwa',
+      'order-accept-confirm': 'Kubali order hii na uonyeshe kuwa unaifanyia kazi?',
+      'order-accepted-title': 'Order Imekubaliwa!',
+      'order-accepted-msg': 'Mteja atapata taarifa kuwa order yake imeona na inashughulikiwa.',
+      'cu-order-huduma': 'Huduma',
+      'cu-order-simu': 'Simu',
+      'cu-order-maelezo': 'Maelezo',
+      'cu-order-tarehe': 'Tarehe',
+      'cu-order-hali': 'Hali',
+      'cu-status-inasubiri': 'Inasubiri',
+      'cu-status-inashughulikiwa': 'Inashughulikiwa',
+      'cu-status-imekamilika': 'Imekamilika',
+      'admin-orders-empty': 'Hakuna maombi bado.',
+      'admin-clients-empty': 'Hakuna wateja bado.',
+      'admin-loading': 'Inapakia...',
+      'cu-orders-empty': 'Hujawahi kuomba huduma bado.',
+      'cu-loading': 'Inapakia...',
       'cu-sb-nyumbani': 'Nyumbani',
       'cu-sb-huduma': 'Huduma',
       'cu-sb-orders': 'Orders',
@@ -3569,6 +3614,34 @@ s0.parentNode.insertBefore(s1,s0);
       'admin-no-reviews': 'No reviews yet.',
       'admin-delete': '🗑️ Delete',
       'admin-logout': '🚪 Logout',
+      'admin-order-jina': 'Name',
+      'admin-order-simu': 'Phone',
+      'admin-order-huduma': 'Service',
+      'admin-order-maelezo': 'Details',
+      'admin-order-tarehe': 'Date',
+      'admin-order-hali': 'Status',
+      'admin-order-kitendo': 'Action',
+      'order-status-mpya': 'New',
+      'order-status-inashughulikiwa': 'In Progress',
+      'order-status-imekamilika': 'Completed',
+      'order-accept-btn': '✅ Accept',
+      'order-accepted-label': '✔ Accepted',
+      'order-accept-confirm': 'Accept this order and confirm you are working on it?',
+      'order-accepted-title': 'Order Accepted!',
+      'order-accepted-msg': 'The customer will be notified that their order has been seen and is being worked on.',
+      'cu-order-huduma': 'Service',
+      'cu-order-simu': 'Phone',
+      'cu-order-maelezo': 'Details',
+      'cu-order-tarehe': 'Date',
+      'cu-order-hali': 'Status',
+      'cu-status-inasubiri': 'Pending',
+      'cu-status-inashughulikiwa': 'In Progress',
+      'cu-status-imekamilika': 'Completed',
+      'admin-orders-empty': 'No orders yet.',
+      'admin-clients-empty': 'No clients yet.',
+      'admin-loading': 'Loading...',
+      'cu-orders-empty': 'You have not requested any service yet.',
+      'cu-loading': 'Loading...',
       'cu-sb-nyumbani': 'Home',
       'cu-sb-huduma': 'Services',
       'cu-sb-orders': 'Orders',
@@ -3896,6 +3969,18 @@ s0.parentNode.insertBefore(s1,s0);
     });
 
     localStorage.setItem('platinumz-lang', lang);
+
+    // Re-render orders with new language
+    if(_adminUser && _unsubAdminOrders){
+      _unsubAdminOrders();
+      _unsubAdminOrders = null;
+      loadAdminDashboard(_adminUser);
+    }
+    if(_customerUser && _unsubCustomerOrders){
+      _unsubCustomerOrders();
+      _unsubCustomerOrders = null;
+      loadCustomerDashboard(_customerUser);
+    }
   }
 
   function toggleTheme(){
