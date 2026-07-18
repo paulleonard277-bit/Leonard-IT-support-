@@ -3469,17 +3469,13 @@ s0.parentNode.insertBefore(s1,s0);
         message: 'Nambari yako ya uthibitisho ni: ' + fpCode + '. Inaisha baada ya dakika 10.',
         time: new Date().toLocaleString('sw-TZ')
       }, EMAILJS_PUBLIC_KEY).then((res) => {
-        console.log('EmailJS success:', res);
         document.getElementById('forgotStep1').style.display = 'none';
         document.getElementById('forgotStep2').style.display = 'block';
         document.querySelector('.fp-code-input[data-idx="0"]').focus();
       }).catch((err) => {
-        console.error('EmailJS error:', err.status, err.text);
         errEl.textContent = 'EmailJS error: ' + (err.text || JSON.stringify(err));
         errEl.style.display = 'block';
       });
-      document.getElementById('forgotStep2').style.display = 'block';
-      document.querySelector('.fp-code-input[data-idx="0"]').focus();
     }).catch(() => { errEl.textContent = t['fp-err-email']; errEl.style.display = 'block'; });
   });
 
