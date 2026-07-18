@@ -1230,6 +1230,87 @@
   .call-incoming p{color:#8899aa;font-size:0.85rem;margin-bottom:30px;}
   .call-incoming .call-actions{display:flex;gap:24px;}
   @keyframes callPulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(242,169,59,.4);}50%{transform:scale(1.05);box-shadow:0 0 0 15px rgba(242,169,59,0);}}
+
+  /* === AI DIAGNOSTIC === */
+  .diag-modal{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:100008;display:none;align-items:center;justify-content:center;backdrop-filter:blur(6px);}
+  .diag-modal.show{display:flex;}
+  .diag-panel{background:#0c1929;border:1px solid #1e3348;border-radius:20px;width:94%;max-width:520px;max-height:85vh;overflow-y:auto;animation:slideUp .4s ease;}
+  .diag-head{background:linear-gradient(135deg,#0E1A2B,#1a2942);padding:18px 22px;border-bottom:1px solid #1e3348;display:flex;align-items:center;justify-content:space-between;}
+  .diag-head h3{color:#F2A93B;font-size:1rem;margin:0;}
+  .diag-body{padding:20px 22px;}
+  .diag-input{width:100%;background:#1a2942;border:1px solid #1e3348;border-radius:10px;padding:12px 14px;color:#fff;font-size:0.88rem;outline:none;resize:vertical;min-height:80px;font-family:inherit;}
+  .diag-input:focus{border-color:#F2A93B;}
+  .diag-submit{width:100%;background:linear-gradient(135deg,#F2A93B,#FF6B35);color:#0E1A2B;border:none;border-radius:10px;padding:12px;font-weight:700;font-size:0.9rem;cursor:pointer;margin-top:12px;}
+  .diag-results{margin-top:16px;}
+  .diag-result-card{background:#1a2942;border:1px solid #1e3348;border-radius:12px;padding:14px;margin-bottom:10px;}
+  .diag-result-card h5{color:#F2A93B;font-size:0.88rem;margin:0 0 6px;}
+  .diag-result-card p{color:#8899aa;font-size:0.82rem;margin:0;line-height:1.5;}
+  .diag-result-card .confidence{display:inline-block;background:#0E1A2B;border-radius:20px;padding:2px 10px;font-size:0.72rem;color:#3cd3c6;margin-top:6px;}
+  .diag-spinner{text-align:center;padding:20px;color:#F2A93B;}
+
+  /* === SCREEN RECORDING === */
+  .rec-indicator{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:rgba(242,59,59,.9);color:#fff;padding:8px 20px;border-radius:20px;font-size:0.82rem;font-weight:700;z-index:99999;display:none;align-items:center;gap:8px;animation:recPulse 1s infinite;}
+  .rec-indicator.show{display:flex;}
+  .rec-dot{width:10px;height:10px;background:#fff;border-radius:50%;animation:recBlink 1s infinite;}
+  @keyframes recPulse{0%,100%{opacity:1;}50%{opacity:.7;}}
+  @keyframes recBlink{0%,100%{opacity:1;}50%{opacity:0;}}
+
+  /* === LOYALTY POINTS === */
+  .loyalty-card{background:linear-gradient(135deg,#0E1A2B 0%,#1a2942 50%,#0E1A2B 100%);border:1px solid #F2A93B;border-radius:16px;padding:20px;position:relative;overflow:hidden;}
+  .loyalty-card::before{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;background:radial-gradient(circle,rgba(242,169,59,.15),transparent);border-radius:50%;}
+  .loyalty-points{font-size:2.5rem;font-weight:800;color:#F2A93B;font-family:'JetBrains Mono',monospace;}
+  .loyalty-label{color:#8899aa;font-size:0.78rem;margin-top:4px;}
+  .loyalty-tier{display:inline-flex;align-items:center;gap:6px;background:rgba(242,169,59,.1);border:1px solid rgba(242,169,59,.3);border-radius:20px;padding:4px 12px;color:#F2A93B;font-size:0.78rem;font-weight:600;margin-top:10px;}
+  .loyalty-progress{width:100%;height:6px;background:#1a2942;border-radius:3px;margin-top:12px;overflow:hidden;}
+  .loyalty-progress-bar{height:100%;background:linear-gradient(90deg,#F2A93B,#FF6B35);border-radius:3px;transition:width .5s ease;}
+  .loyalty-badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:8px;margin-top:14px;}
+  .loyalty-badge{background:#1a2942;border:1px solid #1e3348;border-radius:10px;padding:10px 6px;text-align:center;opacity:.4;transition:all .3s;}
+  .loyalty-badge.earned{opacity:1;border-color:#F2A93B;box-shadow:0 0 12px rgba(242,169,59,.2);}
+  .loyalty-badge .badge-icon{font-size:1.5rem;}
+  .loyalty-badge .badge-name{font-size:0.65rem;color:#8899aa;margin-top:4px;}
+  .loyalty-rewards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;}
+  .loyalty-reward{background:#1a2942;border:1px solid #1e3348;border-radius:10px;padding:12px;text-align:center;cursor:pointer;transition:all .2s;}
+  .loyalty-reward:hover{border-color:#F2A93B;}
+  .loyalty-reward .rw-icon{font-size:1.3rem;}
+  .loyalty-reward .rw-cost{color:#F2A93B;font-weight:700;font-size:0.78rem;margin-top:4px;}
+  .loyalty-reward .rw-name{color:#8899aa;font-size:0.72rem;margin-top:2px;}
+
+  /* === AUTO DIAGNOSTICS === */
+  .autodiag-card{background:#1a2942;border:1px solid #1e3348;border-radius:12px;padding:14px;margin-bottom:8px;display:flex;align-items:center;gap:12px;}
+  .autodiag-card .ad-icon{font-size:1.3rem;width:40px;text-align:center;}
+  .autodiag-card .ad-label{color:#8899aa;font-size:0.75rem;}
+  .autodiag-card .ad-value{color:#fff;font-size:0.85rem;font-weight:600;}
+  .autodiag-card .ad-good{color:#3cd3c6;}
+  .autodiag-card .ad-warn{color:#F2A93B;}
+  .autodiag-card .ad-bad{color:#ff6b6b;}
+
+  /* === QR CHECK-IN === */
+  .qr-modal{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:100009;display:none;align-items:center;justify-content:center;backdrop-filter:blur(6px);}
+  .qr-modal.show{display:flex;}
+  .qr-panel{background:#0c1929;border:1px solid #1e3348;border-radius:20px;width:92%;max-width:400px;padding:30px;text-align:center;animation:slideUp .4s ease;}
+  .qr-code-display{background:#fff;border-radius:16px;padding:20px;margin:16px auto;width:200px;height:200px;display:flex;align-items:center;justify-content:center;}
+  .qr-code-display canvas{width:100%!important;height:100%!important;}
+  .qr-checkins{margin-top:16px;text-align:left;}
+  .qr-checkin-item{background:#1a2942;border:1px solid #1e3348;border-radius:10px;padding:10px 14px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;}
+  .qr-checkin-item .ci-name{color:#fff;font-size:0.85rem;font-weight:600;}
+  .qr-checkin-item .ci-time{color:#8899aa;font-size:0.75rem;font-family:'JetBrains Mono',monospace;}
+
+  /* === CUSTOMER JOURNEY === */
+  .journey-timeline{position:relative;padding-left:30px;}
+  .journey-timeline::before{content:'';position:absolute;left:12px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,#F2A93B,#3cd3c6,#a29bfe);}
+  .journey-item{position:relative;margin-bottom:18px;animation:fadeIn .4s ease;}
+  .journey-item::before{content:'';position:absolute;left:-22px;top:6px;width:12px;height:12px;border-radius:50%;border:2px solid #F2A93B;background:#0c1929;}
+  .journey-item.completed::before{background:#3cd3c6;border-color:#3cd3c6;}
+  .journey-item.active::before{background:#F2A93B;border-color:#F2A93B;box-shadow:0 0 8px rgba(242,169,59,.5);}
+  .journey-card{background:#1a2942;border:1px solid #1e3348;border-radius:10px;padding:12px 14px;}
+  .journey-card .j-title{color:#fff;font-size:0.85rem;font-weight:600;}
+  .journey-card .j-desc{color:#8899aa;font-size:0.78rem;margin-top:3px;}
+  .journey-card .j-date{color:#F2A93B;font-size:0.72rem;font-family:'JetBrains Mono',monospace;margin-top:4px;}
+  .journey-card .j-icon{float:right;font-size:1.1rem;}
+  .journey-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px;}
+  .journey-stat{background:#1a2942;border:1px solid #1e3348;border-radius:10px;padding:12px;text-align:center;}
+  .journey-stat .js-val{font-size:1.3rem;font-weight:700;color:#F2A93B;font-family:'JetBrains Mono',monospace;}
+  .journey-stat .js-label{font-size:0.7rem;color:#8899aa;margin-top:2px;}
 </style>
 <body>
 
@@ -2612,6 +2693,11 @@ s0.parentNode.insertBefore(s1,s0);
         <a class="cu-sb-link" data-page="maoni" data-label="cu-sb-maoni"><span class="icon">⭐</span>Maoni</a>
         <a class="cu-sb-link" onclick="openAppointment()" style="cursor:pointer;" data-label="cu-sb-appt"><span class="icon">🗓️</span>Miadi</a>
         <a class="cu-sb-link" onclick="openLocationSharing()" style="cursor:pointer;" data-label="cu-sb-loc"><span class="icon">📍</span>Eneo</a>
+        <a class="cu-sb-link" onclick="openDiagnostic()" style="cursor:pointer;" data-label="cu-sb-diag"><span class="icon">🤖</span>AI Diagnostic</a>
+        <a class="cu-sb-link" onclick="openAutoDiag()" style="cursor:pointer;" data-label="cu-sb-autodiag"><span class="icon">⚡</span>Auto Diagnostics</a>
+        <a class="cu-sb-link" onclick="startScreenRecording()" style="cursor:pointer;" data-label="cu-sb-record"><span class="icon">🎬</span>Record Screen</a>
+        <a class="cu-sb-link" onclick="openCustomerJourney()" style="cursor:pointer;" data-label="cu-sb-journey"><span class="icon">📊</span>Safari Yangu</a>
+        <a class="cu-sb-link" data-page="loyalty" data-label="cu-sb-loyalty"><span class="icon">🏆</span>Pointi</a>
         <a class="cu-sb-link" data-page="about" data-label="cu-sb-about"><span class="icon">ℹ️</span>Kuhusu Sisi</a>
       </nav>
       <div class="cu-sb-logout">
@@ -2792,6 +2878,30 @@ s0.parentNode.insertBefore(s1,s0);
           <button class="cu-btn cu-btn-primary" style="margin-top:12px;" onclick="submitReview()">Tuma Maoni →</button>
         </div>
         <div id="cuReviewsList"></div>
+      </div>
+
+      <!-- LOYALTY POINTS PAGE -->
+      <div class="cu-page" id="cuPageLoyalty">
+        <h2 class="cu-page-title">🏆 Pointi Zangu</h2>
+        <p class="cu-page-sub">Pata pointi kwa kila huduma na uwape badges!</p>
+        <div class="loyalty-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+            <div>
+              <div class="loyalty-label">Jumla ya Pointi</div>
+              <div class="loyalty-points" id="loyaltyPoints">0</div>
+            </div>
+            <div class="loyalty-tier" id="loyaltyTier">🥉 Bronze</div>
+          </div>
+          <div class="loyalty-progress"><div class="loyalty-progress-bar" id="loyaltyBar" style="width:0%"></div></div>
+          <div style="display:flex;justify-content:space-between;margin-top:6px;">
+            <span style="color:#8899aa;font-size:0.7rem;" id="loyaltyTierLabel">Bronze</span>
+            <span style="color:#8899aa;font-size:0.7rem;" id="loyaltyNextTier">Silver — 100 pointi</span>
+          </div>
+        </div>
+        <h3 style="color:var(--paper);font-size:0.9rem;margin:18px 0 10px;">🎖️ Badges</h3>
+        <div class="loyalty-badges" id="loyaltyBadges"></div>
+        <h3 style="color:var(--paper);font-size:0.9rem;margin:18px 0 10px;">🎁 Ofa za Pointi</h3>
+        <div class="loyalty-rewards" id="loyaltyRewards"></div>
       </div>
 
       <!-- ABOUT US PAGE -->
@@ -3078,6 +3188,8 @@ s0.parentNode.insertBefore(s1,s0);
       <button class="ad-tab" data-tab="miadi" data-label="admin-tab-miadi">🗓️ Miadi <span class="count" id="tabCountAppts">0</span></button>
       <button class="ad-tab" data-tab="eneo" data-label="admin-tab-eneo">📍 Eneo <span class="count" id="tabCountLocs">0</span></button>
       <button class="ad-tab" data-tab="simu" data-label="admin-tab-simu">📞 Simu</button>
+      <button class="ad-tab" data-tab="checkin" data-label="admin-tab-checkin">📱 Check-ins</button>
+      <button class="ad-tab" data-tab="points" data-label="admin-tab-points">🏆 Pointi</button>
     </div>
 
     <div class="ad-panel active" id="panelWateja">
@@ -3225,11 +3337,32 @@ s0.parentNode.insertBefore(s1,s0);
         </div>
       </div>
     </div>
+
+    <!-- ADMIN CHECK-INS PANEL -->
+    <div class="ad-panel" id="panelCheckin">
+      <div style="padding:20px;">
+        <h3 style="color:var(--paper);margin:0 0 8px;">📱 QR Check-ins</h3>
+        <p style="color:var(--muted);font-size:0.85rem;margin:0 0 16px;">Wateja walio-check-in leo.</p>
+        <div id="adminCheckinList"><div class="ad-empty"><div class="ad-empty-icon">📱</div>Hakuna check-in bado.</div></div>
+      </div>
+    </div>
+
+    <!-- ADMIN LOYALTY PANEL -->
+    <div class="ad-panel" id="panelPoints">
+      <div style="padding:20px;">
+        <h3 style="color:var(--paper);margin:0 0 8px;">🏆 Loyalty Points</h3>
+        <p style="color:var(--muted);font-size:0.85rem;margin:0 0 16px;">Pointi za wateja na badges walizopata.</p>
+        <div class="ad-table-wrap">
+          <table class="ad-table">
+            <thead><tr><th>Mteja</th><th>Email</th><th>Pointi</th><th>Tier</th><th>Badges</th></tr></thead>
+            <tbody id="adminLoyaltyBody"><tr><td colspan="5" class="ad-empty"><div class="ad-empty-icon">🏆</div>Inapakia...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
 
 </div>
-
-<!-- Edit Client Modal -->
 <div class="ad-edit-overlay" id="editClientOverlay" onclick="if(event.target===this)closeEditClient()">
   <div class="ad-edit-modal">
     <div class="ad-edit-head">
@@ -3660,6 +3793,7 @@ s0.parentNode.insertBefore(s1,s0);
         requestNotificationPermission();
         renderTimeSlots();
         try { listenForIncomingCalls(); } catch(e){}
+        try { loadLoyaltyPoints(); } catch(e){}
       }
     } else {
       if(currentUserName) {
@@ -3974,6 +4108,8 @@ s0.parentNode.insertBefore(s1,s0);
     loadAdminAppointments();
     loadAdminLocations();
     loadAdminCallUsers();
+    loadAdminCheckins();
+    loadAdminLoyalty();
   }
 
   function deleteReview(id){
@@ -4151,6 +4287,42 @@ s0.parentNode.insertBefore(s1,s0);
     }).catch(err=>{
       showNotifToast('Hitilafu',err.message,'❌');
     });
+  }
+
+  // ========== ADMIN CHECKINS ==========
+  function loadAdminCheckins(){
+    const list=document.getElementById('adminCheckinList');
+    if(!list) return;
+    const today=new Date(); today.setHours(0,0,0,0);
+    db.collection('checkins').get().then(snap=>{
+      if(snap.empty){ list.innerHTML='<div class="ad-empty"><div class="ad-empty-icon">📱</div>Hakuna check-in bado.</div>'; return; }
+      let items=[];
+      snap.forEach(doc=>{const d=doc.data();items.push({...d,id:doc.id});});
+      items.sort((a,b)=>{const ta=a.timestamp?a.timestamp.toDate().getTime():0;const tb=b.timestamp?b.timestamp.toDate().getTime():0;return tb-ta;});
+      let html='';
+      items.forEach(item=>{
+        const dt=item.timestamp?item.timestamp.toDate().toLocaleString('sw-TZ'):'—';
+        html+='<div class="qr-checkin-item" style="margin-bottom:6px;"><div><div style="color:var(--paper);font-weight:600;font-size:0.88rem;">👤 '+(item.name||'—')+'</div><div style="color:var(--muted);font-size:0.78rem;">'+(item.email||'')+'</div></div><div style="text-align:right;"><div style="color:var(--muted);font-size:0.75rem;font-family:JetBrains Mono,monospace;">'+dt+'</div><div style="color:var(--fiber);font-size:0.72rem;">'+(item.location||'Office')+'</div></div></div>';
+      });
+      list.innerHTML=html;
+    }).catch(e=>{list.innerHTML='<div class="ad-empty" style="color:#ff6b6b">Hitilafu: '+e.message+'</div>';});
+  }
+
+  // ========== ADMIN LOYALTY ==========
+  function loadAdminLoyalty(){
+    const tBody=document.getElementById('adminLoyaltyBody');
+    if(!tBody) return;
+    db.collection('loyalty').get().then(snap=>{
+      if(snap.empty){ tBody.innerHTML='<tr><td colspan="5" class="ad-empty"><div class="ad-empty-icon">🏆</div>Hakuna pointi bado.</td></tr>'; return; }
+      let rows='';
+      snap.forEach(doc=>{
+        const d=doc.data();
+        const pts=d.points||0;
+        const tier=getLoyaltyTier(pts);
+        rows+='<tr><td><strong>'+(d.name||'—')+'</strong></td><td style="color:var(--muted);font-size:0.82rem;">'+(d.email||'—')+'</td><td style="color:#F2A93B;font-weight:700;font-family:JetBrains Mono,monospace;">'+pts+'</td><td><span class="ad-badge ad-badge-green">'+tier.icon+' '+tier.name+'</span></td><td>—</td></tr>';
+      });
+      tBody.innerHTML=rows;
+    }).catch(e=>{tBody.innerHTML='<tr><td colspan="5" class="ad-empty" style="color:#ff6b6b">Hitilafu: '+e.message+'</td></tr>';});
   }
 
   let _activeOrderFilter = 'all';
@@ -4422,6 +4594,14 @@ s0.parentNode.insertBefore(s1,s0);
         showNotifToast(currentLang==='sw'?'Order Imekamilika!':'Order Completed!', (orderData.huduma||'')+' — '+orderData.email,'✅');
         if(orderData.email){
           sendOrderCompleteEmail(orderData);
+          // Award loyalty points
+          if(orderData.uid){
+            addLoyaltyPoints(orderData.uid,25,'Order completed');
+          } else {
+            db.collection('clients').where('email','==',orderData.email).get().then(snap=>{
+              snap.forEach(doc=>{ addLoyaltyPoints(doc.id,25,'Order completed'); });
+            });
+          }
         }
       });
     }).catch((e) => {
@@ -5124,6 +5304,8 @@ s0.parentNode.insertBefore(s1,s0);
       'admin-tab-miadi': '🗓️ Miadi',
       'admin-tab-eneo': '📍 Eneo',
       'admin-tab-simu': '📞 Simu',
+      'admin-tab-checkin': '📱 Check-ins',
+      'admin-tab-points': '🏆 Pointi',
       'admin-send': 'Tuma 📤',
       'admin-chat-input-ph': 'Andika ujumbe kwa mteja...',
       'ad-chat-sidebar-head': 'Wateja',
@@ -5233,6 +5415,11 @@ s0.parentNode.insertBefore(s1,s0);
       'cu-sb-about': 'Kuhusu Sisi',
       'cu-sb-appt': 'Miadi',
       'cu-sb-loc': 'Eneo',
+      'cu-sb-diag': 'AI Diagnostic',
+      'cu-sb-autodiag': 'Auto Diagnostics',
+      'cu-sb-record': 'Record Screen',
+      'cu-sb-journey': 'Safari Yangu',
+      'cu-sb-loyalty': 'Pointi',
       'cu-hero-title': '👋 Karibu, ',
       'cu-page-sub': 'Ungependa kufanya nini leo?',
       'cu-stat-orders': 'Orders',
@@ -5586,6 +5773,8 @@ s0.parentNode.insertBefore(s1,s0);
       'admin-tab-miadi': '🗓️ Appointments',
       'admin-tab-eneo': '📍 Location',
       'admin-tab-simu': '📞 Calls',
+      'admin-tab-checkin': '📱 Check-ins',
+      'admin-tab-points': '🏆 Loyalty',
       'admin-send': 'Send 📤',
       'admin-chat-input-ph': 'Type a message to customer...',
       'ad-chat-sidebar-head': 'Customers',
@@ -5695,6 +5884,11 @@ s0.parentNode.insertBefore(s1,s0);
       'cu-sb-about': 'About Us',
       'cu-sb-appt': 'Appointments',
       'cu-sb-loc': 'Location',
+      'cu-sb-diag': 'AI Diagnostic',
+      'cu-sb-autodiag': 'Auto Diagnostics',
+      'cu-sb-record': 'Record Screen',
+      'cu-sb-journey': 'My Journey',
+      'cu-sb-loyalty': 'Points',
       'cu-hero-title': '👋 Welcome, ',
       'cu-page-sub': 'What would you like to do today?',
       'cu-stat-orders': 'Orders',
@@ -6184,7 +6378,8 @@ s0.parentNode.insertBefore(s1,s0);
         chat: 'cuPageChat',
         offa: 'cuPageOffa',
         maoni: 'cuPageMaoni',
-        about: 'cuPageAbout'
+        about: 'cuPageAbout',
+        loyalty: 'cuPageLoyalty'
       };
       const target = document.getElementById(pageMap[page]);
       if(target) target.classList.add('active');
@@ -6293,7 +6488,397 @@ s0.parentNode.insertBefore(s1,s0);
   });
 
 // ============================================================
-// PWA SERVICE WORKER
+// AI PROBLEM DIAGNOSTIC
+// ============================================================
+function openDiagnostic(){ document.getElementById('diagModal').classList.add('show'); }
+const diagDB = [
+  {keywords:['simu','screen','skrini','nyeupe','black','blacking','blank','nyeusi'],solution:'Jinsi ya Kusahihisha: 1) Bonyeza power button kwa sekunde 10. 2) Ifanye hard reset. 3) Ikiwa bado haijaamka, inaweza kuwa loose display cable.',service:'Phone Repair',confidence:85},
+  {keywords:['slow','kutu','polepole','hang','freeze','buffering','lag'],solution:'Jinsi ya Kusahihisha: 1) Funga programu zote. 2) Angalia RAM kwenye Task Manager. 3) Ondoa programu nyingi za background. 4) Sasisha OS. 5) Ongeza RAM au SSD.',service:'PC/Laptop Repair',confidence:80},
+  {keywords:['wifi','internet','mtandao','connection','network','data','mawasiliano'],solution:'Jinsi ya Kusahihisha: 1) Reboot router. 2) Angalia network cables. 3) Forget network kisha uungane tena. 4) Sasisha network drivers. 5) Angalia DNS settings.',service:'Network Setup',confidence:88},
+  {keywords:['virus','malware','pop','slow','ad','hack','security','ulinzi'],solution:'Jinsi ya Kusahihisha: 1) Kausha internet. 2) Scan kwa antivirus. 3) Ondoa browser extensions zisizo zaaminika. 4) Sasisha firewall. 5) Badilisha passwords zote.',service:'Firewall & Antivirus',confidence:90},
+  {keywords:['data','file','photo','video','picha','video','deleted','imefutwa','lost','imepotea','recovery'],solution:'Jinsi ya Kusahihisha: 1) Simamisha kutumia device mara moja. 2) Tumia data recovery software. 3) Usisave chochote kwenye device. 4) Wasiliana na mtaalamu wa data recovery.',service:'Data Recovery',confidence:75},
+  {keywords:['cctv','camera','security','camera','usalama','surveillance','record'],solution:'Jinsi ya Kusahihisha: 1) Angalia power supply ya cameras. 2) Angalia network cables/connections. 3) Reboot DVR/NVR. 4) Angalia storage (HDD). 5) Sasisha firmware.',service:'CCTV Installation',confidence:82},
+  {keywords:['printer','print','kuchapa','paper','jam','error','ink','cartridge'],solution:'Jinsi ya Kusahihisha: 1) Cancel print queue. 2) Ondoa paper jam. 3) Clean print heads. 4) Update printer drivers. 5) Run printer diagnostic.',service:'PC/Laptop Repair',confidence:78},
+  {keywords:['battery','chaji','charge','power','umeme','dim','low'],solution:'Jinsi ya Kusahihisha: 1) Angalia charger kwanza. 2) Angalia charging port. 3) Calibrate battery. 4) Kama battery ni old, ibadilishe. 5) Angalia battery health.',service:'Phone Repair',confidence:85},
+  {keywords:['backup','hifadhi','youth','copy','save','Cloud'],solution:'Jinsi ya Kusahihisha: 1) Tumia Google Drive / iCloud. 2) Backup kwenye external HDD/SSD. 3) Tumia NAS kwa backup ya moja kwa moja. 4) Weka schedule ya backup ya kiotomatiki.',service:'Data Recovery',confidence:80},
+  {keywords:['business','biashara','POS','inventory','stok','software','programu','system'],solution:'Jinsi ya Kusahihisha: 1) Angalia mahitaji ya biashara yako. 2) Chagua POS system inayofaa. 3) Sanidi inventory management. 4) Fanya training kwa watumiaji.',service:'Business Systems',confidence:85},
+];
+function runDiagnosis(){
+  const input = document.getElementById('diagInput').value.trim();
+  const results = document.getElementById('diagResults');
+  if(!input){ results.innerHTML='<p style="color:#ff6b6b;font-size:0.85rem;">Tafadhali eleza tatizo lako.</p>'; return; }
+  results.innerHTML='<div class="diag-spinner">🤖 AI inachambua...</div>';
+  setTimeout(()=>{
+    const words = input.toLowerCase().split(/\s+/);
+    let matches = [];
+    diagDB.forEach(item=>{
+      let score=0;
+      words.forEach(w=>{ if(item.keywords.some(k=>w.includes(k)||k.includes(w))) score++; });
+      if(score>0) matches.push({...item,score});
+    });
+    matches.sort((a,b)=>b.score-a.score);
+    if(matches.length===0){
+      matches=[{solution:'Tatizo hili linahitaji uchunguzi wa karibu. Tafadhali wasiliana na timu yetu kupitia Live Chat au piga simu. Admin atakusaidia kupata suluhisho sahihi.',service:'Remote Support',confidence:50}];
+    }
+    let html='';
+    matches.slice(0,3).forEach(m=>{
+      html+='<div class="diag-result-card"><h5>🔧 '+m.service+'</h5><p>'+m.solution+'</p><span class="confidence">Uaminifu: '+m.confidence+'%</span></div>';
+    });
+    html+='<div style="text-align:center;margin-top:14px;"><button onclick="document.getElementById(\'diagModal\').classList.remove(\'show\')" style="background:#1a2942;border:1px solid #1e3348;border-radius:10px;padding:10px 20px;color:#F2A93B;font-size:0.85rem;cursor:pointer;">Ongea na Admin →</button></div>';
+    results.innerHTML=html;
+  },1500);
+}
+
+// ============================================================
+// SCREEN RECORDING
+// ============================================================
+let mediaRecorder=null; let recordedChunks=[]; let recStream=null;
+function startScreenRecording(){
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getDisplayMedia){
+    showNotifToast('Haitumiki','Browser haina support ya screen recording','❌'); return;
+  }
+  navigator.mediaDevices.getDisplayMedia({video:{mediaSurface:'window'},audio:true}).then(stream=>{
+    recStream=stream;
+    recordedChunks=[];
+    mediaRecorder=new MediaRecorder(stream,{mimeType:'video/webm;codecs=vp9'});
+    mediaRecorder.ondataavailable=e=>{ if(e.data.size>0) recordedChunks.push(e.data); };
+    mediaRecorder.onstop=()=>{ sendRecordedVideo(); };
+    mediaRecorder.start();
+    document.getElementById('recIndicator').classList.add('show');
+    stream.getVideoTracks()[0].onended=()=>{ stopScreenRecording(); };
+  }).catch(e=>{
+    showNotifToast('Hitilafu',e.message,'❌');
+  });
+}
+function stopScreenRecording(){
+  if(mediaRecorder&&mediaRecorder.state!=='inactive') mediaRecorder.stop();
+  if(recStream) recStream.getTracks().forEach(t=>t.stop());
+  document.getElementById('recIndicator').classList.remove('show');
+}
+function sendRecordedVideo(){
+  const blob=new Blob(recordedChunks,{type:'video/webm'});
+  if(blob.size<100){ showNotifToast('Hitilafu','Video haijaandikwa','❌'); return; }
+  const reader=new FileReader();
+  reader.onload=()=>{
+    const user=firebase.auth().currentUser;
+    if(!user) return;
+    db.collection('chats').add({
+      sender:'customer',name:user.displayName||user.email.split('@')[0],email:user.email,
+      message:'🎬 Screen Recording — '+new Date().toLocaleString('sw-TZ'),
+      image:reader.result, read:false,
+      createdAt:firebase.firestore.FieldValue.serverTimestamp()
+    }).then(()=>{
+      showNotifToast('Imetumwa!','Video imetumwa kwa admin kwa ajili ya uchunguzi','🎬');
+    });
+  };
+  reader.readAsDataURL(blob);
+}
+
+// ============================================================
+// LOYALTY POINTS & GAMIFICATION
+// ============================================================
+const LOYALTY_TIERS=[
+  {name:'Bronze',icon:'🥉',min:0,color:'#cd7f32'},
+  {name:'Silver',icon:'🥈',min:100,color:'#C0C0C0'},
+  {name:'Gold',icon:'🥇',min:300,color:'#FFD700'},
+  {name:'Platinum',icon:'💎',min:600,color:'#E5E4E2'},
+  {name:'Diamond',icon:'👑',min:1000,color:'#B9F2FF'}
+];
+const BADGES_DEF=[
+  {id:'first-order',icon:'🎯',name:'Mteja wa Kwanza',req:1},
+  {id:'five-orders',icon:'5️⃣',name:'Mteja wa 5',req:5},
+  {id:'ten-orders',icon:'🔟',name:'Mteja wa 10',req:10},
+  {id:'first-review',icon:'⭐',name:'Mapokezi ya Kwanza',req:1,review:true},
+  {id:'early-bird',icon:'🌅',name:'Mapema Sana',req:1,early:true},
+  {id:'loyal',icon:'❤️',name:'Mteja waaminifu',req:20},
+  {id:'vip',icon:'👑',name:'VIP Customer',req:50},
+  {id:'legend',icon:'🏆',name:'Legenda',req:100}
+];
+function getLoyaltyTier(pts){
+  let tier=LOYALTY_TIERS[0];
+  for(let i=LOYALTY_TIERS.length-1;i>=0;i--){ if(pts>=LOYALTY_TIERS[i].min){tier=LOYALTY_TIERS[i];break;} }
+  return tier;
+}
+function loadLoyaltyPoints(){
+  const user=firebase.auth().currentUser;
+  if(!user) return;
+  db.collection('loyalty').doc(user.uid).get().then(doc=>{
+    let pts=0;
+    if(doc.exists) pts=doc.data().points||0;
+    const tier=getLoyaltyTier(pts);
+    const nextTierIdx=LOYALTY_TIERS.findIndex(t=>t.name===tier.name)+1;
+    const nextTier=nextTierIdx<LOYALTY_TIERS.length?LOYALTY_TIERS[nextTierIdx]:null;
+    document.getElementById('loyaltyPoints').textContent=pts;
+    document.getElementById('loyaltyTier').innerHTML=tier.icon+' '+tier.name;
+    document.getElementById('loyaltyTierLabel').textContent=tier.icon+' '+tier.name;
+    if(nextTier){
+      const progress=Math.min(100,((pts-tier.min)/(nextTier.min-tier.min))*100);
+      document.getElementById('loyaltyBar').style.width=progress+'%';
+      document.getElementById('loyaltyNextTier').textContent=nextTier.icon+' '+nextTier.name+' — '+(nextTier.min-pts)+' pointi zaidi';
+    } else {
+      document.getElementById('loyaltyBar').style.width='100%';
+      document.getElementById('loyaltyNextTier').textContent='Level ya Juu! 👑';
+    }
+    renderBadges(pts);
+    renderRewards(pts);
+  }).catch(()=>{});
+}
+function renderBadges(pts){
+  const c=document.getElementById('loyaltyBadges');
+  let html='';
+  BADGES_DEF.forEach(b=>{
+    const earned=pts>=b.req;
+    html+='<div class="loyalty-badge '+(earned?'earned':'')+'"><div class="badge-icon">'+b.icon+'</div><div class="badge-name">'+b.name+'</div></div>';
+  });
+  c.innerHTML=html;
+}
+function renderRewards(pts){
+  const c=document.getElementById('loyaltyRewards');
+  const rewards=[
+    {icon:'💰',name:'Punguzo 5%',cost:50},
+    {icon:'🔧',name:'Service ya Bure',cost:200},
+    {icon:'⭐',name:'VIP Badge',cost:100},
+    {icon:'🎁',name:'Gift Pack',cost:300}
+  ];
+  let html='';
+  rewards.forEach(r=>{
+    const canRedeem=pts>=r.cost;
+    html+='<div class="loyalty-reward" onclick="'+(canRedeem?"redeemReward('"+r.name+"',"+r.cost+")":'')+'" style="'+(canRedeem?'':'opacity:.4;cursor:not-allowed;')+'"><div class="rw-icon">'+r.icon+'</div><div class="rw-cost">'+r.cost+' pt</div><div class="rw-name">'+r.name+'</div></div>';
+  });
+  c.innerHTML=html;
+}
+function redeemReward(name,cost){
+  if(!confirm('Tumia '+cost+' pointi kwa '+name+'?')) return;
+  const user=firebase.auth().currentUser;
+  if(!user) return;
+  db.collection('loyalty').doc(user.uid).get().then(doc=>{
+    const pts=doc.exists?(doc.data().points||0):0;
+    if(pts<cost){ showNotifToast('Pointi hazitoshi','Una '+pts+' pointi tu','🏆'); return; }
+    db.collection('loyalty').doc(user.uid).set({points:pts-cost,email:user.email,name:user.displayName||user.email.split('@')[0]},{merge:true}).then(()=>{
+      showNotifToast('Imetumia!','Umetumia '+cost+' pointi kwa '+name,'🎁');
+      loadLoyaltyPoints();
+    });
+  });
+}
+function addLoyaltyPoints(uid,pts,reason){
+  db.collection('loyalty').doc(uid).get().then(doc=>{
+    const current=doc.exists?(doc.data().points||0):0;
+    db.collection('loyalty').doc(uid).set({points:current+pts},{merge:true}).catch(()=>{});
+  });
+}
+
+// ============================================================
+// AUTO DIAGNOSTICS
+// ============================================================
+function openAutoDiag(){ document.getElementById('autoDiagModal').classList.add('show'); }
+function runAutoDiag(){
+  const btn=document.getElementById('autoDiagBtn');
+  const results=document.getElementById('autoDiagResults');
+  btn.disabled=true; btn.textContent='⏳ Inachambua...';
+  results.innerHTML='';
+  const info={};
+  info.os=navigator.platform||'Unknown';
+  info.browser=navigator.userAgent.split(' ').pop();
+  info.lang=navigator.language;
+  info.cores=navigator.hardwareConcurrency||'Unknown';
+  info.ram=navigator.deviceMemory?(navigator.deviceMemory+' GB'):'Unknown';
+  info.screen=screen.width+'x'+screen.height;
+  info.colorDepth=navigator.colorDepth+'-bit';
+  info.touch='ontouchstart' in window?'Ndiyo':'Hapana';
+  info.connection=navigator.connection?(navigator.connection.effectiveType||navigator.connection.type||'Unknown'):'Unknown';
+  info.cookies=navigator.cookieEnabled?'Imewashwa':'Imezimwa';
+  info.jsEnabled='Ndiyo';
+  info.doNotTrack=navigator.doNotTrack||'Haijawekwa';
+  info.timezone=Intl.DateTimeFormat().resolvedOptions().timeZone;
+  info.battery=navigator.getBattery?'Inachukua...':'Haiwezekani';
+
+  const connQuality=info.connection==='4g'?['Good','ad-good']:info.connection==='3g'?['Fair','ad-warn']:['Unknown',''];
+  const coresNum=typeof info.cores==='number'?info.cores:0;
+  const coresStatus=coresNum>=8?['Excellent','ad-good']:coresNum>=4?['Good','ad-good']:coresNum>=2?['Fair','ad-warn']:['Low','ad-bad'];
+
+  let html='';
+  html+=diagCard('💻','Platform',info.os,'');
+  html+=diagCard('🌐','Browser',info.browser,'');
+  html+=diagCard('⚙️','CPU Cores',info.cores,coresStatus[1]);
+  html+=diagCard('🧠','RAM',info.ram,'');
+  html+=diagCard('📱','Screen',info.screen,'');
+  html+=diagCard('🎨','Color Depth',info.colorDepth,'');
+  html+=diagCard('👆','Touch Screen',info.touch,'');
+  html+=diagCard('📡','Network',connQuality[0],connQuality[1]);
+  html+=diagCard('🍪','Cookies',info.cookies,'');
+  html+=diagCard('🌍','Timezone',info.timezone,'');
+  html+=diagCard('🔒','Do Not Track',info.doNotTrack,'');
+
+  if(navigator.getBattery){
+    navigator.getBattery().then(bat=>{
+      const pct=Math.round(bat.level*100);
+      const batStatus=pct>50?'ad-good':pct>20?'ad-warn':'ad-bad';
+      document.getElementById('batteryCard').innerHTML=diagCardHTML('🔋','Battery',pct+'%',batStatus);
+      sendDiagReport(info);
+    });
+  } else {
+    html+=diagCard('🔋','Battery','Haiwezekani','');
+    sendDiagReport(info);
+  }
+  results.innerHTML=html;
+  btn.disabled=false; btn.textContent='⚡ Anzisha Uchambuzi Tena';
+}
+function diagCard(icon,label,value,statusClass){
+  return '<div class="autodiag-card"><div class="ad-icon">'+icon+'</div><div style="flex:1;"><div class="ad-label">'+label+'</div><div class="ad-value '+(statusClass||'')+'">'+value+'</div></div></div>';
+}
+function diagCardHTML(icon,label,value,statusClass){
+  return '<div class="autodiag-card"><div class="ad-icon">'+icon+'</div><div style="flex:1;"><div class="ad-label">'+label+'</div><div class="ad-value '+(statusClass||'')+'">'+value+'</div></div></div>';
+}
+function sendDiagReport(info){
+  const user=firebase.auth().currentUser;
+  if(!user) return;
+  const report = Object.entries(info).map(([k,v])=>k+': '+v).join('\n');
+  db.collection('chats').add({
+    sender:'customer',name:user.displayName||user.email.split('@')[0],email:user.email,
+    message:'⚡ Auto Diagnostics Report:\n'+report,read:false,
+    createdAt:firebase.firestore.FieldValue.serverTimestamp()
+  }).then(()=>{
+    showNotifToast('Ripoti Imetumwa','Ripoti ya kifaa chako imetumwa kwa admin','⚡');
+  });
+}
+
+// ============================================================
+// QR CODE CHECK-IN
+// ============================================================
+function generateQRCode(canvas,text){
+  const size=180;const ctx=canvas.getContext('2d');canvas.width=size;canvas.height=size;
+  ctx.fillStyle='#fff';ctx.fillRect(0,0,size,size);
+  const moduleCount=25;const moduleSize=size/moduleCount;
+  let seed=0;for(let i=0;i<text.length;i++) seed=((seed<<5)-seed)+text.charCodeAt(i);
+  function rng(){seed=(seed*16807)%2147483647;return(seed-1)/2147483646;}
+  // finder patterns
+  function drawFinder(x,y){
+    ctx.fillStyle='#0E1A2B';
+    ctx.fillRect(x*moduleSize,y*moduleSize,7*moduleSize,7*moduleSize);
+    ctx.fillStyle='#fff';
+    ctx.fillRect((x+1)*moduleSize,(y+1)*moduleSize,5*moduleSize,5*moduleSize);
+    ctx.fillStyle='#0E1A2B';
+    ctx.fillRect((x+2)*moduleSize,(y+2)*moduleSize,3*moduleSize,3*moduleSize);
+  }
+  drawFinder(0,0);drawFinder(moduleCount-7,0);drawFinder(0,moduleCount-7);
+  // data modules
+  for(let r=0;r<moduleCount;r++){
+    for(let c=0;c<moduleCount;c++){
+      if((r<8&&c<8)||(r<8&&c>moduleCount-9)||(r>moduleCount-9&&c<8)) continue;
+      if(rng()>0.5){
+        ctx.fillStyle=rng()>0.5?'#F2A93B':'#0E1A2B';
+        ctx.fillRect(c*moduleSize,r*moduleSize,moduleSize,moduleSize);
+      }
+    }
+  }
+}
+function openQRCheckin(){
+  const user=firebase.auth().currentUser;
+  if(!user){ showNotifToast('Ingia Kwanza','','🔒'); return; }
+  document.getElementById('qrModal').classList.add('show');
+  generateQRCode(document.getElementById('qrCanvas'),'PLATINUMZ-'+user.uid+'-'+Date.now());
+  loadQRCheckins();
+}
+function doQRCheckin(){
+  const user=firebase.auth().currentUser;
+  if(!user) return;
+  db.collection('checkins').add({
+    uid:user.uid,name:user.displayName||user.email.split('@')[0],email:user.email,
+    timestamp:firebase.firestore.FieldValue.serverTimestamp(),
+    location:'PLATINUMZ Office'
+  }).then(()=>{
+    showNotifToast('Check-in!','Umefanikiwa kucheck-in kwenye ofisi','✅');
+    generateQRCode(document.getElementById('qrCanvas'),'PLATINUMZ-'+user.uid+'-'+Date.now());
+    loadQRCheckins();
+    addLoyaltyPoints(user.uid,10,'Check-in');
+  });
+}
+function loadQRCheckins(){
+  const user=firebase.auth().currentUser;
+  if(!user) return;
+  const list=document.getElementById('qrCheckinList');
+  db.collection('checkins').where('uid','==',user.uid).get().then(snap=>{
+    if(snap.empty){ list.innerHTML=''; return; }
+    let items=[];
+    snap.forEach(doc=>{const d=doc.data();items.push(d);});
+    items.sort((a,b)=>{const ta=a.timestamp?a.timestamp.toDate().getTime():0;const tb=b.timestamp?b.timestamp.toDate().getTime():0;return tb-ta;});
+    let html='<h4 style="color:var(--paper);font-size:0.85rem;margin:14px 0 8px;">Check-in Zilizopita</h4>';
+    items.slice(0,5).forEach(item=>{
+      const dt=item.timestamp?item.timestamp.toDate().toLocaleString('sw-TZ'):'—';
+      html+='<div class="qr-checkin-item"><span class="ci-name">'+(item.location||'Office')+'</span><span class="ci-time">'+dt+'</span></div>';
+    });
+    list.innerHTML=html;
+  }).catch(()=>{});
+}
+
+// ============================================================
+// CUSTOMER JOURNEY MAP
+// ============================================================
+function openCustomerJourney(){
+  const user=firebase.auth().currentUser;
+  if(!user) return;
+  document.getElementById('journeyModal').classList.add('show');
+  loadJourneyData(user);
+}
+function loadJourneyData(user){
+  const body=document.getElementById('journeyBody');
+  body.innerHTML='<div class="diag-spinner">📊 Inapakia safari yako...</div>';
+  Promise.all([
+    db.collection('clients').doc(user.uid).get(),
+    db.collection('orders').where('uid','==',user.uid).get(),
+    db.collection('checkins').where('uid','==',user.uid).get(),
+    db.collection('reviews').where('email','==',user.email).get(),
+    db.collection('appointments').where('uid','==',user.uid).get(),
+    db.collection('loyalty').doc(user.uid).get()
+  ]).then(([clientSnap,ordersSnap,checkinsSnap,reviewsSnap,apptsSnap,loyaltySnap])=>{
+    const events=[];
+    if(clientSnap.exists){
+      const d=clientSnap.data();
+      events.push({icon:'👤',title:'Umejisajili',desc:'Umejiunga na PLATINUMZ IT Support',date:d.createdAt,status:'completed'});
+    }
+    ordersSnap.forEach(doc=>{
+      const d=doc.data();
+      const st=d.status==='imekamilika'?'completed':d.status==='inashughulikiwa'?'active':'';
+      events.push({icon:'📋',title:'Order: '+(d.huduma||'Service'),desc:d.maelezo||'Huduma iliyotolewa',date:d.createdAt,status:st});
+    });
+    checkinsSnap.forEach(doc=>{
+      const d=doc.data();
+      events.push({icon:'📱',title:'Check-in',desc:'Ulicheck-in '+(d.location||'Office'),date:d.timestamp,status:'completed'});
+    });
+    reviewsSnap.forEach(doc=>{
+      const d=doc.data();
+      events.push({icon:'⭐',title:'Maoni: '+(d.huduma||''),desc:d.comment||d.review||'',date:d.createdAt,status:'completed'});
+    });
+    apptsSnap.forEach(doc=>{
+      const d=doc.data();
+      events.push({icon:'🗓️',title:'Miadi: '+(d.service||''),desc:'Tarehe: '+(d.date||'—')+' Saa: '+(d.time||'—'),date:d.createdAt,status:d.status==='confirmed'?'completed':''});
+    });
+    events.sort((a,b)=>{
+      const da=a.date?a.date.toDate().getTime():0;
+      const db2=b.date?b.date.toDate().getTime():0;
+      return da-db2;
+    });
+    const totalOrders=ordersSnap.size;
+    const completedOrders=ordersSnap.docs.filter(d=>d.data().status==='imekamilika').length;
+    const pts=loyaltySnap.exists?(loyaltySnap.data().points||0):0;
+    let statsHtml='<div class="journey-stats">';
+    statsHtml+='<div class="journey-stat"><div class="js-val">'+totalOrders+'</div><div class="js-label">Orders</div></div>';
+    statsHtml+='<div class="journey-stat"><div class="js-val">'+completedOrders+'</div><div class="js-label">Zilizokamilika</div></div>';
+    statsHtml+='<div class="journey-stat"><div class="js-val">'+pts+'</div><div class="js-label">Pointi</div></div>';
+    statsHtml+='</div>';
+    let timelineHtml='<div class="journey-timeline">';
+    events.forEach(e=>{
+      const dt=e.date?e.date.toDate().toLocaleString('sw-TZ',{dateStyle:'medium',timeStyle:'short'}):'';
+      timelineHtml+='<div class="journey-item '+(e.status||'')+'"><div class="journey-card"><span class="j-icon">'+e.icon+'</span><div class="j-title">'+e.title+'</div><div class="j-desc">'+e.desc+'</div><div class="j-date">'+dt+'</div></div></div>';
+    });
+    if(events.length===0) timelineHtml+='<p style="color:#8899aa;text-align:center;">Hakuna matukio bado.</p>';
+    timelineHtml+='</div>';
+    body.innerHTML=statsHtml+timelineHtml;
+  }).catch(e=>{
+    body.innerHTML='<p style="color:#ff6b6b;">Hitilafu: '+e.message+'</p>';
+  });
+}
+</script>
 // ============================================================
 if('serviceWorker' in navigator){
   navigator.serviceWorker.register('service-worker.js').catch(()=>{});
@@ -6853,6 +7438,67 @@ function endCall(){
   <div class="call-actions">
     <button class="call-ctrl-btn accept-call" onclick="acceptIncomingCall()" title="Accept">📞</button>
     <button class="call-ctrl-btn end-call" onclick="rejectIncomingCall()" title="Reject">✕</button>
+  </div>
+</div>
+
+<!-- === AI DIAGNOSTIC MODAL === -->
+<div class="diag-modal" id="diagModal">
+  <div class="diag-panel">
+    <div class="diag-head">
+      <h3>🤖 AI Diagnostic</h3>
+      <button onclick="document.getElementById('diagModal').classList.remove('show')" style="background:none;border:none;color:#667;font-size:1.3rem;cursor:pointer;">✕</button>
+    </div>
+    <div class="diag-body">
+      <p style="color:#8899aa;font-size:0.85rem;margin:0 0 14px;">Eleza tatizo lako kwa maneno rahisi. AI yetu itapendekeza suluhisho!</p>
+      <textarea class="diag-input" id="diagInput" placeholder="mfano: Simu yangu haifunguki, skrini ni nyeupe..."></textarea>
+      <button class="diag-submit" onclick="runDiagnosis()">🔍 Chambua Tatizo</button>
+      <div class="diag-results" id="diagResults"></div>
+    </div>
+  </div>
+</div>
+
+<!-- === SCREEN RECORDING INDICATOR === -->
+<div class="rec-indicator" id="recIndicator"><div class="rec-dot"></div> <span id="recText">Recording...</span> <button onclick="stopScreenRecording()" style="background:none;border:none;color:#fff;font-size:1rem;cursor:pointer;">⏹️</button></div>
+
+<!-- === AUTO DIAGNOSTICS MODAL === -->
+<div class="diag-modal" id="autoDiagModal">
+  <div class="diag-panel">
+    <div class="diag-head">
+      <h3>⚡ Auto Diagnostics</h3>
+      <button onclick="document.getElementById('autoDiagModal').classList.remove('show')" style="background:none;border:none;color:#667;font-size:1.3rem;cursor:pointer;">✕</button>
+    </div>
+    <div class="diag-body">
+      <p style="color:#8899aa;font-size:0.85rem;margin:0 0 14px;">Mfumo utachambua kifaa chako na kutuma ripoti kwa admin.</p>
+      <button class="diag-submit" onclick="runAutoDiag()" id="autoDiagBtn">⚡ Anzisha Uchambuzi</button>
+      <div id="autoDiagResults" style="margin-top:14px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- === QR CHECK-IN MODAL === -->
+<div class="qr-modal" id="qrModal">
+  <div class="qr-panel">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+      <h3 style="color:#F2A93B;font-size:1rem;margin:0;">📱 QR Check-in</h3>
+      <button onclick="document.getElementById('qrModal').classList.remove('show')" style="background:none;border:none;color:#667;font-size:1.3rem;cursor:pointer;">✕</button>
+    </div>
+    <p style="color:#8899aa;font-size:0.82rem;">Scanne QR code hii unapofika ofisini.</p>
+    <div class="qr-code-display" id="qrCodeDisplay"><canvas id="qrCanvas"></canvas></div>
+    <button class="diag-submit" onclick="doQRCheckin()" style="margin-top:10px;">✅ Check-in Sasa</button>
+    <div class="qr-checkins" id="qrCheckinList"></div>
+  </div>
+</div>
+
+<!-- === LOYALTY POINTS PAGE (in customer dashboard) === -->
+
+<!-- === CUSTOMER JOURNEY MODAL === -->
+<div class="diag-modal" id="journeyModal">
+  <div class="diag-panel" style="max-width:500px;">
+    <div class="diag-head">
+      <h3>📊 Safari Yako</h3>
+      <button onclick="document.getElementById('journeyModal').classList.remove('show')" style="background:none;border:none;color:#667;font-size:1.3rem;cursor:pointer;">✕</button>
+    </div>
+    <div class="diag-body" id="journeyBody"></div>
   </div>
 </div>
 
