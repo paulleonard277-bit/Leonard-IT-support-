@@ -3559,8 +3559,10 @@ s0.parentNode.insertBefore(s1,s0);
 
     // --- Admin Chat: Per-Customer ---
     let _adminSelectedChatEmail = null;
+    window._adminSelectedChatEmail = null;
     let _adminUnsubChat = null;
     let _adminUnsubUserList = null;
+    let _adminUnsubTyping = null;
     const chatUserList = document.getElementById('adminChatUserList');
     const chatHeader = document.getElementById('adminChatTargetName');
 
@@ -3570,10 +3572,12 @@ s0.parentNode.insertBefore(s1,s0);
         const userMap = {};
         snap.forEach((doc) => {
           const d = doc.data();
-          if(d.sender === 'customer' && d.email){
+          if(d.email){
             if(!userMap[d.email]){
               const ts = d.createdAt ? d.createdAt.toDate() : null;
-              userMap[d.email] = { name: d.name || d.email.split('@')[0], email: d.email, lastMsg: d.message || '', time: ts, unread: 0 };
+              userMap[d.email] = { name: (d.sender==='admin' ? null : d.name) || d.email.split('@')[0], email: d.email, lastMsg: d.message || '', time: ts, unread: 0 };
+            } else if(d.sender==='customer' && !userMap[d.email].name){
+              userMap[d.email].name = d.name || d.email.split('@')[0];
             }
           }
         });
@@ -3605,6 +3609,7 @@ s0.parentNode.insertBefore(s1,s0);
 
     window.selectAdminChatCustomer = function(email, name){
       _adminSelectedChatEmail = email;
+      window._adminSelectedChatEmail = email;
       chatHeader.textContent = name + ' (' + email + ')';
       chatInput.disabled = false;
       chatSend.disabled = false;
@@ -3612,6 +3617,7 @@ s0.parentNode.insertBefore(s1,s0);
       document.querySelectorAll('.ad-chat-user').forEach((el) => el.classList.remove('active'));
       event.currentTarget.classList.add('active');
       if(_adminUnsubChat) _adminUnsubChat();
+      if(_adminUnsubTyping) _adminUnsubTyping();
       _adminUnsubChat = db.collection('chats').orderBy('createdAt','asc').limit(200).onSnapshot((snap) => {
         let html = '';
         let msgCount = 0;
@@ -3637,42 +3643,43 @@ s0.parentNode.insertBefore(s1,s0);
           return batch.commit();
         }).catch(()=>{});
       });
+
+      // Per-customer typing listener
+      _adminUnsubTyping = db.collection('typing').doc('customer_' + email).onSnapshot((doc) => {
+        const existing = chatBox.querySelector('.typing-indicator');
+        if(doc.exists){
+          const ts = doc.data().timestamp;
+          if(ts){
+            const diff = Date.now() - ts.toDate().getTime();
+            if(diff < 5000){
+              if(!existing){
+                const div = document.createElement('div');
+                div.className = 'typing-indicator';
+                div.innerHTML = '<span class="typing-dots"><span></span><span></span><span></span></span> Mteja anaandika...';
+                chatBox.appendChild(div);
+                chatBox.scrollTop = chatBox.scrollHeight;
+              }
+              return;
+            }
+          }
+        }
+        if(existing) existing.remove();
+      });
     };
 
     chatSend.onclick = () => {
       const msg = chatInput.value.trim();
       if(!msg || !_adminSelectedChatEmail) return;
       db.collection('chats').add({ sender:'admin', name:'Admin', email:_adminSelectedChatEmail, message:msg, read:false, createdAt:firebase.firestore.FieldValue.serverTimestamp() });
-      db.collection('typing').doc('admin').set({sender:'admin',email:_adminSelectedChatEmail,timestamp:firebase.firestore.FieldValue.serverTimestamp()}).catch(()=>{});
+      db.collection('typing').doc('admin_' + _adminSelectedChatEmail).set({sender:'admin',email:_adminSelectedChatEmail,timestamp:firebase.firestore.FieldValue.serverTimestamp()}).catch(()=>{});
       chatInput.value = '';
     };
     chatInput.addEventListener('keydown', (e) => { if(e.key === 'Enter') chatSend.click(); });
     chatInput.addEventListener('input', function(){
       if(_adminSelectedChatEmail){
-        db.collection('typing').doc('admin').set({sender:'admin',email:_adminSelectedChatEmail,timestamp:firebase.firestore.FieldValue.serverTimestamp()}).catch(()=>{});
+        db.collection('typing').doc('admin_' + _adminSelectedChatEmail).set({sender:'admin',email:_adminSelectedChatEmail,timestamp:firebase.firestore.FieldValue.serverTimestamp()}).catch(()=>{});
       }
     });
-    db.collection('typing').doc('customer').onSnapshot((doc) => {
-      const existing = chatBox.querySelector('.typing-indicator');
-      if(doc.exists && _adminSelectedChatEmail){
-        const ts = doc.data().timestamp;
-        if(ts){
-          const diff = Date.now() - ts.toDate().getTime();
-          if(diff < 5000){
-            if(!existing){
-              const div = document.createElement('div');
-              div.className = 'typing-indicator';
-              div.innerHTML = '<span class="typing-dots"><span></span><span></span><span></span></span> Mteja anaandika...';
-              chatBox.appendChild(div);
-              chatBox.scrollTop = chatBox.scrollHeight;
-            }
-            return;
-          }
-        }
-      }
-      if(existing) existing.remove();
-    });
-
     loadAdminChatUsers();
 
     function loadAdminReviews(){
@@ -3929,7 +3936,7 @@ s0.parentNode.insertBefore(s1,s0);
       const chatData = {
         sender: role,
         name: role === 'admin' ? 'Admin' : (_customerUser ? (_customerUser.displayName || _customerUser.email.split('@')[0]) : 'Mteja'),
-        email: role === 'customer' && _customerUser ? _customerUser.email : '',
+        email: role === 'admin' ? (window._adminSelectedChatEmail || '') : (_customerUser ? _customerUser.email : ''),
         message: '📷 Picha',
         image: imgData,
         read: false,
@@ -4164,14 +4171,14 @@ s0.parentNode.insertBefore(s1,s0);
         read: false,
         createdAt: firebase.firestore.FieldValue.serverTimestamp()
       });
-      db.collection('typing').doc('customer').set({sender:'customer',timestamp:firebase.firestore.FieldValue.serverTimestamp()}).catch(()=>{});
+      db.collection('typing').doc('customer_' + user.email).set({sender:'customer',email:user.email,timestamp:firebase.firestore.FieldValue.serverTimestamp()}).catch(()=>{});
       chatInput.value = '';
     };
     chatInput.addEventListener('keydown', (e) => { if(e.key === 'Enter') chatSend.click(); });
     chatInput.addEventListener('input', function(){
-      db.collection('typing').doc('customer').set({sender:'customer',timestamp:firebase.firestore.FieldValue.serverTimestamp()}).catch(()=>{});
+      db.collection('typing').doc('customer_' + user.email).set({sender:'customer',email:user.email,timestamp:firebase.firestore.FieldValue.serverTimestamp()}).catch(()=>{});
     });
-    db.collection('typing').doc('admin').onSnapshot((doc) => {
+    db.collection('typing').doc('admin_' + user.email).onSnapshot((doc) => {
       const existing = chatBox.querySelector('.typing-indicator');
       if(doc.exists){
         const ts = doc.data().timestamp;
@@ -4191,8 +4198,8 @@ s0.parentNode.insertBefore(s1,s0);
       }
       if(existing) existing.remove();
     });
-    // Mark admin messages as read
-    db.collection('chats').where('sender','==','admin').where('read','==',false).get().then((snap) => {
+    // Mark admin messages to this customer as read
+    db.collection('chats').where('sender','==','admin').where('email','==',email).where('read','==',false).get().then((snap) => {
       const batch = db.batch();
       snap.forEach((doc) => { batch.update(doc.ref, {read:true}); });
       return batch.commit();
