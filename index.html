@@ -3597,7 +3597,7 @@ s0.parentNode.insertBefore(s1,s0);
           const initial = (u.name || 'M')[0].toUpperCase();
           const timeStr = u.time ? u.time.toLocaleTimeString('sw-TZ',{hour:'2-digit',minute:'2-digit'}) : '';
           const activeClass = _adminSelectedChatEmail === u.email ? ' active' : '';
-          html += '<div class="ad-chat-user'+activeClass+'" onclick="selectAdminChatCustomer(\''+u.email.replace(/'/g,"\\'")+'\',\''+u.name.replace(/'/g,"\\'")+'\')">';
+          html += '<div class="ad-chat-user'+activeClass+'" onclick="selectAdminChatCustomer(\''+u.email.replace(/'/g,"\\'")+'\',\''+u.name.replace(/'/g,"\\'")+'\',this)">';
           html += '<div class="ad-chat-user-avatar">'+initial+'</div>';
           html += '<div class="ad-chat-user-info"><div class="ad-chat-user-name">'+u.name+'</div><div class="ad-chat-user-email">'+u.email+'</div></div>';
           html += '<div class="ad-chat-user-time">'+timeStr+'</div>';
@@ -3607,18 +3607,18 @@ s0.parentNode.insertBefore(s1,s0);
       });
     }
 
-    window.selectAdminChatCustomer = function(email, name){
+    window.selectAdminChatCustomer = function(email, name, el){
       _adminSelectedChatEmail = email;
       window._adminSelectedChatEmail = email;
       chatHeader.textContent = name + ' (' + email + ')';
       chatInput.disabled = false;
       chatSend.disabled = false;
       chatInput.placeholder = 'Andika ujumbe kwa ' + name + '...';
-      document.querySelectorAll('.ad-chat-user').forEach((el) => el.classList.remove('active'));
-      event.currentTarget.classList.add('active');
+      document.querySelectorAll('.ad-chat-user').forEach((e) => e.classList.remove('active'));
+      if(el) el.closest('.ad-chat-user').classList.add('active');
       if(_adminUnsubChat) _adminUnsubChat();
       if(_adminUnsubTyping) _adminUnsubTyping();
-      _adminUnsubChat = db.collection('chats').orderBy('createdAt','asc').limit(200).onSnapshot((snap) => {
+      _adminUnsubChat = db.collection('chats').orderBy('createdAt','asc').onSnapshot((snap) => {
         let html = '';
         let msgCount = 0;
         snap.forEach((doc) => {
@@ -3940,9 +3940,10 @@ s0.parentNode.insertBefore(s1,s0);
     if(e.target.id === 'adminChatSend' || e.target.closest('#adminChatSend')){
       e.preventDefault();
       const inp = document.getElementById('adminChatInput');
-      if(!inp || !window._adminSelectedChatEmail) return;
+      if(!inp || !window._adminSelectedChatEmail){ console.log('Admin chat blocked: no input or no customer selected', inp, window._adminSelectedChatEmail); return; }
       const msg = inp.value.trim();
       if(!msg) return;
+      console.log('Admin sending to:', window._adminSelectedChatEmail, msg);
       db.collection('chats').add({
         sender:'admin',
         name:'Admin',
@@ -4169,7 +4170,7 @@ s0.parentNode.insertBefore(s1,s0);
       }
     }).catch(()=>{});
 
-    db.collection('chats').orderBy('createdAt','asc').limit(200).onSnapshot((snap) => {
+    db.collection('chats').orderBy('createdAt','asc').onSnapshot((snap) => {
       let html = '';
       let msgCount = 0;
       snap.forEach((doc) => {
@@ -5711,7 +5712,7 @@ s0.parentNode.insertBefore(s1,s0);
   let custChatUnsub = null;
   function listenCustomerChat(){
     if(custChatUnsub) return;
-    custChatUnsub = db.collection('chats').orderBy('createdAt', 'asc').limit(100).onSnapshot((snap) => {
+    custChatUnsub = db.collection('chats').orderBy('createdAt', 'asc').onSnapshot((snap) => {
       if(snap.empty){
         custChatMsgs.innerHTML = '<p style="color:var(--muted); text-align:center; padding:20px; font-size:0.85rem;">Andika ujumbe wako hapa...</p>';
         return;
