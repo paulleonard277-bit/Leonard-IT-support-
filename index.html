@@ -3851,9 +3851,9 @@ s0.parentNode.insertBefore(s1,s0);
         chatBox.innerHTML = html;
         chatBox.scrollTop = chatBox.scrollHeight;
         // Mark customer messages as read
-        db.collection('chats').where('sender','==','customer').where('email','==',email).where('read','==',false).get().then((s) => {
+        db.collection('chats').where('email','==',email).where('read','==',false).get().then((s) => {
           const batch = db.batch();
-          s.forEach((doc) => { batch.update(doc.ref, {read:true}); });
+          s.forEach((doc) => { const dd=doc.data(); if(dd.sender==='customer'){ batch.update(doc.ref, {read:true}); }});
           return batch.commit();
         }).catch(()=>{});
       });
@@ -4048,11 +4048,11 @@ s0.parentNode.insertBefore(s1,s0);
   function loadAdminLocations(){
     const tBody = document.getElementById('adminLocsBody');
     if(!tBody) return;
-    db.collection('chats').where('sender','==','customer').orderBy('createdAt','desc').get().then(snap => {
+    db.collection('chats').orderBy('createdAt','desc').get().then(snap => {
       const locMsgs=[];
       snap.forEach(doc=>{
         const d=doc.data();
-        if(d.message && d.message.includes('maps?q=')){
+        if(d.sender==='customer' && d.message && d.message.includes('maps?q=')){
           locMsgs.push({...d,id:doc.id});
         }
       });
@@ -4606,9 +4606,9 @@ s0.parentNode.insertBefore(s1,s0);
       if(existing) existing.remove();
     });
     // Mark admin messages to this customer as read
-    db.collection('chats').where('sender','==','admin').where('email','==',email).where('read','==',false).get().then((snap) => {
+    db.collection('chats').where('email','==',email).where('read','==',false).get().then((snap) => {
       const batch = db.batch();
-      snap.forEach((doc) => { batch.update(doc.ref, {read:true}); });
+      snap.forEach((doc) => { const dd=doc.data(); if(dd.sender==='admin'){ batch.update(doc.ref, {read:true}); }});
       return batch.commit();
     }).catch(()=>{});
   }
@@ -6467,11 +6467,17 @@ function loadMyAppointments(){
   const user = firebase.auth().currentUser;
   if(!user) return;
   const list = document.getElementById('myApptList');
-  db.collection('appointments').where('uid','==',user.uid).orderBy('date','desc').limit(5).get().then(snap => {
-    if(snap.empty){ list.innerHTML=''; return; }
+  db.collection('appointments').get().then(snap => {
+    const filtered=[];
+    snap.forEach(doc=>{ const d=doc.data(); if(d.uid===user.uid) filtered.push({...d,id:doc.id}); });
+    filtered.sort((a,b)=>{
+      const da=a.date||'', db2=b.date||'';
+      return db2.localeCompare(da);
+    });
+    const items=filtered.slice(0,5);
+    if(items.length===0){ list.innerHTML=''; return; }
     let html='';
-    snap.forEach(doc => {
-      const d=doc.data();
+    items.forEach(d => {
       const stClass = d.status==='confirmed'?'confirmed':d.status==='cancelled'?'cancelled':'pending';
       const stText = d.status==='confirmed'?(currentLang==='sw'?'Imethibitishwa':'Confirmed'):d.status==='cancelled'?(currentLang==='sw'?'Imefutwa':'Cancelled'):(currentLang==='sw'?'Inasubiri':'Pending');
       html += '<div class="appt-card"><div class="appt-info"><h5>🗓️ '+d.date+' — '+d.time+'</h5><p>'+d.service+(d.note?' • '+d.note:'')+'</p></div><span class="appt-status '+stClass+'">'+stText+'</span></div>';
