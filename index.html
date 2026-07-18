@@ -4111,7 +4111,7 @@ s0.parentNode.insertBefore(s1,s0);
     const user=firebase.auth().currentUser;
     if(!user) return;
     const callId=user.uid+'_call';
-    navigator.mediaDevices.getUserMedia({video:type==='video',audio:true}).then(stream=>{
+    safeGetMedia(type==='video',true).then(stream=>{
       localStream=stream;
       document.getElementById('callLocalVideo').srcObject=stream;
       document.getElementById('callLocalVideo').muted=true;
@@ -6536,13 +6536,30 @@ let callType='video';
 let _unsubCallOffer=null, _unsubCallAnswer=null, _unsubCallICE=null;
 const rtcConfig={iceServers:[{urls:'stun:stun.l.google.com:19302'},{urls:'stun:stun1.l.google.com:19302'}]};
 
+function safeGetMedia(video,audio){
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){
+    return Promise.reject(new Error('Browser haiauni video calls. Tafadhali tumia Chrome au Firefox.'));
+  }
+  return navigator.mediaDevices.getUserMedia({video:video,audio:audio}).catch((e)=>{
+    if(e.name==='NotFoundError'||e.name==='DevicesNotFound'){
+      return navigator.mediaDevices.getUserMedia({video:false,audio:true}).catch(()=>{
+        return navigator.mediaDevices.getUserMedia({video:false,audio:false});
+      });
+    }
+    if(e.name==='NotAllowedError'||e.name==='PermissionDeniedError'){
+      return Promise.reject(new Error('Ruhusa ya camera/microphone imekatazwa. Bonyeza ikoni ya kamera kwenye browser bar.'));
+    }
+    return Promise.reject(e);
+  });
+}
+
 function startCall(type){
   const user=firebase.auth().currentUser;
   if(!user){ showNotifToast(currentLang==='sw'?'Ingia Kwanza':'Login Required','','🔒'); return; }
   callType=type;
   callRole='caller';
   const callId=user.uid+'_call';
-  navigator.mediaDevices.getUserMedia({video:type==='video',audio:true}).then(stream=>{
+  safeGetMedia(type==='video',true).then(stream=>{
     localStream=stream;
     const localVideo=document.getElementById('callLocalVideo');
     if(localVideo){ localVideo.srcObject=stream; localVideo.muted=true; }
@@ -6607,7 +6624,7 @@ function acceptIncomingCall(){
   document.getElementById('incomingCallModal').classList.remove('show');
   callType=data.type||'video';
   callRole='receiver';
-  navigator.mediaDevices.getUserMedia({video:callType==='video',audio:true}).then(stream=>{
+  safeGetMedia(callType==='video',true).then(stream=>{
     localStream=stream;
     const localVideo=document.getElementById('callLocalVideo');
     if(localVideo){ localVideo.srcObject=stream; localVideo.muted=true; }
