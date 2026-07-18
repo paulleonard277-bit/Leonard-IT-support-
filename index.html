@@ -3923,6 +3923,24 @@ s0.parentNode.insertBefore(s1,s0);
   document.addEventListener('click', function(e){
     if(!e.target.closest('.ad-notif-wrap')) document.getElementById('adminNotifPanel').classList.remove('show');
     if(!e.target.closest('.cu-notif-wrap')) document.getElementById('cuNotifPanel').classList.remove('show');
+
+    // Backup: customer chat send button
+    if(e.target.id === 'cuChatSend' || e.target.closest('#cuChatSend')){
+      e.preventDefault();
+      const inp = document.getElementById('cuChatInput');
+      if(!inp || !_customerUser) return;
+      const msg = inp.value.trim();
+      if(!msg) return;
+      db.collection('chats').add({
+        sender:'customer',
+        email: _customerUser.email,
+        name: _customerUser.displayName || _customerUser.email.split('@')[0],
+        message: msg,
+        read: false,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      }).then(() => { inp.value = ''; }).catch((err) => { console.error('Chat send error:', err); });
+      db.collection('typing').doc('customer_' + _customerUser.email).set({sender:'customer',email:_customerUser.email,timestamp:firebase.firestore.FieldValue.serverTimestamp()}).catch(()=>{});
+    }
   });
 
   // --- File Attachments ---
@@ -4160,21 +4178,9 @@ s0.parentNode.insertBefore(s1,s0);
       chatBox.scrollTop = chatBox.scrollHeight;
     }, (e) => { chatBox.innerHTML = '<div class="cu-empty" style="color:#ff6b6b">Hitilafu: '+e.message+'</div>'; });
 
-    chatSend.onclick = () => {
-      const msg = chatInput.value.trim();
-      if(!msg) return;
-      db.collection('chats').add({
-        sender:'customer',
-        email: user.email,
-        name: user.displayName || user.email.split('@')[0],
-        message: msg,
-        read: false,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-      });
-      db.collection('typing').doc('customer_' + user.email).set({sender:'customer',email:user.email,timestamp:firebase.firestore.FieldValue.serverTimestamp()}).catch(()=>{});
-      chatInput.value = '';
-    };
-    chatInput.addEventListener('keydown', (e) => { if(e.key === 'Enter') chatSend.click(); });
+    // Chat send handled by delegated click handler (backup click listener)
+    // Inline handlers for Enter key and typing indicator only
+    chatInput.addEventListener('keydown', (e) => { if(e.key === 'Enter'){ document.getElementById('cuChatSend').click(); } });
     chatInput.addEventListener('input', function(){
       db.collection('typing').doc('customer_' + user.email).set({sender:'customer',email:user.email,timestamp:firebase.firestore.FieldValue.serverTimestamp()}).catch(()=>{});
     });
