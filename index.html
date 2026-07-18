@@ -1148,7 +1148,7 @@
   <div class="splash-progress"><div class="splash-progress-bar"></div></div>
 </div>
 
-<div class="gate-screen" id="gateScreen" style="display:flex;">
+<div class="gate-screen" id="gateScreen" style="display:none;">
 
   <div class="gate-form-panel">
   <div class="gate-box">
@@ -2888,10 +2888,14 @@ s0.parentNode.insertBefore(s1,s0);
   // ═══════ SPLASH SCREEN AUTO-DISMISS ═══════
   (function(){
     const splash = document.getElementById('splashScreen');
+    const gate = document.getElementById('gateScreen');
     if(!splash) return;
     setTimeout(function(){
       splash.classList.add('hide');
-      setTimeout(function(){ splash.style.display='none'; }, 800);
+      setTimeout(function(){
+        splash.style.display='none';
+        if(gate) gate.style.display='flex';
+      }, 800);
     }, 4200);
   })();
 
