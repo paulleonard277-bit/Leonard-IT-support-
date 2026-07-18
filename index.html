@@ -3762,6 +3762,10 @@ s0.parentNode.insertBefore(s1,s0);
       gateScreen.style.display = 'none';
       if(chatFab) chatFab.style.display='none';
       if(chatPan) chatPan.classList.remove('show');
+      var pwaBanner = document.getElementById('pwaBanner');
+      if(pwaBanner) pwaBanner.classList.remove('show');
+      var notifToast = document.getElementById('notifToast');
+      if(notifToast) notifToast.classList.remove('show');
       if(user.email === ADMIN_EMAIL){
         mainContent.style.display = 'none';
         adminDash.style.display = 'block';
