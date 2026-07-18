@@ -10,7 +10,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="PLATINUMZ">
-<link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiUExBVElOVU1aIElUIFN1cHBvcnQiLCJzaG9ydF9uYW1lIjoiUExBVElOVU1aIiwic3RhcnRfdXJsIjoiLiIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiMwQTBGMTFDIiwidGhlbWVfY29sb3IiOiIjMEUxQTJCIiwiaWNvbnMiOlt7InNyYyI6ImRhdGE6aW1hZ2Uvc3ZnK3htbCwlM0NzdmcgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB2aWV3Qm94PScwIDAgMTAwIDEwMCUnM0UlM0NyZWN0IHdpZHRoPScxMDAnIGhlaWdodD0nMTAwJyByeD0nMjAnIGZpbGw9JyUyMzBFMUEyQicvJTNFJTNDbnRleHQgeD0nNTAnIHk9JzY4JyBmb250LXNpemU9JzU1JyBmb250LWZhbWlseT0nQXJpYWwsc2Fucy1zZXJpZicgZm9udC13ZWlnaHQ9JzcwMCcgZmlsbD0nJTIzRjJBOTNCJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyUzRVAlM0MvdGV4dCUzRSUzQy9zdmclM0UiLCJzaXplcyI6IjUxMng1MTIiLCJ0eXBlIjoiaW1hZ2Uvc3ZnK3htbCJ9XX0=">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.json">
 <script>window.onerror=function(m,s,l){var d=document.getElementById('jsErrors');if(d){d.style.display='block';d.innerHTML+='ERR:'+m+' @L'+l+'\n';}return true;};</script>
 <style>#jsErrors{position:fixed;bottom:0;left:0;right:0;background:red;color:#fff;font:11px/1.4 monospace;padding:6px 10px;z-index:99999;max-height:100px;overflow:auto;display:none;}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -6049,16 +6050,7 @@ s0.parentNode.insertBefore(s1,s0);
 // PWA SERVICE WORKER
 // ============================================================
 if('serviceWorker' in navigator){
-  const swCode = `
-    self.addEventListener('install', e => { self.skipWaiting(); });
-    self.addEventListener('activate', e => { e.waitUntil(clients.claim()); });
-    self.addEventListener('fetch', e => {
-      e.respondWith(fetch(e.request).catch(() => caches.match(e.request)));
-    });
-  `;
-  const swBlob = new Blob([swCode], {type:'application/javascript'});
-  const swUrl = URL.createObjectURL(swBlob);
-  navigator.serviceWorker.register(swUrl).catch(()=>{});
+  navigator.serviceWorker.register('service-worker.js').catch(()=>{});
 }
 
 // PWA Install Prompt
