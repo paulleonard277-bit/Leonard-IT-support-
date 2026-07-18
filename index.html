@@ -3076,6 +3076,9 @@ s0.parentNode.insertBefore(s1,s0);
       <button class="ad-tab" data-tab="chat" data-label="admin-tab-chat">💬 Chat <span class="count" id="tabCountChats">0</span></button>
       <button class="ad-tab" data-tab="maoni" data-label="admin-tab-maoni">⭐ Maoni <span class="count" id="tabCountReviews">0</span></button>
       <button class="ad-tab" data-tab="analytics" data-label="admin-tab-analytics">📊 Analytics</button>
+      <button class="ad-tab" data-tab="miadi" data-label="admin-tab-miadi">🗓️ Miadi <span class="count" id="tabCountAppts">0</span></button>
+      <button class="ad-tab" data-tab="eneo" data-label="admin-tab-eneo">📍 Eneo <span class="count" id="tabCountLocs">0</span></button>
+      <button class="ad-tab" data-tab="simu" data-label="admin-tab-simu">📞 Simu</button>
     </div>
 
     <div class="ad-panel active" id="panelWateja">
@@ -3156,6 +3159,70 @@ s0.parentNode.insertBefore(s1,s0);
         <div class="ad-chart-card">
           <h4>💼 Huduma Maalum</h4>
           <canvas id="servicesChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADMIN APPOINTMENTS PANEL -->
+    <div class="ad-panel" id="panelMiadi">
+      <div class="ad-toolbar">
+        <input type="text" id="apptSearchInput" class="ad-search" placeholder="🔍 Tafuta miadi..." oninput="filterAppointments()">
+        <div class="ad-filter-group">
+          <button class="ad-filter-btn active" onclick="filterApptStatus('all',this)">All</button>
+          <button class="ad-filter-btn" onclick="filterApptStatus('pending',this)">⏳ Inasubiri</button>
+          <button class="ad-filter-btn" onclick="filterApptStatus('confirmed',this)">✅ Imethibitishwa</button>
+          <button class="ad-filter-btn" onclick="filterApptStatus('cancelled',this)">❌ Imefutwa</button>
+        </div>
+      </div>
+      <div class="ad-table-wrap">
+        <table class="ad-table">
+          <thead><tr><th>Jina</th><th>Email</th><th>Huduma</th><th>Tarehe</th><th>Saa</th><th>Maelezo</th><th>Hali</th><th>Kitendo</th></tr></thead>
+          <tbody id="adminApptsBody"><tr><td colspan="8" class="ad-empty"><div class="ad-empty-icon">🗓️</div>Inapakia miadi...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ADMIN LOCATIONS PANEL -->
+    <div class="ad-panel" id="panelEneo">
+      <div class="ad-toolbar">
+        <input type="text" id="locSearchInput" class="ad-search" placeholder="🔍 Tafuta eneo..." oninput="filterLocations()">
+      </div>
+      <div class="ad-table-wrap">
+        <table class="ad-table">
+          <thead><tr><th>Jina</th><th>Email</th><th>Eneo</th><th>Google Maps</th><th>Tarehe</th><th>Hali</th></tr></thead>
+          <tbody id="adminLocsBody"><tr><td colspan="6" class="ad-empty"><div class="ad-empty-icon">📍</div>Inapakia eneo...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ADMIN CALLS PANEL -->
+    <div class="ad-panel" id="panelSimu">
+      <div style="padding:20px;">
+        <h3 style="color:var(--paper);margin:0 0 8px;">📞 Piga Mteja</h3>
+        <p style="color:var(--muted);font-size:0.85rem;margin:0 0 20px;">Chagua mteja ili kupiga video au sauti call moja kwa moja.</p>
+        <div class="ad-chat-layout" style="min-height:400px;">
+          <div class="ad-chat-sidebar" id="adminCallSidebar">
+            <div class="ad-chat-sidebar-head">Wateja</div>
+            <div id="adminCallUserList"><div class="ad-chat-empty-side">Hakuna mteja.</div></div>
+          </div>
+          <div class="ad-chat-main" style="display:flex;align-items:center;justify-content:center;flex-direction:column;">
+            <div id="adminCallDefault" style="text-align:center;">
+              <div style="font-size:4rem;margin-bottom:16px;">📞</div>
+              <h3 style="color:var(--paper);margin:0 0 8px;">Chagua Mteja</h3>
+              <p style="color:var(--muted);font-size:0.85rem;">Chagua mteja upande wa kushoto ili kuanza call.</p>
+            </div>
+            <div id="adminCallActive" style="display:none;text-align:center;">
+              <div id="adminCallTargetInfo" style="margin-bottom:20px;">
+                <div style="font-size:3rem;" id="adminCallAvatar">👤</div>
+                <h3 style="color:var(--paper);margin:8px 0 4px;" id="adminCallName">...</h3>
+                <p style="color:var(--muted);font-size:0.82rem;" id="adminCallEmail">...</p>
+              </div>
+              <div style="display:flex;gap:12px;justify-content:center;">
+                <button onclick="adminCallCustomer('audio')" style="background:linear-gradient(135deg,#F2A93B,#FF6B35);color:#0E1A2B;border:none;border-radius:12px;padding:14px 24px;font-weight:700;font-size:0.9rem;cursor:pointer;">📞 Piga Sauti</button>
+                <button onclick="adminCallCustomer('video')" style="background:linear-gradient(135deg,#00F2A9,#00cc8a);color:#0E1A2B;border:none;border-radius:12px;padding:14px 24px;font-weight:700;font-size:0.9rem;cursor:pointer;">📹 Video Call</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -3901,6 +3968,11 @@ s0.parentNode.insertBefore(s1,s0);
         type:'pie', data:{ labels:svcLabels, datasets:[{ data:svcData, backgroundColor:svcColors.slice(0,svcLabels.length), borderWidth:0 }] }, options:{ responsive:true, maintainAspectRatio:true, plugins:{ legend:{ position:'right', labels:{ color:'var(--text)', font:{family:fontFamily,size:11}, padding:10 } } } }
       });
     }).catch((e) => { console.error('Analytics error:', e); });
+
+    // Load new admin panels
+    loadAdminAppointments();
+    loadAdminLocations();
+    loadAdminCallUsers();
   }
 
   function deleteReview(id){
@@ -3910,6 +3982,173 @@ s0.parentNode.insertBefore(s1,s0);
       document.querySelectorAll('.ad-panel').forEach(p => p.classList.remove('active'));
       document.querySelector('.ad-tab[data-tab="maoni"]').classList.add('active');
       document.getElementById('panelMaoni').classList.add('active');
+      loadAdminDashboard(_adminUser);
+    });
+  }
+
+  // ========== ADMIN APPOINTMENTS ==========
+  let _adminAppts = [];
+  let _apptFilter = 'all';
+  function loadAdminAppointments(){
+    const tBody = document.getElementById('adminApptsBody');
+    if(!tBody) return;
+    db.collection('appointments').orderBy('date','desc').get().then(snap => {
+      document.getElementById('tabCountAppts').textContent = snap.size;
+      if(snap.empty){ tBody.innerHTML='<tr><td colspan="8" class="ad-empty"><div class="ad-empty-icon">🗓️</div>Hakuna miadi bado.</td></tr>'; return; }
+      _adminAppts = [];
+      let rows='';
+      snap.forEach(doc => {
+        const d=doc.data();
+        _adminAppts.push({...d,id:doc.id});
+        const dt = d.date || '—';
+        const stClass = d.status==='confirmed'?'ad-badge-green':d.status==='cancelled'?'ad-badge-red':'ad-badge-gold';
+        const stText = d.status==='confirmed'?'Imethibitishwa':d.status==='cancelled'?'Imefutwa':'Inasubiri';
+        const canConfirm = d.status==='pending';
+        const canCancel = d.status!=='cancelled';
+        let actions = '';
+        if(canConfirm) actions += '<button class="ad-edit-btn" onclick="adminConfirmAppt(\''+doc.id+'\')" title="Thibitisha">✅</button> ';
+        if(canCancel) actions += '<button class="ad-delete-btn" onclick="adminCancelAppt(\''+doc.id+'\')" title="Futa">❌</button>';
+        rows+='<tr data-status="'+(d.status||'pending')+'" data-search="'+((d.name||'')+(d.email||'')+(d.service||'')+(d.date||'')).toLowerCase()+'"><td><strong>'+(d.name||'—')+'</strong></td><td style="color:var(--muted);font-size:0.82rem;">'+(d.email||'—')+'</td><td><span class="ad-badge ad-badge-blue">'+(d.service||'—')+'</span></td><td style="font-family:JetBrains Mono,monospace;font-size:0.82rem;">'+dt+'</td><td style="font-family:JetBrains Mono,monospace;font-size:0.82rem;">'+(d.time||'—')+'</td><td style="color:var(--muted);font-size:0.82rem;">'+(d.note||'—')+'</td><td><span class="ad-badge '+stClass+'">'+stText+'</span></td><td>'+actions+'</td></tr>';
+      });
+      tBody.innerHTML = rows;
+    }).catch(e => { tBody.innerHTML='<tr><td colspan="8" class="ad-empty" style="color:#ff6b6b">Hitilafu: '+e.message+'</td></tr>'; });
+  }
+  function adminConfirmAppt(id){
+    if(!confirm('Thibitisha miadi hii?')) return;
+    db.collection('appointments').doc(id).update({status:'confirmed'}).then(()=>{
+      showNotifToast('Miadi Imethibitishwa','Appointment confirmed','✅');
+      loadAdminAppointments();
+    });
+  }
+  function adminCancelAppt(id){
+    if(!confirm('Futa miadi hii?')) return;
+    db.collection('appointments').doc(id).update({status:'cancelled'}).then(()=>{
+      showNotifToast('Miadi Imefutwa','Appointment cancelled','❌');
+      loadAdminAppointments();
+    });
+  }
+  function filterAppointments(){
+    const q=(document.getElementById('apptSearchInput').value||'').toLowerCase();
+    document.querySelectorAll('#adminApptsBody tr').forEach(r=>{
+      const matchSearch=(r.getAttribute('data-search')||'').includes(q);
+      const matchStatus=_apptFilter==='all'||r.getAttribute('data-status')===_apptFilter;
+      r.style.display=(matchSearch&&matchStatus)?'':'none';
+    });
+  }
+  function filterApptStatus(status,btn){
+    _apptFilter=status;
+    const wrap=btn.closest('.ad-filter-group');
+    if(wrap) wrap.querySelectorAll('.ad-filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    filterAppointments();
+  }
+
+  // ========== ADMIN LOCATIONS ==========
+  let _adminLocs = [];
+  function loadAdminLocations(){
+    const tBody = document.getElementById('adminLocsBody');
+    if(!tBody) return;
+    db.collection('chats').where('sender','==','customer').orderBy('createdAt','desc').get().then(snap => {
+      const locMsgs=[];
+      snap.forEach(doc=>{
+        const d=doc.data();
+        if(d.message && d.message.includes('maps?q=')){
+          locMsgs.push({...d,id:doc.id});
+        }
+      });
+      const uniqueByEmail={};
+      locMsgs.forEach(m=>{ uniqueByEmail[m.email]=m; });
+      const locs=Object.values(uniqueByEmail);
+      document.getElementById('tabCountLocs').textContent=locs.length;
+      if(locs.length===0){ tBody.innerHTML='<tr><td colspan="6" class="ad-empty"><div class="ad-empty-icon">📍</div>Hakuna eneo bado.</td></tr>'; return; }
+      _adminLocs=locs;
+      let rows='';
+      locs.forEach(m=>{
+        const dt=m.createdAt?m.createdAt.toDate().toLocaleString('sw-TZ'):'—';
+        const mapMatch=m.message.match(/maps\?q=([-\d.]+),([-\d.]+)/);
+        const lat=mapMatch?mapMatch[1]:'—';
+        const lng=mapMatch?mapMatch[2]:'—';
+        const mapUrl=mapMatch?'https://www.google.com/maps?q='+lat+','+lng:'';
+        rows+='<tr data-search="'+((m.name||'')+(m.email||'')+(lat+','+lng)).toLowerCase()+'"><td><strong>'+(m.name||'—')+'</strong></td><td style="color:var(--muted);font-size:0.82rem;">'+(m.email||'—')+'</td><td style="font-size:0.82rem;color:var(--muted);">Lat: '+lat+'<br>Lng: '+lng+'</td><td>'+(mapUrl?'<a href="'+mapUrl+'" target="_blank" style="color:#F2A93B;text-decoration:underline;">📍 Fungua</a>':'—')+'</td><td style="font-family:JetBrains Mono,monospace;font-size:0.82rem;">'+dt+'</td><td><span class="ad-badge ad-badge-green">Imeshirikiwa</span></td></tr>';
+      });
+      tBody.innerHTML=rows;
+    }).catch(e=>{ tBody.innerHTML='<tr><td colspan="6" class="ad-empty" style="color:#ff6b6b">Hitilafu: '+e.message+'</td></tr>'; });
+  }
+  function filterLocations(){
+    const q=(document.getElementById('locSearchInput').value||'').toLowerCase();
+    document.querySelectorAll('#adminLocsBody tr').forEach(r=>{
+      r.style.display=(r.getAttribute('data-search')||'').includes(q)?'':'none';
+    });
+  }
+
+  // ========== ADMIN CALLS ==========
+  let _adminCallSelected = '';
+  function loadAdminCallUsers(){
+    const list = document.getElementById('adminCallUserList');
+    if(!list) return;
+    db.collection('clients').orderBy('createdAt','desc').get().then(snap=>{
+      if(snap.empty){ list.innerHTML='<div class="ad-chat-empty-side">Hakuna mteja.</div>'; return; }
+      let html='';
+      snap.forEach(doc=>{
+        const d=doc.data();
+        html+='<div class="ad-chat-user" onclick="adminSelectCallCustomer(this,\''+((d.jina||'').replace(/'/g,"\\'"))+'\',\''+(d.email||'')+'\')" style="padding:12px 14px;cursor:pointer;border-bottom:1px solid var(--line);transition:background 0.2s;" onmouseover="this.style.background=\'var(--hover)\'" onmouseout="this.style.background=\'none\'"><strong style="color:var(--paper);font-size:0.88rem;">'+(d.jina||'Mteja')+'</strong><div style="color:var(--muted);font-size:0.75rem;">'+(d.email||'')+'</div></div>';
+      });
+      list.innerHTML=html;
+    });
+  }
+  function adminSelectCallCustomer(el,name,email){
+    document.querySelectorAll('#adminCallUserList .ad-chat-user').forEach(u=>u.style.background='none');
+    el.style.background='var(--hover)';
+    _adminCallSelected=email;
+    document.getElementById('adminCallDefault').style.display='none';
+    document.getElementById('adminCallActive').style.display='block';
+    document.getElementById('adminCallName').textContent=name||email.split('@')[0];
+    document.getElementById('adminCallEmail').textContent=email;
+    document.getElementById('adminCallAvatar').textContent=(name||'M').charAt(0).toUpperCase();
+  }
+  function adminCallCustomer(type){
+    if(!_adminCallSelected){ showNotifToast('Chagua Mteja','Select a customer first','👤'); return; }
+    const user=firebase.auth().currentUser;
+    if(!user) return;
+    const callId=user.uid+'_call';
+    navigator.mediaDevices.getUserMedia({video:type==='video',audio:true}).then(stream=>{
+      localStream=stream;
+      document.getElementById('callLocalVideo').srcObject=stream;
+      document.getElementById('callLocalVideo').muted=true;
+      peerConnection=new RTCPeerConnection(rtcConfig);
+      remoteStream=new MediaStream();
+      document.getElementById('callRemoteVideo').srcObject=remoteStream;
+      stream.getTracks().forEach(t=>peerConnection.addTrack(t,stream));
+      peerConnection.ontrack=e=>{e.streams[0].getTracks().forEach(t=>remoteStream.addTrack(t));};
+      peerConnection.onicecandidate=e=>{
+        if(e.candidate){
+          db.collection('calls').doc(callId+'_ice').set({candidate:e.candidate.toJSON(),from:user.email,role:'caller',ts:firebase.firestore.FieldValue.serverTimestamp()},{merge:true}).catch(()=>{});
+        }
+      };
+      peerConnection.createOffer().then(offer=>peerConnection.setLocalDescription(offer)).then(()=>{
+        db.collection('calls').doc(callId).set({offer:peerConnection.localDescription.toJSON(),from:user.email,fromName:user.displayName||'Admin',type:type,status:'ringing',targetEmail:_adminCallSelected,ts:firebase.firestore.FieldValue.serverTimestamp()});
+        document.getElementById('callModal').classList.add('show');
+        document.getElementById('callStatusText').textContent='Inaita '+_adminCallSelected+'...';
+        document.getElementById('callPartnerName').textContent=_adminCallSelected;
+        _unsubCallAnswer=db.collection('calls').doc(callId).onSnapshot(doc=>{
+          const d=doc.data();
+          if(d&&d.answer){
+            peerConnection.setRemoteDescription(new RTCSessionDescription(d.answer));
+            startCallTimer();
+            document.getElementById('callStatusText').textContent='Imeungana — '+type;
+            if(_unsubCallAnswer) _unsubCallAnswer();
+          }
+          if(d&&d.status==='ended'){ endCall(); }
+        });
+        _unsubCallICE=db.collection('calls').doc(callId+'_ice').onSnapshot(doc=>{
+          const d=doc.data();
+          if(d&&d.candidate&&d.role==='receiver'&&peerConnection){
+            peerConnection.addIceCandidate(new RTCIceCandidate(d.candidate)).catch(()=>{});
+          }
+        });
+      });
+    }).catch(err=>{
+      showNotifToast('Hitilafu',err.message,'❌');
     });
   }
 
@@ -4881,6 +5120,9 @@ s0.parentNode.insertBefore(s1,s0);
       'admin-tab-chat': '💬 Chat',
       'admin-tab-maoni': '⭐ Maoni',
       'admin-tab-analytics': '📊 Analytics',
+      'admin-tab-miadi': '🗓️ Miadi',
+      'admin-tab-eneo': '📍 Eneo',
+      'admin-tab-simu': '📞 Simu',
       'admin-send': 'Tuma 📤',
       'admin-chat-input-ph': 'Andika ujumbe kwa mteja...',
       'ad-chat-sidebar-head': 'Wateja',
@@ -5340,6 +5582,9 @@ s0.parentNode.insertBefore(s1,s0);
       'admin-tab-chat': '💬 Chat',
       'admin-tab-maoni': '⭐ Reviews',
       'admin-tab-analytics': '📊 Analytics',
+      'admin-tab-miadi': '🗓️ Appointments',
+      'admin-tab-eneo': '📍 Location',
+      'admin-tab-simu': '📞 Calls',
       'admin-send': 'Send 📤',
       'admin-chat-input-ph': 'Type a message to customer...',
       'ad-chat-sidebar-head': 'Customers',
