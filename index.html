@@ -4159,7 +4159,7 @@ s0.parentNode.insertBefore(s1,s0);
       });
       oBody.innerHTML = rows;
       document.getElementById('cuStatDone').textContent = doneCount;
-    }).catch((e) => { oBody.innerHTML = '<tr><td colspan="5" class="cu-empty" style="color:#ff6b6b">Hitilafu: '+e.message+'</td></tr>'; });
+    }, (e) => { oBody.innerHTML = '<tr><td colspan="5" class="cu-empty" style="color:#ff6b6b">Hitilafu: '+e.message+'</td></tr>'; });
 
     db.collection('clients').doc(user.uid).get().then((doc) => {
       if(doc.exists){
