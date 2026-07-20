@@ -3316,6 +3316,8 @@ s0.parentNode.insertBefore(s1,s0);
           <div class="ad-chat-sidebar" id="adminCallSidebar">
             <div class="ad-chat-sidebar-head">Wateja</div>
             <div id="adminCallUserList"><div class="ad-chat-empty-side">Hakuna mteja.</div></div>
+            <div class="ad-chat-sidebar-head" style="border-top:1px solid var(--line);">Missed Calls</div>
+            <div id="adminMissedCallList" style="max-height:200px;overflow-y:auto;"></div>
           </div>
           <div class="ad-chat-main" style="display:flex;align-items:center;justify-content:center;flex-direction:column;">
             <div id="adminCallDefault" style="text-align:center;">
@@ -3774,11 +3776,15 @@ s0.parentNode.insertBefore(s1,s0);
         currentUserName = 'Admin';
         try { loadAdminDashboard(user); } catch(e){ console.error('Admin dashboard error:', e); }
         var alBtn = document.getElementById('adminLogoutBtn');
-        if(alBtn){ alBtn.onclick = function(){ auth.signOut(); }; }
+        if(alBtn){ alBtn.onclick = function(){ try{db.collection('presence').doc('admin').set({online:false,ts:firebase.firestore.FieldValue.serverTimestamp()}).catch(()=>{});}catch(e){} auth.signOut(); }; }
         if(!firstAuthLoad) showAdminWelcomePopup('Admin');
         requestNotificationPermission();
         renderTimeSlots();
+        try { db.collection('presence').doc('admin').set({online:true,email:user.email,ts:firebase.firestore.FieldValue.serverTimestamp()}); }catch(e){}
         try { listenForIncomingCalls(); } catch(e){}
+        try { listenForMissedCalls(); } catch(e){}
+        try { loadAdminMissedCalls(); } catch(e){}
+        try { window.addEventListener('beforeunload',()=>{ db.collection('presence').doc('admin').set({online:false,ts:firebase.firestore.FieldValue.serverTimestamp()}).catch(()=>{}); }); }catch(e){}
       } else {
         adminDash.style.display = 'none';
         mainContent.style.display = 'none';
@@ -4284,6 +4290,10 @@ s0.parentNode.insertBefore(s1,s0);
             if(_unsubCallAnswer) _unsubCallAnswer();
           }
           if(d&&d.status==='ended'){ endCall(); }
+          if(d&&(d.status==='rejected'||d.status==='missed')){
+            endCall();
+            showNotifToast(currentLang==='sw'?'Call Imekatazwa':'Call Rejected',currentLang==='sw'?'Mteja amekataa simu':'Customer rejected the call','📵');
+          }
         });
         _unsubCallICE=db.collection('calls').doc(callId+'_ice').onSnapshot(doc=>{
           const d=doc.data();
@@ -4295,6 +4305,26 @@ s0.parentNode.insertBefore(s1,s0);
     }).catch(err=>{
       showNotifToast('Hitilafu',err.message,'❌');
     });
+  }
+
+  // ========== ADMIN MISSED CALLS LIST ==========
+  function loadAdminMissedCalls(){
+    const list=document.getElementById('adminMissedCallList');
+    if(!list) return;
+    db.collection('calls').where('status','in',['missed','rejected']).get().then(snap=>{
+      if(snap.empty){ list.innerHTML='<div style="padding:12px;color:var(--muted);font-size:0.8rem;">Hakuna missed calls.</div>'; return; }
+      let items=[];
+      snap.forEach(doc=>{const d=doc.data();items.push({...d,id:doc.id});});
+      items.sort((a,b)=>{const ta=a.ts?a.ts.toDate().getTime():0;const tb=b.ts?b.ts.toDate().getTime():0;return tb-ta;});
+      let html='';
+      items.slice(0,20).forEach(item=>{
+        const dt=item.ts?item.ts.toDate().toLocaleString('sw-TZ'):'—';
+        const st=item.status==='missed'?'📞 Missed':'📵 Rejected';
+        const stColor=item.status==='missed'?'#ff6b6b':'#f39c12';
+        html+='<div style="padding:10px 12px;border-bottom:1px solid var(--line);cursor:pointer;" onmouseover="this.style.background=\'var(--hover)\'" onmouseout="this.style.background=\'none\'"><div style="display:flex;justify-content:space-between;align-items:center;"><div><strong style="color:var(--paper);font-size:0.82rem;">'+(item.fromName||item.from||'Unknown')+'</strong><div style="color:var(--muted);font-size:0.72rem;">'+(item.type==='video'?'📹 Video':'📞 Audio')+'</div></div><div style="text-align:right;"><div style="color:'+stColor+';font-size:0.72rem;font-weight:700;">'+st+'</div><div style="color:var(--muted);font-size:0.7rem;font-family:JetBrains Mono,monospace;">'+dt+'</div></div></div></div>';
+      });
+      list.innerHTML=html;
+    }).catch(()=>{});
   }
 
   // ========== ADMIN CHECKINS ==========
@@ -7150,6 +7180,18 @@ function safeGetMedia(video,audio){
 function startCall(type){
   const user=firebase.auth().currentUser;
   if(!user){ showNotifToast(currentLang==='sw'?'Ingia Kwanza':'Login Required','','🔒'); return; }
+  db.collection('presence').doc('admin').get().then(docSnap=>{
+    const adminData=docSnap.data();
+    if(!adminData||!adminData.online){
+      showNotifToast(currentLang==='sw'?'Hapafikikani':'Admin Offline',currentLang==='sw'?'Admin hapatikani hivi sasa. Tafadhali jaribu tena baadaye.':'Admin is currently unavailable. Please try again later.','📴');
+      return;
+    }
+    _proceedStartCall(type,user);
+  }).catch(()=>{
+    _proceedStartCall(type,user);
+  });
+}
+function _proceedStartCall(type,user){
   callType=type;
   callRole='caller';
   const callId=user.uid+'_call';
@@ -7181,6 +7223,10 @@ function startCall(type){
           if(_unsubCallAnswer) _unsubCallAnswer();
         }
         if(d&&d.status==='ended'){ endCall(); }
+        if(d&&(d.status==='rejected'||d.status==='missed')){
+          endCall();
+          showNotifToast(currentLang==='sw'?'Call Rejected':'Call Rejected',currentLang==='sw'?'Simu imekatazwa na '+((d.fromName||d.from==='')?'admin':'mpokeaji'):'The call was rejected by the receiver','📵');
+        }
       });
       _unsubCallICE=db.collection('calls').doc(callId+'_ice').onSnapshot(doc=>{
         const d=doc.data();
@@ -7198,14 +7244,47 @@ function listenForIncomingCalls(){
   const user=firebase.auth().currentUser;
   if(!user) return;
   _unsubCallOffer=db.collection('calls').where('status','==','ringing').onSnapshot(snap=>{
+    snap.docChanges().forEach(change=>{
+      if(change.type==='added'){
+        const d=change.doc.data();
+        if(d.from===user.email) return;
+        document.getElementById('incomingCallerName').textContent=d.fromName||d.from;
+        document.getElementById('incomingCallModal').classList.add('show');
+        window._incomingCallDocId=change.doc.id;
+        window._incomingCallData=d;
+      }
+      if(change.type==='removed'){
+        document.getElementById('incomingCallModal').classList.remove('show');
+      }
+    });
+  });
+}
+
+let _unsubMissedCalls=null;
+let _unsubRejectedCalls=null;
+function listenForMissedCalls(){
+  const user=firebase.auth().currentUser;
+  if(!user) return;
+  if(_unsubMissedCalls){ try{_unsubMissedCalls();}catch(e){} _unsubMissedCalls=null; }
+  if(_unsubRejectedCalls){ try{_unsubRejectedCalls();}catch(e){} _unsubRejectedCalls=null; }
+  _unsubMissedCalls=db.collection('calls').where('status','==','missed').onSnapshot(snap=>{
     snap.forEach(doc=>{
       const d=doc.data();
       if(d.from===user.email) return;
-      if(d.status==='ended') return;
-      document.getElementById('incomingCallerName').textContent=d.fromName||d.from;
-      document.getElementById('incomingCallModal').classList.add('show');
-      window._incomingCallDocId=doc.id;
-      window._incomingCallData=d;
+      const callerName=d.fromName||d.from||'Mteja';
+      const callType=d.type==='video'?'Video':'Audio';
+      showNotifToast(currentLang==='sw'?'Missed Call':'Missed Call',currentLang==='sw'?'Call ilikatika — '+callerName+' ('+callType+')':'Missed call — '+callerName+' ('+callType+')','📞');
+      sendBrowserNotification('PLATINUMZ — Missed Call',currentLang==='sw'?'Call ilikatika — '+callerName:'Missed call — '+callerName);
+    });
+  });
+  _unsubRejectedCalls=db.collection('calls').where('status','==','rejected').onSnapshot(snap=>{
+    snap.forEach(doc=>{
+      const d=doc.data();
+      if(d.from===user.email) return;
+      const callerName=d.fromName||d.from||'Mteja';
+      const callType=d.type==='video'?'Video':'Audio';
+      showNotifToast(currentLang==='sw'?'Call Imekatazwa':'Call Rejected',currentLang==='sw'?''+callerName+' amekataa simu ('+callType+')':callerName+' rejected the call ('+callType+')','📵');
+      sendBrowserNotification('PLATINUMZ — Call Rejected',currentLang==='sw'?'Call imekatazwa — '+callerName:'Call rejected — '+callerName);
     });
   });
 }
@@ -7253,6 +7332,10 @@ function acceptIncomingCall(){
 
 function rejectIncomingCall(){
   document.getElementById('incomingCallModal').classList.remove('show');
+  const callId=window._incomingCallDocId;
+  if(callId){
+    db.collection('calls').doc(callId).set({status:'rejected',endTs:firebase.firestore.FieldValue.serverTimestamp()},{merge:true}).catch(()=>{});
+  }
 }
 
 function toggleMute(){
@@ -7304,7 +7387,14 @@ function endCall(){
   document.getElementById('incomingCallModal').classList.remove('show');
   const user=firebase.auth().currentUser;
   if(user){
-    db.collection('calls').doc(user.uid+'_call').set({status:'ended'},{merge:true}).catch(()=>{});
+    const callDocRef=db.collection('calls').doc(user.uid+'_call');
+    callDocRef.get().then(docSnap=>{
+      const d=docSnap.data();
+      const newStatus=(d&&d.status==='ringing')?'missed':(d&&d.status==='connected')?'ended':'ended';
+      callDocRef.set({status:newStatus,endTs:firebase.firestore.FieldValue.serverTimestamp()},{merge:true}).catch(()=>{});
+    }).catch(()=>{
+      db.collection('calls').doc(user.uid+'_call').set({status:'ended',endTs:firebase.firestore.FieldValue.serverTimestamp()},{merge:true}).catch(()=>{});
+    });
   }
   if(_unsubCallOffer){ try{_unsubCallOffer();}catch(e){} _unsubCallOffer=null; }
   if(_unsubCallAnswer){ try{_unsubCallAnswer();}catch(e){} _unsubCallAnswer=null; }
