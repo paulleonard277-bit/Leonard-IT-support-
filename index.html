@@ -4262,6 +4262,7 @@ s0.parentNode.insertBefore(s1,s0);
     const user=firebase.auth().currentUser;
     if(!user) return;
     const callId=user.uid+'_call';
+    _activeCallId=callId;
     safeGetMedia(type==='video',true).then(stream=>{
       localStream=stream;
       document.getElementById('callLocalVideo').srcObject=stream;
@@ -4283,11 +4284,10 @@ s0.parentNode.insertBefore(s1,s0);
         document.getElementById('callPartnerName').textContent=_adminCallSelected;
         _unsubCallAnswer=db.collection('calls').doc(callId).onSnapshot(doc=>{
           const d=doc.data();
-          if(d&&d.answer){
+          if(d&&d.answer&&peerConnection){
             peerConnection.setRemoteDescription(new RTCSessionDescription(d.answer));
             startCallTimer();
             document.getElementById('callStatusText').textContent='Imeungana — '+type;
-            if(_unsubCallAnswer) _unsubCallAnswer();
           }
           if(d&&d.status==='ended'){ endCall(); }
           if(d&&(d.status==='rejected'||d.status==='missed')){
@@ -7155,8 +7155,9 @@ function shareMyLocation(){
 // ============================================================
 let localStream=null, remoteStream=null, peerConnection=null;
 let callTimer=null, callSeconds=0;
-let callRole=''; // 'caller' or 'receiver'
+let callRole='';
 let callType='video';
+let _activeCallId=null;
 let _unsubCallOffer=null, _unsubCallAnswer=null, _unsubCallICE=null;
 const rtcConfig={iceServers:[{urls:'stun:stun.l.google.com:19302'},{urls:'stun:stun1.l.google.com:19302'}]};
 
@@ -7195,6 +7196,7 @@ function _proceedStartCall(type,user){
   callType=type;
   callRole='caller';
   const callId=user.uid+'_call';
+  _activeCallId=callId;
   safeGetMedia(type==='video',true).then(stream=>{
     localStream=stream;
     const localVideo=document.getElementById('callLocalVideo');
@@ -7216,11 +7218,10 @@ function _proceedStartCall(type,user){
       document.getElementById('callStatusText').textContent=currentLang==='sw'?'Inaita...':'Calling...';
       _unsubCallAnswer=db.collection('calls').doc(callId).onSnapshot(doc=>{
         const d=doc.data();
-        if(d&&d.answer){
+        if(d&&d.answer&&peerConnection){
           peerConnection.setRemoteDescription(new RTCSessionDescription(d.answer));
           startCallTimer();
           document.getElementById('callStatusText').textContent=currentLang==='sw'?'Imeungana — '+callType:'Connected — '+callType;
-          if(_unsubCallAnswer) _unsubCallAnswer();
         }
         if(d&&d.status==='ended'){ endCall(); }
         if(d&&(d.status==='rejected'||d.status==='missed')){
@@ -7294,6 +7295,7 @@ function acceptIncomingCall(){
   const callId=window._incomingCallDocId;
   const data=window._incomingCallData;
   if(!user||!callId) return;
+  _activeCallId=callId;
   document.getElementById('incomingCallModal').classList.remove('show');
   callType=data.type||'video';
   callRole='receiver';
@@ -7318,6 +7320,11 @@ function acceptIncomingCall(){
       document.getElementById('callModal').classList.add('show');
       document.getElementById('callStatusText').textContent=currentLang==='sw'?'Imeungana':'Connected';
       startCallTimer();
+      _unsubCallAnswer=db.collection('calls').doc(callId).onSnapshot(doc=>{
+        const d=doc.data();
+        if(d&&d.status==='ended'){ endCall(); }
+        if(d&&(d.status==='rejected'||d.status==='missed')){ endCall(); }
+      });
     });
     _unsubCallICE=db.collection('calls').doc(callId+'_ice_caller').onSnapshot(doc=>{
       const d=doc.data();
@@ -7385,17 +7392,17 @@ function endCall(){
   clearInterval(callTimer);
   document.getElementById('callModal').classList.remove('show');
   document.getElementById('incomingCallModal').classList.remove('show');
-  const user=firebase.auth().currentUser;
-  if(user){
-    const callDocRef=db.collection('calls').doc(user.uid+'_call');
-    callDocRef.get().then(docSnap=>{
+  const docId=_activeCallId;
+  if(docId){
+    db.collection('calls').doc(docId).get().then(docSnap=>{
       const d=docSnap.data();
       const newStatus=(d&&d.status==='ringing')?'missed':(d&&d.status==='connected')?'ended':'ended';
-      callDocRef.set({status:newStatus,endTs:firebase.firestore.FieldValue.serverTimestamp()},{merge:true}).catch(()=>{});
+      db.collection('calls').doc(docId).set({status:newStatus,endTs:firebase.firestore.FieldValue.serverTimestamp()},{merge:true}).catch(()=>{});
     }).catch(()=>{
-      db.collection('calls').doc(user.uid+'_call').set({status:'ended',endTs:firebase.firestore.FieldValue.serverTimestamp()},{merge:true}).catch(()=>{});
+      db.collection('calls').doc(docId).set({status:'ended',endTs:firebase.firestore.FieldValue.serverTimestamp()},{merge:true}).catch(()=>{});
     });
   }
+  _activeCallId=null;
   if(_unsubCallOffer){ try{_unsubCallOffer();}catch(e){} _unsubCallOffer=null; }
   if(_unsubCallAnswer){ try{_unsubCallAnswer();}catch(e){} _unsubCallAnswer=null; }
   if(_unsubCallICE){ try{_unsubCallICE();}catch(e){} _unsubCallICE=null; }
