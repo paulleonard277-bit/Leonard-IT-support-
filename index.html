@@ -4273,7 +4273,7 @@ s0.parentNode.insertBefore(s1,s0);
       peerConnection.ontrack=e=>{e.streams[0].getTracks().forEach(t=>remoteStream.addTrack(t));};
       peerConnection.onicecandidate=e=>{
         if(e.candidate){
-          db.collection('calls').doc(callId+'_ice').set({candidate:e.candidate.toJSON(),from:user.email,role:'caller',ts:firebase.firestore.FieldValue.serverTimestamp()},{merge:true}).catch(()=>{});
+          db.collection('calls').doc(callId+'_ice_caller').set({candidate:e.candidate.toJSON(),from:user.email,ts:firebase.firestore.FieldValue.serverTimestamp()},{merge:true}).catch(()=>{});
         }
       };
       peerConnection.createOffer().then(offer=>peerConnection.setLocalDescription(offer)).then(()=>{
@@ -4295,9 +4295,9 @@ s0.parentNode.insertBefore(s1,s0);
             showNotifToast(currentLang==='sw'?'Call Imekatazwa':'Call Rejected',currentLang==='sw'?'Mteja amekataa simu':'Customer rejected the call','📵');
           }
         });
-        _unsubCallICE=db.collection('calls').doc(callId+'_ice').onSnapshot(doc=>{
+        _unsubCallICE=db.collection('calls').doc(callId+'_ice_receiver').onSnapshot(doc=>{
           const d=doc.data();
-          if(d&&d.candidate&&d.role==='receiver'&&peerConnection){
+          if(d&&d.candidate&&peerConnection){
             peerConnection.addIceCandidate(new RTCIceCandidate(d.candidate)).catch(()=>{});
           }
         });
@@ -7207,7 +7207,7 @@ function _proceedStartCall(type,user){
     peerConnection.ontrack=e=>{ e.streams[0].getTracks().forEach(t=>remoteStream.addTrack(t)); };
     peerConnection.onicecandidate=e=>{
       if(e.candidate){
-        db.collection('calls').doc(callId+'_ice').set({candidate:e.candidate.toJSON(),from:user.email,role:callRole,ts:firebase.firestore.FieldValue.serverTimestamp()},{merge:true}).catch(()=>{});
+        db.collection('calls').doc(callId+'_ice_caller').set({candidate:e.candidate.toJSON(),from:user.email,ts:firebase.firestore.FieldValue.serverTimestamp()},{merge:true}).catch(()=>{});
       }
     };
     peerConnection.createOffer().then(offer=>peerConnection.setLocalDescription(offer)).then(()=>{
@@ -7228,9 +7228,9 @@ function _proceedStartCall(type,user){
           showNotifToast(currentLang==='sw'?'Call Rejected':'Call Rejected',currentLang==='sw'?'Simu imekatazwa na '+((d.fromName||d.from==='')?'admin':'mpokeaji'):'The call was rejected by the receiver','📵');
         }
       });
-      _unsubCallICE=db.collection('calls').doc(callId+'_ice').onSnapshot(doc=>{
+      _unsubCallICE=db.collection('calls').doc(callId+'_ice_receiver').onSnapshot(doc=>{
         const d=doc.data();
-        if(d&&d.candidate&&d.role==='receiver'&&peerConnection){
+        if(d&&d.candidate&&peerConnection){
           peerConnection.addIceCandidate(new RTCIceCandidate(d.candidate)).catch(()=>{});
         }
       });
@@ -7309,7 +7309,7 @@ function acceptIncomingCall(){
     peerConnection.ontrack=e=>{ e.streams[0].getTracks().forEach(t=>remoteStream.addTrack(t)); };
     peerConnection.onicecandidate=e=>{
       if(e.candidate){
-        db.collection('calls').doc(callId+'_ice').set({candidate:e.candidate.toJSON(),from:user.email,role:callRole,ts:firebase.firestore.FieldValue.serverTimestamp()},{merge:true}).catch(()=>{});
+        db.collection('calls').doc(callId+'_ice_receiver').set({candidate:e.candidate.toJSON(),from:user.email,ts:firebase.firestore.FieldValue.serverTimestamp()},{merge:true}).catch(()=>{});
       }
     };
     peerConnection.setRemoteDescription(new RTCSessionDescription(data.offer));
@@ -7319,9 +7319,9 @@ function acceptIncomingCall(){
       document.getElementById('callStatusText').textContent=currentLang==='sw'?'Imeungana':'Connected';
       startCallTimer();
     });
-    _unsubCallICE=db.collection('calls').doc(callId+'_ice').onSnapshot(doc=>{
+    _unsubCallICE=db.collection('calls').doc(callId+'_ice_caller').onSnapshot(doc=>{
       const d=doc.data();
-      if(d&&d.candidate&&d.role==='caller'&&peerConnection){
+      if(d&&d.candidate&&peerConnection){
         peerConnection.addIceCandidate(new RTCIceCandidate(d.candidate)).catch(()=>{});
       }
     });
