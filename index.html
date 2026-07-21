@@ -375,12 +375,13 @@
   /* animated mesh gradient background */
   .splash-bg{ position:absolute; inset:0; overflow:hidden; }
   .splash-bg .orb{
-    position:absolute; border-radius:50%; filter:blur(90px); opacity:0.4;
+    position:absolute; border-radius:50%; filter:blur(100px); opacity:0.4;
     animation: orbFloat 8s ease-in-out infinite alternate;
   }
-  .splash-bg .orb-1{ width:500px; height:500px; background:radial-gradient(circle,#3efadb,#0a2a2a); top:-15%; left:-10%; animation-duration:7s; }
-  .splash-bg .orb-2{ width:400px; height:400px; background:radial-gradient(circle,#F2A93B,#2a1a08); bottom:-10%; right:-5%; animation-delay:1s; animation-duration:9s; }
-  .splash-bg .orb-3{ width:350px; height:350px; background:radial-gradient(circle,#a29bfe,#1a1540); top:40%; left:55%; animation-delay:2s; animation-duration:10s; }
+  .splash-bg .orb-1{ width:600px; height:600px; background:radial-gradient(circle,#3efadb,#0a2a2a); top:-20%; left:-15%; animation-duration:7s; }
+  .splash-bg .orb-2{ width:500px; height:500px; background:radial-gradient(circle,#F2A93B,#2a1a08); bottom:-15%; right:-8%; animation-delay:1s; animation-duration:9s; }
+  .splash-bg .orb-3{ width:400px; height:400px; background:radial-gradient(circle,#a29bfe,#1a1540); top:40%; left:55%; animation-delay:2s; animation-duration:10s; }
+  .splash-bg .orb-4{ width:300px; height:300px; background:radial-gradient(circle,#3ed4f8,#0a1a2a); top:60%; left:10%; animation-delay:3s; animation-duration:11s; opacity:0.25; }
   @keyframes orbFloat{
     0%{ transform:translate(0,0) scale(1); }
     33%{ transform:translate(40px,-30px) scale(1.1); }
@@ -436,41 +437,95 @@
     animation: streamShoot linear infinite;
   }
   .splash-streams .stream-1{ top:15%; }
-  .splash-streams .stream-1::after{ width:120px; background:linear-gradient(90deg,transparent,#3efadb,transparent); animation-duration:2.5s; animation-delay:0.5s; }
+  .splash-streams .stream-1::after{ width:180px; background:linear-gradient(90deg,transparent,#3efadb,transparent); animation-duration:2.2s; animation-delay:0.5s; }
   .splash-streams .stream-2{ top:38%; }
-  .splash-streams .stream-2::after{ width:80px; background:linear-gradient(90deg,transparent,#F2A93B,transparent); animation-duration:3s; animation-delay:1.2s; }
+  .splash-streams .stream-2::after{ width:120px; background:linear-gradient(90deg,transparent,#F2A93B,transparent); animation-duration:2.8s; animation-delay:1.2s; }
   .splash-streams .stream-3{ top:62%; }
-  .splash-streams .stream-3::after{ width:150px; background:linear-gradient(90deg,transparent,#a29bfe,transparent); animation-duration:2s; animation-delay:0.8s; }
+  .splash-streams .stream-3::after{ width:220px; background:linear-gradient(90deg,transparent,#a29bfe,transparent); animation-duration:1.8s; animation-delay:0.8s; }
   .splash-streams .stream-4{ top:82%; }
-  .splash-streams .stream-4::after{ width:100px; background:linear-gradient(90deg,transparent,#3ed4f8,transparent); animation-duration:2.8s; animation-delay:1.6s; }
+  .splash-streams .stream-4::after{ width:150px; background:linear-gradient(90deg,transparent,#3ed4f8,transparent); animation-duration:2.5s; animation-delay:1.6s; }
   .splash-streams .stream-5{ top:50%; }
-  .splash-streams .stream-5::after{ width:60px; background:linear-gradient(90deg,transparent,#ff6b6b,transparent); animation-duration:3.5s; animation-delay:2s; }
+  .splash-streams .stream-5::after{ width:100px; background:linear-gradient(90deg,transparent,#ff6b6b,transparent); animation-duration:3.2s; animation-delay:2s; }
+  .splash-streams .stream-6{ top:25%; }
+  .splash-streams .stream-6::after{ width:130px; background:linear-gradient(90deg,transparent,#3efadb,transparent); animation-duration:2.6s; animation-delay:0.3s; }
+  .splash-streams .stream-7{ top:75%; }
+  .splash-streams .stream-7::after{ width:90px; background:linear-gradient(90deg,transparent,#F2A93B,transparent); animation-duration:3s; animation-delay:1.8s; }
   @keyframes streamShoot{
-    0%{ left:-150px; opacity:0; }
-    10%{ opacity:0.8; }
-    90%{ opacity:0.8; }
-    100%{ left:calc(100% + 50px); opacity:0; }
+    0%{ left:-200px; opacity:0; }
+    8%{ opacity:0.9; }
+    92%{ opacity:0.9; }
+    100%{ left:calc(100% + 100px); opacity:0; }
   }
 
-  /* particle dots */
-  .splash-particles{ position:absolute; inset:0; z-index:4; }
-  .splash-particles .dot{
-    position:absolute; width:4px; height:4px; border-radius:50%;
-    background:var(--fiber); opacity:0;
-    animation: particleFade 4s ease-in-out infinite;
+  /* ═══ CANVAS PARTICLES ═══ */
+  .splash-canvas-wrap{ position:absolute; inset:0; z-index:4; }
+  .splash-canvas-wrap canvas{ width:100%; height:100%; }
+
+  /* ═══ MATRIX RAIN ═══ */
+  .splash-matrix{ position:absolute; inset:0; z-index:3; overflow:hidden; pointer-events:none; opacity:0.12; }
+  .splash-matrix .m-col{
+    position:absolute; top:-20px;
+    font-family:'JetBrains Mono',monospace; font-size:12px;
+    color:#3efadb; line-height:1.3;
+    animation:mFall linear infinite;
+    writing-mode:vertical-rl;
   }
-  .splash-particles .dot:nth-child(1){ top:12%; left:8%; animation-delay:0s; }
-  .splash-particles .dot:nth-child(2){ top:25%; left:82%; animation-delay:0.4s; background:var(--signal); width:3px; height:3px; }
-  .splash-particles .dot:nth-child(3){ top:70%; left:15%; animation-delay:0.8s; width:5px; height:5px; }
-  .splash-particles .dot:nth-child(4){ top:85%; left:72%; animation-delay:1.2s; background:#a29bfe; }
-  .splash-particles .dot:nth-child(5){ top:45%; left:92%; animation-delay:1.6s; width:3px; height:3px; background:var(--signal); }
-  .splash-particles .dot:nth-child(6){ top:8%; left:55%; animation-delay:2s; background:var(--fiber); width:2px; height:2px; }
-  .splash-particles .dot:nth-child(7){ top:60%; left:40%; animation-delay:0.6s; background:#ff6b6b; width:3px; height:3px; }
-  .splash-particles .dot:nth-child(8){ top:35%; left:25%; animation-delay:2.4s; background:var(--fiber); width:4px; height:4px; }
-  @keyframes particleFade{
-    0%,100%{ opacity:0; transform:translateY(0); }
-    50%{ opacity:0.8; transform:translateY(-12px); }
+  .splash-matrix .m-col:nth-child(1){ left:5%; animation-duration:4s; animation-delay:0.2s; color:#3efadb; }
+  .splash-matrix .m-col:nth-child(2){ left:12%; animation-duration:5s; animation-delay:0.8s; color:#3ed4f8; font-size:10px; }
+  .splash-matrix .m-col:nth-child(3){ left:22%; animation-duration:3.5s; animation-delay:0.4s; color:#a29bfe; }
+  .splash-matrix .m-col:nth-child(4){ left:35%; animation-duration:6s; animation-delay:1.2s; color:#3efadb; font-size:11px; }
+  .splash-matrix .m-col:nth-child(5){ left:48%; animation-duration:4.5s; animation-delay:0.6s; color:#F2A93B; }
+  .splash-matrix .m-col:nth-child(6){ left:58%; animation-duration:5.5s; animation-delay:1.5s; color:#3ed4f8; font-size:10px; }
+  .splash-matrix .m-col:nth-child(7){ left:68%; animation-duration:3.8s; animation-delay:0.3s; color:#3efadb; }
+  .splash-matrix .m-col:nth-child(8){ left:78%; animation-duration:4.8s; animation-delay:0.9s; color:#a29bfe; font-size:11px; }
+  .splash-matrix .m-col:nth-child(9){ left:88%; animation-duration:5.2s; animation-delay:1.1s; color:#F2A93B; }
+  .splash-matrix .m-col:nth-child(10){ left:95%; animation-duration:3.2s; animation-delay:0.7s; color:#3efadb; font-size:10px; }
+  @keyframes mFall{
+    0%{ transform:translateY(-100%); opacity:0; }
+    10%{ opacity:1; }
+    90%{ opacity:1; }
+    100%{ transform:translateY(calc(100vh + 100%)); opacity:0; }
   }
+
+  /* ═══ RIPPLE WAVES ═══ */
+  .splash-ripples{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:5; pointer-events:none; }
+  .splash-ripple{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    border-radius:50%; border:1px solid rgba(62,211,199,0.15);
+    opacity:0; animation: rippleExpand 3s ease-out infinite;
+  }
+  .splash-ripple:nth-child(1){ animation-delay:0s; }
+  .splash-ripple:nth-child(2){ animation-delay:1s; }
+  .splash-ripple:nth-child(3){ animation-delay:2s; }
+  .splash-ripple:nth-child(4){ animation-delay:0.5s; border-color:rgba(162,155,254,0.12); }
+  .splash-ripple:nth-child(5){ animation-delay:1.5s; border-color:rgba(242,169,59,0.1); }
+  @keyframes rippleExpand{
+    0%{ width:80px; height:80px; opacity:0.6; border-width:2px; }
+    100%{ width:800px; height:800px; opacity:0; border-width:0.5px; }
+  }
+
+  /* ═══ HELIX RINGS ═══ */
+  .splash-helix{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:5; pointer-events:none; }
+  .splash-helix .h-ring{
+    position:absolute; top:50%; left:50%; border-radius:50%;
+    border:1px solid transparent;
+  }
+  .splash-helix .h-ring:nth-child(1){
+    width:340px; height:340px; margin:-170px 0 0 -170px;
+    border-color:rgba(62,211,199,0.08);
+    animation:hSpin 16s linear infinite;
+  }
+  .splash-helix .h-ring:nth-child(2){
+    width:440px; height:440px; margin:-220px 0 0 -220px;
+    border-color:rgba(162,155,254,0.06);
+    animation:hSpin 22s linear infinite reverse;
+  }
+  .splash-helix .h-ring:nth-child(3){
+    width:560px; height:560px; margin:-280px 0 0 -280px;
+    border-color:rgba(242,169,59,0.05);
+    animation:hSpin 28s linear infinite;
+  }
+  @keyframes hSpin{ to{ transform:rotate(360deg); } }
 
   /* floating rings */
   .splash-rings{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:5; }
@@ -529,16 +584,17 @@
   @keyframes electricSpin{ to{ transform:rotate(360deg); } }
   @keyframes electricFadeIn{ to{ opacity:0.7; } }
 
-  /* brand name with glitch */
+  /* brand name with neon flicker */
   .splash-brand{
     font-family:'Space Grotesk',sans-serif; font-weight:700;
     font-size:clamp(1.6rem,4vw,2.4rem); color:#EDF2F7;
     margin-bottom:8px; letter-spacing:-0.02em;
     animation: brandSlideUp 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.8s both;
     position:relative;
+    text-shadow:0 0 10px rgba(62,211,199,0.3);
   }
-  .splash-brand .accent{ color:#F2A93B; }
-  .splash-brand .fiber{ color:#3efadb; }
+  .splash-brand .accent{ color:#F2A93B; text-shadow:0 0 10px rgba(242,169,59,0.4); }
+  .splash-brand .fiber{ color:#3efadb; text-shadow:0 0 10px rgba(62,211,199,0.4); }
   @keyframes brandSlideUp{
     0%{ transform:translateY(40px); opacity:0; }
     100%{ transform:translateY(0); opacity:1; }
@@ -547,7 +603,16 @@
   /* ═══ GLITCH EFFECT ═══ */
   .splash-brand.glitch-active{
     animation: brandSlideUp 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.8s both,
-               glitchMain 0.3s ease 1.8s 3;
+               glitchMain 0.3s ease 1.8s 3,
+               neonFlicker 4s ease-in-out 2.8s infinite;
+  }
+  @keyframes neonFlicker{
+    0%,100%{ text-shadow:0 0 10px rgba(62,211,199,0.3), 0 0 20px rgba(62,211,199,0.1); }
+    5%{ text-shadow:0 0 5px rgba(62,211,199,0.1); }
+    6%{ text-shadow:0 0 15px rgba(62,211,199,0.5), 0 0 30px rgba(62,211,199,0.2); }
+    50%{ text-shadow:0 0 20px rgba(62,211,199,0.6), 0 0 40px rgba(62,211,199,0.3), 0 0 60px rgba(62,211,199,0.1); }
+    52%{ text-shadow:0 0 8px rgba(62,211,199,0.2); }
+    53%{ text-shadow:0 0 20px rgba(62,211,199,0.6), 0 0 40px rgba(62,211,199,0.3); }
   }
   .splash-brand.glitch-active::before,
   .splash-brand.glitch-active::after{
@@ -594,9 +659,32 @@
     animation: brandSlideUp 0.8s cubic-bezier(0.34,1.56,0.64,1) 1.1s both;
   }
 
+  /* ═══ SOUNDWAVE BARS ═══ */
+  .splash-wave{ display:flex; gap:3px; justify-content:center; margin-top:20px; height:30px; align-items:flex-end; }
+  .splash-wave .w-bar{
+    width:3px; border-radius:2px; animation:wPulse ease-in-out infinite;
+    background:linear-gradient(180deg,#3efadb,#3ed4f8);
+  }
+  .splash-wave .w-bar:nth-child(1){ height:8px; animation-duration:1.2s; animation-delay:0s; }
+  .splash-wave .w-bar:nth-child(2){ height:16px; animation-duration:0.9s; animation-delay:0.1s; }
+  .splash-wave .w-bar:nth-child(3){ height:24px; animation-duration:1.1s; animation-delay:0.2s; }
+  .splash-wave .w-bar:nth-child(4){ height:12px; animation-duration:0.8s; animation-delay:0.15s; }
+  .splash-wave .w-bar:nth-child(5){ height:20px; animation-duration:1.3s; animation-delay:0.05s; }
+  .splash-wave .w-bar:nth-child(6){ height:10px; animation-duration:0.95s; animation-delay:0.25s; }
+  .splash-wave .w-bar:nth-child(7){ height:18px; animation-duration:1.15s; animation-delay:0.12s; }
+  .splash-wave .w-bar:nth-child(8){ height:26px; animation-duration:0.85s; animation-delay:0.08s; }
+  .splash-wave .w-bar:nth-child(9){ height:14px; animation-duration:1.05s; animation-delay:0.18s; }
+  .splash-wave .w-bar:nth-child(10){ height:8px; animation-duration:1.25s; animation-delay:0.22s; }
+  .splash-wave .w-bar:nth-child(11){ height:22px; animation-duration:0.9s; animation-delay:0.06s; }
+  .splash-wave .w-bar:nth-child(12){ height:16px; animation-duration:1.1s; animation-delay:0.14s; }
+  @keyframes wPulse{
+    0%,100%{ transform:scaleY(0.4); opacity:0.5; }
+    50%{ transform:scaleY(1); opacity:1; }
+  }
+
   /* ═══ SYSTEM STATUS PHASES ═══ */
   .splash-status{
-    margin-top:28px; font-family:'JetBrains Mono',monospace;
+    margin-top:20px; font-family:'JetBrains Mono',monospace;
     font-size:0.75rem; color:rgba(62,211,199,0.7);
     letter-spacing:0.08em; height:20px;
     animation: brandSlideUp 0.6s ease 1.4s both;
@@ -611,27 +699,34 @@
   /* typing dots — replaced by status phases */
   .splash-typing{ display:none; }
 
-  /* progress bar */
-  .splash-progress{
+  /* ═══ PROGRESS BAR v2 ═══ */
+  .splash-progress-wrap{
     position:absolute; bottom:50px; left:50%; transform:translateX(-50%);
-    width:240px; height:3px; border-radius:4px;
-    background:rgba(62,211,199,0.1);
-    overflow:hidden; z-index:10;
+    width:280px; z-index:10;
     animation: brandSlideUp 0.6s ease 0.6s both;
   }
-  .splash-progress-bar{
-    height:100%; width:0; border-radius:4px;
-    background:linear-gradient(90deg,#3efadb,#3ed4f8,#a29bfe);
-    animation: progressFill 3.5s cubic-bezier(0.4,0,0.2,1) 0.8s forwards;
-    box-shadow:0 0 14px rgba(62,211,199,0.5);
-  }
-  @keyframes progressFill{ to{ width:100%; } }
-
-  /* progress percentage */
-  .splash-pct{
-    position:absolute; bottom:62px; left:50%; transform:translateX(-50%);
+  .splash-progress-label{
     font-family:'JetBrains Mono',monospace; font-size:0.65rem;
-    color:rgba(62,211,199,0.5); z-index:10;
+    color:rgba(62,211,199,0.4); text-align:center; margin-bottom:8px;
+    letter-spacing:0.08em;
+  }
+  .splash-progress-segs{ display:flex; gap:3px; }
+  .splash-progress-seg{
+    flex:1; height:4px; border-radius:2px;
+    background:rgba(62,211,199,0.08); overflow:hidden; position:relative;
+  }
+  .splash-progress-seg::after{
+    content:''; position:absolute; inset:0; border-radius:2px;
+    background:linear-gradient(90deg,#3efadb,#3ed4f8);
+    transform:scaleX(0); transform-origin:left;
+    transition:transform 0.4s ease;
+    box-shadow:0 0 8px rgba(62,211,199,0.4);
+  }
+  .splash-progress-seg.filled::after{ transform:scaleX(1); }
+
+  .splash-pct{
+    font-family:'JetBrains Mono',monospace; font-size:0.75rem;
+    color:rgba(62,211,199,0.6); text-align:center; margin-top:8px;
     animation: brandSlideUp 0.6s ease 0.6s both;
   }
 
@@ -1776,12 +1871,13 @@
   .fp-code-input:focus{ border-color:var(--fiber); box-shadow:0 0 12px rgba(62,211,199,0.25); outline:none; }
 </style>
 
-<!-- ═══════ SPLASH SCREEN ═══════ -->
+<!-- ═══════ SPLASH SCREEN v3 ═══════ -->
 <div class="splash-screen" id="splashScreen">
   <div class="splash-bg">
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
   </div>
   <div class="splash-grid"></div>
   <div class="splash-scanline"></div>
@@ -1805,6 +1901,20 @@
     </svg>
   </div>
 
+  <!-- Matrix rain -->
+  <div class="splash-matrix">
+    <div class="m-col">01001010 11010100 00110011 10101010</div>
+    <div class="m-col">10110011 01101001 11001010 01010110</div>
+    <div class="m-col">01110010 10010110 01001101 11010011</div>
+    <div class="m-col">11001010 00110101 10100110 01101001</div>
+    <div class="m-col">00101101 11101001 01010011 10010110</div>
+    <div class="m-col">10100110 01010101 11010010 00111010</div>
+    <div class="m-col">01010011 10110100 00101011 11001001</div>
+    <div class="m-col">11101001 01001101 10010110 01101010</div>
+    <div class="m-col">00110101 10101001 01101010 11010011</div>
+    <div class="m-col">10010110 01101001 11010100 00101011</div>
+  </div>
+
   <!-- Data stream lines -->
   <div class="splash-streams">
     <div class="stream stream-1"></div>
@@ -1812,6 +1922,27 @@
     <div class="stream stream-3"></div>
     <div class="stream stream-4"></div>
     <div class="stream stream-5"></div>
+    <div class="stream stream-6"></div>
+    <div class="stream stream-7"></div>
+  </div>
+
+  <!-- Canvas particles -->
+  <div class="splash-canvas-wrap"><canvas id="splashCanvas"></canvas></div>
+
+  <!-- Ripple waves -->
+  <div class="splash-ripples">
+    <div class="splash-ripple"></div>
+    <div class="splash-ripple"></div>
+    <div class="splash-ripple"></div>
+    <div class="splash-ripple"></div>
+    <div class="splash-ripple"></div>
+  </div>
+
+  <!-- Helix rings -->
+  <div class="splash-helix">
+    <div class="h-ring"></div>
+    <div class="h-ring"></div>
+    <div class="h-ring"></div>
   </div>
 
   <div class="splash-particles">
@@ -1825,7 +1956,7 @@
   <div class="splash-corner tr"></div>
   <div class="splash-corner bl"></div>
   <div class="splash-corner br"></div>
-  <div class="splash-version">v2.0 — PLATINUMZ SYSTEMS</div>
+  <div class="splash-version">v3.0 — PLATINUMZ SYSTEMS</div>
 
   <div class="splash-center">
     <!-- Electric glow ring -->
@@ -1867,14 +1998,30 @@
     <div class="splash-brand glitch-active" data-text="PLATINUMZ IT Support"><span class="fiber">PLATINUM</span><span class="accent">Z</span> IT Support</div>
     <div class="splash-tagline">TEHAMA YA KISASA • 24/7</div>
 
+    <!-- Soundwave bars -->
+    <div class="splash-wave">
+      <div class="w-bar"></div><div class="w-bar"></div><div class="w-bar"></div><div class="w-bar"></div>
+      <div class="w-bar"></div><div class="w-bar"></div><div class="w-bar"></div><div class="w-bar"></div>
+      <div class="w-bar"></div><div class="w-bar"></div><div class="w-bar"></div><div class="w-bar"></div>
+    </div>
+
     <!-- System status phases -->
     <div class="splash-status" id="splashStatus"><span class="cursor"></span></div>
 
     <div class="splash-typing"><span></span><span></span><span></span></div>
   </div>
 
+  <!-- Segmented progress bar -->
+  <div class="splash-progress-wrap" id="splashProgressWrap">
+    <div class="splash-progress-label">LOADING SYSTEMS</div>
+    <div class="splash-progress-segs" id="splashSegs">
+      <div class="splash-progress-seg"></div><div class="splash-progress-seg"></div>
+      <div class="splash-progress-seg"></div><div class="splash-progress-seg"></div>
+      <div class="splash-progress-seg"></div><div class="splash-progress-seg"></div>
+      <div class="splash-progress-seg"></div><div class="splash-progress-seg"></div>
+    </div>
+  </div>
   <div class="splash-pct" id="splashPct">0%</div>
-  <div class="splash-progress"><div class="splash-progress-bar"></div></div>
 </div>
 
 <!-- ═══════ WELCOME OVERLAY v2 ═══════ -->
@@ -3824,13 +3971,71 @@ s0.parentNode.insertBefore(s1,s0);
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-  // ═══════ SPLASH SCREEN AUTO-DISMISS ═══════
+  // ═══════ SPLASH SCREEN v3 AUTO-DISMISS ═══════
   (function(){
     var splash = document.getElementById('splashScreen');
     var gate = document.getElementById('gateScreen');
     var statusEl = document.getElementById('splashStatus');
     var pctEl = document.getElementById('splashPct');
+    var segsEl = document.getElementById('splashSegs');
     if(!splash) return;
+
+    // ── Canvas Particles ──
+    var cvs = document.getElementById('splashCanvas');
+    if(cvs){
+      var ctx = cvs.getContext('2d');
+      var particles = [];
+      function resizeSplashCanvas(){
+        cvs.width = window.innerWidth;
+        cvs.height = window.innerHeight;
+      }
+      resizeSplashCanvas();
+      window.addEventListener('resize', resizeSplashCanvas);
+      function mkParticle(){
+        return {
+          x: Math.random()*cvs.width,
+          y: Math.random()*cvs.height,
+          vx: (Math.random()-0.5)*0.4,
+          vy: (Math.random()-0.5)*0.4,
+          r: Math.random()*1.5+0.5,
+          o: Math.random()*0.4+0.1,
+          color: ['#3efadb','#3ed4f8','#a29bfe','#F2A93B'][Math.floor(Math.random()*4)]
+        };
+      }
+      for(var pi=0;pi<60;pi++) particles.push(mkParticle());
+      var splashAnimFrame;
+      function drawSplashParticles(){
+        ctx.clearRect(0,0,cvs.width,cvs.height);
+        for(var i=0;i<particles.length;i++){
+          var p=particles[i];
+          p.x+=p.vx; p.y+=p.vy;
+          if(p.x<0||p.x>cvs.width) p.vx*=-1;
+          if(p.y<0||p.y>cvs.height) p.vy*=-1;
+          ctx.beginPath();
+          ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+          ctx.fillStyle=p.color;
+          ctx.globalAlpha=p.o;
+          ctx.fill();
+          // draw connections
+          for(var j=i+1;j<particles.length;j++){
+            var q=particles[j];
+            var dx=p.x-q.x, dy=p.y-q.y;
+            var dist=Math.sqrt(dx*dx+dy*dy);
+            if(dist<120){
+              ctx.beginPath();
+              ctx.moveTo(p.x,p.y);
+              ctx.lineTo(q.x,q.y);
+              ctx.strokeStyle=p.color;
+              ctx.globalAlpha=(1-dist/120)*0.15;
+              ctx.stroke();
+            }
+          }
+        }
+        ctx.globalAlpha=1;
+        splashAnimFrame=requestAnimationFrame(drawSplashParticles);
+      }
+      drawSplashParticles();
+    }
 
     // System status typing phases
     var phases = [
@@ -3863,18 +4068,28 @@ s0.parentNode.insertBefore(s1,s0);
     }
     setTimeout(typePhase, 1600);
 
-    // Percentage counter
+    // Percentage counter + segmented progress
     var pct = 0;
+    var totalSegs = 8;
     var pctInterval = setInterval(function(){
       pct += 1;
       if(pct > 100) pct = 100;
       if(pctEl) pctEl.textContent = pct + '%';
+      // fill segments based on progress
+      if(segsEl){
+        var filled = Math.floor(pct / (100/totalSegs));
+        var segs = segsEl.querySelectorAll('.splash-progress-seg');
+        for(var s=0;s<segs.length;s++){
+          if(s<filled) segs[s].classList.add('filled');
+        }
+      }
       if(pct >= 100) clearInterval(pctInterval);
     }, 35);
 
     // Dismiss
     setTimeout(function(){
       splash.classList.add('hide');
+      if(splashAnimFrame) cancelAnimationFrame(splashAnimFrame);
       setTimeout(function(){
         splash.style.display='none';
         var wOverlay=document.getElementById('welcomeOverlay');
