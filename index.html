@@ -1786,7 +1786,14 @@
 </style>
 <body>
 
-<div class="loading-screen" id="loadingScreen">
+<!-- Skip to main content (accessibility) -->
+<a href="#mainContent" class="skip-link" id="skipLink">Ruka hadi maudhui makuu</a>
+<style>.skip-link{position:absolute;top:-100%;left:16px;z-index:99999;padding:12px 24px;background:var(--fiber);color:#0E1A2B;font-weight:700;font-size:0.9rem;border-radius:0 0 12px 12px;text-decoration:none;transition:top 0.3s;box-shadow:0 4px 20px rgba(62,211,199,0.4);}.skip-link:focus{top:0;}</style>
+
+<!-- Offline indicator -->
+<div id="offlineIndicator" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:99998;background:linear-gradient(90deg,#F2A93B,#e8a838);color:#0E1A2B;text-align:center;padding:10px;font-size:0.85rem;font-weight:700;box-shadow:0 -4px 20px rgba(242,169,59,0.3);">📡 Mtandao haupo — Baadhi ya huduma hazipatikani</div>
+
+<div class="loading-screen" id="loadingScreen" role="status" aria-label="Inapakia">
   <div class="spinner"></div>
   <div class="brand"><span class="dot"></span>PLATINUMZ IT Support</div>
 </div>
@@ -2138,7 +2145,7 @@
   </div>
 </div>
 
-<div class="gate-screen" id="gateScreen" style="display:none;">
+<div class="gate-screen" id="gateScreen" style="display:none;" role="dialog" aria-label="Ingia au Jisajili">
 
   <div class="gate-form-panel">
   <div class="gate-box">
@@ -2214,9 +2221,9 @@
   </div>
 </div>
 
-<div id="mainContent" style="display:none;">
+<div id="mainContent" style="display:none;" role="main" aria-label="Maudhui Makuu">
 
-<nav>
+<nav role="navigation" aria-label="Mwongozo Mkuu">
   <div class="wrap">
     <div class="brand"><span class="dot"></span>PLATINUMZ IT Support</div>
     <div class="nav-links">
@@ -3322,7 +3329,7 @@ s0.parentNode.insertBefore(s1,s0);
 
   <div class="cu-layout">
 
-    <div class="cu-sidebar" id="cuSidebar">
+    <div class="cu-sidebar" id="cuSidebar" role="navigation" aria-label="Menyu ya Mteja">
       <div class="cu-sb-brand"><span class="dot"></span><span>PLATINUMZ</span></div>
       <div class="cu-sb-user">
         <div class="cu-sb-user-avatar" id="cuAvatar">M</div>
@@ -3640,7 +3647,7 @@ s0.parentNode.insertBefore(s1,s0);
 
 </div>
 
-<div id="adminDashboard" style="display:none; min-height:100vh; background:var(--ink); color:var(--paper);">
+<div id="adminDashboard" style="display:none; min-height:100vh; background:var(--ink); color:var(--paper);" role="main" aria-label="Dashboard ya Admin">
 
   <style>
     .ad-topbar{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;background:linear-gradient(135deg,var(--panel),rgba(26,26,32,0.95));border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50;backdrop-filter:blur(20px);}
@@ -3876,6 +3883,7 @@ s0.parentNode.insertBefore(s1,s0);
       <button class="ad-tab" data-tab="simu" data-label="admin-tab-simu">📞 Simu</button>
       <button class="ad-tab" data-tab="checkin" data-label="admin-tab-checkin">📱 Check-ins</button>
       <button class="ad-tab" data-tab="points" data-label="admin-tab-points">🏆 Pointi</button>
+      <button class="ad-tab" data-tab="data" data-label="admin-tab-data">💾 Data</button>
     </div>
 
     <div class="ad-panel active" id="panelWateja">
@@ -3940,6 +3948,7 @@ s0.parentNode.insertBefore(s1,s0);
     </div>
 
     <div class="ad-panel" id="panelAnalytics">
+      <div id="analyticsMetrics" style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px;"></div>
       <div class="ad-analytics-grid">
         <div class="ad-chart-card">
           <h4>📋 Orders kwa Mwezi</h4>
@@ -3957,6 +3966,10 @@ s0.parentNode.insertBefore(s1,s0);
           <h4>💼 Huduma Maalum</h4>
           <canvas id="servicesChart"></canvas>
         </div>
+      </div>
+      <div style="margin-top:24px;">
+        <h4 style="color:var(--paper);margin-bottom:14px;">📈 Mwelekeo wa Mwezi huu</h4>
+        <div id="analyticsInsights" style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;"></div>
       </div>
     </div>
 
@@ -4045,6 +4058,42 @@ s0.parentNode.insertBefore(s1,s0);
             <thead><tr><th>Mteja</th><th>Email</th><th>Pointi</th><th>Tier</th><th>Badges</th></tr></thead>
             <tbody id="adminLoyaltyBody"><tr><td colspan="5" class="ad-empty"><div class="ad-empty-icon">🏆</div>Inapakia...</td></tr></tbody>
           </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="ad-panel" id="panelData">
+      <div style="padding:24px;">
+        <h3 style="color:var(--paper);margin:0 0 8px;">💾 Data Backup & Restore</h3>
+        <p style="color:var(--muted);font-size:0.85rem;margin:0 0 24px;">Hamisha au packua data ya Firestore. Unaweza kuhifadhi data au kurejesha kutoka backup.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;">
+          <div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px;">
+            <div style="font-size:2rem;margin-bottom:12px;">📤</div>
+            <h4 style="color:var(--paper);margin:0 0 8px;">Hamisha Data (Export)</h4>
+            <p style="color:var(--muted);font-size:0.82rem;margin:0 0 16px;">Download data zote kama JSON file. Unaweza kuhifadhi kama backup.</p>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <button onclick="exportAllData()" style="padding:12px;background:var(--fiber);color:#0E1A2B;border:none;border-radius:10px;font-weight:700;cursor:pointer;font-size:0.9rem;">📥 Hamisha Zote (JSON)</button>
+              <button onclick="exportCollection('orders')" style="padding:10px;background:transparent;color:var(--paper);border:1px solid var(--line);border-radius:10px;cursor:pointer;font-size:0.82rem;">📋 Orders tu</button>
+              <button onclick="exportCollection('clients')" style="padding:10px;background:transparent;color:var(--paper);border:1px solid var(--line);border-radius:10px;cursor:pointer;font-size:0.82rem;">👥 Wateja tu</button>
+              <button onclick="exportCollection('reviews')" style="padding:10px;background:transparent;color:var(--paper);border:1px solid var(--line);border-radius:10px;cursor:pointer;font-size:0.82rem;">⭐ Maoni tu</button>
+            </div>
+          </div>
+          <div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px;">
+            <div style="font-size:2rem;margin-bottom:12px;">📥</div>
+            <h4 style="color:var(--paper);margin:0 0 8px;">Rejesha Data (Import)</h4>
+            <p style="color:var(--muted);font-size:0.82rem;margin:0 0 16px;">Packua data kutoka JSON backup file. Tahadhari: data itaongezwa kwenye Firestore.</p>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <input type="file" id="importFileInput" accept=".json" style="display:none;" onchange="handleImportFile(event)">
+              <button onclick="document.getElementById('importFileInput').click()" style="padding:12px;background:var(--gold);color:#0E1A2B;border:none;border-radius:10px;font-weight:700;cursor:pointer;font-size:0.9rem;">📤 Pakia Backup</button>
+              <div id="importStatus" style="color:var(--muted);font-size:0.82rem;min-height:20px;"></div>
+            </div>
+          </div>
+          <div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px;">
+            <div style="font-size:2rem;margin-bottom:12px;">📊</div>
+            <h4 style="color:var(--paper);margin:0 0 8px;">Takwimu za Data</h4>
+            <p style="color:var(--muted);font-size:0.82rem;margin:0 0 16px;">Taarifa za data zote kwenye Firestore.</p>
+            <div id="dataStats" style="color:var(--paper);font-size:0.88rem;">Inapakia...</div>
+          </div>
         </div>
       </div>
     </div>
@@ -4515,6 +4564,7 @@ s0.parentNode.insertBefore(s1,s0);
     const action = mode === 'login'
       ? auth.signInWithEmailAndPassword(email, pass)
       : auth.createUserWithEmailAndPassword(email, pass);
+    if(mode==='login') _2faPendingPw=pass;
 
     action
       .then((result) => {
@@ -4605,7 +4655,15 @@ s0.parentNode.insertBefore(s1,s0);
       var notifToast = document.getElementById('notifToast');
       if(notifToast) notifToast.classList.remove('show');
 
-      _checkAdminRole(user).then(()=>{
+      _checkAdminRole(user).then(function(result){
+        if(result==='twoFactorPending'){
+          // 2FA modal is showing, sign out until verified
+          adminDash.style.display='none';
+          mainContent.style.display='none';
+          var cuDashTF=document.getElementById('customerDashboard'); if(cuDashTF) cuDashTF.style.display='none';
+          gateScreen.style.display='none';
+          return;
+        }
         if(_isAdmin(user)){
         mainContent.style.display = 'none';
         adminDash.style.display = 'block';
@@ -4957,6 +5015,34 @@ s0.parentNode.insertBefore(s1,s0);
       _chartServices = new Chart(document.getElementById('servicesChart'),{
         type:'pie', data:{ labels:svcLabels, datasets:[{ data:svcData, backgroundColor:svcColors.slice(0,svcLabels.length), borderWidth:0 }] }, options:{ responsive:true, maintainAspectRatio:true, plugins:{ legend:{ position:'right', labels:{ color:'var(--text)', font:{family:fontFamily,size:11}, padding:10 } } } }
       });
+      // === REAL METRICS CARDS ===
+      const totalOrders=orderSnap.size;
+      const completedOrders=orderSnap.docs.filter(d=>d.data().status==='imekamilika').length;
+      const totalClients=clientSnap.size;
+      const thisMonth=now.getMonth();
+      const lastMonth=thisMonth>0?thisMonth-1:11;
+      const thisMonthOrders=orderSnap.docs.filter(d=>{const cd=d.data().createdAt;return cd&&cd.toDate().getMonth()===thisMonth;}).length;
+      const lastMonthOrders=orderSnap.docs.filter(d=>{const cd=d.data().createdAt;return cd&&cd.toDate().getMonth()===lastMonth;}).length;
+      const thisMonthClients=clientSnap.docs.filter(d=>{const cd=d.data().createdAt;return cd&&cd.toDate().getMonth()===thisMonth;}).length;
+      const lastMonthClients=clientSnap.docs.filter(d=>{const cd=d.data().createdAt;return cd&&cd.toDate().getMonth()===lastMonth;}).length;
+      const growthRate=lastMonthOrders?Math.round(((thisMonthOrders-lastMonthOrders)/lastMonthOrders)*100):100;
+      const clientGrowth=lastMonthClients?Math.round(((thisMonthClients-lastMonthClients)/lastMonthClients)*100):100;
+      const completionRate=totalOrders?Math.round((completedOrders/totalOrders)*100):0;
+      let totalRevenue=0;
+      orderSnap.forEach(d=>{const p=d.data().gharama;if(p){const n=parseInt(String(p).replace(/[^0-9]/g,''));if(!isNaN(n))totalRevenue+=n;}});
+      const avgRevenue=completedOrders?Math.round(totalRevenue/completedOrders):0;
+      const metricsHtml='<div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center;"><div style="font-size:0.75rem;color:var(--muted);margin-bottom:6px;">💰 Mapato Jumla</div><div style="font-size:1.6rem;font-weight:800;color:var(--fiber);font-family:JetBrains Mono,monospace;">TSH '+totalRevenue.toLocaleString()+'</div><div style="font-size:0.7rem;color:var(--muted);margin-top:4px;">Avg: TSH '+avgRevenue.toLocaleString()+'/order</div></div>'
+        +'<div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center;"><div style="font-size:0.75rem;color:var(--muted);margin-bottom:6px;">📈 Mwelekeo Orders</div><div style="font-size:1.6rem;font-weight:800;color:'+(growthRate>=0?'var(--fiber)':'#ff6b6b')+';font-family:JetBrains Mono,monospace;">'+(growthRate>=0?'+':'')+growthRate+'%</div><div style="font-size:0.7rem;color:var(--muted);margin-top:4px;">'+thisMonthOrders+' vs '+lastMonthOrders+' iliyopita</div></div>'
+        +'<div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center;"><div style="font-size:0.75rem;color:var(--muted);margin-bottom:6px;">✅ Kiwango cha Kukamilika</div><div style="font-size:1.6rem;font-weight:800;color:var(--signal);font-family:JetBrains Mono,monospace;">'+completionRate+'%</div><div style="font-size:0.7rem;color:var(--muted);margin-top:4px;">'+completedOrders+'/'+totalOrders+' orders</div></div>'
+        +'<div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center;"><div style="font-size:0.75rem;color:var(--muted);margin-bottom:6px;">👥 Wateja Wapya</div><div style="font-size:1.6rem;font-weight:800;color:#a29bfe;font-family:JetBrains Mono,monospace;">'+thisMonthClients+'</div><div style="font-size:0.7rem;color:var(--muted);margin-top:4px;">'+(clientGrowth>=0?'+':'')+clientGrowth+'% vs iliyopita</div></div>';
+      document.getElementById('analyticsMetrics').innerHTML=metricsHtml;
+      // === INSIGHTS ===
+      const topService=Object.entries(serviceCounts).sort((a,b)=>b[1]-a[1])[0];
+      const insightsHtml=(topService?'<div style="background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;"><div style="color:var(--muted);font-size:0.82rem;margin-bottom:6px;">🏆 Huduma Namba 1</div><div style="color:var(--paper);font-weight:700;font-size:0.95rem;">'+topService[0]+'</div><div style="color:var(--muted);font-size:0.78rem;margin-top:4px;">'+topService[1]+' orders</div></div>':'')
+        +'<div style="background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;"><div style="color:var(--muted);font-size:0.82rem;margin-bottom:6px;">📊 Takwimu za Jumla</div><div style="color:var(--paper);font-size:0.88rem;">Orders: '+totalOrders+' | Wateja: '+totalClients+' | Reviews: '+document.querySelectorAll('.ad-review-item').length+'</div></div>'
+        +'<div style="background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;"><div style="color:var(--muted);font-size:0.82rem;margin-bottom:6px;">📅 Mwezi: '+months[thisMonth]+'</div><div style="color:var(--paper);font-size:0.88rem;">Orders mpya: '+thisMonthOrders+' | Wateja wapya: '+thisMonthClients+'</div></div>'
+        +'<div style="background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;"><div style="color:var(--muted);font-size:0.82rem;margin-bottom:6px;">⚡ Viashiria</div><div style="color:var(--paper);font-size:0.88rem;">Pending: '+(totalOrders-completedOrders)+' | Completion: '+completionRate+'%</div></div>';
+      document.getElementById('analyticsInsights').innerHTML=insightsHtml;
     }).catch((e) => { console.error('Analytics error:', e); });
 
     // Load new admin panels
@@ -4965,6 +5051,7 @@ s0.parentNode.insertBefore(s1,s0);
     loadAdminCallUsers();
     loadAdminCheckins();
     loadAdminLoyalty();
+    loadDataStats();
   }
 
   function deleteReview(id){
@@ -5202,6 +5289,108 @@ s0.parentNode.insertBefore(s1,s0);
       });
       tBody.innerHTML=rows;
     }).catch(e=>{tBody.innerHTML='<tr><td colspan="5" class="ad-empty" style="color:#ff6b6b">Hitilafu: '+e.message+'</td></tr>';});
+  }
+
+  // ========== DATA EXPORT / IMPORT ==========
+  const _dataCollections = ['orders','clients','reviews','chats','appointments','loyalty','checkins','calls','typing','presence','passwordResets'];
+
+  function exportAllData(){
+    const btn=event.target; btn.textContent='Inapakia...'; btn.disabled=true;
+    const exportData={_exportDate:new Date().toISOString(),_version:'1.0'};
+    let p=Promise.resolve();
+    _dataCollections.forEach(col=>{
+      p=p.then(()=>db.collection(col).get().then(snap=>{
+        exportData[col]=[];
+        snap.forEach(doc=>{ exportData[col].push({id:doc.id,...doc.data()}); });
+      }).catch(()=>{ exportData[col]=[]; }));
+    });
+    p.then(()=>{
+      const json=JSON.stringify(exportData,null,2);
+      const blob=new Blob([json],{type:'application/json'});
+      const a=document.createElement('a');
+      a.href=URL.createObjectURL(blob);
+      a.download='platinumz-backup-'+new Date().toISOString().split('T')[0]+'.json';
+      a.click();
+      URL.revokeObjectURL(a.href);
+      btn.textContent='📥 Hamisha Zote (JSON)'; btn.disabled=false;
+      showNotifToast('Imehamishwa','Data yote imeshapakiwa kama backup.','📤');
+    }).catch(e=>{
+      btn.textContent='📥 Hamisha Zote (JSON)'; btn.disabled=false;
+      showNotifToast('Hitilafu',e.message,'❌');
+    });
+  }
+
+  function exportCollection(colName){
+    db.collection(colName).get().then(snap=>{
+      const data=[];
+      snap.forEach(doc=>{ data.push({id:doc.id,...doc.data()}); });
+      const json=JSON.stringify(data,null,2);
+      const blob=new Blob([json],{type:'application/json'});
+      const a=document.createElement('a');
+      a.href=URL.createObjectURL(blob);
+      a.download='platinumz-'+colName+'-'+new Date().toISOString().split('T')[0]+'.json';
+      a.click();
+      URL.revokeObjectURL(a.href);
+      showNotifToast('Imehamishwa',colName+' ('+data.length+' records) imeshapakiwa.','📤');
+    }).catch(e=>{ showNotifToast('Hitilafu',e.message,'❌'); });
+  }
+
+  function handleImportFile(evt){
+    const file=evt.target.files[0];
+    if(!file) return;
+    const statusEl=document.getElementById('importStatus');
+    statusEl.textContent='Inapakia...'; statusEl.style.color='var(--fiber)';
+    const reader=new FileReader();
+    reader.onload=function(e){
+      try{
+        const data=JSON.parse(e.target.result);
+        let imported=0, errors=0;
+        const promises=[];
+        Object.keys(data).forEach(key=>{
+          if(key.startsWith('_')||!Array.isArray(data[key])) return;
+          data[key].forEach(item=>{
+            const p=new Promise((resolve)=>{
+              const docId=item.id;
+              const {_id,...rest}=item;
+              if(docId){
+                db.collection(key).doc(docId).set(rest,{merge:true}).then(()=>{imported++;resolve();}).catch(()=>{errors++;resolve();});
+              } else {
+                db.collection(key).add(rest).then(()=>{imported++;resolve();}).catch(()=>{errors++;resolve();});
+              }
+            });
+            promises.push(p);
+          });
+        });
+        Promise.all(promises).then(()=>{
+          statusEl.textContent='✅ Imekamilika: '+imported+' records imerejeshwa'+(errors?' ('+errors+' errors)':'');
+          statusEl.style.color='var(--fiber)';
+          showNotifToast('Imerejeshwa',imported+' records zimerejeshwa.','📥');
+        });
+      }catch(err){
+        statusEl.textContent='❌ Hitilafu: '+err.message;
+        statusEl.style.color='#ff6b6b';
+      }
+    };
+    reader.readAsText(file);
+    evt.target.value='';
+  }
+
+  function loadDataStats(){
+    const el=document.getElementById('dataStats');
+    if(!el) return;
+    let statsHtml='';
+    let loaded=0;
+    const cols=['orders','clients','reviews','chats','appointments','loyalty'];
+    cols.forEach(col=>{
+      db.collection(col).get().then(snap=>{
+        statsHtml+='<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line);"><span style="color:var(--muted);">'+col+'</span><span style="color:var(--fiber);font-weight:600;">'+snap.size+'</span></div>';
+        loaded++;
+        if(loaded===cols.length) el.innerHTML=statsHtml;
+      }).catch(()=>{
+        loaded++;
+        if(loaded===cols.length) el.innerHTML=statsHtml;
+      });
+    });
   }
 
   let _activeOrderFilter = 'all';
@@ -5460,11 +5649,15 @@ s0.parentNode.insertBefore(s1,s0);
   function cancelOrder(id){
     const at = translations[currentLang];
     if(!confirm(at['order-cancel-confirm']||'Futa order hii?')) return;
-    db.collection('orders').doc(id).update({
-      status: 'imefutwa',
-      cancelledAt: firebase.firestore.FieldValue.serverTimestamp()
-    }).then(()=>{
-      showNotifToast(currentLang==='sw'?'Order Imefutwa':'Order Cancelled', currentLang==='sw'?'Order yako imefutwa':'Your order has been cancelled','🗑️');
+    db.collection('orders').doc(id).get().then(doc=>{
+      const d=doc.data();
+      return db.collection('orders').doc(id).update({
+        status: 'imefutwa',
+        cancelledAt: firebase.firestore.FieldValue.serverTimestamp()
+      }).then(()=>{
+        showNotifToast(currentLang==='sw'?'Order Imefutwa':'Order Cancelled', currentLang==='sw'?'Order yako imefutwa':'Your order has been cancelled','🗑️');
+        sendOrderCancelEmail({email:d.email||'',jina:d.jina||'',huduma:d.huduma||''});
+      });
     }).catch(e=>{
       alert((currentLang==='sw'?'Hitilafu: ':'Error: ')+e.message);
     });
@@ -5523,6 +5716,43 @@ s0.parentNode.insertBefore(s1,s0);
           message: 'Habari ' + (orderData.jina || 'Mteja') + ',\n\nOrder yako ya huduma ya ' + (orderData.huduma || '') + ' imekamilika! Tafadhali wasiliana nasi kwa maelezo zaidi.\n\nAsante,\nPLATINUMZ IT Support'
         }, 'D_a8Phfg44i8U1Niz').catch(function(e){ console.log('Email send skipped:', e); });
       }
+    } catch(e){ console.log('Email not available:', e); }
+  }
+
+  function sendNewOrderEmail(orderData){
+    try {
+      if(typeof emailjs !== 'undefined'){
+        emailjs.send('service_r453frt', 'template_32lb4l9', {
+          to_email: orderData.email,
+          to_name: orderData.jina || 'Mteja',
+          message: 'Habari ' + (orderData.jina || 'Mteja') + ',\n\nAsante kwa order yako ya huduma ya ' + (orderData.huduma || '') + '.\nGharama: ' + (orderData.gharama || 'Kwa mazungumzo') + '\n\nTimu yetu inashughulikia order yako. Utapokea taarifa muda mfupi.\n\nAsante,\nPLATINUMZ IT Support'
+        }, 'D_a8Phfg44i8U1Niz').catch(function(e){ console.log('New order email skipped:', e); });
+      }
+    } catch(e){ console.log('Email not available:', e); }
+  }
+
+  function sendOrderCancelEmail(orderData){
+    try {
+      if(typeof emailjs !== 'undefined'){
+        emailjs.send('service_r453frt', 'template_32lb4l9', {
+          to_email: orderData.email,
+          to_name: orderData.jina || 'Mteja',
+          message: 'Habari ' + (orderData.jina || 'Mteja') + ',\n\nOrder yako ya huduma ya ' + (orderData.huduma || '') + ' imefutwa.\n\nKama una maswali, tafadhali wasiliana nasi.\n\nAsante,\nPLATINUMZ IT Support'
+        }, 'D_a8Phfg44i8U1Niz').catch(function(e){ console.log('Cancel email skipped:', e); });
+      }
+    } catch(e){ console.log('Email not available:', e); }
+  }
+
+  function sendAppointmentEmail(apptData, type){
+    try {
+      if(typeof emailjs === 'undefined') return;
+      var subject = type === 'confirmed' ? 'Imethibitishwa' : type === 'cancelled' ? 'Imefutwa' : 'Mpya';
+      var msg = 'Habari ' + (apptData.name || 'Mteja') + ',\n\nMiadi yako ya ' + (apptData.service || '') + ' tarehe ' + (apptData.date || '') + ' saa ' + (apptData.time || '') + ' ' + subject + '.\n\nAsante,\nPLATINUMZ IT Support';
+      emailjs.send('service_r453frt', 'template_32lb4l9', {
+        to_email: apptData.email,
+        to_name: apptData.name || 'Mteja',
+        message: msg
+      }, 'D_a8Phfg44i8U1Niz').catch(function(e){ console.log('Appt email skipped:', e); });
     } catch(e){ console.log('Email not available:', e); }
   }
 
@@ -5869,6 +6099,7 @@ s0.parentNode.insertBefore(s1,s0);
       orderErr.style.color = '';
       setTimeout(() => orderModal.classList.remove('open'), 300);
       setTimeout(() => showOrderPopup(service), 450);
+      sendNewOrderEmail({email:user?user.email:'Mgeni',jina:name,huduma:service,gharama:(serviceTranslations[service]&&serviceTranslations[service].price)?serviceTranslations[service].price:'Bei ya mkutano'});
     }).catch((err) => {
       orderErr.style.color = '';
       orderErr.textContent = 'Hitilafu imetokea: ' + err.message;
@@ -6203,6 +6434,7 @@ s0.parentNode.insertBefore(s1,s0);
       'admin-tab-simu': '📞 Simu',
       'admin-tab-checkin': '📱 Check-ins',
       'admin-tab-points': '🏆 Pointi',
+      'admin-tab-data': '💾 Data',
       'admin-send': 'Tuma 📤',
       'admin-chat-input-ph': 'Andika ujumbe kwa mteja...',
       'ad-chat-sidebar-head': 'Wateja',
@@ -6694,6 +6926,7 @@ s0.parentNode.insertBefore(s1,s0);
       'admin-tab-simu': '📞 Calls',
       'admin-tab-checkin': '📱 Check-ins',
       'admin-tab-points': '🏆 Loyalty',
+      'admin-tab-data': '💾 Data',
       'admin-send': 'Send 📤',
       'admin-chat-input-ph': 'Type a message to customer...',
       'ad-chat-sidebar-head': 'Customers',
@@ -6889,6 +7122,141 @@ s0.parentNode.insertBefore(s1,s0);
       'chat-title': '💬 Chat with Admin',
       'chat-ph': 'Type a message...',
       'chat-placeholder': 'Type your message here...',
+    },
+    fr: {
+      'gate-tag': 'Solutions IT',
+      'gate-h1': 'PLATINUMZ IT Support',
+      'gate-p': 'Solutions technologiques fiables pour tous vos besoins informatiques.',
+      'gate-login': 'Se Connecter',
+      'gate-register': 'S\'inscrire',
+      'gate-name': 'Nom complet',
+      'gate-email': 'Email',
+      'gate-pass': 'Mot de passe',
+      'gate-confirm': 'Confirmer le mot de passe',
+      'gate-forgot': 'Mot de passe oublié?',
+      'nav-home': 'Accueil',
+      'nav-services': 'Services',
+      'nav-about': 'À propos',
+      'nav-contact': 'Contact',
+      'nav-dashboard': 'Tableau de bord',
+      'hero-badge': '🟢 Solutions IT professionnelles',
+      'hero-title1': 'Solutions',
+      'hero-title2': 'IT & Tech',
+      'hero-p': 'Services informatiques professionnels pour entreprises et particuliers.',
+      'hero-btn1': 'Commander maintenant',
+      'hero-btn2': 'Nos services',
+      'svc-title': 'Nos Services',
+      'svc-sub': 'Des solutions complètes pour tous vos besoins technologiques.',
+      'about-title': 'À propos de PLATINUMZ',
+      'about-p': 'Fondé avec un seul but : rendre les services IT accessibles, transparents et fiables.',
+      'footer-desc': 'Solutions IT fiables pour tous vos besoins.',
+      'cu-orders-title': 'Mes Commandes',
+      'cu-reviews-title': 'Mes Avis',
+      'cu-profile-title': 'Mon Profil',
+      'admin-tab-wateja': '👥 Clients',
+      'admin-tab-orders': '📋 Commandes',
+      'admin-tab-chat': '💬 Chat',
+      'admin-tab-maoni': '⭐ Avis',
+      'admin-tab-analytics': '📊 Analytique',
+      'admin-tab-miadi': '🗓️ Rendez-vous',
+      'admin-tab-eneo': '📍 Localisation',
+      'admin-tab-simu': '📞 Appels',
+      'admin-tab-checkin': '📱 Check-ins',
+      'admin-tab-points': '🏆 Points',
+      'admin-tab-data': '💾 Données',
+      'chat-title': '💬 Chat avec Admin',
+      'chat-ph': 'Tapez un message...',
+      'chat-placeholder': 'Tapez votre message ici...',
+    },
+    ar: {
+      'gate-tag': 'حلول تقنية',
+      'gate-h1': 'PLATINUMZ دعم تقني',
+      'gate-p': 'حلول تقنية موثوقة لجميع احتياجاتك في تكنولوجيا المعلومات.',
+      'gate-login': 'تسجيل الدخول',
+      'gate-register': 'إنشاء حساب',
+      'gate-name': 'الاسم الكامل',
+      'gate-email': 'البريد الإلكتروني',
+      'gate-pass': 'كلمة المرور',
+      'gate-confirm': 'تأكيد كلمة المرور',
+      'gate-forgot': 'نسيت كلمة المرور؟',
+      'nav-home': 'الرئيسية',
+      'nav-services': 'الخدمات',
+      'nav-about': 'من نحن',
+      'nav-contact': 'اتصل بنا',
+      'nav-dashboard': 'لوحة التحكم',
+      'hero-badge': '🟢 حلول تقنية احترافية',
+      'hero-title1': 'حلول',
+      'hero-title2': 'تقنية',
+      'hero-p': 'خدمات تقنية احترافية للشركات والأفراد.',
+      'hero-btn1': 'اطلب الآن',
+      'hero-btn2': 'خدماتنا',
+      'svc-title': 'خدماتنا',
+      'svc-sub': 'حلول شاملة لجميع احتياجاتك التقنية.',
+      'about-title': 'عن PLATINUMZ',
+      'about-p': 'تأسست بهدف واحد: جعل خدمات تكنولوجيا المعلومات متاحة وشفافة وموثوقة.',
+      'footer-desc': 'حلول تقنية موثوقة لجميع احتياجاتك.',
+      'cu-orders-title': 'طلباتي',
+      'cu-reviews-title': 'تقييماتي',
+      'cu-profile-title': 'ملفي الشخصي',
+      'admin-tab-wateja': '👥 العملاء',
+      'admin-tab-orders': '📋 الطلبات',
+      'admin-tab-chat': '💬 المحادثة',
+      'admin-tab-maoni': '⭐ التقييمات',
+      'admin-tab-analytics': '📊 التحليلات',
+      'admin-tab-miadi': '🗓️ المواعيد',
+      'admin-tab-eneo': '📍 الموقع',
+      'admin-tab-simu': '📞 المكالمات',
+      'admin-tab-checkin': '📱 تسجيلات الدخول',
+      'admin-tab-points': '🏆 النقاط',
+      'admin-tab-data': '💾 البيانات',
+      'chat-title': '💬 المحادثة مع المشرف',
+      'chat-ph': 'اكتب رسالة...',
+      'chat-placeholder': 'اكتب رسالتك هنا...',
+    },
+    hi: {
+      'gate-tag': 'IT समाधान',
+      'gate-h1': 'PLATINUMZ IT सहायता',
+      'gate-p': 'आपकी सभी कंप्यूटिंग आवश्यकताओं के लिए विश्वसनीय तकनीकी समाधान।',
+      'gate-login': 'लॉग इन',
+      'gate-register': 'रजिस्टर',
+      'gate-name': 'पूरा नाम',
+      'gate-email': 'ईमेल',
+      'gate-pass': 'पासवर्ड',
+      'gate-confirm': 'पासवर्ड की पुष्टि करें',
+      'gate-forgot': 'पासवर्ड भूल गए?',
+      'nav-home': 'होम',
+      'nav-services': 'सेवाएं',
+      'nav-about': 'हमारे बारे में',
+      'nav-contact': 'संपर्क',
+      'nav-dashboard': 'डैशबोर्ड',
+      'hero-badge': '🟢 पेशेवर IT समाधान',
+      'hero-title1': 'समाधान',
+      'hero-title2': 'IT & Tech',
+      'hero-p': 'व्यवसायों और व्यक्तियों के लिए पेशेवर IT सेवाएं।',
+      'hero-btn1': 'अभी ऑर्डर करें',
+      'hero-btn2': 'हमारी सेवाएं',
+      'svc-title': 'हमारी सेवाएं',
+      'svc-sub': 'आपकी सभी तकनीकी आवश्यकताओं के लिए व्यापक समाधान।',
+      'about-title': 'PLATINUMZ के बारे में',
+      'about-p': 'एक ही उद्देश्य के साथ स्थापित: IT सेवाओं को सुलभ, पारदर्शी और विश्वसनीय बनाना।',
+      'footer-desc': 'आपकी सभी आवश्यकताओं के लिए विश्वसनीय IT समाधान।',
+      'cu-orders-title': 'मेरे ऑर्डर',
+      'cu-reviews-title': 'मेरी समीक्षाएं',
+      'cu-profile-title': 'मेरी प्रोफ़ाइल',
+      'admin-tab-wateja': '👥 ग्राहक',
+      'admin-tab-orders': '📋 ऑर्डर',
+      'admin-tab-chat': '💬 चैट',
+      'admin-tab-maoni': '⭐ समीक्षाएं',
+      'admin-tab-analytics': '📊 एनालिटिक्स',
+      'admin-tab-miadi': '🗓️ अपॉइंटमेंट',
+      'admin-tab-eneo': '📍 स्थान',
+      'admin-tab-simu': '📞 कॉल',
+      'admin-tab-checkin': '📱 चेक-इन',
+      'admin-tab-points': '🏆 पॉइंट',
+      'admin-tab-data': '💾 डेटा',
+      'chat-title': '💬 एडमिन से चैट',
+      'chat-ph': 'संदेश टाइप करें...',
+      'chat-placeholder': 'यहां अपना संदेश टाइप करें...',
     }
   };
 
@@ -7140,16 +7508,21 @@ s0.parentNode.insertBefore(s1,s0);
     }
 
     // Update all lang buttons
+    const langLabels = {sw:'EN',en:'FR',fr:'AR',ar:'HI',hi:'SW'};
+    const langFull = {sw:'English',en:'Français',fr:'العربية',ar:'हिन्दी',hi:'Kiswahili'};
     document.querySelectorAll('[id^="langToggle"]').forEach(el => {
       if(el.tagName !== 'A') {
         if(el.querySelector('span')) {
-          el.innerHTML = '<span>🌐</span> ' + (lang === 'sw' ? 'EN' : 'SW');
+          el.innerHTML = '<span>🌐</span> ' + langLabels[lang];
         } else {
-          el.textContent = lang === 'sw' ? 'EN' : 'SW';
+          el.textContent = langLabels[lang];
         }
       }
-      else el.textContent = '🌐 ' + (lang === 'sw' ? 'English' : 'Kiswahili');
+      else el.textContent = '🌐 ' + langFull[lang];
     });
+    // RTL support for Arabic
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.body.style.textAlign = lang === 'ar' ? 'right' : '';
 
     localStorage.setItem('platinumz-lang', lang);
 
@@ -7190,7 +7563,11 @@ s0.parentNode.insertBefore(s1,s0);
   // Wire up ALL theme and lang toggles
   document.querySelectorAll('[id^="themeToggle"]').forEach(el => el.addEventListener('click', toggleTheme));
   document.querySelectorAll('[id^="langToggle"]').forEach(el => el.addEventListener('click', () => {
-    applyLang(currentLang === 'sw' ? 'en' : 'sw');
+    const langs = ['sw','en','fr','ar','hi'];
+    const langLabels = {sw:'SW',en:'EN',fr:'FR',ar:'AR',hi:'HI'};
+    const idx = langs.indexOf(currentLang);
+    const next = langs[(idx + 1) % langs.length];
+    applyLang(next);
   }));
 
   // Apply saved theme icons
@@ -8547,6 +8924,144 @@ function _initProfileOnLogin(user){
   },500);
 }
 
+// ============================================================
+// OFFLINE / ONLINE INDICATOR
+// ============================================================
+(function(){
+  var indicator=document.getElementById('offlineIndicator');
+  function updateOnlineStatus(){
+    if(navigator.onLine){ if(indicator) indicator.style.display='none'; }
+    else { if(indicator) indicator.style.display='block'; }
+  }
+  window.addEventListener('online',updateOnlineStatus);
+  window.addEventListener('offline',updateOnlineStatus);
+  updateOnlineStatus();
+})();
+
+// ============================================================
+// TWO-FACTOR AUTHENTICATION (2FA)
+// ============================================================
+let _2faPending=false, _2faEmail='', _2faCode='', _2faVerified=new Set(), _2faPendingPw='';
+
+function _init2FADigits(){
+  var digits=document.querySelectorAll('#twoFAInputs .twoFA-digit');
+  digits.forEach(function(d,i){
+    d.addEventListener('input',function(){
+      if(d.value.length===1&&i<digits.length-1) digits[i+1].focus();
+      if(d.value.length>1) d.value=d.value.slice(-1);
+    });
+    d.addEventListener('keydown',function(e){
+      if(e.key==='Backspace'&&!d.value&&i>0) digits[i-1].focus();
+      if(e.key==='Enter') verify2FACode();
+    });
+    d.addEventListener('paste',function(e){
+      e.preventDefault();
+      var pasted=(e.clipboardData||window.clipboardData).getData('text').replace(/\D/g,'').slice(0,6);
+      pasted.split('').forEach(function(ch,j){ if(digits[j]) digits[j].value=ch; });
+      if(digits[Math.min(pasted.length,5)]) digits[Math.min(pasted.length,5)].focus();
+    });
+  });
+}
+function generate2FACode(){return String(Math.floor(100000+Math.random()*900000));}
+function send2FACode(email){
+  _2faCode=generate2FACode(); _2faEmail=email;
+  return db.collection('twoFactor').doc(email.replace(/\./g,'_')).set({
+    code:_2faCode,email:email,createdAt:firebase.firestore.FieldValue.serverTimestamp()
+  }).then(()=>{ return emailjs.send('service_r453frt','template_32lb4l9',{to_email:email,subject:'🔐 PLATINUMZ — 2FA Code',message:'Your 2FA code is: '+_2faCode}).catch(()=>{}); });
+}
+function show2FAModal(email){
+  _2faPending=true; _2faEmail=email;
+  var modal=document.getElementById('twoFAModal'); if(modal) modal.classList.add('show');
+  var digits=document.querySelectorAll('#twoFAInputs .twoFA-digit');
+  digits.forEach(function(d){d.value='';});
+  document.getElementById('twoFAMsg').textContent='';
+  _init2FADigits(); setTimeout(function(){if(digits[0])digits[0].focus();},300);
+  send2FACode(email);
+}
+function close2FAModal(){ _2faPending=false; var modal=document.getElementById('twoFAModal'); if(modal) modal.classList.remove('show'); auth.signOut(); }
+function verify2FACode(){
+  var digits=document.querySelectorAll('#twoFAInputs .twoFA-digit');
+  var entered=''; digits.forEach(function(d){entered+=d.value;});
+  var msg=document.getElementById('twoFAMsg');
+  if(entered.length!==6){msg.className='profile-msg error';msg.textContent=currentLang==='sw'?'Weka nambari 6':'Enter 6-digit code';return;}
+  msg.className='profile-msg'; msg.textContent=currentLang==='sw'?'Inathibitisha...':'Verifying...';
+  db.collection('twoFactor').doc(_2faEmail.replace(/\./g,'_')).get().then(function(doc){
+    if(doc.exists&&doc.data().code===entered){
+      _2faVerified.add(_2faEmail); _2faPending=false;
+      document.getElementById('twoFAModal').classList.remove('show'); msg.textContent='';
+      db.collection('twoFactor').doc(_2faEmail.replace(/\./g,'_')).delete().catch(()=>{});
+      auth.signInWithEmailAndPassword(_2faEmail,_2faPendingPw||'').catch(()=>{});
+    } else { msg.className='profile-msg error'; msg.textContent=currentLang==='sw'?'Nambari si sahihi':'Invalid code'; digits.forEach(function(d){d.value='';}); if(digits[0])digits[0].focus(); }
+  }).catch(function(){msg.className='profile-msg error';msg.textContent=currentLang==='sw'?'Hitilafu':'Error';});
+}
+function resend2FACode(){ send2FACode(_2faEmail).then(()=>{var m=document.getElementById('twoFAMsg');if(m){m.className='profile-msg success';m.textContent=currentLang==='sw'?'Nambari mpya imetumwa!':'New code sent!';}}); }
+
+// ============================================================
+// ACCESSIBILITY — KEYBOARD NAV + FOCUS MANAGEMENT
+// ============================================================
+(function(){
+  // Skip link
+  var skipLink=document.getElementById('skipLink');
+  if(skipLink) skipLink.addEventListener('click',function(e){
+    e.preventDefault();
+    var main=document.getElementById('mainContent');
+    if(main){main.style.display='block';main.setAttribute('tabindex','-1');main.focus();}
+  });
+
+  // Escape key closes modals/overlays
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){
+      document.querySelectorAll('.modal-overlay.open,.diag-modal.show,.qr-modal.show,.pw-modal.show,.loc-modal.show,.call-modal.show').forEach(function(m){
+        m.classList.remove('open','show');
+      });
+      // Close mobile sidebar
+      var sb=document.getElementById('cuSidebar'); if(sb) sb.classList.remove('open');
+      var ov=document.getElementById('cuMbOverlay'); if(ov) ov.classList.remove('open');
+    }
+  });
+
+  // Focus trap for modals
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='Tab') return;
+    var activeModal=document.querySelector('.modal-overlay.open,.pw-modal.show,.call-modal.show');
+    if(!activeModal) return;
+    var focusables=activeModal.querySelectorAll('button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),a[href],[tabindex]:not([tabindex="-1"])');
+    if(focusables.length===0) return;
+    var first=focusables[0], last=focusables[focusables.length-1];
+    if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+    else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+  });
+
+  // Arrow key nav for sidebar links
+  document.querySelectorAll('.cu-sb-nav .cu-sb-link').forEach(function(link,idx,all){
+    link.setAttribute('tabindex','0');
+    link.addEventListener('keydown',function(e){
+      if(e.key==='ArrowDown'){e.preventDefault();if(all[idx+1])all[idx+1].focus();}
+      if(e.key==='ArrowUp'){e.preventDefault();if(all[idx-1])all[idx-1].focus();}
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();link.click();}
+    });
+  });
+
+  // Arrow key nav for admin tabs
+  document.querySelectorAll('.ad-tab').forEach(function(tab,idx,all){
+    tab.setAttribute('tabindex','0');
+    tab.addEventListener('keydown',function(e){
+      if(e.key==='ArrowRight'){e.preventDefault();if(all[idx+1])all[idx+1].focus();}
+      if(e.key==='ArrowLeft'){e.preventDefault();if(all[idx-1])all[idx-1].focus();}
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();tab.click();}
+    });
+  });
+
+  // ARIA live region for announcements
+  var liveRegion=document.createElement('div');
+  liveRegion.setAttribute('aria-live','polite');
+  liveRegion.setAttribute('aria-atomic','true');
+  liveRegion.setAttribute('class','sr-only');
+  liveRegion.style.cssText='position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);border:0;';
+  document.body.appendChild(liveRegion);
+  window.announce=function(msg){ liveRegion.textContent=msg; setTimeout(function(){liveRegion.textContent='';},3000); };
+})();
+
 </script>
 
 <!-- === PWA INSTALL BANNER === -->
@@ -8746,6 +9261,30 @@ function _initProfileOnLogin(user){
     <div class="diag-body" id="journeyBody"></div>
   </div>
 </div>
+
+<!-- === 2FA VERIFICATION MODAL === -->
+<div class="pw-modal" id="twoFAModal">
+  <div class="pw-box" style="max-width:400px;">
+    <button class="pw-close" onclick="close2FAModal()">✕</button>
+    <h3 style="text-align:center;">🔐 uthibitisho wa Hatua mbili</h3>
+    <p style="color:var(--muted);font-size:0.82rem;text-align:center;margin-bottom:16px;" data-label="2fa-desc">Tumekutumia nambari ya uthibitisho kwenye email yako. Weka nambari ya taratibu 6.</p>
+    <div style="display:flex;gap:8px;justify-content:center;margin-bottom:16px;" id="twoFAInputs">
+      <input type="text" maxlength="1" class="twoFA-digit" inputmode="numeric" pattern="[0-9]" aria-label="Digit 1">
+      <input type="text" maxlength="1" class="twoFA-digit" inputmode="numeric" pattern="[0-9]" aria-label="Digit 2">
+      <input type="text" maxlength="1" class="twoFA-digit" inputmode="numeric" pattern="[0-9]" aria-label="Digit 3">
+      <input type="text" maxlength="1" class="twoFA-digit" inputmode="numeric" pattern="[0-9]" aria-label="Digit 4">
+      <input type="text" maxlength="1" class="twoFA-digit" inputmode="numeric" pattern="[0-9]" aria-label="Digit 5">
+      <input type="text" maxlength="1" class="twoFA-digit" inputmode="numeric" pattern="[0-9]" aria-label="Digit 6">
+    </div>
+    <p id="twoFAMsg" class="profile-msg" style="text-align:center;"></p>
+    <button class="cu-btn cu-btn-primary" style="width:100%;margin-top:10px;" onclick="verify2FACode()" data-label="2fa-verify-btn">Thibitisha →</button>
+    <p style="text-align:center;margin-top:12px;"><a style="color:var(--fiber);font-size:0.82rem;cursor:pointer;" onclick="resend2FACode()" data-label="2fa-resend">Tuma tena nambari</a></p>
+  </div>
+</div>
+<style>
+.twoFA-digit{width:48px;height:56px;text-align:center;font-size:1.4rem;font-weight:700;font-family:'JetBrains Mono',monospace;border:2px solid var(--line);border-radius:12px;background:var(--panel-2);color:var(--paper);transition:all 0.2s;}
+.twoFA-digit:focus{border-color:var(--fiber);box-shadow:0 0 12px rgba(62,211,199,0.25);outline:none;}
+</style>
 
 <!-- === CHANGE PASSWORD MODAL === -->
 <div class="pw-modal" id="pwModal">
