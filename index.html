@@ -1711,6 +1711,15 @@
   .loyalty-reward .rw-cost{color:#F2A93B;font-weight:700;font-size:0.78rem;margin-top:4px;}
   .loyalty-reward .rw-name{color:#8899aa;font-size:0.72rem;margin-top:2px;}
 
+  /* === ORDER CANCEL BUTTON === */
+  .cu-cancel-btn{background:none;border:1px solid rgba(255,107,107,0.3);color:#ff6b6b;width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:0.85rem;font-weight:700;transition:all 0.2s;display:inline-flex;align-items:center;justify-content:center;}
+  .cu-cancel-btn:hover{background:rgba(255,107,107,0.15);border-color:#ff6b6b;transform:scale(1.1);}
+
+  /* === LOADING SPINNER === */
+  .cu-spinner{display:inline-block;width:18px;height:18px;border:2px solid var(--line);border-top-color:var(--fiber);border-radius:50%;animation:cuSpin 0.8s linear infinite;margin-right:8px;vertical-align:middle;}
+  @keyframes cuSpin{ to{ transform:rotate(360deg); } }
+  .cu-loading-overlay{display:flex;align-items:center;justify-content:center;gap:10px;padding:40px;color:var(--muted);font-size:0.88rem;}
+
   /* === PROFILE PAGE === */
   .profile-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;margin-bottom:16px;}
   .profile-avatar-wrap{display:flex;flex-direction:column;align-items:center;margin-bottom:20px;}
@@ -2626,8 +2635,48 @@
           <p data-label="about-impact-desc">Tumehudumia wateja kutoka kila kona ya Tanzania — kutoka Arusha hadi Mwanza, Dar es Salaam hadi Mbeya.</p>
         </div>
       </div>
-    </div>
 
+      <!-- TERMS & CONDITIONS PAGE -->
+      <div class="cu-page" id="cuPageTerms">
+        <h2 class="cu-page-title" data-label="cu-terms-title">📜 Masharti ya Matumizi</h2>
+        <p class="cu-page-sub" data-label="cu-terms-sub">Tafadhali soma masharti haya kwa makini.</p>
+        <div class="profile-card" style="line-height:1.7;color:var(--muted);font-size:0.88rem;">
+          <h3 style="color:var(--paper);font-size:1rem;" data-label="cu-terms-h1">1. MAPITISHO</h3>
+          <p data-label="cu-terms-p1">Kwa kutumia huduma za PLATINUMZ IT Support, unakubaliana na masharti yote yaliyoainishwa hapa. Kama hukubaliani na sehemu yoyote, tafadhali usitumie huduma zetu.</p>
+          <h3 style="color:var(--paper);font-size:1rem;margin-top:16px;" data-label="cu-terms-h2">2. HUDUMA ZETU</h3>
+          <p data-label="cu-terms-p2">Tunatoa huduma za TEHAMA ikiwa ni pamoja na ukarabati wa kompyuta, usanidi wa mtandao, usalama wa kimtandao, na huduma nyingine za kiufundi. Huduma zetu zinatolewa kwa ubora wa juu iwezekanavyo.</p>
+          <h3 style="color:var(--paper);font-size:1rem;margin-top:16px;" data-label="cu-terms-h3">3. MALIPO</h3>
+          <p data-label="cu-terms-p3">Malipo yanafanywa kabla au baada ya huduma kutolewa, kulingana na makubaliano. Tunakubali malipo kupitia Tigo Pesa, M-Pesa, na njia nyingine zinazopatikana.</p>
+          <h3 style="color:var(--paper);font-size:1rem;margin-top:16px;" data-label="cu-terms-h4">4. JUKUMU LA MTEJA</h3>
+          <p data-label="cu-terms-p4">Mteja anawajibika kutoa taarifa sahihi, kuhifadhi vifaa vyake kabla ya huduma, na kuthibitisha uhalali wa umiliki wa vifaa vinavyokarabatiwa.</p>
+          <h3 style="color:var(--paper);font-size:1rem;margin-top:16px;" data-label="cu-terms-h5">5. DHAMANA</h3>
+          <p data-label="cu-terms-p5">Huduma zetu zina dhamana ya siku 30 baada ya ukarabati. Ikiwa hitilafu inarudi ndani ya kipindi hiki, tutainhaririwa bila malipo. Dhamana haiondoi uharibifu unaosababishwa na matumizi mabaya.</p>
+          <h3 style="color:var(--paper);font-size:1rem;margin-top:16px;" data-label="cu-terms-h6">6. KUFUTA ODER</h3>
+          <p data-label="cu-terms-p6">Unaweza kufuta oda yako kabla ya kuanza kufanyiwa kazi. Baada ya kuanza, kufuta kunaweza kuhusisha ada ya sehemu ya kazi iliyofanyika.</p>
+        </div>
+      </div>
+
+      <!-- PRIVACY POLICY PAGE -->
+      <div class="cu-page" id="cuPagePrivacy">
+        <h2 class="cu-page-title" data-label="cu-privacy-title">🔒 Sera ya Faragha</h2>
+        <p class="cu-page-sub" data-label="cu-privacy-sub">Jinsi tunavyolinda taarifa zako.</p>
+        <div class="profile-card" style="line-height:1.7;color:var(--muted);font-size:0.88rem;">
+          <h3 style="color:var(--paper);font-size:1rem;" data-label="cu-privacy-h1">1. TUNAKUSANYA NINI</h3>
+          <p data-label="cu-privacy-p1">Tunakusanya jina lako, anwani ya barua pepe, namba ya simu, na taarifa za huduma unazozihitaji. Pia tunakusanya data ya matumizi ya programu kwa uboreshaji.</p>
+          <h3 style="color:var(--paper);font-size:1rem;margin-top:16px;" data-label="cu-privacy-h2">2. TUNATUMIAJE TAARIFA</h3>
+          <p data-label="cu-privacy-p2">Taarifa zako zinatumika kwa: kutoa huduma zako, kuwasiliana nawe kuhusu oda zako, kuboresha huduma zetu, na kutoa taarifa muhimu kuhusu ofa mpya.</p>
+          <h3 style="color:var(--paper);font-size:1rem;margin-top:16px;" data-label="cu-privacy-h3">3. USHIRIKIANO</h3>
+          <p data-label="cu-privacy-p3">Hatushirikiani na taarifa zako na watu wengine bila ridhaa yako, isipokuwa pale tunapolazimishwa na sheria.</p>
+          <h3 style="color:var(--paper);font-size:1rem;margin-top:16px;" data-label="cu-privacy-h4">4. USALAMA</h3>
+          <p data-label="cu-privacy-p4">Tunatumia teknolojia ya sasa ya usalama kulinda taarifa zako. Hata hivyo, hakuna mtandao ambao ni salama 100%.</p>
+          <h3 style="color:var(--paper);font-size:1rem;margin-top:16px;" data-label="cu-privacy-h5">5. HAKI ZAKO</h3>
+          <p data-label="cu-privacy-p5">Una haki ya: kuona taarifa zako, kuzihaririwa, kuzifuta, na kupinga usindikaji. Wasiliana nasi kupitia Live Chat au barua pepe.</p>
+          <h3 style="color:var(--paper);font-size:1rem;margin-top:16px;" data-label="cu-privacy-h6">6. COOKIES</h3>
+          <p data-label="cu-privacy-p6">Tovuti yetu inatumia cookies kuboresha uzoefu wako. Unaweza kuondoa cookies kwenye mipangilio ya browser yako.</p>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -3296,6 +3345,8 @@ s0.parentNode.insertBefore(s1,s0);
         <a class="cu-sb-link" onclick="openCustomerJourney()" style="cursor:pointer;" data-label="cu-sb-journey"><span class="icon">📊</span>Safari Yangu</a>
         <a class="cu-sb-link" data-page="loyalty" data-label="cu-sb-loyalty"><span class="icon">🏆</span>Pointi</a>
         <a class="cu-sb-link" data-page="about" data-label="cu-sb-about"><span class="icon">ℹ️</span>Kuhusu Sisi</a>
+        <a class="cu-sb-link" data-page="terms" data-label="cu-sb-terms"><span class="icon">📜</span>Masharti</a>
+        <a class="cu-sb-link" data-page="privacy" data-label="cu-sb-privacy"><span class="icon">🔒</span>Faragha</a>
         <a class="cu-sb-link" data-page="profile" data-label="cu-sb-profile"><span class="icon">👤</span>Wasifu</a>
       </nav>
       <div class="cu-sb-logout">
@@ -3377,8 +3428,8 @@ s0.parentNode.insertBefore(s1,s0);
         </div>
         <div class="cu-table-wrap">
           <table class="cu-table">
-            <thead><tr><th data-label="cu-order-huduma">Huduma</th><th data-label="cu-order-gharama">Gharama</th><th data-label="cu-order-simu">Simu</th><th data-label="cu-order-maelezo">Maelezo</th><th data-label="cu-order-tarehe">Tarehe</th><th data-label="cu-order-hali">Hali</th></tr></thead>
-            <tbody id="cuOrdersBody"><tr><td colspan="6" class="cu-empty">Inapakia...</td></tr></tbody>
+            <thead><tr><th data-label="cu-order-huduma">Huduma</th><th data-label="cu-order-gharama">Gharama</th><th data-label="cu-order-simu">Simu</th><th data-label="cu-order-maelezo">Maelezo</th><th data-label="cu-order-tarehe">Tarehe</th><th data-label="cu-order-hali">Hali</th><th data-label="cu-order-kitendo">Kitendo</th></tr></thead>
+            <tbody id="cuOrdersBody"><tr><td colspan="7" class="cu-empty"><div class="cu-spinner"></div>Inapakia...</td></tr></tbody>
           </table>
         </div>
       </div>
@@ -3475,7 +3526,7 @@ s0.parentNode.insertBefore(s1,s0);
           <textarea id="cuReviewText" placeholder="Andika maoni yako hapa..."></textarea>
           <button class="cu-btn cu-btn-primary" style="margin-top:12px;" onclick="submitReview()">Tuma Maoni →</button>
         </div>
-        <div id="cuReviewsList"></div>
+        <div id="cuReviewsList"><div class="cu-loading-overlay"><div class="cu-spinner"></div>Inapakia maoni...</div></div>
       </div>
 
       <!-- LOYALTY POINTS PAGE -->
@@ -4244,6 +4295,22 @@ s0.parentNode.insertBefore(s1,s0);
   auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
   const db = firebase.firestore();
   const ADMIN_EMAIL = 'paulleonard277@gmail.com';
+  let _adminRoleCache = {};
+
+  function _isAdmin(user){
+    if(!user) return false;
+    if(user.email === ADMIN_EMAIL) return true;
+    return !!_adminRoleCache[user.uid];
+  }
+  function _checkAdminRole(user){
+    return db.collection('clients').doc(user.uid).get().then(doc=>{
+      if(doc.exists && doc.data().role === 'admin'){
+        _adminRoleCache[user.uid] = true;
+        return true;
+      }
+      return false;
+    }).catch(()=>false);
+  }
 
   // EmailJS config — badilisha na zako mwenyewe
   // 1. Fungua https://www.emailjs.com — jiunge bure
@@ -4537,7 +4604,9 @@ s0.parentNode.insertBefore(s1,s0);
       if(pwaBanner) pwaBanner.classList.remove('show');
       var notifToast = document.getElementById('notifToast');
       if(notifToast) notifToast.classList.remove('show');
-      if(user.email === ADMIN_EMAIL){
+
+      _checkAdminRole(user).then(()=>{
+        if(_isAdmin(user)){
         mainContent.style.display = 'none';
         adminDash.style.display = 'block';
         currentUserName = 'Admin';
@@ -4575,7 +4644,8 @@ s0.parentNode.insertBefore(s1,s0);
         try { listenForMissedCalls(); } catch(e){}
         try { loadLoyaltyPoints(); } catch(e){}
         try { _initProfileOnLogin(user); } catch(e){}
-      }
+        }
+      }).catch(()=>{});
     } else {
       if(currentUserName) {
         try {
@@ -5387,6 +5457,18 @@ s0.parentNode.insertBefore(s1,s0);
       alert('Hitilafu imetokea: ' + e.message);
     });
   }
+  function cancelOrder(id){
+    const at = translations[currentLang];
+    if(!confirm(at['order-cancel-confirm']||'Futa order hii?')) return;
+    db.collection('orders').doc(id).update({
+      status: 'imefutwa',
+      cancelledAt: firebase.firestore.FieldValue.serverTimestamp()
+    }).then(()=>{
+      showNotifToast(currentLang==='sw'?'Order Imefutwa':'Order Cancelled', currentLang==='sw'?'Order yako imefutwa':'Your order has been cancelled','🗑️');
+    }).catch(e=>{
+      alert((currentLang==='sw'?'Hitilafu: ':'Error: ')+e.message);
+    });
+  }
 
   function completeOrder(id){
     const at = translations[currentLang];
@@ -5513,13 +5595,13 @@ s0.parentNode.insertBefore(s1,s0);
       document.getElementById('cuStatOrders').textContent = orderCount;
       document.getElementById('cuStatPending').textContent = orderCount;
       let doneCount = 0;
-      if(snap.empty){ oBody.innerHTML = '<tr><td colspan="6" class="cu-empty">'+translations[currentLang]['cu-orders-empty']+'</td></tr>'; return; }
+      if(snap.empty){ oBody.innerHTML = '<tr><td colspan="7" class="cu-empty">'+translations[currentLang]['cu-orders-empty']+'</td></tr>'; return; }
       let docs = [];
-      snap.forEach((doc) => { const d = doc.data(); docs.push({d, ts: d.createdAt ? d.createdAt.toDate().getTime() : 0}); });
+      snap.forEach((doc) => { const d = doc.data(); docs.push({d, id:doc.id, ts: d.createdAt ? d.createdAt.toDate().getTime() : 0}); });
       docs.sort((a,b) => b.ts - a.ts);
       let rows = '';
       const ct = translations[currentLang];
-      docs.forEach(({d}) => {
+      docs.forEach(({d, id}) => {
         const dt = d.createdAt ? d.createdAt.toDate().toLocaleDateString(currentLang === 'sw' ? 'sw-TZ' : 'en-US') : '—';
         const st = d.status || 'mpya';
         let statusBadge = '';
@@ -5530,14 +5612,20 @@ s0.parentNode.insertBefore(s1,s0);
         } else if(st === 'imekamilika'){
           statusBadge = '<span class="cu-badge cu-badge-green">'+(ct['cu-status-imekamilika']||'Imekamilika')+'</span>';
           doneCount++;
+        } else if(st === 'imefutwa'){
+          statusBadge = '<span class="cu-badge cu-badge-red" style="opacity:0.6;text-decoration:line-through;">'+(currentLang==='sw'?'Imefutwa':'Cancelled')+'</span>';
         } else {
           statusBadge = '<span class="cu-badge cu-badge-red">'+st+'</span>';
         }
-        rows += '<tr><td><span class="cu-badge cu-badge-green">'+(d.huduma||'—')+'</span></td><td style="color:var(--fiber);font-weight:600;font-size:0.82rem;">'+(d.gharama||'—')+'</td><td style="color:var(--muted)">'+(d.simu||'—')+'</td><td style="color:var(--muted)">'+(d.maelezo||'—')+'</td><td style="font-family:JetBrains Mono,monospace;font-size:0.82rem;color:var(--muted)">'+dt+'</td><td>'+statusBadge+'</td></tr>';
+        let actionBtn = '';
+        if(st === 'mpya' || st === 'inashughulikiwa'){
+          actionBtn = '<button class="cu-cancel-btn" onclick="cancelOrder(\''+id+'\')" title="'+(currentLang==='sw'?'Futa order':'Cancel order')+'">✕</button>';
+        }
+        rows += '<tr><td><span class="cu-badge cu-badge-green">'+(d.huduma||'—')+'</span></td><td style="color:var(--fiber);font-weight:600;font-size:0.82rem;">'+(d.gharama||'—')+'</td><td style="color:var(--muted)">'+(d.simu||'—')+'</td><td style="color:var(--muted)">'+(d.maelezo||'—')+'</td><td style="font-family:JetBrains Mono,monospace;font-size:0.82rem;color:var(--muted)">'+dt+'</td><td>'+statusBadge+'</td><td>'+actionBtn+'</td></tr>';
       });
       oBody.innerHTML = rows;
       document.getElementById('cuStatDone').textContent = doneCount;
-    }, (e) => { oBody.innerHTML = '<tr><td colspan="5" class="cu-empty" style="color:#ff6b6b">Hitilafu: '+e.message+'</td></tr>'; });
+    }, (e) => { oBody.innerHTML = '<tr><td colspan="7" class="cu-empty" style="color:#ff6b6b">Hitilafu: '+e.message+'</td></tr>'; });
 
     db.collection('clients').doc(user.uid).get().then((doc) => {
       if(doc.exists){
@@ -6150,6 +6238,9 @@ s0.parentNode.insertBefore(s1,s0);
       'cu-order-maelezo': 'Maelezo',
       'cu-order-tarehe': 'Tarehe',
       'cu-order-hali': 'Hali',
+      'cu-order-kitendo': 'Kitendo',
+      'cu-order-cancel-confirm': 'Futa order hii?',
+      'cu-orders-empty': 'Hakuna orders bado.',
       'cu-status-inasubiri': 'Inasubiri',
       'cu-status-inashughulikiwa': 'Inashughulikiwa',
       'cu-status-imekamilika': 'Imekamilika',
@@ -6230,6 +6321,8 @@ s0.parentNode.insertBefore(s1,s0);
       'cu-sb-journey': 'Safari Yangu',
       'cu-sb-loyalty': 'Pointi',
       'cu-sb-profile': 'Wasifu',
+      'cu-sb-privacy': 'Faragha',
+      'cu-sb-terms': 'Masharti',
       'cu-profile-title': '👤 Wasifu Wangu',
       'cu-profile-sub': 'Badilisha taarifa zako za kibinafsi.',
       'cu-profile-change-avatar': 'Badilisha Picha',
@@ -6636,6 +6729,9 @@ s0.parentNode.insertBefore(s1,s0);
       'cu-order-maelezo': 'Details',
       'cu-order-tarehe': 'Date',
       'cu-order-hali': 'Status',
+      'cu-order-kitendo': 'Action',
+      'cu-order-cancel-confirm': 'Cancel this order?',
+      'cu-orders-empty': 'No orders yet.',
       'cu-status-inasubiri': 'Pending',
       'cu-status-inashughulikiwa': 'In Progress',
       'cu-status-imekamilika': 'Completed',
@@ -6709,6 +6805,8 @@ s0.parentNode.insertBefore(s1,s0);
       'cu-sb-maoni': 'Reviews',
       'cu-sb-about': 'About Us',
       'cu-sb-profile': 'Profile',
+      'cu-sb-privacy': 'Privacy',
+      'cu-sb-terms': 'Terms',
       'cu-profile-title': '👤 My Profile',
       'cu-profile-sub': 'Update your personal information.',
       'cu-profile-change-avatar': 'Change Photo',
@@ -7142,7 +7240,7 @@ s0.parentNode.insertBefore(s1,s0);
   const custChatSend = document.getElementById('customerChatSend');
 
   auth.onAuthStateChanged((user) => {
-    const isAdmin = user && user.email === ADMIN_EMAIL;
+    const isAdmin = user && _isAdmin(user);
     custChatOpen.style.display = (user && !isAdmin) ? 'none' : 'none';
     if(!user) custChatWidget.style.display = 'none';
   });
@@ -7222,6 +7320,8 @@ s0.parentNode.insertBefore(s1,s0);
         offa: 'cuPageOffa',
         maoni: 'cuPageMaoni',
         about: 'cuPageAbout',
+        terms: 'cuPageTerms',
+        privacy: 'cuPagePrivacy',
         loyalty: 'cuPageLoyalty',
         profile: 'cuPageProfile'
       };
