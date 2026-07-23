@@ -1711,6 +1711,33 @@
   .loyalty-reward .rw-cost{color:#F2A93B;font-weight:700;font-size:0.78rem;margin-top:4px;}
   .loyalty-reward .rw-name{color:#8899aa;font-size:0.72rem;margin-top:2px;}
 
+  /* === PROFILE PAGE === */
+  .profile-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;margin-bottom:16px;}
+  .profile-avatar-wrap{display:flex;flex-direction:column;align-items:center;margin-bottom:20px;}
+  .profile-avatar{width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,var(--fiber),#3ed4f8);display:flex;align-items:center;justify-content:center;font-size:2.2rem;font-weight:800;color:#0E1A2B;border:3px solid var(--fiber);box-shadow:0 0 24px rgba(62,211,199,0.3);transition:all 0.3s;}
+  .profile-avatar:hover{transform:scale(1.05);box-shadow:0 0 30px rgba(62,211,199,0.5);}
+  .profile-avatar-btn{margin-top:10px;padding:6px 16px;border-radius:8px;border:1px solid var(--fiber);color:var(--fiber);background:none;cursor:pointer;font-size:0.8rem;font-weight:600;transition:all 0.2s;}
+  .profile-avatar-btn:hover{background:rgba(62,211,199,0.1);}
+  .profile-info{max-width:500px;margin:0 auto;}
+  .profile-row{margin-bottom:16px;}
+  .profile-row label{display:block;color:var(--muted);font-size:0.82rem;margin-bottom:6px;font-weight:600;}
+  .profile-input{width:100%;padding:12px 16px;border-radius:12px;border:1px solid var(--line);background:var(--panel-2);color:var(--paper);font-size:0.9rem;font-family:inherit;transition:all 0.2s;box-sizing:border-box;}
+  .profile-input:focus{border-color:var(--fiber);box-shadow:0 0 12px rgba(62,211,199,0.15);outline:none;}
+  .profile-actions{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;}
+  .profile-msg{margin-top:12px;font-size:0.85rem;min-height:20px;}
+  .profile-msg.success{color:var(--fiber);}
+  .profile-msg.error{color:#ff6b6b;}
+
+  /* === CHANGE PASSWORD MODAL === */
+  .pw-modal{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:100010;display:none;align-items:center;justify-content:center;backdrop-filter:blur(6px);}
+  .pw-modal.show{display:flex;}
+  .pw-box{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:32px;width:90%;max-width:420px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.5);}
+  .pw-box h3{color:var(--paper);font-size:1.1rem;margin-bottom:16px;text-align:center;}
+  .pw-box .profile-input{margin-bottom:14px;}
+  .pw-box .pw-actions{display:flex;gap:10px;margin-top:10px;}
+  .pw-box .pw-close{position:absolute;top:16px;right:16px;background:none;border:none;color:var(--muted);font-size:1.3rem;cursor:pointer;transition:color 0.2s;}
+  .pw-box .pw-close:hover{color:var(--paper);}
+
   /* === AUTO DIAGNOSTICS === */
   .autodiag-card{background:#1a2942;border:1px solid #1e3348;border-radius:12px;padding:14px;margin-bottom:8px;display:flex;align-items:center;gap:12px;}
   .autodiag-card .ad-icon{font-size:1.3rem;width:40px;text-align:center;}
@@ -3235,6 +3262,10 @@ s0.parentNode.insertBefore(s1,s0);
       .cu-pay-info p{font-size:0.72rem; word-break:break-all;}
       .cu-offer-card{padding:18px 16px !important;}
       .cu-review-form{padding:18px 14px !important;}
+      .profile-card{padding:18px 14px !important;}
+      .profile-avatar{width:72px;height:72px;font-size:1.8rem;}
+      .profile-actions{flex-direction:column;}
+      .profile-actions .cu-btn{width:100%;text-align:center;}
       #cuPageOrders > div:first-child{flex-direction:column !important; gap:10px;}
       #cuPageOrders > div:first-child .cu-btn{width:100%;}
     }
@@ -3265,6 +3296,7 @@ s0.parentNode.insertBefore(s1,s0);
         <a class="cu-sb-link" onclick="openCustomerJourney()" style="cursor:pointer;" data-label="cu-sb-journey"><span class="icon">📊</span>Safari Yangu</a>
         <a class="cu-sb-link" data-page="loyalty" data-label="cu-sb-loyalty"><span class="icon">🏆</span>Pointi</a>
         <a class="cu-sb-link" data-page="about" data-label="cu-sb-about"><span class="icon">ℹ️</span>Kuhusu Sisi</a>
+        <a class="cu-sb-link" data-page="profile" data-label="cu-sb-profile"><span class="icon">👤</span>Wasifu</a>
       </nav>
       <div class="cu-sb-logout">
         <button class="cu-sb-lang" id="langToggleCustomer" style="width:100%;padding:10px 16px;border-radius:12px;border:1px solid var(--line);background:none;color:var(--paper);cursor:pointer;font-size:0.85rem;font-weight:700;margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;"><span>🌐</span> SW</button>
@@ -3510,6 +3542,43 @@ s0.parentNode.insertBefore(s1,s0);
         </div>
         <div class="cu-about-contact">
           <p data-label="cu-about-contact">Una maswali? Wasiliana nasi kupitia Live Chat au piga simu: <strong>0786 868 069</strong></p>
+        </div>
+      </div>
+
+      <!-- PROFILE PAGE -->
+      <div class="cu-page" id="cuPageProfile">
+        <h2 class="cu-page-title" data-label="cu-profile-title">👤 Wasifu Wangu</h2>
+        <p class="cu-page-sub" data-label="cu-profile-sub">Badilisha taarifa zako za kibinafsi.</p>
+        <div class="profile-card">
+          <div class="profile-avatar-wrap">
+            <div class="profile-avatar" id="profileAvatar">M</div>
+            <button class="profile-avatar-btn" onclick="document.getElementById('avatarUploadInput').click();" data-label="cu-profile-change-avatar">Badilisha Picha</button>
+            <input type="file" id="avatarUploadInput" accept="image/*" style="display:none;" onchange="handleAvatarUpload(event)">
+          </div>
+          <div class="profile-info">
+            <div class="profile-row">
+              <label data-label="cu-profile-name">Jina Kamili</label>
+              <input type="text" id="profileNameInput" class="profile-input" placeholder="Jina lako">
+            </div>
+            <div class="profile-row">
+              <label>Email</label>
+              <input type="email" id="profileEmailDisplay" class="profile-input" disabled style="opacity:0.5;cursor:not-allowed;">
+            </div>
+            <div class="profile-row">
+              <label data-label="cu-profile-service">Huduma</label>
+              <input type="text" id="profileServiceInput" class="profile-input" placeholder="Huduma unayopata" disabled style="opacity:0.5;cursor:not-allowed;">
+            </div>
+            <div class="profile-actions">
+              <button class="cu-btn cu-btn-primary" onclick="saveProfile()" data-label="cu-profile-save">💾 Hifadhi Mabadiliko</button>
+              <button class="cu-btn" onclick="openChangePasswordModal()" style="border:1px solid var(--line);color:var(--muted);padding:10px 20px;border-radius:12px;cursor:pointer;font-size:0.88rem;background:none;" data-label="cu-profile-change-pass">🔒 Badilisha Password</button>
+            </div>
+            <p class="profile-msg" id="profileMsg"></p>
+          </div>
+        </div>
+        <div class="profile-card" style="margin-top:20px;">
+          <h3 style="color:var(--paper);font-size:0.95rem;margin-bottom:12px;" data-label="cu-profile-verify">📧 Uthibitisho wa Email</h3>
+          <p style="color:var(--muted);font-size:0.85rem;margin-bottom:12px;" id="profileVerifyStatus" data-label="cu-profile-verify-status">Inakagua...</p>
+          <button class="cu-btn" id="profileVerifyBtn" onclick="sendVerifyEmail()" style="display:none;border:1px solid var(--fiber);color:var(--fiber);padding:10px 20px;border-radius:12px;cursor:pointer;font-size:0.88rem;background:none;" data-label="cu-profile-verify-btn">📧 Tuma Email ya Uthibitisho</button>
         </div>
       </div>
 
@@ -4505,6 +4574,7 @@ s0.parentNode.insertBefore(s1,s0);
         try { listenForIncomingCalls(); } catch(e){}
         try { listenForMissedCalls(); } catch(e){}
         try { loadLoyaltyPoints(); } catch(e){}
+        try { _initProfileOnLogin(user); } catch(e){}
       }
     } else {
       if(currentUserName) {
@@ -6159,6 +6229,23 @@ s0.parentNode.insertBefore(s1,s0);
       'cu-sb-record': 'Record Screen',
       'cu-sb-journey': 'Safari Yangu',
       'cu-sb-loyalty': 'Pointi',
+      'cu-sb-profile': 'Wasifu',
+      'cu-profile-title': '👤 Wasifu Wangu',
+      'cu-profile-sub': 'Badilisha taarifa zako za kibinafsi.',
+      'cu-profile-change-avatar': 'Badilisha Picha',
+      'cu-profile-name': 'Jina Kamili',
+      'cu-profile-service': 'Huduma',
+      'cu-profile-save': '💾 Hifadhi Mabadiliko',
+      'cu-profile-change-pass': '🔒 Badilisha Password',
+      'cu-profile-verify': '📧 Uthibitisho wa Email',
+      'cu-profile-verify-status': 'Inakagua...',
+      'cu-profile-verify-btn': '📧 Tuma Email ya Uthibitisho',
+      'cu-pw-title': '🔒 Badilisha Password',
+      'cu-pw-old': 'Password ya Zamani',
+      'cu-pw-new': 'Password Mpya',
+      'cu-pw-confirm': 'Thibitisha Password Mpya',
+      'cu-pw-submit': '🔄 Badilisha Sasa',
+      'cu-pw-cancel': 'Ghairi',
       'cu-hero-title': '👋 Karibu, ',
       'cu-page-sub': 'Ungependa kufanya nini leo?',
       'cu-stat-orders': 'Orders',
@@ -6621,6 +6708,23 @@ s0.parentNode.insertBefore(s1,s0);
       'cu-sb-offa': 'Offers',
       'cu-sb-maoni': 'Reviews',
       'cu-sb-about': 'About Us',
+      'cu-sb-profile': 'Profile',
+      'cu-profile-title': '👤 My Profile',
+      'cu-profile-sub': 'Update your personal information.',
+      'cu-profile-change-avatar': 'Change Photo',
+      'cu-profile-name': 'Full Name',
+      'cu-profile-service': 'Service',
+      'cu-profile-save': '💾 Save Changes',
+      'cu-profile-change-pass': '🔒 Change Password',
+      'cu-profile-verify': '📧 Email Verification',
+      'cu-profile-verify-status': 'Checking...',
+      'cu-profile-verify-btn': '📧 Send Verification Email',
+      'cu-pw-title': '🔒 Change Password',
+      'cu-pw-old': 'Old Password',
+      'cu-pw-new': 'New Password',
+      'cu-pw-confirm': 'Confirm New Password',
+      'cu-pw-submit': '🔄 Change Now',
+      'cu-pw-cancel': 'Cancel',
       'cu-sb-appt': 'Appointments',
       'cu-sb-loc': 'Location',
       'cu-sb-diag': 'AI Diagnostic',
@@ -7118,7 +7222,8 @@ s0.parentNode.insertBefore(s1,s0);
         offa: 'cuPageOffa',
         maoni: 'cuPageMaoni',
         about: 'cuPageAbout',
-        loyalty: 'cuPageLoyalty'
+        loyalty: 'cuPageLoyalty',
+        profile: 'cuPageProfile'
       };
       const target = document.getElementById(pageMap[page]);
       if(target) target.classList.add('active');
@@ -7308,6 +7413,8 @@ function sendRecordedVideo(){
       createdAt:firebase.firestore.FieldValue.serverTimestamp()
     }).then(()=>{
       showNotifToast('Imetumwa!','Video imetumwa kwa admin kwa ajili ya uchunguzi','🎬');
+    }).catch(err=>{
+      showNotifToast('Hitilafu','Video haikuweza kutumwa: '+err.message,'❌');
     });
   };
   reader.readAsDataURL(blob);
@@ -7530,6 +7637,8 @@ function doQRCheckin(){
     generateQRCode(document.getElementById('qrCanvas'),'PLATINUMZ-'+user.uid+'-'+Date.now());
     loadQRCheckins();
     addLoyaltyPoints(user.uid,10,'Check-in');
+  }).catch(err=>{
+    showNotifToast('Hitilafu','Check-in imeshindikana: '+err.message,'❌');
   });
 }
 function loadQRCheckins(){
@@ -8138,6 +8247,206 @@ window.addEventListener('beforeunload',function(){
     });
   }
 });
+
+// ============================================================
+// PROFILE EDITING
+// ============================================================
+function loadProfile(){
+  const user=firebase.auth().currentUser;
+  if(!user) return;
+  const nameInput=document.getElementById('profileNameInput');
+  const emailDisplay=document.getElementById('profileEmailDisplay');
+  const serviceInput=document.getElementById('profileServiceInput');
+  const avatarEl=document.getElementById('profileAvatar');
+  if(nameInput) nameInput.value=user.displayName||'';
+  if(emailDisplay) emailDisplay.value=user.email||'';
+  if(avatarEl){
+    const initial=(user.displayName||user.email||'M').charAt(0).toUpperCase();
+    avatarEl.textContent=initial;
+  }
+  // Load service from Firestore
+  if(serviceInput){
+    db.collection('clients').doc(user.uid).get().then(doc=>{
+      if(doc.exists){
+        serviceInput.value=doc.data().huduma||'';
+      }
+    }).catch(()=>{});
+  }
+  // Check email verification
+  checkEmailVerification();
+}
+function saveProfile(){
+  const user=firebase.auth().currentUser;
+  if(!user) return;
+  const nameInput=document.getElementById('profileNameInput');
+  const msg=document.getElementById('profileMsg');
+  const newName=(nameInput.value||'').trim();
+  if(!newName){
+    msg.className='profile-msg error';
+    msg.textContent=currentLang==='sw'?'Jina si tupu!':'Name cannot be empty!';
+    return;
+  }
+  msg.className='profile-msg';
+  msg.textContent=currentLang==='sw'?'Inahifadhi...':'Saving...';
+  const tasks=[user.updateProfile({displayName:newName})];
+  tasks.push(db.collection('clients').doc(user.uid).set({jina:newName},{merge:true}));
+  Promise.all(tasks).then(()=>{
+    msg.className='profile-msg success';
+    msg.textContent=currentLang==='sw'?'Imehifadhiwa! ✅':'Saved! ✅';
+    // Update sidebar display
+    const cuName=document.getElementById('cuName');
+    if(cuName) cuName.textContent=newName;
+    const avatarEl=document.getElementById('profileAvatar');
+    if(avatarEl) avatarEl.textContent=newName.charAt(0).toUpperCase();
+    const cuAvatar=document.getElementById('cuAvatar');
+    if(cuAvatar) cuAvatar.textContent=newName.charAt(0).toUpperCase();
+  }).catch(err=>{
+    msg.className='profile-msg error';
+    msg.textContent=(currentLang==='sw'?'Hitilafu: ':'Error: ')+err.message;
+  });
+}
+function handleAvatarUpload(event){
+  const file=event.target.files[0];
+  if(!file) return;
+  if(file.size>200000){
+    alert(currentLang==='sw'?'Picha ni kubwa sana (max 200KB)':'Image too large (max 200KB)');
+    return;
+  }
+  const reader=new FileReader();
+  reader.onload=function(e){
+    const dataUrl=e.target.result;
+    const user=firebase.auth().currentUser;
+    if(!user) return;
+    db.collection('clients').doc(user.uid).set({avatar:dataUrl},{merge:true}).then(()=>{
+      const avatarEl=document.getElementById('profileAvatar');
+      if(avatarEl){
+        avatarEl.style.backgroundImage='url('+dataUrl+')';
+        avatarEl.style.backgroundSize='cover';
+        avatarEl.style.backgroundPosition='center';
+        avatarEl.textContent='';
+      }
+      const cuAvatar=document.getElementById('cuAvatar');
+      if(cuAvatar){
+        cuAvatar.style.backgroundImage='url('+dataUrl+')';
+        cuAvatar.style.backgroundSize='cover';
+        cuAvatar.style.backgroundPosition='center';
+        cuAvatar.textContent='';
+      }
+    }).catch(err=>{
+      alert((currentLang==='sw'?'Hitilafu: ':'Error: ')+err.message);
+    });
+  };
+  reader.readAsDataURL(file);
+}
+function checkEmailVerification(){
+  const user=firebase.auth().currentUser;
+  if(!user) return;
+  const statusEl=document.getElementById('profileVerifyStatus');
+  const btn=document.getElementById('profileVerifyBtn');
+  user.reload().then(()=>{
+    if(user.emailVerified){
+      statusEl.textContent=currentLang==='sw'?'✅ Email yako imethibitishwa.':'✅ Your email is verified.';
+      statusEl.style.color='var(--fiber)';
+      if(btn) btn.style.display='none';
+    } else {
+      statusEl.textContent=currentLang==='sw'?'⚠️ Email yako bado haijathibitishwa.':'⚠️ Your email is not yet verified.';
+      statusEl.style.color='var(--signal)';
+      if(btn) btn.style.display='inline-block';
+    }
+  }).catch(()=>{});
+}
+function sendVerifyEmail(){
+  const user=firebase.auth().currentUser;
+  if(!user) return;
+  user.sendEmailVerification().then(()=>{
+    alert(currentLang==='sw'?'Email ya uthibitisho imetumwa! Angalia inbox yako.':'Verification email sent! Check your inbox.');
+  }).catch(err=>{
+    alert((currentLang==='sw'?'Hitilafu: ':'Error: ')+err.message);
+  });
+}
+
+// ============================================================
+// CHANGE PASSWORD
+// ============================================================
+function openChangePasswordModal(){
+  const modal=document.getElementById('pwModal');
+  if(modal) modal.classList.add('show');
+  document.getElementById('pwOldInput').value='';
+  document.getElementById('pwNewInput').value='';
+  document.getElementById('pwConfirmInput').value='';
+  document.getElementById('pwMsg').textContent='';
+}
+function closeChangePasswordModal(){
+  const modal=document.getElementById('pwModal');
+  if(modal) modal.classList.remove('show');
+}
+function doChangePassword(){
+  const user=firebase.auth().currentUser;
+  if(!user) return;
+  const oldPw=document.getElementById('pwOldInput').value;
+  const newPw=document.getElementById('pwNewInput').value;
+  const confirmPw=document.getElementById('pwConfirmInput').value;
+  const msg=document.getElementById('pwMsg');
+  if(!oldPw||!newPw||!confirmPw){
+    msg.className='profile-msg error';
+    msg.textContent=currentLang==='sw'?'Jaza sehemu zote':'Fill all fields';
+    return;
+  }
+  if(newPw.length<6){
+    msg.className='profile-msg error';
+    msg.textContent=currentLang==='sw'?'Password mpya ni fupi (min 6)':'New password too short (min 6)';
+    return;
+  }
+  if(newPw!==confirmPw){
+    msg.className='profile-msg error';
+    msg.textContent=currentLang==='sw'?'Passwords hazifanani':'Passwords do not match';
+    return;
+  }
+  msg.className='profile-msg';
+  msg.textContent=currentLang==='sw'?'Inabadilisha...':'Changing...';
+  const credential=firebase.auth.EmailAuthProvider.credential(user.email,oldPw);
+  user.reauthenticateAndRetrieveDataWithCredential(credential).then(()=>{
+    return user.updatePassword(newPw);
+  }).then(()=>{
+    msg.className='profile-msg success';
+    msg.textContent=currentLang==='sw'?'Password imebadilishwa! ✅':'Password changed! ✅';
+    setTimeout(closeChangePasswordModal,2000);
+  }).catch(err=>{
+    msg.className='profile-msg error';
+    let errMsg=err.message;
+    if(err.code==='auth/wrong-password') errMsg=currentLang==='sw'?'Password ya zamani si sahihi':'Old password is incorrect';
+    if(err.code==='auth/weak-password') errMsg=currentLang==='sw'?'Password ni dhaifu sana':'Password is too weak';
+    msg.textContent=errMsg;
+  });
+}
+
+// ============================================================
+// LOAD PROFILE ON DASHBOARD INIT
+// ============================================================
+function _initProfileOnLogin(user){
+  setTimeout(()=>{
+    loadProfile();
+    // Load saved avatar
+    if(user){
+      db.collection('clients').doc(user.uid).get().then(doc=>{
+        if(doc.exists&&doc.data().avatar){
+          const dataUrl=doc.data().avatar;
+          const avatarEl=document.getElementById('profileAvatar');
+          const cuAvatar=document.getElementById('cuAvatar');
+          [avatarEl,cuAvatar].forEach(el=>{
+            if(el){
+              el.style.backgroundImage='url('+dataUrl+')';
+              el.style.backgroundSize='cover';
+              el.style.backgroundPosition='center';
+              el.textContent='';
+            }
+          });
+        }
+      }).catch(()=>{});
+    }
+  },500);
+}
+
 </script>
 
 <!-- === PWA INSTALL BANNER === -->
@@ -8335,6 +8644,25 @@ window.addEventListener('beforeunload',function(){
       <button onclick="document.getElementById('journeyModal').classList.remove('show')" style="background:none;border:none;color:#667;font-size:1.3rem;cursor:pointer;">✕</button>
     </div>
     <div class="diag-body" id="journeyBody"></div>
+  </div>
+</div>
+
+<!-- === CHANGE PASSWORD MODAL === -->
+<div class="pw-modal" id="pwModal">
+  <div class="pw-box">
+    <button class="pw-close" onclick="closeChangePasswordModal()">✕</button>
+    <h3 data-label="cu-pw-title">🔒 Badilisha Password</h3>
+    <label style="color:var(--muted);font-size:0.82rem;display:block;margin-bottom:4px;" data-label="cu-pw-old">Password ya Zamani</label>
+    <input type="password" id="pwOldInput" class="profile-input" placeholder="••••••••">
+    <label style="color:var(--muted);font-size:0.82rem;display:block;margin-bottom:4px;" data-label="cu-pw-new">Password Mpya</label>
+    <input type="password" id="pwNewInput" class="profile-input" placeholder="••••••••" minlength="6">
+    <label style="color:var(--muted);font-size:0.82rem;display:block;margin-bottom:4px;" data-label="cu-pw-confirm">Thibitisha Password Mpya</label>
+    <input type="password" id="pwConfirmInput" class="profile-input" placeholder="••••••••" minlength="6">
+    <p id="pwMsg" class="profile-msg" style="margin-top:8px;"></p>
+    <div class="pw-actions">
+      <button class="cu-btn cu-btn-primary" onclick="doChangePassword()" data-label="cu-pw-submit">🔄 Badilisha Sasa</button>
+      <button class="cu-btn" onclick="closeChangePasswordModal()" style="border:1px solid var(--line);color:var(--muted);padding:10px 20px;border-radius:12px;cursor:pointer;font-size:0.88rem;background:none;" data-label="cu-pw-cancel">Ghairi</button>
+    </div>
   </div>
 </div>
 
