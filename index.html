@@ -3131,7 +3131,7 @@ s0.parentNode.insertBefore(s1,s0);
 <div id="customerDashboard" style="display:none; min-height:100vh; background:var(--ink); color:var(--paper);">
 
   <style>
-    .cu-layout{display:grid;grid-template-columns:240px 1fr;min-height:100vh;}
+    .cu-layout{display:grid;grid-template-columns:240px 1fr;height:100vh;overflow:hidden;}
     .cu-sidebar{background:var(--panel);border-right:1px solid var(--line);padding:24px 0;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;}
     .cu-sb-brand{padding:0 24px 24px;border-bottom:1px solid var(--line);margin-bottom:12px;display:flex;align-items:center;gap:10px;}
     .cu-sb-brand .dot{width:10px;height:10px;border-radius:50%;background:var(--fiber);box-shadow:0 0 10px var(--fiber);}
@@ -3150,7 +3150,7 @@ s0.parentNode.insertBefore(s1,s0);
     .cu-sb-logout button:hover{background:rgba(255,107,107,0.15);border-color:#ff6b6b;}
     .cu-sb-logout .door{display:inline-block;transition:transform 0.3s;}
     .cu-sb-logout button:hover .door{transform:rotateY(40deg) translateX(3px);}
-    .cu-main{padding:28px 32px;overflow-y:auto;}
+    .cu-main{padding:28px 32px;overflow-y:auto;overflow-x:hidden;}
     .cu-page{display:none;animation:fadeSlide 0.3s ease;}
     .cu-page.active{display:block;}
     @keyframes fadeSlide{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
@@ -7702,6 +7702,7 @@ s0.parentNode.insertBefore(s1,s0);
       };
       const target = document.getElementById(pageMap[page]);
       if(target) target.classList.add('active');
+      document.querySelector('.cu-main').scrollTop = 0;
       // Close mobile sidebar
       document.getElementById('cuSidebar').classList.remove('open');
       document.getElementById('cuMbOverlay').classList.remove('open');
