@@ -5638,13 +5638,9 @@
     const langFull = {sw:'English',en:'Kiswahili'};
     document.querySelectorAll('[id^="langToggle"]').forEach(el => {
       if(el.tagName !== 'A') {
-        if(el.querySelector('span')) {
-          el.innerHTML = '<span>ðŸŒ</span> ' + langLabels[lang];
-        } else {
-          el.textContent = langLabels[lang];
-        }
+        el.textContent = langLabels[lang];
       }
-      else el.textContent = 'ðŸŒ ' + langFull[lang];
+      else el.textContent = langFull[lang];
     });
 
     localStorage.setItem('platinumz-lang', lang);

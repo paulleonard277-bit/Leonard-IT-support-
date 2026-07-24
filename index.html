@@ -2242,7 +2242,7 @@
     <a href="#status" onclick="mobileMenu.classList.remove('open'); menuToggle.textContent='â˜°';">Hali ya Huduma</a>
     <a href="#faq" onclick="mobileMenu.classList.remove('open'); menuToggle.textContent='â˜°';">Maswali (FAQ)</a>
     <a href="#wasiliana" onclick="mobileMenu.classList.remove('open'); menuToggle.textContent='â˜°';">Wasiliana Nasi</a>
-    <a id="langToggleMobile" style="cursor:pointer;">ðŸŒ Badilisha Lugha (SW/EN)</a>
+    <a id="langToggleMobile" style="cursor:pointer;">Lugha (SW/EN)</a>
   </div>
 </nav>
 
@@ -3345,7 +3345,7 @@ s0.parentNode.insertBefore(s1,s0);
         <a class="cu-sb-link" data-page="profile" data-label="cu-sb-profile"><span class="icon">ðŸ‘¤</span>Wasifu</a>
       </nav>
       <div class="cu-sb-logout">
-        <button class="cu-sb-lang" id="langToggleCustomer" style="width:100%;padding:10px 16px;border-radius:12px;border:1px solid var(--line);background:none;color:var(--paper);cursor:pointer;font-size:0.85rem;font-weight:700;margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;"><span>ðŸŒ</span> SW</button>
+        <button class="cu-sb-lang" id="langToggleCustomer" style="width:100%;padding:10px 16px;border-radius:12px;border:1px solid var(--line);background:none;color:var(--paper);cursor:pointer;font-size:0.85rem;font-weight:700;margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;">SW</button>
         <button id="cuLogoutBtn" onclick="firebase.auth().signOut()"><span class="door">ðŸšª</span>Out</button>
       </div>
     </div>
@@ -7279,13 +7279,9 @@ s0.parentNode.insertBefore(s1,s0);
     const langFull = {sw:'English',en:'Kiswahili'};
     document.querySelectorAll('[id^="langToggle"]').forEach(el => {
       if(el.tagName !== 'A') {
-        if(el.querySelector('span')) {
-          el.innerHTML = '<span>ðŸŒ</span> ' + langLabels[lang];
-        } else {
-          el.textContent = langLabels[lang];
-        }
+        el.textContent = langLabels[lang];
       }
-      else el.textContent = 'ðŸŒ ' + langFull[lang];
+      else el.textContent = langFull[lang];
     });
 
     localStorage.setItem('platinumz-lang', lang);
