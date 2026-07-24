@@ -2203,7 +2203,6 @@
     <p class="switch-mode" id="switchModeText">Huna akaunti? <a id="switchModeLink">Jisajili hapa</a></p>
     <div style="display:flex; gap:8px; justify-content:center; margin-top:20px;">
       <button id="langToggleGateMobile" style="background:none; border:1px solid var(--line); color:var(--paper); padding:7px 14px; border-radius:6px; font-size:0.78rem; cursor:pointer; font-family:'JetBrains Mono',monospace;">SW</button>
-      <button id="themeToggleGateMobile" style="background:none; border:1px solid var(--line); color:var(--paper); padding:7px 12px; border-radius:6px; font-size:0.85rem; cursor:pointer;">ðŸŒ™</button>
     </div>
   </div>
   </div>
@@ -2227,7 +2226,6 @@
       <a href="#wasiliana" class="nav-cta">Piga Simu</a>
       <button id="langToggle" aria-label="Badilisha lugha" title="SW / EN" style="background:none; border:1px solid var(--line); color:var(--paper); padding:8px 12px; border-radius:8px; font-size:0.75rem; cursor:pointer; font-family:'JetBrains Mono',monospace;">SW</button>
       <button id="currencyToggle" onclick="toggleCurrency()" aria-label="Badilisha sarafu" title="TSH / USD" style="background:none; border:1px solid var(--line); color:var(--paper); padding:8px 12px; border-radius:8px; font-size:0.75rem; cursor:pointer; font-family:'JetBrains Mono',monospace;">$ USD</button>
-      <button id="themeToggle" aria-label="Badilisha mandhari" title="Badilisha Dark/Light" style="background:none; border:1px solid var(--line); color:var(--paper); width:38px; height:38px; border-radius:8px; font-size:1rem; cursor:pointer; display:flex; align-items:center; justify-content:center;">ðŸŒ™</button>
       <button class="menu-toggle" id="menuToggle" aria-label="Fungua menyu">â˜°</button>
     </div>
   </div>
@@ -7311,17 +7309,7 @@ s0.parentNode.insertBefore(s1,s0);
     }
   }
 
-  function toggleTheme(){
-    document.body.classList.toggle('light');
-    const isLight = document.body.classList.contains('light');
-    localStorage.setItem('platinumz-theme', isLight ? 'light' : 'dark');
-    document.querySelectorAll('[id^="themeToggle"]').forEach(el => {
-      el.textContent = isLight ? 'â˜€ï¸' : 'ðŸŒ™';
-    });
-  }
-
-  // Wire up ALL theme and lang toggles
-  document.querySelectorAll('[id^="themeToggle"]').forEach(el => el.addEventListener('click', toggleTheme));
+  // Wire up lang toggles
   document.querySelectorAll('[id^="langToggle"]').forEach(el => el.addEventListener('click', () => {
     const langs = ['sw','en'];
     const langLabels = {sw:'SW',en:'EN'};
@@ -7329,11 +7317,6 @@ s0.parentNode.insertBefore(s1,s0);
     const next = langs[(idx + 1) % langs.length];
     applyLang(next);
   }));
-
-  // Apply saved theme icons
-  if(savedTheme === 'light'){
-    document.querySelectorAll('[id^="themeToggle"]').forEach(el => el.textContent = 'â˜€ï¸');
-  }
 
   applyLang(currentLang);
   updateStatus();

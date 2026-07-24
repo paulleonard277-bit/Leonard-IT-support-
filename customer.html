@@ -5606,17 +5606,7 @@
     }
   }
 
-  function toggleTheme(){
-    document.body.classList.toggle('light');
-    const isLight = document.body.classList.contains('light');
-    localStorage.setItem('platinumz-theme', isLight ? 'light' : 'dark');
-    document.querySelectorAll('[id^="themeToggle"]').forEach(el => {
-      el.textContent = isLight ? 'â˜€ï¸' : 'ðŸŒ™';
-    });
-  }
-
-  // Wire up ALL theme and lang toggles
-  document.querySelectorAll('[id^="themeToggle"]').forEach(el => el.addEventListener('click', toggleTheme));
+  // Wire up lang toggles
   document.querySelectorAll('[id^="langToggle"]').forEach(el => el.addEventListener('click', () => {
     const langs = ['sw','en'];
     const langLabels = {sw:'SW',en:'EN'};
@@ -5624,11 +5614,6 @@
     const next = langs[(idx + 1) % langs.length];
     applyLang(next);
   }));
-
-  // Apply saved theme icons
-  if(savedTheme === 'light'){
-    document.querySelectorAll('[id^="themeToggle"]').forEach(el => el.textContent = 'â˜€ï¸');
-  }
 
   applyLang(currentLang);
   updateStatus();
