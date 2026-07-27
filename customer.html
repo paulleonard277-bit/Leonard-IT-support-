@@ -2404,6 +2404,26 @@
 
 </div>
 
+
+<div class="diamond-popup-overlay login" id="welcomePopup">
+  <div class="diamond-popup">
+    <div class="diamond-shape"></div>
+    <div class="diamond-icon" id="welcomeEmoji">&#x1F48E;</div>
+    <div class="diamond-title" id="welcomeName">Karibu!</div>
+    <div class="diamond-sub" id="welcomeMsg">Umeingia kwenye mfumo wa PLATINUMZ.</div>
+    <div class="diamond-bar"><div class="diamond-bar-inner"></div></div>
+  </div>
+</div>
+
+<div class="diamond-popup-overlay logout" id="goodbyePopup">
+  <div class="diamond-popup">
+    <div class="diamond-shape"></div>
+    <div class="diamond-icon">&#x1F48E;</div>
+    <div class="diamond-title" id="goodbyeTitle">Kwaheri! &#x1F44B;</div>
+    <div class="diamond-sub" id="goodbyeMsg">Umetoka kwenye mfumo. Tutarajia kuona tena!</div>
+    <div class="diamond-bar"><div class="diamond-bar-inner"></div></div>
+  </div>
+</div>
 <script>
   // â•â•â•â•â•â•â• SPLASH SCREEN v3 AUTO-DISMISS â•â•â•â•â•â•â•
   (function(){
@@ -2929,8 +2949,8 @@
       document.getElementById('cuInfoName').textContent = userName;
       document.getElementById('cuInfoEmail').textContent = user.email;
       var clBtn = document.getElementById('cuLogoutBtn');
-      if(clBtn){ clBtn.onclick = function(){ auth.signOut().then(()=>{ window.location.href='index.html'; }); }; }
-      if(!firstAuthLoad) try { showWelcomePopup(userName); } catch(e){}
+      if(clBtn){ clBtn.onclick = function(){ try { showGoodbyePopup(currentUserName); } catch(e){} setTimeout(()=>{ auth.signOut().then(()=>{ window.location.href='index.html'; }); }, 1500); }; }
+      try { if(!sessionStorage.getItem('platinumz-welcomed')){ showWelcomePopup(userName); sessionStorage.setItem('platinumz-welcomed','1'); } } catch(e){}
       try { loadCustomerDashboard(user); } catch(e){ console.error('Customer dashboard error:', e); }
       requestNotificationPermission();
       renderTimeSlots();
@@ -4141,6 +4161,12 @@
   document.getElementById('orderCompletedPopup').addEventListener('click', function(e){
     if(e.target === this) this.classList.remove('show');
   });
+  document.getElementById('welcomePopup').addEventListener('click', function(e){
+    if(e.target === this) this.classList.remove('show');
+  });
+  document.getElementById('goodbyePopup').addEventListener('click', function(e){
+    if(e.target === this) this.classList.remove('show');
+  });
 
   // Welcome Popup
   function showWelcomePopup(name){
@@ -4148,8 +4174,8 @@
     const isEn = currentLang === 'en';
     document.getElementById('welcomeName').textContent = (isEn ? 'Welcome, ' : 'Karibu, ') + name + '!';
     document.getElementById('welcomeMsg').textContent = isEn
-      ? 'You have successfully registered. Welcome to PLATINUMZ IT Support!'
-      : 'Umejisajili kikamilifu. Karibu sana kwenye familia ya PLATINUMZ IT Support!';
+      ? 'You have successfully logged in. Welcome to PLATINUMZ IT Support!'
+      : 'Umeingia kwenye mfumo wa PLATINUMZ. Tunafurahi kuona tena!';
     popup.classList.add('show');
     setTimeout(() => { popup.classList.remove('show'); }, 4000);
   }
@@ -5769,13 +5795,13 @@
   // Mobile logout button
   const cuMbLogout = document.getElementById('cuMbLogout');
   if(cuMbLogout){
-    cuMbLogout.addEventListener('click', () => auth.signOut());
+    cuMbLogout.addEventListener('click', () => { try { showGoodbyePopup(currentUserName); } catch(e){} setTimeout(()=>{ auth.signOut().then(()=>{ window.location.href='index.html'; }); }, 1500); });
   }
 
   // Top logout button (always visible)
   const cuLogoutBtnTop = document.getElementById('cuLogoutBtnTop');
   if(cuLogoutBtnTop){
-    cuLogoutBtnTop.addEventListener('click', () => auth.signOut());
+    cuLogoutBtnTop.addEventListener('click', () => { try { showGoodbyePopup(currentUserName); } catch(e){} setTimeout(()=>{ auth.signOut().then(()=>{ window.location.href='index.html'; }); }, 1500); });
   }
 
   // ========== ADMIN DASHBOARD ==========

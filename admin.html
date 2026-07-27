@@ -2474,6 +2474,26 @@
   </div>
 </div>
 
+
+<div class="diamond-popup-overlay login" id="welcomePopup">
+  <div class="diamond-popup">
+    <div class="diamond-shape"></div>
+    <div class="diamond-icon" id="welcomeEmoji">&#x1F48E;</div>
+    <div class="diamond-title" id="welcomeName">Karibu!</div>
+    <div class="diamond-sub" id="welcomeMsg">Umeingia kwenye mfumo wa PLATINUMZ.</div>
+    <div class="diamond-bar"><div class="diamond-bar-inner"></div></div>
+  </div>
+</div>
+
+<div class="diamond-popup-overlay logout" id="goodbyePopup">
+  <div class="diamond-popup">
+    <div class="diamond-shape"></div>
+    <div class="diamond-icon">&#x1F48E;</div>
+    <div class="diamond-title" id="goodbyeTitle">Kwaheri! &#x1F44B;</div>
+    <div class="diamond-sub" id="goodbyeMsg">Umetoka kwenye mfumo. Tutarajia kuona tena!</div>
+    <div class="diamond-bar"><div class="diamond-bar-inner"></div></div>
+  </div>
+</div>
 <script>
   // â•â•â•â•â•â•â• SPLASH SCREEN v3 AUTO-DISMISS â•â•â•â•â•â•â•
   (function(){
@@ -2993,8 +3013,8 @@
       currentUserName = 'Admin';
       try { loadAdminDashboard(user); } catch(e){ console.error('Admin dashboard error:', e); }
       var alBtn = document.getElementById('adminLogoutBtn');
-      if(alBtn){ alBtn.onclick = function(){ try{db.collection('presence').doc('admin').set({online:false,ts:firebase.firestore.FieldValue.serverTimestamp()}).catch(()=>{});}catch(e){} auth.signOut().then(()=>{ window.location.href='index.html'; }); }; }
-      if(!firstAuthLoad) showAdminWelcomePopup('Admin');
+      if(alBtn){ alBtn.onclick = function(){ try{db.collection('presence').doc('admin').set({online:false,ts:firebase.firestore.FieldValue.serverTimestamp()}).catch(()=>{});}catch(e){} try { showGoodbyePopup('Admin'); } catch(e){} setTimeout(()=>{ auth.signOut().then(()=>{ window.location.href='index.html'; }); }, 1500); }; }
+      try { if(!sessionStorage.getItem('platinumz-welcomed')){ showAdminWelcomePopup('Admin'); sessionStorage.setItem('platinumz-welcomed','1'); } } catch(e){}
       requestNotificationPermission();
       renderTimeSlots();
       try { db.collection('presence').doc('admin').set({online:true,email:user.email,ts:firebase.firestore.FieldValue.serverTimestamp()}); }catch(e){}
@@ -4203,6 +4223,12 @@
     if(e.target === this) this.classList.remove('show');
   });
   document.getElementById('orderCompletedPopup').addEventListener('click', function(e){
+    if(e.target === this) this.classList.remove('show');
+  });
+  document.getElementById('welcomePopup').addEventListener('click', function(e){
+    if(e.target === this) this.classList.remove('show');
+  });
+  document.getElementById('goodbyePopup').addEventListener('click', function(e){
     if(e.target === this) this.classList.remove('show');
   });
 
