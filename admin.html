@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="sw">
 <head>
 <meta charset="UTF-8">
@@ -2197,7 +2197,7 @@
         <div class="ad-notif-panel" id="adminNotifPanel"></div>
       </div>
       <button class="ad-top-logout" id="langToggleAdmin" style="padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:none;color:var(--paper);cursor:pointer;font-size:0.78rem;font-weight:700;letter-spacing:0.5px;">SW</button>
-      <button class="ad-top-logout" id="adminLogoutBtn" onclick="firebase.auth().signOut()">ðŸšª Out</button>
+      <button class="ad-top-logout" id="adminLogoutBtn">ðŸšª Out</button>
     </div>
   </div>
 
@@ -4235,6 +4235,7 @@
   // Welcome Popup
   function showWelcomePopup(name){
     const popup = document.getElementById('welcomePopup');
+    if(!popup) return;
     const isEn = currentLang === 'en';
     document.getElementById('welcomeName').textContent = (isEn ? 'Welcome, ' : 'Karibu, ') + name + '!';
     document.getElementById('welcomeMsg').textContent = isEn
@@ -4246,6 +4247,7 @@
 
   function showGoodbyePopup(name){
     const popup = document.getElementById('goodbyePopup');
+    if(!popup) return;
     const isEn = currentLang === 'en';
     document.getElementById('goodbyeTitle').textContent = (isEn ? 'Goodbye, ' : 'Kwaheri, ') + name + '!';
     document.getElementById('goodbyeMsg').textContent = isEn
@@ -4258,10 +4260,11 @@
   }
 
   function showAdminWelcomePopup(name){
-    const popup = document.getElementById('adminWelcomePopup');
+    const popup = document.getElementById('welcomePopup');
+    if(!popup) return;
     const isEn = currentLang === 'en';
-    document.getElementById('adminWelcomeTitle').textContent = (isEn ? 'Welcome, ' : 'Karibu, ') + (name || 'Admin') + '!';
-    document.getElementById('adminWelcomeMsg').textContent = isEn
+    document.getElementById('welcomeName').textContent = (isEn ? 'Welcome, ' : 'Karibu, ') + (name || 'Admin') + '!';
+    document.getElementById('welcomeMsg').textContent = isEn
       ? 'You have entered the PLATINUMZ IT Support dashboard.'
       : 'Umeingia kwenye dashboard ya PLATINUMZ IT Support, ' + (name || 'Admin') + '.';
     popup.classList.add('show');
@@ -4706,7 +4709,7 @@
       'admin-no-chat': 'Hakuna ujumbe bado.',
       'admin-chat-ph': 'Andika ujumbe kwa wateja...',
       'admin-greeting': 'Karibu, Admin',
-      'admin-greeting-sub': 'Hii ni dashibodi yako â€” fuatilia wateja, orders, chat na maoni.',
+      'admin-greeting-sub': 'Hii ni dashibodi yako â€” fuatilia wateja, maombi, mazungumzo na maoni.',
       'admin-stat-wateja': 'Wateja',
       'admin-stat-orders': 'Maombi',
       'admin-stat-ujumbe': 'Ujumbe',
@@ -4728,7 +4731,7 @@
       'ad-chat-select': 'Chagua mteja kuanza chat...',
       'admin-no-reviews': 'Hakuna maoni bado.',
       'admin-delete': 'ðŸ—‘ï¸ Futa',
-      'admin-logout': 'ðŸšª Out',
+      'admin-logout': 'ðŸšª Ondoka',
       'admin-order-jina': 'Jina',
       'admin-order-simu': 'Simu',
       'admin-order-huduma': 'Huduma',
@@ -5220,7 +5223,7 @@
       'ad-chat-select': 'Select a customer to start chat...',
       'admin-no-reviews': 'No reviews yet.',
       'admin-delete': 'ðŸ—‘ï¸ Delete',
-      'admin-logout': 'Ondoka',
+      'admin-logout': 'Out',
       'admin-order-jina': 'Name',
       'admin-order-simu': 'Phone',
       'admin-order-huduma': 'Service',
@@ -5859,13 +5862,13 @@
   // Mobile logout button
   const cuMbLogout = document.getElementById('cuMbLogout');
   if(cuMbLogout){
-    cuMbLogout.addEventListener('click', () => auth.signOut());
+    cuMbLogout.addEventListener('click', () => { try { showGoodbyePopup(currentUserName); } catch(e){} setTimeout(()=>{ auth.signOut().then(()=>{ window.location.href='index.html'; }); }, 1500); });
   }
 
   // Top logout button (always visible)
-  const cuLogoutBtnTop = document.getElementById('cuLogoutBtnTop');
-  if(cuLogoutBtnTop){
-    cuLogoutBtnTop.addEventListener('click', () => auth.signOut());
+  const cuLogoutBtnTop2 = document.getElementById('cuLogoutBtnTop');
+  if(cuLogoutBtnTop2){
+    cuLogoutBtnTop2.addEventListener('click', () => { try { showGoodbyePopup(currentUserName); } catch(e){} setTimeout(()=>{ auth.signOut().then(()=>{ window.location.href='index.html'; }); }, 1500); });
   }
 
   // ========== ADMIN DASHBOARD ==========

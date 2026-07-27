@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="sw">
 <head>
 <meta charset="UTF-8">
@@ -2115,7 +2115,7 @@
       </nav>
       <div class="cu-sb-logout">
         <button class="cu-sb-lang" id="langToggleCustomer" style="width:100%;padding:10px 16px;border-radius:12px;border:1px solid var(--line);background:none;color:var(--paper);cursor:pointer;font-size:0.85rem;font-weight:700;margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;">SW</button>
-        <button id="cuLogoutBtn" onclick="firebase.auth().signOut()"><span class="door">ðŸšª</span>Out</button>
+        <button id="cuLogoutBtn"><span class="door">ðŸšª</span>Out</button>
       </div>
     </div>
 
@@ -2138,7 +2138,7 @@
             <button class="cu-notif-bell" id="cuNotifBell" onclick="toggleNotifPanel('customer')">ðŸ”” <span class="cu-notif-badge" id="cuNotifBadge">0</span></button>
             <div class="cu-notif-panel" id="cuNotifPanel"></div>
           </div>
-          <button id="cuLogoutBtnTop" onclick="firebase.auth().signOut()" style="background:none;border:1px solid rgba(255,107,107,0.3);color:#ff6b6b;padding:8px 16px;border-radius:10px;font-size:0.82rem;cursor:pointer;font-weight:600;display:flex;align-items:center;gap:6px;transition:all 0.2s;"><span style="display:inline-block;transition:transform 0.3s;">ðŸšª</span> Out</button>
+          <button id="cuLogoutBtnTop" style="background:none;border:1px solid rgba(255,107,107,0.3);color:#ff6b6b;padding:8px 16px;border-radius:10px;font-size:0.82rem;cursor:pointer;font-weight:600;display:flex;align-items:center;gap:6px;transition:all 0.2s;"><span style="display:inline-block;transition:transform 0.3s;">ðŸšª</span> Out</button>
         </div>
         <p class="cu-page-sub" data-label="cu-page-sub">Ungependa kufanya nini leo?</p>
         <div class="cu-grid">
@@ -4171,6 +4171,7 @@
   // Welcome Popup
   function showWelcomePopup(name){
     const popup = document.getElementById('welcomePopup');
+    if(!popup) return;
     const isEn = currentLang === 'en';
     document.getElementById('welcomeName').textContent = (isEn ? 'Welcome, ' : 'Karibu, ') + name + '!';
     document.getElementById('welcomeMsg').textContent = isEn
@@ -4182,6 +4183,7 @@
 
   function showGoodbyePopup(name){
     const popup = document.getElementById('goodbyePopup');
+    if(!popup) return;
     const isEn = currentLang === 'en';
     document.getElementById('goodbyeTitle').textContent = (isEn ? 'Goodbye, ' : 'Kwaheri, ') + name + '!';
     document.getElementById('goodbyeMsg').textContent = isEn
@@ -4194,10 +4196,11 @@
   }
 
   function showAdminWelcomePopup(name){
-    const popup = document.getElementById('adminWelcomePopup');
+    const popup = document.getElementById('welcomePopup');
+    if(!popup) return;
     const isEn = currentLang === 'en';
-    document.getElementById('adminWelcomeTitle').textContent = (isEn ? 'Welcome, ' : 'Karibu, ') + (name || 'Admin') + '!';
-    document.getElementById('adminWelcomeMsg').textContent = isEn
+    document.getElementById('welcomeName').textContent = (isEn ? 'Welcome, ' : 'Karibu, ') + (name || 'Admin') + '!';
+    document.getElementById('welcomeMsg').textContent = isEn
       ? 'You have entered the PLATINUMZ IT Support dashboard.'
       : 'Umeingia kwenye dashboard ya PLATINUMZ IT Support, ' + (name || 'Admin') + '.';
     popup.classList.add('show');
@@ -4642,7 +4645,7 @@
       'admin-no-chat': 'Hakuna ujumbe bado.',
       'admin-chat-ph': 'Andika ujumbe kwa wateja...',
       'admin-greeting': 'Karibu, Admin',
-      'admin-greeting-sub': 'Hii ni dashibodi yako â€” fuatilia wateja, orders, chat na maoni.',
+      'admin-greeting-sub': 'Hii ni dashibodi yako â€” fuatilia wateja, maombi, mazungumzo na maoni.',
       'admin-stat-wateja': 'Wateja',
       'admin-stat-orders': 'Maombi',
       'admin-stat-ujumbe': 'Ujumbe',
@@ -4664,7 +4667,7 @@
       'ad-chat-select': 'Chagua mteja kuanza chat...',
       'admin-no-reviews': 'Hakuna maoni bado.',
       'admin-delete': 'ðŸ—‘ï¸ Futa',
-      'admin-logout': 'ðŸšª Out',
+      'admin-logout': 'ðŸšª Ondoka',
       'admin-order-jina': 'Jina',
       'admin-order-simu': 'Simu',
       'admin-order-huduma': 'Huduma',
@@ -5156,7 +5159,7 @@
       'ad-chat-select': 'Select a customer to start chat...',
       'admin-no-reviews': 'No reviews yet.',
       'admin-delete': 'ðŸ—‘ï¸ Delete',
-      'admin-logout': 'Ondoka',
+      'admin-logout': 'Out',
       'admin-order-jina': 'Name',
       'admin-order-simu': 'Phone',
       'admin-order-huduma': 'Service',
