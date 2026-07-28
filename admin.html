@@ -2203,7 +2203,7 @@
 
   <div class="ad-wrap">
     <div class="ad-greeting" id="adminGreeting">Karibu, Admin</div>
-    <div class="ad-greeting-sub">Hii ni dashibodi yako â€” fuatilia wateja, orders, chat na maoni.</div>
+    <div class="ad-greeting-sub">Hii ni dashibodi yako â€” fuatilia wateja, maombi, mazungumzo na maoni.</div>
 
     <div class="ad-stats">
       <div class="ad-stat-card"><div class="icon">ðŸ‘¥</div><div class="num" id="statClients">0</div><div class="label">Wateja</div></div>
@@ -5625,6 +5625,11 @@
           const iconSpan = el.querySelector('.icon');
           const iconHTML = iconSpan ? iconSpan.outerHTML : '';
           el.innerHTML = iconHTML + ' ' + t[key];
+          return;
+        }
+        if(el.querySelector('.door')) {
+          const doorSpan = el.querySelector('.door');
+          el.innerHTML = doorSpan.outerHTML + t[key];
           return;
         }
         el.textContent = t[key];

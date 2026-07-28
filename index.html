@@ -3344,7 +3344,7 @@ s0.parentNode.insertBefore(s1,s0);
       </nav>
       <div class="cu-sb-logout">
         <button class="cu-sb-lang" id="langToggleCustomer" style="width:100%;padding:10px 16px;border-radius:12px;border:1px solid var(--line);background:none;color:var(--paper);cursor:pointer;font-size:0.85rem;font-weight:700;margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;">SW</button>
-        <button id="cuLogoutBtn"><span class="door">ðŸšª</span>Out</button>
+        <button id="cuLogoutBtn" data-label="cu-toka"><span class="door">ðŸšª</span>Out</button>
       </div>
     </div>
 
@@ -3355,7 +3355,7 @@ s0.parentNode.insertBefore(s1,s0);
         <div class="cu-mb-brand"><span class="dot"></span>PLATINUMZ</div>
         <div style="display:flex;gap:6px;">
           <button id="langToggleCustomerMb" style="background:none;border:1px solid rgba(62,211,199,0.3);color:var(--fiber);padding:6px 10px;border-radius:8px;font-size:0.75rem;cursor:pointer;font-weight:700;">SW</button>
-          <button class="cu-mb-logout" id="cuMbLogout">ðŸšª Out</button>
+          <button class="cu-mb-logout" id="cuMbLogout" data-label="cu-toka"><span class="door">ðŸšª</span> Out</button>
         </div>
       </div>
 
@@ -3849,7 +3849,7 @@ s0.parentNode.insertBefore(s1,s0);
 
   <div class="ad-wrap">
     <div class="ad-greeting" id="adminGreeting">Karibu, Admin</div>
-    <div class="ad-greeting-sub">Hii ni dashibodi yako â€” fuatilia wateja, orders, chat na maoni.</div>
+    <div class="ad-greeting-sub">Hii ni dashibodi yako â€” fuatilia wateja, maombi, mazungumzo na maoni.</div>
 
     <div class="ad-stats">
       <div class="ad-stat-card"><div class="icon">ðŸ‘¥</div><div class="num" id="statClients">0</div><div class="label">Wateja</div></div>
@@ -7240,6 +7240,11 @@ s0.parentNode.insertBefore(s1,s0);
           el.innerHTML = iconHTML + ' ' + t[key];
           return;
         }
+        if(el.querySelector('.door')) {
+          const doorSpan = el.querySelector('.door');
+          el.innerHTML = doorSpan.outerHTML + t[key];
+          return;
+        }
         el.textContent = t[key];
       }
     });
@@ -7481,7 +7486,7 @@ s0.parentNode.insertBefore(s1,s0);
   // Top logout button (always visible)
   const cuLogoutBtnTop = document.getElementById('cuLogoutBtnTop');
   if(cuLogoutBtnTop){
-    cuLogoutBtnTop2.addEventListener('click', () => { try { showGoodbyePopup(currentUserName); } catch(e){} setTimeout(()=>{ auth.signOut().then(()=>{ window.location.href='index.html'; }); }, 1500); });
+    cuLogoutBtnTop.addEventListener('click', () => { try { showGoodbyePopup(currentUserName); } catch(e){} setTimeout(()=>{ auth.signOut().then(()=>{ window.location.href='index.html'; }); }, 1500); });
   }
 
   // ========== ADMIN DASHBOARD ==========
