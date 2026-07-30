@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="sw">
 <head>
 <meta charset="UTF-8">
@@ -3344,7 +3344,7 @@ s0.parentNode.insertBefore(s1,s0);
       </nav>
       <div class="cu-sb-logout">
         <button class="cu-sb-lang" id="langToggleCustomer" style="width:100%;padding:10px 16px;border-radius:12px;border:1px solid var(--line);background:none;color:var(--paper);cursor:pointer;font-size:0.85rem;font-weight:700;margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;">SW</button>
-        <button id="cuLogoutBtn" data-label="cu-toka"><span class="door">ðŸšª</span>Out</button>
+        <button id="cuLogoutBtn" onclick="firebase.auth().signOut()"><span class="door">ðŸšª</span>Out</button>
       </div>
     </div>
 
@@ -3355,7 +3355,7 @@ s0.parentNode.insertBefore(s1,s0);
         <div class="cu-mb-brand"><span class="dot"></span>PLATINUMZ</div>
         <div style="display:flex;gap:6px;">
           <button id="langToggleCustomerMb" style="background:none;border:1px solid rgba(62,211,199,0.3);color:var(--fiber);padding:6px 10px;border-radius:8px;font-size:0.75rem;cursor:pointer;font-weight:700;">SW</button>
-          <button class="cu-mb-logout" id="cuMbLogout" data-label="cu-toka"><span class="door">ðŸšª</span> Out</button>
+          <button class="cu-mb-logout" id="cuMbLogout">ðŸšª Out</button>
         </div>
       </div>
 
@@ -3367,7 +3367,7 @@ s0.parentNode.insertBefore(s1,s0);
             <button class="cu-notif-bell" id="cuNotifBell" onclick="toggleNotifPanel('customer')">ðŸ”” <span class="cu-notif-badge" id="cuNotifBadge">0</span></button>
             <div class="cu-notif-panel" id="cuNotifPanel"></div>
           </div>
-          <button id="cuLogoutBtnTop" style="background:none;border:1px solid rgba(255,107,107,0.3);color:#ff6b6b;padding:8px 16px;border-radius:10px;font-size:0.82rem;cursor:pointer;font-weight:600;display:flex;align-items:center;gap:6px;transition:all 0.2s;"><span style="display:inline-block;transition:transform 0.3s;">ðŸšª</span> Out</button>
+          <button id="cuLogoutBtnTop" onclick="firebase.auth().signOut()" style="background:none;border:1px solid rgba(255,107,107,0.3);color:#ff6b6b;padding:8px 16px;border-radius:10px;font-size:0.82rem;cursor:pointer;font-weight:600;display:flex;align-items:center;gap:6px;transition:all 0.2s;"><span style="display:inline-block;transition:transform 0.3s;">ðŸšª</span> Out</button>
         </div>
         <p class="cu-page-sub" data-label="cu-page-sub">Ungependa kufanya nini leo?</p>
         <div class="cu-grid">
@@ -3843,13 +3843,13 @@ s0.parentNode.insertBefore(s1,s0);
         <div class="ad-notif-panel" id="adminNotifPanel"></div>
       </div>
       <button class="ad-top-logout" id="langToggleAdmin" style="padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:none;color:var(--paper);cursor:pointer;font-size:0.78rem;font-weight:700;letter-spacing:0.5px;">SW</button>
-      <button class="ad-top-logout" id="adminLogoutBtn">ðŸšª Out</button>
+      <button class="ad-top-logout" id="adminLogoutBtn" onclick="firebase.auth().signOut()">ðŸšª Out</button>
     </div>
   </div>
 
   <div class="ad-wrap">
     <div class="ad-greeting" id="adminGreeting">Karibu, Admin</div>
-    <div class="ad-greeting-sub">Hii ni dashibodi yako â€” fuatilia wateja, maombi, mazungumzo na maoni.</div>
+    <div class="ad-greeting-sub">Hii ni dashibodi yako â€” fuatilia wateja, orders, chat na maoni.</div>
 
     <div class="ad-stats">
       <div class="ad-stat-card"><div class="icon">ðŸ‘¥</div><div class="num" id="statClients">0</div><div class="label">Wateja</div></div>
@@ -5848,7 +5848,6 @@ s0.parentNode.insertBefore(s1,s0);
   // Welcome Popup
   function showWelcomePopup(name){
     const popup = document.getElementById('welcomePopup');
-    if(!popup) return;
     const isEn = currentLang === 'en';
     document.getElementById('welcomeName').textContent = (isEn ? 'Welcome, ' : 'Karibu, ') + name + '!';
     document.getElementById('welcomeMsg').textContent = isEn
@@ -5860,7 +5859,6 @@ s0.parentNode.insertBefore(s1,s0);
 
   function showGoodbyePopup(name){
     const popup = document.getElementById('goodbyePopup');
-    if(!popup) return;
     const isEn = currentLang === 'en';
     document.getElementById('goodbyeTitle').textContent = (isEn ? 'Goodbye, ' : 'Kwaheri, ') + name + '!';
     document.getElementById('goodbyeMsg').textContent = isEn
@@ -5873,11 +5871,10 @@ s0.parentNode.insertBefore(s1,s0);
   }
 
   function showAdminWelcomePopup(name){
-    const popup = document.getElementById('welcomePopup');
-    if(!popup) return;
+    const popup = document.getElementById('adminWelcomePopup');
     const isEn = currentLang === 'en';
-    document.getElementById('welcomeName').textContent = (isEn ? 'Welcome, ' : 'Karibu, ') + (name || 'Admin') + '!';
-    document.getElementById('welcomeMsg').textContent = isEn
+    document.getElementById('adminWelcomeTitle').textContent = (isEn ? 'Welcome, ' : 'Karibu, ') + (name || 'Admin') + '!';
+    document.getElementById('adminWelcomeMsg').textContent = isEn
       ? 'You have entered the PLATINUMZ IT Support dashboard.'
       : 'Umeingia kwenye dashboard ya PLATINUMZ IT Support, ' + (name || 'Admin') + '.';
     popup.classList.add('show');
@@ -6322,7 +6319,7 @@ s0.parentNode.insertBefore(s1,s0);
       'admin-no-chat': 'Hakuna ujumbe bado.',
       'admin-chat-ph': 'Andika ujumbe kwa wateja...',
       'admin-greeting': 'Karibu, Admin',
-      'admin-greeting-sub': 'Hii ni dashibodi yako â€” fuatilia wateja, maombi, mazungumzo na maoni.',
+      'admin-greeting-sub': 'Hii ni dashibodi yako â€” fuatilia wateja, orders, chat na maoni.',
       'admin-stat-wateja': 'Wateja',
       'admin-stat-orders': 'Maombi',
       'admin-stat-ujumbe': 'Ujumbe',
@@ -6344,7 +6341,7 @@ s0.parentNode.insertBefore(s1,s0);
       'ad-chat-select': 'Chagua mteja kuanza chat...',
       'admin-no-reviews': 'Hakuna maoni bado.',
       'admin-delete': 'ðŸ—‘ï¸ Futa',
-      'admin-logout': 'ðŸšª Ondoka',
+      'admin-logout': 'ðŸšª Out',
       'admin-order-jina': 'Jina',
       'admin-order-simu': 'Simu',
       'admin-order-huduma': 'Huduma',
@@ -6493,7 +6490,7 @@ s0.parentNode.insertBefore(s1,s0);
       'cu-maoni-title': 'â­ Andika Maoni Yako',
       'cu-maoni-ph': 'Andika maoni yako hapa...',
       'cu-maoni-send': 'Tuma Maoni',
-      'cu-toka': 'ðŸšª Ondoka',
+      'cu-toka': 'ðŸšª Out',
       'cu-quick-huduma': 'Huduma',
       'cu-quick-orders': 'Maombi',
       'cu-quick-chat': 'Mazungumzo',
@@ -6836,7 +6833,7 @@ s0.parentNode.insertBefore(s1,s0);
       'ad-chat-select': 'Select a customer to start chat...',
       'admin-no-reviews': 'No reviews yet.',
       'admin-delete': 'ðŸ—‘ï¸ Delete',
-      'admin-logout': 'Out',
+      'admin-logout': 'Ondoka',
       'admin-order-jina': 'Name',
       'admin-order-simu': 'Phone',
       'admin-order-huduma': 'Service',
@@ -7240,11 +7237,6 @@ s0.parentNode.insertBefore(s1,s0);
           el.innerHTML = iconHTML + ' ' + t[key];
           return;
         }
-        if(el.querySelector('.door')) {
-          const doorSpan = el.querySelector('.door');
-          el.innerHTML = doorSpan.outerHTML + t[key];
-          return;
-        }
         el.textContent = t[key];
       }
     });
@@ -7480,13 +7472,13 @@ s0.parentNode.insertBefore(s1,s0);
   // Mobile logout button
   const cuMbLogout = document.getElementById('cuMbLogout');
   if(cuMbLogout){
-    cuMbLogout.addEventListener('click', () => { try { showGoodbyePopup(currentUserName); } catch(e){} setTimeout(()=>{ auth.signOut().then(()=>{ window.location.href='index.html'; }); }, 1500); });
+    cuMbLogout.addEventListener('click', () => auth.signOut());
   }
 
   // Top logout button (always visible)
   const cuLogoutBtnTop = document.getElementById('cuLogoutBtnTop');
   if(cuLogoutBtnTop){
-    cuLogoutBtnTop.addEventListener('click', () => { try { showGoodbyePopup(currentUserName); } catch(e){} setTimeout(()=>{ auth.signOut().then(()=>{ window.location.href='index.html'; }); }, 1500); });
+    cuLogoutBtnTop.addEventListener('click', () => auth.signOut());
   }
 
   // ========== ADMIN DASHBOARD ==========
