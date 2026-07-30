@@ -2424,8 +2424,20 @@
     <div class="diamond-bar"><div class="diamond-bar-inner"></div></div>
   </div>
 </div>
+<div class="diamond-popup-overlay order-success" id="orderSuccessPopup">
+  <div class="diamond-popup">
+    <div class="diamond-shape"></div>
+    <div class="diamond-icon">&#x2705;</div>
+    <div class="diamond-title" id="orderSuccessTitle">Ombi Lako Limewasili! &#x2705;</div>
+    <div class="diamond-sub"><span id="orderSuccessService"></span></div>
+    <div class="diamond-sub" id="orderSuccessMsg">Timu yetu itawasiliana nawe haraka.</div>
+    <div class="diamond-bar"><div class="diamond-bar-inner"></div></div>
+  </div>
+</div>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 <script>
-  // â•â•â•â•â•â•â• SPLASH SCREEN v3 AUTO-DISMISS â•â•â•â•â•â•â•
   (function(){
     var splash = document.getElementById('splashScreen');
     var gate = document.getElementById('gateScreen');
