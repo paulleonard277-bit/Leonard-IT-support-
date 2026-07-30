@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="sw">
 <head>
 <meta charset="UTF-8">
@@ -2504,6 +2504,88 @@
     <div class="diamond-bar"><div class="diamond-bar-inner"></div></div>
   </div>
 </div>
+<div class="diamond-popup-overlay admin-login" id="orderAcceptedPopup">
+  <div class="diamond-popup">
+    <div class="diamond-shape"></div>
+    <div class="diamond-icon">&#x1F441;&#xFE0F;</div>
+    <div class="diamond-title">Order Imekubaliwa!</div>
+    <div class="diamond-sub">Mteja atapata taarifa kuwa order yake imeona na inashughulikiwa.</div>
+    <div class="diamond-bar"><div class="diamond-bar-inner"></div></div>
+  </div>
+</div>
+<div class="diamond-popup-overlay order-success" id="orderCompletedPopup">
+  <div class="diamond-popup">
+    <div class="diamond-shape"></div>
+    <div class="diamond-icon">&#x2705;</div>
+    <div class="diamond-title">Order Imekamilika!</div>
+    <div class="diamond-sub">Mteja atapata taarifa kuwa order yake imekamilika.</div>
+    <div class="diamond-bar"><div class="diamond-bar-inner"></div></div>
+  </div>
+</div>
+
+<!-- Forgot Password Verification Modal -->
+<div class="modal-overlay" id="forgotModal" style="z-index:250;">
+  <div class="modal-box" style="max-width:440px;">
+    <button class="close-x" id="closeForgotBtn">&times;</button>
+    <div id="forgotStep1">
+      <div class="eyebrow" style="margin-bottom:10px;" data-label="fp-step1-eyebrow">&#x1F4C9; Sahau Password?</div>
+      <p style="color:var(--muted); font-size:0.88rem; margin-bottom:20px;" data-label="fp-step1-desc">Andika email yako tutakutumia nambari ya uthibitisho.</p>
+      <label data-label="fp-email-label">Email</label>
+      <input type="email" id="fpEmail" required placeholder="jina@mfano.com" style="width:100%; padding:12px 14px; background:var(--ink); border:1px solid var(--line); border-radius:8px; color:var(--paper); font-family:'Inter',sans-serif; font-size:0.95rem;">
+      <p class="err" id="fpErr1"></p>
+      <button class="submit-btn" id="fpSendCode" style="margin-top:16px; width:100%;" data-label="fp-send-btn">Tuma Nambari &#8594;</button>
+    </div>
+    <div id="forgotStep2" style="display:none;">
+      <div class="eyebrow" style="margin-bottom:10px;" data-label="fp-step2-eyebrow">&#x1F510; Thibitisha Nambari</div>
+      <p style="color:var(--muted); font-size:0.88rem; margin-bottom:20px;" data-label="fp-step2-desc">Tafadhali weka nambari ya taratibu 6 uliopitia email.</p>
+      <div style="display:flex; gap:8px; justify-content:center; margin-bottom:20px;">
+        <input type="text" maxlength="1" class="fp-code-input" data-idx="0" inputmode="numeric" pattern="[0-9]" autocomplete="one-time-code">
+        <input type="text" maxlength="1" class="fp-code-input" data-idx="1" inputmode="numeric" pattern="[0-9]">
+        <input type="text" maxlength="1" class="fp-code-input" data-idx="2" inputmode="numeric" pattern="[0-9]">
+        <input type="text" maxlength="1" class="fp-code-input" data-idx="3" inputmode="numeric" pattern="[0-9]">
+        <input type="text" maxlength="1" class="fp-code-input" data-idx="4" inputmode="numeric" pattern="[0-9]">
+        <input type="text" maxlength="1" class="fp-code-input" data-idx="5" inputmode="numeric" pattern="[0-9]">
+      </div>
+      <p class="err" id="fpErr2"></p>
+      <button class="submit-btn" id="fpVerifyCode" style="margin-top:16px; width:100%;" data-label="fp-verify-btn">Thibitisha &#8594;</button>
+    </div>
+    <div id="forgotStep3" style="display:none;">
+      <div class="eyebrow" style="margin-bottom:10px;" data-label="fp-step3-eyebrow">&#x1F511; Weka Password Mpya</div>
+      <p style="color:var(--muted); font-size:0.88rem; margin-bottom:20px;" data-label="fp-step3-desc">Nambari imethibitishwa. Weka password mpya.</p>
+      <label data-label="fp-new-pass-label">Password Mpya</label>
+      <input type="password" id="fpNewPass" required placeholder="&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;" minlength="6" style="width:100%; padding:12px 14px; background:var(--ink); border:1px solid var(--line); border-radius:8px; color:var(--paper); font-family:'Inter',sans-serif; font-size:0.95rem;">
+      <label data-label="fp-confirm-pass-label">Thibitisha Password</label>
+      <input type="password" id="fpConfirmPass" required placeholder="&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;" minlength="6" style="width:100%; padding:12px 14px; background:var(--ink); border:1px solid var(--line); border-radius:8px; color:var(--paper); font-family:'Inter',sans-serif; font-size:0.95rem;">
+      <p class="err" id="fpErr3"></p>
+      <button class="submit-btn" id="fpResetPass" style="margin-top:16px; width:100%;" data-label="fp-reset-btn">Badilisha Password &#8594;</button>
+    </div>
+    <div id="forgotStep4" style="display:none; text-align:center;">
+      <div style="font-size:3rem; margin-bottom:12px;">&#x2705;</div>
+      <div class="eyebrow" style="margin-bottom:10px;" data-label="fp-step4-eyebrow">Imefanikiwa!</div>
+      <p style="color:var(--muted); font-size:0.88rem; margin-bottom:20px;" data-label="fp-step4-desc">Password yako imebadilishwa. Sasa unaweza kuingia.</p>
+      <button class="submit-btn" id="fpGoLogin" style="width:100%;" data-label="fp-login-btn">Ingia Sasa &#8594;</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .fp-code-input{
+    width:44px; height:52px; text-align:center; font-size:1.3rem; font-weight:700;
+    background:var(--ink); border:2px solid var(--line); border-radius:10px;
+    color:var(--paper); font-family:'JetBrains Mono',monospace;
+    transition:border-color 0.2s, box-shadow 0.2s;
+  }
+  .fp-code-input:focus{ border-color:var(--fiber); box-shadow:0 0 12px rgba(62,211,199,0.25); outline:none; }
+</style>
+
+<div class="modal-overlay" id="legalModal">
+  <div class="modal-box" style="max-width:560px; max-height:80vh; overflow-y:auto;">
+    <button class="close-x" id="closeLegalBtn">&times;</button>
+    <h3 id="legalTitle">Sera ya Faragha</h3>
+    <div id="legalBody" style="color:var(--muted); font-size:0.9rem; line-height:1.7; margin-top:16px;"></div>
+  </div>
+</div>
+
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
@@ -2922,13 +3004,13 @@
     setMode('login');
   });
 
-  authForm.addEventListener('submit', (e) => {
+  if(authForm) authForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    authErr.style.display = 'none';
-    const email = authEmail.value.trim();
-    const pass = authPassword.value;
-    const fullName = authName.value.trim();
-    const service = authService.value;
+    if(authErr) authErr.style.display = 'none';
+    const email = authEmail ? authEmail.value.trim() : '';
+    const pass = authPassword ? authPassword.value : '';
+    const fullName = authName ? authName.value.trim() : '';
+    const service = authService ? authService.value : '';
 
     if(mode === 'signup' && pass !== authPasswordConfirm.value){
       authErr.textContent = translations[currentLang]['pwd-mismatch'];
@@ -3005,10 +3087,10 @@
     legalBody.innerHTML = type === 'privacy' ? privacyHTML : termsHTML;
     legalModal.classList.add('open');
   }
-  document.getElementById('openPrivacy').addEventListener('click', () => openLegal('privacy'));
-  document.getElementById('openTerms').addEventListener('click', () => openLegal('terms'));
-  closeLegalBtn.addEventListener('click', () => legalModal.classList.remove('open'));
-  legalModal.addEventListener('click', (e) => { if(e.target === legalModal) legalModal.classList.remove('open'); });
+  try { document.getElementById('openPrivacy').addEventListener('click', () => openLegal('privacy')); } catch(e){}
+  try { document.getElementById('openTerms').addEventListener('click', () => openLegal('terms')); } catch(e){}
+  try { closeLegalBtn.addEventListener('click', () => legalModal.classList.remove('open')); } catch(e){}
+  try { legalModal.addEventListener('click', (e) => { if(e.target === legalModal) legalModal.classList.remove('open'); }); } catch(e){}
 
 
   let currentUserName = '';
@@ -5768,18 +5850,18 @@
 
   auth.onAuthStateChanged((user) => {
     const isAdmin = user && _isAdmin(user);
-    custChatOpen.style.display = (user && !isAdmin) ? 'none' : 'none';
-    if(!user) custChatWidget.style.display = 'none';
+    if(custChatOpen) custChatOpen.style.display = (user && !isAdmin) ? 'none' : 'none';
+    if(!user && custChatWidget) custChatWidget.style.display = 'none';
   });
 
-  custChatOpen.addEventListener('click', () => {
-    custChatWidget.style.display = 'block';
-    custChatOpen.style.display = 'none';
+  if(custChatOpen) custChatOpen.addEventListener('click', () => {
+    if(custChatWidget) custChatWidget.style.display = 'block';
+    if(custChatOpen) custChatOpen.style.display = 'none';
     listenCustomerChat();
   });
-  custChatClose.addEventListener('click', () => {
-    custChatWidget.style.display = 'none';
-    custChatOpen.style.display = 'block';
+  if(custChatClose) custChatClose.addEventListener('click', () => {
+    if(custChatWidget) custChatWidget.style.display = 'none';
+    if(custChatOpen) custChatOpen.style.display = 'block';
   });
 
   let custChatUnsub = null;
