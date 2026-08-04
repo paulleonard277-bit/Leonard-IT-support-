@@ -362,7 +362,7 @@
   }
   .modal-overlay.open{display:flex;}
 
-  /* â•â•â•â•â•â•â• SPLASH SCREEN â•â•â•â•â•â•â• */
+  /* ═══════ SPLASH SCREEN ═══════ */
   .splash-screen{
     position:fixed; inset:0; z-index:9999;
     background:#060B14;
@@ -390,7 +390,7 @@
     100%{ transform:translate(30px,20px) scale(1.05); }
   }
 
-  /* grid lines overlay (static â€” no animation for perf) */
+  /* grid lines overlay (static — no animation for perf) */
   .splash-grid{
     position:absolute; inset:0;
     background-image:
@@ -400,7 +400,7 @@
   }
   @keyframes gridScroll{ to{ background-position:60px 60px; } }
 
-  /* â•â•â• CIRCUIT BOARD SVG â•â•â• */
+  /* ═══ CIRCUIT BOARD SVG ═══ */
   .splash-circuit{ position:absolute; inset:0; z-index:2; overflow:hidden; }
   .splash-circuit svg{ width:100%; height:100%; }
   .splash-circuit .circuit-path{
@@ -426,7 +426,7 @@
   @keyframes circuitDraw{ to{ stroke-dashoffset:0; } }
   @keyframes nodeAppear{ 0%{ opacity:0; r:0; } 60%{ opacity:1; r:4; } 100%{ opacity:0.7; r:2.5; } }
 
-  /* â•â•â• DATA STREAMS â•â•â• */
+  /* ═══ DATA STREAMS ═══ */
   .splash-streams{ position:absolute; inset:0; z-index:3; overflow:hidden; pointer-events:none; }
   .splash-streams .stream{
     position:absolute; height:1px; left:0; width:100%;
@@ -458,11 +458,11 @@
     100%{ left:calc(100% + 100px); opacity:0; }
   }
 
-  /* â•â•â• CANVAS PARTICLES â•â•â• */
+  /* ═══ CANVAS PARTICLES ═══ */
   .splash-canvas-wrap{ position:absolute; inset:0; z-index:4; }
   .splash-canvas-wrap canvas{ width:100%; height:100%; }
 
-  /* â•â•â• MATRIX RAIN â•â•â• */
+  /* ═══ MATRIX RAIN ═══ */
   .splash-matrix{ position:absolute; inset:0; z-index:3; overflow:hidden; pointer-events:none; opacity:0.12; contain:strict; }
   .splash-matrix .m-col{
     position:absolute; top:-20px;
@@ -484,7 +484,7 @@
     100%{ transform:translateY(calc(100vh + 100%)); opacity:0; }
   }
 
-  /* â•â•â• RIPPLE WAVES â•â•â• */
+  /* ═══ RIPPLE WAVES ═══ */
   .splash-ripples{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:5; pointer-events:none; }
   .splash-ripple{
     position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
@@ -501,7 +501,7 @@
     100%{ width:800px; height:800px; opacity:0; border-width:0.5px; }
   }
 
-  /* â•â•â• HELIX RINGS â•â•â• */
+  /* ═══ HELIX RINGS ═══ */
   .splash-helix{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:5; pointer-events:none; }
   .splash-helix .h-ring{
     position:absolute; top:50%; left:50%; border-radius:50%;
@@ -566,7 +566,7 @@
     0%,100%{ opacity:0.6; } 50%{ opacity:1; }
   }
 
-  /* â•â•â• ELECTRIC GLOW RING â•â•â• */
+  /* ═══ ELECTRIC GLOW RING ═══ */
   .splash-electric{
     position:absolute; top:50%; left:50%; width:160px; height:160px;
     margin:-80px 0 0 -80px; border-radius:50%;
@@ -597,7 +597,7 @@
     100%{ transform:translateY(0); opacity:1; }
   }
 
-  /* â•â•â• GLITCH EFFECT â•â•â• */
+  /* ═══ GLITCH EFFECT ═══ */
   .splash-brand.glitch-active{
     animation: brandSlideUp 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.8s both,
                glitchMain 0.3s ease 1.8s 3,
@@ -656,7 +656,7 @@
     animation: brandSlideUp 0.8s cubic-bezier(0.34,1.56,0.64,1) 1.1s both;
   }
 
-  /* â•â•â• SOUNDWAVE BARS â•â•â• */
+  /* ═══ SOUNDWAVE BARS ═══ */
   .splash-wave{ display:flex; gap:3px; justify-content:center; margin-top:20px; height:30px; align-items:flex-end; }
   .splash-wave .w-bar{
     width:3px; border-radius:2px; animation:wPulse ease-in-out infinite;
@@ -679,7 +679,7 @@
     50%{ transform:scaleY(1); opacity:1; }
   }
 
-  /* â•â•â• SYSTEM STATUS PHASES â•â•â• */
+  /* ═══ SYSTEM STATUS PHASES ═══ */
   .splash-status{
     margin-top:20px; font-family:'JetBrains Mono',monospace;
     font-size:0.75rem; color:rgba(62,211,199,0.7);
@@ -693,10 +693,10 @@
   }
   @keyframes cursorBlink{ 0%,100%{ opacity:1; } 50%{ opacity:0; } }
 
-  /* typing dots â€” replaced by status phases */
+  /* typing dots — replaced by status phases */
   .splash-typing{ display:none; }
 
-  /* â•â•â• PROGRESS BAR v2 â•â•â• */
+  /* ═══ PROGRESS BAR v2 ═══ */
   .splash-progress-wrap{
     position:absolute; bottom:50px; left:50%; transform:translateX(-50%);
     width:280px; z-index:10;
@@ -737,7 +737,7 @@
   }
   @keyframes scanMove{ from{ background-position:0 0; } to{ background-position:0 200px; } }
 
-  /* â•â•â• HORIZONTAL SCAN BEAM â•â•â• */
+  /* ═══ HORIZONTAL SCAN BEAM ═══ */
   .splash-beam{
     position:absolute; left:0; width:100%; height:2px; z-index:7;
     background:linear-gradient(90deg, transparent 0%, rgba(62,211,199,0.4) 20%, rgba(62,211,199,0.8) 50%, rgba(62,211,199,0.4) 80%, transparent 100%);
@@ -774,7 +774,7 @@
   .splash-corner.br::after{ bottom:0; right:0; width:1px; height:30px; }
   @keyframes cornerFade{ from{ opacity:0; } to{ opacity:1; } }
 
-  /* â•â•â• VERSION TAG â•â•â• */
+  /* ═══ VERSION TAG ═══ */
   .splash-version{
     position:absolute; bottom:20px; right:30px; z-index:10;
     font-family:'JetBrains Mono',monospace; font-size:0.6rem;
@@ -900,7 +900,7 @@
   .walk-shadow{ animation:shadowPulse 0.5s ease-in-out infinite alternate; }
   @keyframes shadowPulse{ from{ rx:28; opacity:0.2; } to{ rx:22; opacity:0.35; } }
 
-  /* â•â•â•â•â•â•â• WELCOME OVERLAY v2 â•â•â•â•â•â•â• */
+  /* ═══════ WELCOME OVERLAY v2 ═══════ */
   .welcome-overlay{
     position:fixed; inset:0; z-index:199;
     display:flex; align-items:center; justify-content:center;
@@ -1345,7 +1345,7 @@
     .gate-box #forgotWrap a{font-size:0.78rem;}
   }
 
-  /* â•â•â•â•â•â•â• COMPREHENSIVE MOBILE RESPONSIVE â•â•â•â•â•â•â• */
+  /* ═══════ COMPREHENSIVE MOBILE RESPONSIVE ═══════ */
   @media(max-width:768px){
     .wrap{padding:0 16px;}
     nav .wrap{height:60px;}
@@ -2191,69 +2191,69 @@
   <div class="ad-topbar">
     <div class="ad-brand"><span class="dot"></span>PLATINUMZ Admin</div>
     <div class="ad-top-right">
-      <span class="admin-tag">ðŸ›¡ï¸ ADMIN</span>
+      <span class="admin-tag">🛡️ ADMIN</span>
       <div class="ad-notif-wrap" id="adminNotifWrap">
-        <button class="ad-notif-bell" id="adminNotifBell" onclick="toggleNotifPanel('admin')">ðŸ”” <span class="ad-notif-badge" id="adminNotifBadge">0</span></button>
+        <button class="ad-notif-bell" id="adminNotifBell" onclick="toggleNotifPanel('admin')">🔔 <span class="ad-notif-badge" id="adminNotifBadge">0</span></button>
         <div class="ad-notif-panel" id="adminNotifPanel"></div>
       </div>
       <button class="ad-top-logout" id="langToggleAdmin" style="padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:none;color:var(--paper);cursor:pointer;font-size:0.78rem;font-weight:700;letter-spacing:0.5px;">SW</button>
-      <button class="ad-top-logout" id="adminLogoutBtn">ðŸšª Out</button>
+      <button class="ad-top-logout" id="adminLogoutBtn">🚪 Out</button>
     </div>
   </div>
 
   <div class="ad-wrap">
     <div class="ad-greeting" id="adminGreeting">Karibu, Admin</div>
-    <div class="ad-greeting-sub">Hii ni dashibodi yako â€” fuatilia wateja, maombi, mazungumzo na maoni.</div>
+    <div class="ad-greeting-sub">Hii ni dashibodi yako — fuatilia wateja, maombi, mazungumzo na maoni.</div>
 
     <div class="ad-stats">
-      <div class="ad-stat-card"><div class="icon">ðŸ‘¥</div><div class="num" id="statClients">0</div><div class="label">Wateja</div></div>
-      <div class="ad-stat-card"><div class="icon">ðŸ“‹</div><div class="num" id="statOrders">0</div><div class="label">Orders</div></div>
-      <div class="ad-stat-card"><div class="icon">ðŸ’¬</div><div class="num" id="statChats">0</div><div class="label">Ujumbe</div></div>
-      <div class="ad-stat-card"><div class="icon">â­</div><div class="num" id="statReviews">0</div><div class="label">Maoni</div></div>
+      <div class="ad-stat-card"><div class="icon">👥</div><div class="num" id="statClients">0</div><div class="label">Wateja</div></div>
+      <div class="ad-stat-card"><div class="icon">📋</div><div class="num" id="statOrders">0</div><div class="label">Orders</div></div>
+      <div class="ad-stat-card"><div class="icon">💬</div><div class="num" id="statChats">0</div><div class="label">Ujumbe</div></div>
+      <div class="ad-stat-card"><div class="icon">⭐</div><div class="num" id="statReviews">0</div><div class="label">Maoni</div></div>
     </div>
 
     <div class="ad-tabs">
-      <button class="ad-tab active" data-tab="wateja" data-label="admin-tab-wateja">ðŸ‘¥ Wateja <span class="count" id="tabCountClients">0</span></button>
-      <button class="ad-tab" data-tab="orders" data-label="admin-tab-orders">ðŸ“‹ Orders <span class="count" id="tabCountOrders">0</span></button>
-      <button class="ad-tab" data-tab="chat" data-label="admin-tab-chat">ðŸ’¬ Chat <span class="count" id="tabCountChats">0</span></button>
-      <button class="ad-tab" data-tab="maoni" data-label="admin-tab-maoni">â­ Maoni <span class="count" id="tabCountReviews">0</span></button>
-      <button class="ad-tab" data-tab="analytics" data-label="admin-tab-analytics">ðŸ“Š Analytics</button>
-      <button class="ad-tab" data-tab="miadi" data-label="admin-tab-miadi">ðŸ—“ï¸ Miadi <span class="count" id="tabCountAppts">0</span></button>
-      <button class="ad-tab" data-tab="eneo" data-label="admin-tab-eneo">ðŸ“ Eneo <span class="count" id="tabCountLocs">0</span></button>
-      <button class="ad-tab" data-tab="simu" data-label="admin-tab-simu">ðŸ“ž Simu</button>
-      <button class="ad-tab" data-tab="checkin" data-label="admin-tab-checkin">ðŸ“± Check-ins</button>
-      <button class="ad-tab" data-tab="points" data-label="admin-tab-points">ðŸ† Pointi</button>
-      <button class="ad-tab" data-tab="data" data-label="admin-tab-data">ðŸ’¾ Data</button>
+      <button class="ad-tab active" data-tab="wateja" data-label="admin-tab-wateja">👥 Wateja <span class="count" id="tabCountClients">0</span></button>
+      <button class="ad-tab" data-tab="orders" data-label="admin-tab-orders">📋 Orders <span class="count" id="tabCountOrders">0</span></button>
+      <button class="ad-tab" data-tab="chat" data-label="admin-tab-chat">💬 Chat <span class="count" id="tabCountChats">0</span></button>
+      <button class="ad-tab" data-tab="maoni" data-label="admin-tab-maoni">⭐ Maoni <span class="count" id="tabCountReviews">0</span></button>
+      <button class="ad-tab" data-tab="analytics" data-label="admin-tab-analytics">📊 Analytics</button>
+      <button class="ad-tab" data-tab="miadi" data-label="admin-tab-miadi">🗓️ Miadi <span class="count" id="tabCountAppts">0</span></button>
+      <button class="ad-tab" data-tab="eneo" data-label="admin-tab-eneo">📍 Eneo <span class="count" id="tabCountLocs">0</span></button>
+      <button class="ad-tab" data-tab="simu" data-label="admin-tab-simu">📞 Simu</button>
+      <button class="ad-tab" data-tab="checkin" data-label="admin-tab-checkin">📱 Check-ins</button>
+      <button class="ad-tab" data-tab="points" data-label="admin-tab-points">🏆 Pointi</button>
+      <button class="ad-tab" data-tab="data" data-label="admin-tab-data">💾 Data</button>
     </div>
 
     <div class="ad-panel active" id="panelWateja">
       <div class="ad-toolbar">
-        <input type="text" id="clientSearchInput" class="ad-search" placeholder="ðŸ” Tafuta mteja..." oninput="filterClients()">
-        <button class="ad-export-btn" onclick="exportClientsCSV()">ðŸ“¥ CSV</button>
+        <input type="text" id="clientSearchInput" class="ad-search" placeholder="🔍 Tafuta mteja..." oninput="filterClients()">
+        <button class="ad-export-btn" onclick="exportClientsCSV()">📥 CSV</button>
       </div>
       <div class="ad-table-wrap">
         <table class="ad-table">
           <thead><tr><th>Jina</th><th>Email</th><th>Huduma</th><th>Tarehe</th><th data-label="admin-cu-kitendo">Kitendo</th></tr></thead>
-          <tbody id="adminClientsBody"><tr><td colspan="5" class="ad-empty"><div class="ad-empty-icon">ðŸ‘¥</div>Inapakia wateja...</td></tr></tbody>
+          <tbody id="adminClientsBody"><tr><td colspan="5" class="ad-empty"><div class="ad-empty-icon">👥</div>Inapakia wateja...</td></tr></tbody>
         </table>
       </div>
     </div>
 
     <div class="ad-panel" id="panelOrders">
       <div class="ad-toolbar">
-        <input type="text" id="orderSearchInput" class="ad-search" placeholder="ðŸ” Tafuta order..." oninput="filterOrders()">
+        <input type="text" id="orderSearchInput" class="ad-search" placeholder="🔍 Tafuta order..." oninput="filterOrders()">
         <div class="ad-filter-group">
           <button class="ad-filter-btn active" onclick="filterByStatus('all',this)">All</button>
-          <button class="ad-filter-btn" onclick="filterByStatus('mpya',this)">ðŸ†• Mpya</button>
-          <button class="ad-filter-btn" onclick="filterByStatus('inashughulikiwa',this)">â³ Inashughulikiwa</button>
-          <button class="ad-filter-btn" onclick="filterByStatus('imekamilika',this)">âœ… Imekamilika</button>
+          <button class="ad-filter-btn" onclick="filterByStatus('mpya',this)">🆕 Mpya</button>
+          <button class="ad-filter-btn" onclick="filterByStatus('inashughulikiwa',this)">⏳ Inashughulikiwa</button>
+          <button class="ad-filter-btn" onclick="filterByStatus('imekamilika',this)">✅ Imekamilika</button>
         </div>
-        <button class="ad-export-btn" onclick="exportOrdersCSV()">ðŸ“¥ CSV</button>
+        <button class="ad-export-btn" onclick="exportOrdersCSV()">📥 CSV</button>
       </div>
       <div class="ad-table-wrap">
         <table class="ad-table">
           <thead><tr><th data-label="admin-order-jina">Jina</th><th data-label="admin-order-simu">Simu</th><th data-label="admin-order-huduma">Huduma</th><th data-label="admin-order-gharama">Gharama</th><th data-label="admin-order-maelezo">Maelezo</th><th data-label="admin-order-tarehe">Tarehe</th><th data-label="admin-order-hali">Hali</th><th data-label="admin-order-kitendo">Kitendo</th></tr></thead>
-          <tbody id="adminOrdersBody"><tr><td colspan="8" class="ad-empty"><div class="ad-empty-icon">ðŸ“‹</div>Inapakia orders...</td></tr></tbody>
+          <tbody id="adminOrdersBody"><tr><td colspan="8" class="ad-empty"><div class="ad-empty-icon">📋</div>Inapakia orders...</td></tr></tbody>
         </table>
       </div>
     </div>
@@ -2268,47 +2268,47 @@
           <div class="ad-chat-header" id="adminChatHeader">
             <span id="adminChatTargetName" data-label="ad-chat-select">Chagua mteja kuanza chat...</span>
             <div style="display:flex;gap:6px;margin-left:auto;">
-              <button onclick="startCall('audio')" title="Piga Sauti" style="background:#1a2942;border:1px solid #1e3348;border-radius:8px;padding:5px 10px;color:#F2A93B;font-size:0.8rem;cursor:pointer;">ðŸ“ž</button>
-              <button onclick="startCall('video')" title="Video Call" style="background:#1a2942;border:1px solid #1e3348;border-radius:8px;padding:5px 10px;color:#00F2A9;font-size:0.8rem;cursor:pointer;">ðŸ“¹</button>
+              <button onclick="startCall('audio')" title="Piga Sauti" style="background:#1a2942;border:1px solid #1e3348;border-radius:8px;padding:5px 10px;color:#F2A93B;font-size:0.8rem;cursor:pointer;">📞</button>
+              <button onclick="startCall('video')" title="Video Call" style="background:#1a2942;border:1px solid #1e3348;border-radius:8px;padding:5px 10px;color:#00F2A9;font-size:0.8rem;cursor:pointer;">📹</button>
             </div>
           </div>
-          <div class="ad-chat-messages" id="adminChatMessages"><div class="ad-empty"><div class="ad-empty-icon">ðŸ’¬</div>Chagua mteja kwenye orodha upande wa kushoto.</div></div>
+          <div class="ad-chat-messages" id="adminChatMessages"><div class="ad-empty"><div class="ad-empty-icon">💬</div>Chagua mteja kwenye orodha upande wa kushoto.</div></div>
           <div class="ad-chat-input">
             <input type="file" id="adminChatFile" accept="image/*" style="display:none;" onchange="handleChatFile(this,'admin')">
-            <button class="chat-attach-btn" onclick="document.getElementById('adminChatFile').click()" title="Attach image">ðŸ“Ž</button>
+            <button class="chat-attach-btn" onclick="document.getElementById('adminChatFile').click()" title="Attach image">📎</button>
             <input id="adminChatInput" type="text" placeholder="Andika ujumbe..." disabled>
-            <button id="adminChatSend" disabled>Tuma ðŸ“¤</button>
+            <button id="adminChatSend" disabled>Tuma 📤</button>
           </div>
         </div>
       </div>
     </div>
 
     <div class="ad-panel" id="panelMaoni">
-      <div id="adminReviewsList"><div class="ad-empty"><div class="ad-empty-icon">â­</div>Inapakia maoni...</div></div>
+      <div id="adminReviewsList"><div class="ad-empty"><div class="ad-empty-icon">⭐</div>Inapakia maoni...</div></div>
     </div>
 
     <div class="ad-panel" id="panelAnalytics">
       <div id="analyticsMetrics" style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px;"></div>
       <div class="ad-analytics-grid">
         <div class="ad-chart-card">
-          <h4>ðŸ“‹ Orders kwa Mwezi</h4>
+          <h4>📋 Orders kwa Mwezi</h4>
           <canvas id="ordersChart"></canvas>
         </div>
         <div class="ad-chart-card">
-          <h4>ðŸ‘¥ Wateja wapya</h4>
+          <h4>👥 Wateja wapya</h4>
           <canvas id="clientsChart"></canvas>
         </div>
         <div class="ad-chart-card">
-          <h4>ðŸ“Š Hali ya Orders</h4>
+          <h4>📊 Hali ya Orders</h4>
           <canvas id="statusChart"></canvas>
         </div>
         <div class="ad-chart-card">
-          <h4>ðŸ’¼ Huduma Maalum</h4>
+          <h4>💼 Huduma Maalum</h4>
           <canvas id="servicesChart"></canvas>
         </div>
       </div>
       <div style="margin-top:24px;">
-        <h4 style="color:var(--paper);margin-bottom:14px;">ðŸ“ˆ Mwelekeo wa Mwezi huu</h4>
+        <h4 style="color:var(--paper);margin-bottom:14px;">📈 Mwelekeo wa Mwezi huu</h4>
         <div id="analyticsInsights" style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;"></div>
       </div>
     </div>
@@ -2316,18 +2316,18 @@
     <!-- ADMIN APPOINTMENTS PANEL -->
     <div class="ad-panel" id="panelMiadi">
       <div class="ad-toolbar">
-        <input type="text" id="apptSearchInput" class="ad-search" placeholder="ðŸ” Tafuta miadi..." oninput="filterAppointments()">
+        <input type="text" id="apptSearchInput" class="ad-search" placeholder="🔍 Tafuta miadi..." oninput="filterAppointments()">
         <div class="ad-filter-group">
           <button class="ad-filter-btn active" onclick="filterApptStatus('all',this)">All</button>
-          <button class="ad-filter-btn" onclick="filterApptStatus('pending',this)">â³ Inasubiri</button>
-          <button class="ad-filter-btn" onclick="filterApptStatus('confirmed',this)">âœ… Imethibitishwa</button>
-          <button class="ad-filter-btn" onclick="filterApptStatus('cancelled',this)">âŒ Imefutwa</button>
+          <button class="ad-filter-btn" onclick="filterApptStatus('pending',this)">⏳ Inasubiri</button>
+          <button class="ad-filter-btn" onclick="filterApptStatus('confirmed',this)">✅ Imethibitishwa</button>
+          <button class="ad-filter-btn" onclick="filterApptStatus('cancelled',this)">❌ Imefutwa</button>
         </div>
       </div>
       <div class="ad-table-wrap">
         <table class="ad-table">
           <thead><tr><th>Jina</th><th>Email</th><th>Huduma</th><th>Tarehe</th><th>Saa</th><th>Maelezo</th><th>Hali</th><th>Kitendo</th></tr></thead>
-          <tbody id="adminApptsBody"><tr><td colspan="8" class="ad-empty"><div class="ad-empty-icon">ðŸ—“ï¸</div>Inapakia miadi...</td></tr></tbody>
+          <tbody id="adminApptsBody"><tr><td colspan="8" class="ad-empty"><div class="ad-empty-icon">🗓️</div>Inapakia miadi...</td></tr></tbody>
         </table>
       </div>
     </div>
@@ -2335,12 +2335,12 @@
     <!-- ADMIN LOCATIONS PANEL -->
     <div class="ad-panel" id="panelEneo">
       <div class="ad-toolbar">
-        <input type="text" id="locSearchInput" class="ad-search" placeholder="ðŸ” Tafuta eneo..." oninput="filterLocations()">
+        <input type="text" id="locSearchInput" class="ad-search" placeholder="🔍 Tafuta eneo..." oninput="filterLocations()">
       </div>
       <div class="ad-table-wrap">
         <table class="ad-table">
           <thead><tr><th>Jina</th><th>Email</th><th>Eneo</th><th>Google Maps</th><th>Tarehe</th><th>Hali</th></tr></thead>
-          <tbody id="adminLocsBody"><tr><td colspan="6" class="ad-empty"><div class="ad-empty-icon">ðŸ“</div>Inapakia eneo...</td></tr></tbody>
+          <tbody id="adminLocsBody"><tr><td colspan="6" class="ad-empty"><div class="ad-empty-icon">📍</div>Inapakia eneo...</td></tr></tbody>
         </table>
       </div>
     </div>
@@ -2348,7 +2348,7 @@
     <!-- ADMIN CALLS PANEL -->
     <div class="ad-panel" id="panelSimu">
       <div style="padding:20px;">
-        <h3 style="color:var(--paper);margin:0 0 8px;">ðŸ“ž Piga Mteja</h3>
+        <h3 style="color:var(--paper);margin:0 0 8px;">📞 Piga Mteja</h3>
         <p style="color:var(--muted);font-size:0.85rem;margin:0 0 20px;">Chagua mteja ili kupiga video au sauti call moja kwa moja.</p>
         <div class="ad-chat-layout" style="min-height:400px;">
           <div class="ad-chat-sidebar" id="adminCallSidebar">
@@ -2359,19 +2359,19 @@
           </div>
           <div class="ad-chat-main" style="display:flex;align-items:center;justify-content:center;flex-direction:column;">
             <div id="adminCallDefault" style="text-align:center;">
-              <div style="font-size:4rem;margin-bottom:16px;">ðŸ“ž</div>
+              <div style="font-size:4rem;margin-bottom:16px;">📞</div>
               <h3 style="color:var(--paper);margin:0 0 8px;">Chagua Mteja</h3>
               <p style="color:var(--muted);font-size:0.85rem;">Chagua mteja upande wa kushoto ili kuanza call.</p>
             </div>
             <div id="adminCallActive" style="display:none;text-align:center;">
               <div id="adminCallTargetInfo" style="margin-bottom:20px;">
-                <div style="font-size:3rem;" id="adminCallAvatar">ðŸ‘¤</div>
+                <div style="font-size:3rem;" id="adminCallAvatar">👤</div>
                 <h3 style="color:var(--paper);margin:8px 0 4px;" id="adminCallName">...</h3>
                 <p style="color:var(--muted);font-size:0.82rem;" id="adminCallEmail">...</p>
               </div>
               <div style="display:flex;gap:12px;justify-content:center;">
-                <button onclick="adminCallCustomer('audio')" style="background:linear-gradient(135deg,#F2A93B,#FF6B35);color:#0E1A2B;border:none;border-radius:12px;padding:14px 24px;font-weight:700;font-size:0.9rem;cursor:pointer;">ðŸ“ž Piga Sauti</button>
-                <button onclick="adminCallCustomer('video')" style="background:linear-gradient(135deg,#00F2A9,#00cc8a);color:#0E1A2B;border:none;border-radius:12px;padding:14px 24px;font-weight:700;font-size:0.9rem;cursor:pointer;">ðŸ“¹ Video Call</button>
+                <button onclick="adminCallCustomer('audio')" style="background:linear-gradient(135deg,#F2A93B,#FF6B35);color:#0E1A2B;border:none;border-radius:12px;padding:14px 24px;font-weight:700;font-size:0.9rem;cursor:pointer;">📞 Piga Sauti</button>
+                <button onclick="adminCallCustomer('video')" style="background:linear-gradient(135deg,#00F2A9,#00cc8a);color:#0E1A2B;border:none;border-radius:12px;padding:14px 24px;font-weight:700;font-size:0.9rem;cursor:pointer;">📹 Video Call</button>
               </div>
             </div>
           </div>
@@ -2382,21 +2382,21 @@
     <!-- ADMIN CHECK-INS PANEL -->
     <div class="ad-panel" id="panelCheckin">
       <div style="padding:20px;">
-        <h3 style="color:var(--paper);margin:0 0 8px;">ðŸ“± QR Check-ins</h3>
+        <h3 style="color:var(--paper);margin:0 0 8px;">📱 QR Check-ins</h3>
         <p style="color:var(--muted);font-size:0.85rem;margin:0 0 16px;">Wateja walio-check-in leo.</p>
-        <div id="adminCheckinList"><div class="ad-empty"><div class="ad-empty-icon">ðŸ“±</div>Hakuna check-in bado.</div></div>
+        <div id="adminCheckinList"><div class="ad-empty"><div class="ad-empty-icon">📱</div>Hakuna check-in bado.</div></div>
       </div>
     </div>
 
     <!-- ADMIN LOYALTY PANEL -->
     <div class="ad-panel" id="panelPoints">
       <div style="padding:20px;">
-        <h3 style="color:var(--paper);margin:0 0 8px;">ðŸ† Loyalty Points</h3>
+        <h3 style="color:var(--paper);margin:0 0 8px;">🏆 Loyalty Points</h3>
         <p style="color:var(--muted);font-size:0.85rem;margin:0 0 16px;">Pointi za wateja na badges walizopata.</p>
         <div class="ad-table-wrap">
           <table class="ad-table">
             <thead><tr><th>Mteja</th><th>Email</th><th>Pointi</th><th>Tier</th><th>Badges</th></tr></thead>
-            <tbody id="adminLoyaltyBody"><tr><td colspan="5" class="ad-empty"><div class="ad-empty-icon">ðŸ†</div>Inapakia...</td></tr></tbody>
+            <tbody id="adminLoyaltyBody"><tr><td colspan="5" class="ad-empty"><div class="ad-empty-icon">🏆</div>Inapakia...</td></tr></tbody>
           </table>
         </div>
       </div>
@@ -2404,32 +2404,32 @@
 
     <div class="ad-panel" id="panelData">
       <div style="padding:24px;">
-        <h3 style="color:var(--paper);margin:0 0 8px;">ðŸ’¾ Data Backup & Restore</h3>
+        <h3 style="color:var(--paper);margin:0 0 8px;">💾 Data Backup & Restore</h3>
         <p style="color:var(--muted);font-size:0.85rem;margin:0 0 24px;">Hamisha au packua data ya Firestore. Unaweza kuhifadhi data au kurejesha kutoka backup.</p>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;">
           <div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px;">
-            <div style="font-size:2rem;margin-bottom:12px;">ðŸ“¤</div>
+            <div style="font-size:2rem;margin-bottom:12px;">📤</div>
             <h4 style="color:var(--paper);margin:0 0 8px;">Hamisha Data (Export)</h4>
             <p style="color:var(--muted);font-size:0.82rem;margin:0 0 16px;">Download data zote kama JSON file. Unaweza kuhifadhi kama backup.</p>
             <div style="display:flex;flex-direction:column;gap:8px;">
-              <button onclick="exportAllData()" style="padding:12px;background:var(--fiber);color:#0E1A2B;border:none;border-radius:10px;font-weight:700;cursor:pointer;font-size:0.9rem;">ðŸ“¥ Hamisha Zote (JSON)</button>
-              <button onclick="exportCollection('orders')" style="padding:10px;background:transparent;color:var(--paper);border:1px solid var(--line);border-radius:10px;cursor:pointer;font-size:0.82rem;">ðŸ“‹ Orders tu</button>
-              <button onclick="exportCollection('clients')" style="padding:10px;background:transparent;color:var(--paper);border:1px solid var(--line);border-radius:10px;cursor:pointer;font-size:0.82rem;">ðŸ‘¥ Wateja tu</button>
-              <button onclick="exportCollection('reviews')" style="padding:10px;background:transparent;color:var(--paper);border:1px solid var(--line);border-radius:10px;cursor:pointer;font-size:0.82rem;">â­ Maoni tu</button>
+              <button onclick="exportAllData()" style="padding:12px;background:var(--fiber);color:#0E1A2B;border:none;border-radius:10px;font-weight:700;cursor:pointer;font-size:0.9rem;">📥 Hamisha Zote (JSON)</button>
+              <button onclick="exportCollection('orders')" style="padding:10px;background:transparent;color:var(--paper);border:1px solid var(--line);border-radius:10px;cursor:pointer;font-size:0.82rem;">📋 Orders tu</button>
+              <button onclick="exportCollection('clients')" style="padding:10px;background:transparent;color:var(--paper);border:1px solid var(--line);border-radius:10px;cursor:pointer;font-size:0.82rem;">👥 Wateja tu</button>
+              <button onclick="exportCollection('reviews')" style="padding:10px;background:transparent;color:var(--paper);border:1px solid var(--line);border-radius:10px;cursor:pointer;font-size:0.82rem;">⭐ Maoni tu</button>
             </div>
           </div>
           <div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px;">
-            <div style="font-size:2rem;margin-bottom:12px;">ðŸ“¥</div>
+            <div style="font-size:2rem;margin-bottom:12px;">📥</div>
             <h4 style="color:var(--paper);margin:0 0 8px;">Rejesha Data (Import)</h4>
             <p style="color:var(--muted);font-size:0.82rem;margin:0 0 16px;">Packua data kutoka JSON backup file. Tahadhari: data itaongezwa kwenye Firestore.</p>
             <div style="display:flex;flex-direction:column;gap:8px;">
               <input type="file" id="importFileInput" accept=".json" style="display:none;" onchange="handleImportFile(event)">
-              <button onclick="document.getElementById('importFileInput').click()" style="padding:12px;background:var(--gold);color:#0E1A2B;border:none;border-radius:10px;font-weight:700;cursor:pointer;font-size:0.9rem;">ðŸ“¤ Pakia Backup</button>
+              <button onclick="document.getElementById('importFileInput').click()" style="padding:12px;background:var(--gold);color:#0E1A2B;border:none;border-radius:10px;font-weight:700;cursor:pointer;font-size:0.9rem;">📤 Pakia Backup</button>
               <div id="importStatus" style="color:var(--muted);font-size:0.82rem;min-height:20px;"></div>
             </div>
           </div>
           <div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px;">
-            <div style="font-size:2rem;margin-bottom:12px;">ðŸ“Š</div>
+            <div style="font-size:2rem;margin-bottom:12px;">📊</div>
             <h4 style="color:var(--paper);margin:0 0 8px;">Takwimu za Data</h4>
             <p style="color:var(--muted);font-size:0.82rem;margin:0 0 16px;">Taarifa za data zote kwenye Firestore.</p>
             <div id="dataStats" style="color:var(--paper);font-size:0.88rem;">Inapakia...</div>
@@ -2443,8 +2443,8 @@
 <div class="ad-edit-overlay" id="editClientOverlay" onclick="if(event.target===this)closeEditClient()">
   <div class="ad-edit-modal">
     <div class="ad-edit-head">
-      <h3>âœï¸ <span data-label="ad-edit-title">Rekebisha Taarifa za Mteja</span></h3>
-      <button class="ad-edit-close" onclick="closeEditClient()">âœ•</button>
+      <h3>✏️ <span data-label="ad-edit-title">Rekebisha Taarifa za Mteja</span></h3>
+      <button class="ad-edit-close" onclick="closeEditClient()">✕</button>
     </div>
     <input type="hidden" id="editClientId">
     <div class="ad-edit-field">
@@ -2469,7 +2469,7 @@
     </div>
     <div class="ad-edit-actions">
       <button class="ad-edit-cancel" onclick="closeEditClient()" data-label="ad-edit-cancel">Ghairi</button>
-      <button class="ad-edit-save" onclick="saveClient()" data-label="ad-edit-save">ðŸ’¾ Hifadhi</button>
+      <button class="ad-edit-save" onclick="saveClient()" data-label="ad-edit-save">💾 Hifadhi</button>
     </div>
   </div>
 </div>
@@ -2599,7 +2599,7 @@
     var segsEl = document.getElementById('splashSegs');
     if(!splash) return;
 
-    // â”€â”€ Canvas Particles (optimized: 25 particles, max 5 connections checked) â”€â”€
+    // ── Canvas Particles (optimized: 25 particles, max 5 connections checked) ──
     var cvs = document.getElementById('splashCanvas');
     var splashAnimFrame;
     if(cvs){
@@ -2636,7 +2636,7 @@
           ctx.fillStyle=p.color;
           ctx.globalAlpha=p.o;
           ctx.fill();
-          // draw connections â€” limit to 3 neighbors max
+          // draw connections — limit to 3 neighbors max
           var conn=0;
           for(var j=i+1;j<len&&conn<3;j++){
             var q=particles[j];
@@ -2664,7 +2664,7 @@
       '> INITIALIZING...',
       '> LOADING CORE...',
       '> CONNECTING...',
-      '> READY âœ“'
+      '> READY ✓'
     ];
     var phaseIdx = 0;
     var charIdx = 0;
@@ -2688,7 +2688,7 @@
     }
     setTimeout(typePhase, 400);
 
-    // Percentage counter â€” fast (20ms interval, +2 per tick)
+    // Percentage counter — fast (20ms interval, +2 per tick)
     var pct = 0;
     var totalSegs = 8;
     var pctInterval = setInterval(function(){
@@ -2705,7 +2705,7 @@
       if(pct >= 100) clearInterval(pctInterval);
     }, 20);
 
-    // Dismiss â€” 2.5s total
+    // Dismiss — 2.5s total
     setTimeout(function(){
       splash.classList.add('hide');
       if(splashAnimFrame) cancelAnimationFrame(splashAnimFrame);
@@ -2819,8 +2819,8 @@
     }).catch(()=>false);
   }
 
-  // EmailJS config â€” badilisha na zako mwenyewe
-  // 1. Fungua https://www.emailjs.com â€” jiunge bure
+  // EmailJS config — badilisha na zako mwenyewe
+  // 1. Fungua https://www.emailjs.com — jiunge bure
   // 2. Ongeza email service (Gmail/Outlook)
   // 3. Tengeneza template: {{code}}, {{email}}
   // 4. Weka IDs hapa chini
@@ -3068,7 +3068,7 @@
   const closeLegalBtn = document.getElementById('closeLegalBtn');
 
   const privacyHTML = `
-    <p><strong>Taarifa tunazokusanya:</strong> Jina, email, namba ya simu, na huduma uliyopata â€” unapojisajili, kuingia, kutuma maoni, au kujaza fomu ya usajili.</p>
+    <p><strong>Taarifa tunazokusanya:</strong> Jina, email, namba ya simu, na huduma uliyopata — unapojisajili, kuingia, kutuma maoni, au kujaza fomu ya usajili.</p>
     <p><strong>Tunazitumiaje:</strong> Kukupatia huduma, kuwasiliana nawe kuhusu maombi yako, na kuboresha ubora wa huduma zetu.</p>
     <p><strong>Usalama:</strong> Taarifa za login zinahifadhiwa kupitia Firebase (Google) kwa usimbaji fiche (encryption). Hatutoi taarifa zako kwa mtu wa tatu bila ridhaa yako.</p>
     <p><strong>Haki zako:</strong> Unaweza kuomba kufutwa kwa akaunti yako au taarifa zako wakati wowote kwa kuwasiliana nasi.</p>
@@ -3077,7 +3077,7 @@
   const termsHTML = `
     <p>Kwa kutumia website na huduma za PLATINUMZ IT Support, unakubali yafuatayo:</p>
     <p><strong>1. Huduma:</strong> Tunatoa huduma za TEHAMA kwa uaminifu, lakini muda wa kukamilisha kazi unaweza kutofautiana kulingana na aina ya tatizo.</p>
-    <p><strong>2. Malipo:</strong> Bei zinaelezwa wazi kabla ya kuanza kazi yoyote â€” hakuna gharama za siri.</p>
+    <p><strong>2. Malipo:</strong> Bei zinaelezwa wazi kabla ya kuanza kazi yoyote — hakuna gharama za siri.</p>
     <p><strong>3. Dhamana:</strong> Kazi zetu zina kipindi cha dhamana kwa ushauri wa ziada baada ya huduma kukamilika.</p>
     <p><strong>4. Akaunti:</strong> Wewe unawajibika kuweka password yako salama na kutokushiriki na wengine.</p>
     <p><strong>5. Mabadiliko:</strong> Tunaweza kubadilisha vigezo hivi wakati wowote; mabadiliko makubwa yatatangazwa kwenye website.</p>
@@ -3152,13 +3152,13 @@
     db.collection('clients').orderBy('createdAt','desc').get().then((snap) => {
       document.getElementById('statClients').textContent = snap.size;
       document.getElementById('tabCountClients').textContent = snap.size;
-      if(snap.empty){ tBody.innerHTML = '<tr><td colspan="5" class="ad-empty"><div class="ad-empty-icon">ðŸ‘¥</div>'+translations[currentLang]['admin-clients-empty']+'</td></tr>'; return; }
+      if(snap.empty){ tBody.innerHTML = '<tr><td colspan="5" class="ad-empty"><div class="ad-empty-icon">👥</div>'+translations[currentLang]['admin-clients-empty']+'</td></tr>'; return; }
       let rows = '';
       snap.forEach((doc) => {
         const d = doc.data();
-        const dt = d.createdAt ? d.createdAt.toDate().toLocaleDateString('sw-TZ') : 'â€”';
-        const badge = d.huduma ? '<span class="ad-badge ad-badge-green">'+d.huduma+'</span>' : 'â€”';
-        rows += '<tr><td><strong>'+(d.jina||'â€”')+'</strong></td><td style="color:var(--muted)">'+(d.email||'â€”')+'</td><td>'+badge+'</td><td style="font-family:JetBrains Mono,monospace;font-size:0.82rem;color:var(--muted)">'+dt+'</td><td><button class="ad-edit-btn" onclick="editClient(\''+doc.id+'\',\''+((d.jina||'').replace(/'/g,"\\'"))+'\',\''+((d.email||'').replace(/'/g,"\\'"))+'\',\''+((d.huduma||'').replace(/'/g,"\\'"))+'\')">âœï¸</button> <button class="ad-delete-btn" onclick="deleteClient(\''+doc.id+'\',\''+((d.jina||'').replace(/'/g,"\\'"))+'\')">ðŸ—‘ï¸</button></td></tr>';
+        const dt = d.createdAt ? d.createdAt.toDate().toLocaleDateString('sw-TZ') : '—';
+        const badge = d.huduma ? '<span class="ad-badge ad-badge-green">'+d.huduma+'</span>' : '—';
+        rows += '<tr><td><strong>'+(d.jina||'—')+'</strong></td><td style="color:var(--muted)">'+(d.email||'—')+'</td><td>'+badge+'</td><td style="font-family:JetBrains Mono,monospace;font-size:0.82rem;color:var(--muted)">'+dt+'</td><td><button class="ad-edit-btn" onclick="editClient(\''+doc.id+'\',\''+((d.jina||'').replace(/'/g,"\\'"))+'\',\''+((d.email||'').replace(/'/g,"\\'"))+'\',\''+((d.huduma||'').replace(/'/g,"\\'"))+'\')">✏️</button> <button class="ad-delete-btn" onclick="deleteClient(\''+doc.id+'\',\''+((d.jina||'').replace(/'/g,"\\'"))+'\')">🗑️</button></td></tr>';
       });
       tBody.innerHTML = rows;
     }).catch((e) => { tBody.innerHTML = '<tr><td colspan="5" class="ad-empty" style="color:#ff6b6b">'+e.message+'</td></tr>'; });
@@ -3167,31 +3167,31 @@
     _unsubAdminOrders = db.collection('orders').onSnapshot((snap) => {
       document.getElementById('statOrders').textContent = snap.size;
       document.getElementById('tabCountOrders').textContent = snap.size;
-      if(snap.empty){ oBody.innerHTML = '<tr><td colspan="8" class="ad-empty"><div class="ad-empty-icon">ðŸ“‹</div>'+translations[currentLang]['admin-orders-empty']+'</td></tr>'; return; }
+      if(snap.empty){ oBody.innerHTML = '<tr><td colspan="8" class="ad-empty"><div class="ad-empty-icon">📋</div>'+translations[currentLang]['admin-orders-empty']+'</td></tr>'; return; }
       let docs = [];
       snap.forEach((doc) => { const d = doc.data(); docs.push({id:doc.id, d, ts: d.createdAt ? d.createdAt.toDate().getTime() : 0}); });
       docs.sort((a,b) => b.ts - a.ts);
       let rows = '';
       const at = translations[currentLang];
       docs.forEach(({id, d}) => {
-        const dt = d.createdAt ? d.createdAt.toDate().toLocaleDateString(currentLang === 'sw' ? 'sw-TZ' : 'en-US') : 'â€”';
+        const dt = d.createdAt ? d.createdAt.toDate().toLocaleDateString(currentLang === 'sw' ? 'sw-TZ' : 'en-US') : '—';
         const st = d.status || 'mpya';
         let statusBadge = '';
         let actionBtn = '';
         if(st === 'mpya'){
           statusBadge = '<span class="ad-badge ad-badge-gold">'+(at['order-status-mpya']||'Mpya')+'</span>';
-          actionBtn = '<button class="ad-accept-btn" onclick="acceptOrder(\''+id+'\')">'+(at['order-accept-btn']||'âœ… Kubali')+'</button>';
+          actionBtn = '<button class="ad-accept-btn" onclick="acceptOrder(\''+id+'\')">'+(at['order-accept-btn']||'✅ Kubali')+'</button>';
         } else if(st === 'inashughulikiwa'){
           statusBadge = '<span class="ad-badge ad-badge-blue">'+(at['order-status-inashughulikiwa']||'Inashughulikiwa')+'</span>';
-          actionBtn = '<button class="ad-accept-btn" style="background:linear-gradient(135deg,#28a745,#5cb85c);" onclick="completeOrder(\''+id+'\')">'+(at['order-complete-btn']||'âœ… Maliza')+'</button>';
+          actionBtn = '<button class="ad-accept-btn" style="background:linear-gradient(135deg,#28a745,#5cb85c);" onclick="completeOrder(\''+id+'\')">'+(at['order-complete-btn']||'✅ Maliza')+'</button>';
         } else if(st === 'imekamilika'){
           statusBadge = '<span class="ad-badge ad-badge-green">'+(at['order-status-imekamilika']||'Imekamilika')+'</span>';
-          actionBtn = '<span style="color:var(--fiber);font-size:0.82rem;">âœ” '+(at['order-completed-label']||'Imekamilika')+'</span>';
+          actionBtn = '<span style="color:var(--fiber);font-size:0.82rem;">✔ '+(at['order-completed-label']||'Imekamilika')+'</span>';
         } else {
           statusBadge = '<span class="ad-badge ad-badge-red">'+st+'</span>';
-          actionBtn = 'â€”';
+          actionBtn = '—';
         }
-        rows += '<tr data-status="'+st+'"><td><strong>'+(d.jina||'â€”')+'</strong></td><td style="color:var(--muted)">'+(d.simu||'â€”')+'</td><td><span class="ad-badge ad-badge-green">'+(d.huduma||'â€”')+'</span></td><td style="color:var(--fiber);font-weight:600;font-size:0.82rem;">'+(d.gharama||'â€”')+'</td><td style="color:var(--muted)">'+(d.maelezo||'â€”')+'</td><td style="font-family:JetBrains Mono,monospace;font-size:0.82rem;color:var(--muted)">'+dt+'</td><td>'+statusBadge+'</td><td>'+actionBtn+'</td></tr>';
+        rows += '<tr data-status="'+st+'"><td><strong>'+(d.jina||'—')+'</strong></td><td style="color:var(--muted)">'+(d.simu||'—')+'</td><td><span class="ad-badge ad-badge-green">'+(d.huduma||'—')+'</span></td><td style="color:var(--fiber);font-weight:600;font-size:0.82rem;">'+(d.gharama||'—')+'</td><td style="color:var(--muted)">'+(d.maelezo||'—')+'</td><td style="font-family:JetBrains Mono,monospace;font-size:0.82rem;color:var(--muted)">'+dt+'</td><td>'+statusBadge+'</td><td>'+actionBtn+'</td></tr>';
       });
       oBody.innerHTML = rows;
     }, (e) => { oBody.innerHTML = '<tr><td colspan="8" class="ad-empty" style="color:#ff6b6b">'+e.message+'</td></tr>'; });
@@ -3268,11 +3268,11 @@
           const time = d.createdAt ? d.createdAt.toDate().toLocaleTimeString('sw-TZ',{hour:'2-digit',minute:'2-digit'}) : '';
           const isAdmin = d.sender === 'admin';
           const cls = isAdmin ? 'admin' : 'customer';
-          const readTick = isAdmin ? (d.read ? ' âœ“âœ“' : ' âœ“') : '';
+          const readTick = isAdmin ? (d.read ? ' ✓✓' : ' ✓') : '';
           const imgHtml = d.image ? '<img class="chat-img" src="'+d.image+'" onclick="window.open(this.src)" alt="image">' : '';
-          html += '<div class="ad-chat-msg '+cls+'"><div><div class="bubble">'+(d.message||'')+imgHtml+'</div><div class="meta">'+(d.name||(isAdmin?'Admin':'Mteja'))+' Â· '+time+' <span class="read-tick'+(d.read?' read':'')+'">'+readTick+'</span></div></div></div>';
+          html += '<div class="ad-chat-msg '+cls+'"><div><div class="bubble">'+(d.message||'')+imgHtml+'</div><div class="meta">'+(d.name||(isAdmin?'Admin':'Mteja'))+' · '+time+' <span class="read-tick'+(d.read?' read':'')+'">'+readTick+'</span></div></div></div>';
         });
-        if(msgCount === 0) html = '<div class="ad-empty"><div class="ad-empty-icon">ðŸ’¬</div>Hakuna ujumbe na '+name+'.</div>';
+        if(msgCount === 0) html = '<div class="ad-empty"><div class="ad-empty-icon">💬</div>Hakuna ujumbe na '+name+'.</div>';
         chatBox.innerHTML = html;
         chatBox.scrollTop = chatBox.scrollHeight;
         // Mark customer messages as read
@@ -3319,14 +3319,14 @@
       db.collection('reviews').orderBy('createdAt','desc').get().then((snap) => {
         document.getElementById('statReviews').textContent = snap.size;
         document.getElementById('tabCountReviews').textContent = snap.size;
-        if(snap.empty){ reviewsList.innerHTML = '<div class="ad-empty"><div class="ad-empty-icon">â­</div>Hakuna maoni bado.</div>'; return; }
+        if(snap.empty){ reviewsList.innerHTML = '<div class="ad-empty"><div class="ad-empty-icon">⭐</div>Hakuna maoni bado.</div>'; return; }
         let html = '';
         snap.forEach((doc) => {
           const d = doc.data();
-          const dt = d.createdAt ? d.createdAt.toDate().toLocaleDateString('sw-TZ') : 'â€”';
-          const stars = 'â˜…'.repeat(d.stars||0) + 'â˜†'.repeat(5-(d.stars||0));
+          const dt = d.createdAt ? d.createdAt.toDate().toLocaleDateString('sw-TZ') : '—';
+          const stars = '★'.repeat(d.stars||0) + '☆'.repeat(5-(d.stars||0));
           const initial = (d.name||'M')[0].toUpperCase();
-          html += '<div class="ad-review-card"><button class="ad-review-del" onclick="deleteReview(\''+doc.id+'\')">ðŸ—‘ï¸ Futa</button><div class="ad-review-head"><div class="ad-review-author"><div class="ad-review-avatar">'+initial+'</div>'+(d.name||'Mteja')+'</div><div class="ad-review-stars">'+stars+'</div></div><div class="ad-review-text">'+(d.text||'')+'</div><div class="ad-review-date">'+dt+'</div></div>';
+          html += '<div class="ad-review-card"><button class="ad-review-del" onclick="deleteReview(\''+doc.id+'\')">🗑️ Futa</button><div class="ad-review-head"><div class="ad-review-author"><div class="ad-review-avatar">'+initial+'</div>'+(d.name||'Mteja')+'</div><div class="ad-review-stars">'+stars+'</div></div><div class="ad-review-text">'+(d.text||'')+'</div><div class="ad-review-date">'+dt+'</div></div>';
         });
         reviewsList.innerHTML = html;
       }).catch((e) => { reviewsList.innerHTML = '<div class="ad-empty" style="color:#ff6b6b">'+e.message+'</div>'; });
@@ -3408,17 +3408,17 @@
       let totalRevenue=0;
       orderSnap.forEach(d=>{const p=d.data().gharama;if(p){const n=parseInt(String(p).replace(/[^0-9]/g,''));if(!isNaN(n))totalRevenue+=n;}});
       const avgRevenue=completedOrders?Math.round(totalRevenue/completedOrders):0;
-      const metricsHtml='<div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center;"><div style="font-size:0.75rem;color:var(--muted);margin-bottom:6px;">ðŸ’° Mapato Jumla</div><div style="font-size:1.6rem;font-weight:800;color:var(--fiber);font-family:JetBrains Mono,monospace;">TSH '+totalRevenue.toLocaleString()+'</div><div style="font-size:0.7rem;color:var(--muted);margin-top:4px;">Avg: TSH '+avgRevenue.toLocaleString()+'/order</div></div>'
-        +'<div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center;"><div style="font-size:0.75rem;color:var(--muted);margin-bottom:6px;">ðŸ“ˆ Mwelekeo Orders</div><div style="font-size:1.6rem;font-weight:800;color:'+(growthRate>=0?'var(--fiber)':'#ff6b6b')+';font-family:JetBrains Mono,monospace;">'+(growthRate>=0?'+':'')+growthRate+'%</div><div style="font-size:0.7rem;color:var(--muted);margin-top:4px;">'+thisMonthOrders+' vs '+lastMonthOrders+' iliyopita</div></div>'
-        +'<div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center;"><div style="font-size:0.75rem;color:var(--muted);margin-bottom:6px;">âœ… Kiwango cha Kukamilika</div><div style="font-size:1.6rem;font-weight:800;color:var(--signal);font-family:JetBrains Mono,monospace;">'+completionRate+'%</div><div style="font-size:0.7rem;color:var(--muted);margin-top:4px;">'+completedOrders+'/'+totalOrders+' orders</div></div>'
-        +'<div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center;"><div style="font-size:0.75rem;color:var(--muted);margin-bottom:6px;">ðŸ‘¥ Wateja Wapya</div><div style="font-size:1.6rem;font-weight:800;color:#a29bfe;font-family:JetBrains Mono,monospace;">'+thisMonthClients+'</div><div style="font-size:0.7rem;color:var(--muted);margin-top:4px;">'+(clientGrowth>=0?'+':'')+clientGrowth+'% vs iliyopita</div></div>';
+      const metricsHtml='<div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center;"><div style="font-size:0.75rem;color:var(--muted);margin-bottom:6px;">💰 Mapato Jumla</div><div style="font-size:1.6rem;font-weight:800;color:var(--fiber);font-family:JetBrains Mono,monospace;">TSH '+totalRevenue.toLocaleString()+'</div><div style="font-size:0.7rem;color:var(--muted);margin-top:4px;">Avg: TSH '+avgRevenue.toLocaleString()+'/order</div></div>'
+        +'<div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center;"><div style="font-size:0.75rem;color:var(--muted);margin-bottom:6px;">📈 Mwelekeo Orders</div><div style="font-size:1.6rem;font-weight:800;color:'+(growthRate>=0?'var(--fiber)':'#ff6b6b')+';font-family:JetBrains Mono,monospace;">'+(growthRate>=0?'+':'')+growthRate+'%</div><div style="font-size:0.7rem;color:var(--muted);margin-top:4px;">'+thisMonthOrders+' vs '+lastMonthOrders+' iliyopita</div></div>'
+        +'<div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center;"><div style="font-size:0.75rem;color:var(--muted);margin-bottom:6px;">✅ Kiwango cha Kukamilika</div><div style="font-size:1.6rem;font-weight:800;color:var(--signal);font-family:JetBrains Mono,monospace;">'+completionRate+'%</div><div style="font-size:0.7rem;color:var(--muted);margin-top:4px;">'+completedOrders+'/'+totalOrders+' orders</div></div>'
+        +'<div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center;"><div style="font-size:0.75rem;color:var(--muted);margin-bottom:6px;">👥 Wateja Wapya</div><div style="font-size:1.6rem;font-weight:800;color:#a29bfe;font-family:JetBrains Mono,monospace;">'+thisMonthClients+'</div><div style="font-size:0.7rem;color:var(--muted);margin-top:4px;">'+(clientGrowth>=0?'+':'')+clientGrowth+'% vs iliyopita</div></div>';
       document.getElementById('analyticsMetrics').innerHTML=metricsHtml;
       // === INSIGHTS ===
       const topService=Object.entries(serviceCounts).sort((a,b)=>b[1]-a[1])[0];
-      const insightsHtml=(topService?'<div style="background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;"><div style="color:var(--muted);font-size:0.82rem;margin-bottom:6px;">ðŸ† Huduma Namba 1</div><div style="color:var(--paper);font-weight:700;font-size:0.95rem;">'+topService[0]+'</div><div style="color:var(--muted);font-size:0.78rem;margin-top:4px;">'+topService[1]+' orders</div></div>':'')
-        +'<div style="background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;"><div style="color:var(--muted);font-size:0.82rem;margin-bottom:6px;">ðŸ“Š Takwimu za Jumla</div><div style="color:var(--paper);font-size:0.88rem;">Orders: '+totalOrders+' | Wateja: '+totalClients+' | Reviews: '+document.querySelectorAll('.ad-review-item').length+'</div></div>'
-        +'<div style="background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;"><div style="color:var(--muted);font-size:0.82rem;margin-bottom:6px;">ðŸ“… Mwezi: '+months[thisMonth]+'</div><div style="color:var(--paper);font-size:0.88rem;">Orders mpya: '+thisMonthOrders+' | Wateja wapya: '+thisMonthClients+'</div></div>'
-        +'<div style="background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;"><div style="color:var(--muted);font-size:0.82rem;margin-bottom:6px;">âš¡ Viashiria</div><div style="color:var(--paper);font-size:0.88rem;">Pending: '+(totalOrders-completedOrders)+' | Completion: '+completionRate+'%</div></div>';
+      const insightsHtml=(topService?'<div style="background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;"><div style="color:var(--muted);font-size:0.82rem;margin-bottom:6px;">🏆 Huduma Namba 1</div><div style="color:var(--paper);font-weight:700;font-size:0.95rem;">'+topService[0]+'</div><div style="color:var(--muted);font-size:0.78rem;margin-top:4px;">'+topService[1]+' orders</div></div>':'')
+        +'<div style="background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;"><div style="color:var(--muted);font-size:0.82rem;margin-bottom:6px;">📊 Takwimu za Jumla</div><div style="color:var(--paper);font-size:0.88rem;">Orders: '+totalOrders+' | Wateja: '+totalClients+' | Reviews: '+document.querySelectorAll('.ad-review-item').length+'</div></div>'
+        +'<div style="background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;"><div style="color:var(--muted);font-size:0.82rem;margin-bottom:6px;">📅 Mwezi: '+months[thisMonth]+'</div><div style="color:var(--paper);font-size:0.88rem;">Orders mpya: '+thisMonthOrders+' | Wateja wapya: '+thisMonthClients+'</div></div>'
+        +'<div style="background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;"><div style="color:var(--muted);font-size:0.82rem;margin-bottom:6px;">⚡ Viashiria</div><div style="color:var(--paper);font-size:0.88rem;">Pending: '+(totalOrders-completedOrders)+' | Completion: '+completionRate+'%</div></div>';
       document.getElementById('analyticsInsights').innerHTML=insightsHtml;
     }).catch((e) => { console.error('Analytics error:', e); });
 
@@ -3450,21 +3450,21 @@
     if(!tBody) return;
     db.collection('appointments').orderBy('date','desc').get().then(snap => {
       document.getElementById('tabCountAppts').textContent = snap.size;
-      if(snap.empty){ tBody.innerHTML='<tr><td colspan="8" class="ad-empty"><div class="ad-empty-icon">ðŸ—“ï¸</div>Hakuna miadi bado.</td></tr>'; return; }
+      if(snap.empty){ tBody.innerHTML='<tr><td colspan="8" class="ad-empty"><div class="ad-empty-icon">🗓️</div>Hakuna miadi bado.</td></tr>'; return; }
       _adminAppts = [];
       let rows='';
       snap.forEach(doc => {
         const d=doc.data();
         _adminAppts.push({...d,id:doc.id});
-        const dt = d.date || 'â€”';
+        const dt = d.date || '—';
         const stClass = d.status==='confirmed'?'ad-badge-green':d.status==='cancelled'?'ad-badge-red':'ad-badge-gold';
         const stText = d.status==='confirmed'?'Imethibitishwa':d.status==='cancelled'?'Imefutwa':'Inasubiri';
         const canConfirm = d.status==='pending';
         const canCancel = d.status!=='cancelled';
         let actions = '';
-        if(canConfirm) actions += '<button class="ad-edit-btn" onclick="adminConfirmAppt(\''+doc.id+'\')" title="Thibitisha">âœ…</button> ';
-        if(canCancel) actions += '<button class="ad-delete-btn" onclick="adminCancelAppt(\''+doc.id+'\')" title="Futa">âŒ</button>';
-        rows+='<tr data-status="'+(d.status||'pending')+'" data-search="'+((d.name||'')+(d.email||'')+(d.service||'')+(d.date||'')).toLowerCase()+'"><td><strong>'+(d.name||'â€”')+'</strong></td><td style="color:var(--muted);font-size:0.82rem;">'+(d.email||'â€”')+'</td><td><span class="ad-badge ad-badge-blue">'+(d.service||'â€”')+'</span></td><td style="font-family:JetBrains Mono,monospace;font-size:0.82rem;">'+dt+'</td><td style="font-family:JetBrains Mono,monospace;font-size:0.82rem;">'+(d.time||'â€”')+'</td><td style="color:var(--muted);font-size:0.82rem;">'+(d.note||'â€”')+'</td><td><span class="ad-badge '+stClass+'">'+stText+'</span></td><td>'+actions+'</td></tr>';
+        if(canConfirm) actions += '<button class="ad-edit-btn" onclick="adminConfirmAppt(\''+doc.id+'\')" title="Thibitisha">✅</button> ';
+        if(canCancel) actions += '<button class="ad-delete-btn" onclick="adminCancelAppt(\''+doc.id+'\')" title="Futa">❌</button>';
+        rows+='<tr data-status="'+(d.status||'pending')+'" data-search="'+((d.name||'')+(d.email||'')+(d.service||'')+(d.date||'')).toLowerCase()+'"><td><strong>'+(d.name||'—')+'</strong></td><td style="color:var(--muted);font-size:0.82rem;">'+(d.email||'—')+'</td><td><span class="ad-badge ad-badge-blue">'+(d.service||'—')+'</span></td><td style="font-family:JetBrains Mono,monospace;font-size:0.82rem;">'+dt+'</td><td style="font-family:JetBrains Mono,monospace;font-size:0.82rem;">'+(d.time||'—')+'</td><td style="color:var(--muted);font-size:0.82rem;">'+(d.note||'—')+'</td><td><span class="ad-badge '+stClass+'">'+stText+'</span></td><td>'+actions+'</td></tr>';
       });
       tBody.innerHTML = rows;
     }).catch(e => { tBody.innerHTML='<tr><td colspan="8" class="ad-empty" style="color:#ff6b6b">Hitilafu: '+e.message+'</td></tr>'; });
@@ -3472,14 +3472,14 @@
   function adminConfirmAppt(id){
     if(!confirm('Thibitisha miadi hii?')) return;
     db.collection('appointments').doc(id).update({status:'confirmed'}).then(()=>{
-      showNotifToast('Miadi Imethibitishwa','Appointment confirmed','âœ…');
+      showNotifToast('Miadi Imethibitishwa','Appointment confirmed','✅');
       loadAdminAppointments();
     });
   }
   function adminCancelAppt(id){
     if(!confirm('Futa miadi hii?')) return;
     db.collection('appointments').doc(id).update({status:'cancelled'}).then(()=>{
-      showNotifToast('Miadi Imefutwa','Appointment cancelled','âŒ');
+      showNotifToast('Miadi Imefutwa','Appointment cancelled','❌');
       loadAdminAppointments();
     });
   }
@@ -3516,16 +3516,16 @@
       locMsgs.forEach(m=>{ uniqueByEmail[m.email]=m; });
       const locs=Object.values(uniqueByEmail);
       document.getElementById('tabCountLocs').textContent=locs.length;
-      if(locs.length===0){ tBody.innerHTML='<tr><td colspan="6" class="ad-empty"><div class="ad-empty-icon">ðŸ“</div>Hakuna eneo bado.</td></tr>'; return; }
+      if(locs.length===0){ tBody.innerHTML='<tr><td colspan="6" class="ad-empty"><div class="ad-empty-icon">📍</div>Hakuna eneo bado.</td></tr>'; return; }
       _adminLocs=locs;
       let rows='';
       locs.forEach(m=>{
-        const dt=m.createdAt?m.createdAt.toDate().toLocaleString('sw-TZ'):'â€”';
+        const dt=m.createdAt?m.createdAt.toDate().toLocaleString('sw-TZ'):'—';
         const mapMatch=m.message.match(/maps\?q=([-\d.]+),([-\d.]+)/);
-        const lat=mapMatch?mapMatch[1]:'â€”';
-        const lng=mapMatch?mapMatch[2]:'â€”';
+        const lat=mapMatch?mapMatch[1]:'—';
+        const lng=mapMatch?mapMatch[2]:'—';
         const mapUrl=mapMatch?'https://www.google.com/maps?q='+lat+','+lng:'';
-        rows+='<tr data-search="'+((m.name||'')+(m.email||'')+(lat+','+lng)).toLowerCase()+'"><td><strong>'+(m.name||'â€”')+'</strong></td><td style="color:var(--muted);font-size:0.82rem;">'+(m.email||'â€”')+'</td><td style="font-size:0.82rem;color:var(--muted);">Lat: '+lat+'<br>Lng: '+lng+'</td><td>'+(mapUrl?'<a href="'+mapUrl+'" target="_blank" style="color:#F2A93B;text-decoration:underline;">ðŸ“ Fungua</a>':'â€”')+'</td><td style="font-family:JetBrains Mono,monospace;font-size:0.82rem;">'+dt+'</td><td><span class="ad-badge ad-badge-green">Imeshirikiwa</span></td></tr>';
+        rows+='<tr data-search="'+((m.name||'')+(m.email||'')+(lat+','+lng)).toLowerCase()+'"><td><strong>'+(m.name||'—')+'</strong></td><td style="color:var(--muted);font-size:0.82rem;">'+(m.email||'—')+'</td><td style="font-size:0.82rem;color:var(--muted);">Lat: '+lat+'<br>Lng: '+lng+'</td><td>'+(mapUrl?'<a href="'+mapUrl+'" target="_blank" style="color:#F2A93B;text-decoration:underline;">📍 Fungua</a>':'—')+'</td><td style="font-family:JetBrains Mono,monospace;font-size:0.82rem;">'+dt+'</td><td><span class="ad-badge ad-badge-green">Imeshirikiwa</span></td></tr>';
       });
       tBody.innerHTML=rows;
     }).catch(e=>{ tBody.innerHTML='<tr><td colspan="6" class="ad-empty" style="color:#ff6b6b">Hitilafu: '+e.message+'</td></tr>'; });
@@ -3563,7 +3563,7 @@
     document.getElementById('adminCallAvatar').textContent=(name||'M').charAt(0).toUpperCase();
   }
   function adminCallCustomer(type){
-    if(!_adminCallSelected){ showNotifToast('Chagua Mteja','Select a customer first','ðŸ‘¤'); return; }
+    if(!_adminCallSelected){ showNotifToast('Chagua Mteja','Select a customer first','👤'); return; }
     const user=firebase.auth().currentUser;
     if(!user) return;
     const callId=user.uid+'_call';
@@ -3592,12 +3592,12 @@
           if(d&&d.answer&&peerConnection){
             peerConnection.setRemoteDescription(new RTCSessionDescription(d.answer));
             startCallTimer();
-            document.getElementById('callStatusText').textContent='Imeungana â€” '+type;
+            document.getElementById('callStatusText').textContent='Imeungana — '+type;
           }
           if(d&&d.status==='ended'){ endCall(); }
           if(d&&(d.status==='rejected'||d.status==='missed')){
             endCall();
-            showNotifToast(currentLang==='sw'?'Call Imekatazwa':'Call Rejected',currentLang==='sw'?'Mteja amekataa simu':'Customer rejected the call','ðŸ“µ');
+            showNotifToast(currentLang==='sw'?'Call Imekatazwa':'Call Rejected',currentLang==='sw'?'Mteja amekataa simu':'Customer rejected the call','📵');
           }
         });
         _unsubCallICE=db.collection('calls').doc(callId+'_ice_receiver').onSnapshot(doc=>{
@@ -3608,7 +3608,7 @@
         });
       });
     }).catch(err=>{
-      showNotifToast('Hitilafu',err.message,'âŒ');
+      showNotifToast('Hitilafu',err.message,'❌');
     });
   }
 
@@ -3623,10 +3623,10 @@
       items.sort((a,b)=>{const ta=a.ts?a.ts.toDate().getTime():0;const tb=b.ts?b.ts.toDate().getTime():0;return tb-ta;});
       let html='';
       items.slice(0,20).forEach(item=>{
-        const dt=item.ts?item.ts.toDate().toLocaleString('sw-TZ'):'â€”';
-        const st=item.status==='missed'?'ðŸ“ž Missed':'ðŸ“µ Rejected';
+        const dt=item.ts?item.ts.toDate().toLocaleString('sw-TZ'):'—';
+        const st=item.status==='missed'?'📞 Missed':'📵 Rejected';
         const stColor=item.status==='missed'?'#ff6b6b':'#f39c12';
-        html+='<div style="padding:10px 12px;border-bottom:1px solid var(--line);cursor:pointer;" onmouseover="this.style.background=\'var(--hover)\'" onmouseout="this.style.background=\'none\'"><div style="display:flex;justify-content:space-between;align-items:center;"><div><strong style="color:var(--paper);font-size:0.82rem;">'+(item.fromName||item.from||'Unknown')+'</strong><div style="color:var(--muted);font-size:0.72rem;">'+(item.type==='video'?'ðŸ“¹ Video':'ðŸ“ž Audio')+'</div></div><div style="text-align:right;"><div style="color:'+stColor+';font-size:0.72rem;font-weight:700;">'+st+'</div><div style="color:var(--muted);font-size:0.7rem;font-family:JetBrains Mono,monospace;">'+dt+'</div></div></div></div>';
+        html+='<div style="padding:10px 12px;border-bottom:1px solid var(--line);cursor:pointer;" onmouseover="this.style.background=\'var(--hover)\'" onmouseout="this.style.background=\'none\'"><div style="display:flex;justify-content:space-between;align-items:center;"><div><strong style="color:var(--paper);font-size:0.82rem;">'+(item.fromName||item.from||'Unknown')+'</strong><div style="color:var(--muted);font-size:0.72rem;">'+(item.type==='video'?'📹 Video':'📞 Audio')+'</div></div><div style="text-align:right;"><div style="color:'+stColor+';font-size:0.72rem;font-weight:700;">'+st+'</div><div style="color:var(--muted);font-size:0.7rem;font-family:JetBrains Mono,monospace;">'+dt+'</div></div></div></div>';
       });
       list.innerHTML=html;
     }).catch(()=>{});
@@ -3638,14 +3638,14 @@
     if(!list) return;
     const today=new Date(); today.setHours(0,0,0,0);
     db.collection('checkins').get().then(snap=>{
-      if(snap.empty){ list.innerHTML='<div class="ad-empty"><div class="ad-empty-icon">ðŸ“±</div>Hakuna check-in bado.</div>'; return; }
+      if(snap.empty){ list.innerHTML='<div class="ad-empty"><div class="ad-empty-icon">📱</div>Hakuna check-in bado.</div>'; return; }
       let items=[];
       snap.forEach(doc=>{const d=doc.data();items.push({...d,id:doc.id});});
       items.sort((a,b)=>{const ta=a.timestamp?a.timestamp.toDate().getTime():0;const tb=b.timestamp?b.timestamp.toDate().getTime():0;return tb-ta;});
       let html='';
       items.forEach(item=>{
-        const dt=item.timestamp?item.timestamp.toDate().toLocaleString('sw-TZ'):'â€”';
-        html+='<div class="qr-checkin-item" style="margin-bottom:6px;"><div><div style="color:var(--paper);font-weight:600;font-size:0.88rem;">ðŸ‘¤ '+(item.name||'â€”')+'</div><div style="color:var(--muted);font-size:0.78rem;">'+(item.email||'')+'</div></div><div style="text-align:right;"><div style="color:var(--muted);font-size:0.75rem;font-family:JetBrains Mono,monospace;">'+dt+'</div><div style="color:var(--fiber);font-size:0.72rem;">'+(item.location||'Office')+'</div></div></div>';
+        const dt=item.timestamp?item.timestamp.toDate().toLocaleString('sw-TZ'):'—';
+        html+='<div class="qr-checkin-item" style="margin-bottom:6px;"><div><div style="color:var(--paper);font-weight:600;font-size:0.88rem;">👤 '+(item.name||'—')+'</div><div style="color:var(--muted);font-size:0.78rem;">'+(item.email||'')+'</div></div><div style="text-align:right;"><div style="color:var(--muted);font-size:0.75rem;font-family:JetBrains Mono,monospace;">'+dt+'</div><div style="color:var(--fiber);font-size:0.72rem;">'+(item.location||'Office')+'</div></div></div>';
       });
       list.innerHTML=html;
     }).catch(e=>{list.innerHTML='<div class="ad-empty" style="color:#ff6b6b">Hitilafu: '+e.message+'</div>';});
@@ -3656,13 +3656,13 @@
     const tBody=document.getElementById('adminLoyaltyBody');
     if(!tBody) return;
     db.collection('loyalty').get().then(snap=>{
-      if(snap.empty){ tBody.innerHTML='<tr><td colspan="5" class="ad-empty"><div class="ad-empty-icon">ðŸ†</div>Hakuna pointi bado.</td></tr>'; return; }
+      if(snap.empty){ tBody.innerHTML='<tr><td colspan="5" class="ad-empty"><div class="ad-empty-icon">🏆</div>Hakuna pointi bado.</td></tr>'; return; }
       let rows='';
       snap.forEach(doc=>{
         const d=doc.data();
         const pts=d.points||0;
         const tier=getLoyaltyTier(pts);
-        rows+='<tr><td><strong>'+(d.name||'â€”')+'</strong></td><td style="color:var(--muted);font-size:0.82rem;">'+(d.email||'â€”')+'</td><td style="color:#F2A93B;font-weight:700;font-family:JetBrains Mono,monospace;">'+pts+'</td><td><span class="ad-badge ad-badge-green">'+tier.icon+' '+tier.name+'</span></td><td>â€”</td></tr>';
+        rows+='<tr><td><strong>'+(d.name||'—')+'</strong></td><td style="color:var(--muted);font-size:0.82rem;">'+(d.email||'—')+'</td><td style="color:#F2A93B;font-weight:700;font-family:JetBrains Mono,monospace;">'+pts+'</td><td><span class="ad-badge ad-badge-green">'+tier.icon+' '+tier.name+'</span></td><td>—</td></tr>';
       });
       tBody.innerHTML=rows;
     }).catch(e=>{tBody.innerHTML='<tr><td colspan="5" class="ad-empty" style="color:#ff6b6b">Hitilafu: '+e.message+'</td></tr>';});
@@ -3689,11 +3689,11 @@
       a.download='platinumz-backup-'+new Date().toISOString().split('T')[0]+'.json';
       a.click();
       URL.revokeObjectURL(a.href);
-      btn.textContent='ðŸ“¥ Hamisha Zote (JSON)'; btn.disabled=false;
-      showNotifToast('Imehamishwa','Data yote imeshapakiwa kama backup.','ðŸ“¤');
+      btn.textContent='📥 Hamisha Zote (JSON)'; btn.disabled=false;
+      showNotifToast('Imehamishwa','Data yote imeshapakiwa kama backup.','📤');
     }).catch(e=>{
-      btn.textContent='ðŸ“¥ Hamisha Zote (JSON)'; btn.disabled=false;
-      showNotifToast('Hitilafu',e.message,'âŒ');
+      btn.textContent='📥 Hamisha Zote (JSON)'; btn.disabled=false;
+      showNotifToast('Hitilafu',e.message,'❌');
     });
   }
 
@@ -3708,8 +3708,8 @@
       a.download='platinumz-'+colName+'-'+new Date().toISOString().split('T')[0]+'.json';
       a.click();
       URL.revokeObjectURL(a.href);
-      showNotifToast('Imehamishwa',colName+' ('+data.length+' records) imeshapakiwa.','ðŸ“¤');
-    }).catch(e=>{ showNotifToast('Hitilafu',e.message,'âŒ'); });
+      showNotifToast('Imehamishwa',colName+' ('+data.length+' records) imeshapakiwa.','📤');
+    }).catch(e=>{ showNotifToast('Hitilafu',e.message,'❌'); });
   }
 
   function handleImportFile(evt){
@@ -3739,12 +3739,12 @@
           });
         });
         Promise.all(promises).then(()=>{
-          statusEl.textContent='âœ… Imekamilika: '+imported+' records imerejeshwa'+(errors?' ('+errors+' errors)':'');
+          statusEl.textContent='✅ Imekamilika: '+imported+' records imerejeshwa'+(errors?' ('+errors+' errors)':'');
           statusEl.style.color='var(--fiber)';
-          showNotifToast('Imerejeshwa',imported+' records zimerejeshwa.','ðŸ“¥');
+          showNotifToast('Imerejeshwa',imported+' records zimerejeshwa.','📥');
         });
       }catch(err){
-        statusEl.textContent='âŒ Hitilafu: '+err.message;
+        statusEl.textContent='❌ Hitilafu: '+err.message;
         statusEl.style.color='#ff6b6b';
       }
     };
@@ -3854,7 +3854,7 @@
   function renderNotifPanel(panelId, items){
     const panel = document.getElementById(panelId);
     if(!panel) return;
-    if(items.length === 0){ panel.innerHTML = '<div class="notif-empty">ðŸ”” Hakuna arifa bado.</div>'; return; }
+    if(items.length === 0){ panel.innerHTML = '<div class="notif-empty">🔔 Hakuna arifa bado.</div>'; return; }
     panel.innerHTML = items.map(n => '<div class="notif-item'+(n.unread?' unread':'')+'">'+n.text+'<div class="notif-time">'+n.time+'</div></div>').join('');
   }
 
@@ -3873,9 +3873,9 @@
         const isNew = ts > lastRead;
         let text = '';
         const st = d.status || 'mpya';
-        if(st === 'mpya') text = 'ðŸ“‹ Order mpya kutoka <strong>'+(d.jina||'Mteja')+'</strong> - '+(d.huduma||'');
-        else if(st === 'inashughulikiwa') text = 'â³ <strong>'+(d.jina||'Mteja')+' - '+(d.huduma||'')+'</strong> inashughulikiwa';
-        else if(st === 'imekamilika') text = 'âœ… <strong>'+(d.jina||'Mteja')+' - '+(d.huduma||'')+'</strong> imekamilika';
+        if(st === 'mpya') text = '📋 Order mpya kutoka <strong>'+(d.jina||'Mteja')+'</strong> - '+(d.huduma||'');
+        else if(st === 'inashughulikiwa') text = '⏳ <strong>'+(d.jina||'Mteja')+' - '+(d.huduma||'')+'</strong> inashughulikiwa';
+        else if(st === 'imekamilika') text = '✅ <strong>'+(d.jina||'Mteja')+' - '+(d.huduma||'')+'</strong> imekamilika';
         if(text) items.push({text, time:timeStr, unread:isNew});
       });
       _adminNotifs = items;
@@ -3902,11 +3902,11 @@
         let text = '';
         if(st === 'inashughulikiwa'){
           const isUnread = ts > lastRead;
-          text = 'â³ Order yako ya <strong>'+(d.huduma||'')+'</strong> imeanza kushughulikiwa';
+          text = '⏳ Order yako ya <strong>'+(d.huduma||'')+'</strong> imeanza kushughulikiwa';
           items.push({text, time:timeStr, unread:isUnread});
         } else if(st === 'imekamilika'){
           const isUnread = ts > lastRead;
-          text = 'âœ… Order yako ya <strong>'+(d.huduma||'')+'</strong> imekamilika! Furaha!';
+          text = '✅ Order yako ya <strong>'+(d.huduma||'')+'</strong> imekamilika! Furaha!';
           items.push({text, time:timeStr, unread:isUnread});
         }
       });
@@ -3972,7 +3972,7 @@
         sender: role,
         name: role === 'admin' ? 'Admin' : (_customerUser ? (_customerUser.displayName || _customerUser.email.split('@')[0]) : 'Mteja'),
         email: role === 'admin' ? (window._adminSelectedChatEmail || '') : (_customerUser ? _customerUser.email : ''),
-        message: 'ðŸ“· Picha',
+        message: '📷 Picha',
         image: imgData,
         read: false,
         createdAt: firebase.firestore.FieldValue.serverTimestamp()
@@ -4017,7 +4017,7 @@
       acceptedAt: firebase.firestore.FieldValue.serverTimestamp()
     }).then(() => {
       showOrderAcceptedPopup();
-      showNotifToast(currentLang==='sw'?'Order Imekubaliwa':'Order Accepted', currentLang==='sw'?'Order inashughulikiwa sasa':'Order is being processed now','âœ…');
+      showNotifToast(currentLang==='sw'?'Order Imekubaliwa':'Order Accepted', currentLang==='sw'?'Order inashughulikiwa sasa':'Order is being processed now','✅');
     }).catch((e) => {
       console.error('Accept order error:', e);
       alert('Hitilafu imetokea: ' + e.message);
@@ -4032,7 +4032,7 @@
         status: 'imefutwa',
         cancelledAt: firebase.firestore.FieldValue.serverTimestamp()
       }).then(()=>{
-        showNotifToast(currentLang==='sw'?'Order Imefutwa':'Order Cancelled', currentLang==='sw'?'Order yako imefutwa':'Your order has been cancelled','ðŸ—‘ï¸');
+        showNotifToast(currentLang==='sw'?'Order Imefutwa':'Order Cancelled', currentLang==='sw'?'Order yako imefutwa':'Your order has been cancelled','🗑️');
         sendOrderCancelEmail({email:d.email||'',jina:d.jina||'',huduma:d.huduma||''});
       });
     }).catch(e=>{
@@ -4052,7 +4052,7 @@
         completedAt: firebase.firestore.FieldValue.serverTimestamp()
       }).then(() => {
         showOrderCompletedPopup();
-        showNotifToast(currentLang==='sw'?'Order Imekamilika!':'Order Completed!', (orderData.huduma||'')+' â€” '+orderData.email,'âœ…');
+        showNotifToast(currentLang==='sw'?'Order Imekamilika!':'Order Completed!', (orderData.huduma||'')+' — '+orderData.email,'✅');
         if(orderData.email){
           sendOrderCompleteEmail(orderData);
           // Award loyalty points
@@ -4209,7 +4209,7 @@
       let rows = '';
       const ct = translations[currentLang];
       docs.forEach(({d, id}) => {
-        const dt = d.createdAt ? d.createdAt.toDate().toLocaleDateString(currentLang === 'sw' ? 'sw-TZ' : 'en-US') : 'â€”';
+        const dt = d.createdAt ? d.createdAt.toDate().toLocaleDateString(currentLang === 'sw' ? 'sw-TZ' : 'en-US') : '—';
         const st = d.status || 'mpya';
         let statusBadge = '';
         if(st === 'mpya'){
@@ -4226,9 +4226,9 @@
         }
         let actionBtn = '';
         if(st === 'mpya' || st === 'inashughulikiwa'){
-          actionBtn = '<button class="cu-cancel-btn" onclick="cancelOrder(\''+id+'\')" title="'+(currentLang==='sw'?'Futa order':'Cancel order')+'">âœ•</button>';
+          actionBtn = '<button class="cu-cancel-btn" onclick="cancelOrder(\''+id+'\')" title="'+(currentLang==='sw'?'Futa order':'Cancel order')+'">✕</button>';
         }
-        rows += '<tr><td><span class="cu-badge cu-badge-green">'+(d.huduma||'â€”')+'</span></td><td style="color:var(--fiber);font-weight:600;font-size:0.82rem;">'+(d.gharama||'â€”')+'</td><td style="color:var(--muted)">'+(d.simu||'â€”')+'</td><td style="color:var(--muted)">'+(d.maelezo||'â€”')+'</td><td style="font-family:JetBrains Mono,monospace;font-size:0.82rem;color:var(--muted)">'+dt+'</td><td>'+statusBadge+'</td><td>'+actionBtn+'</td></tr>';
+        rows += '<tr><td><span class="cu-badge cu-badge-green">'+(d.huduma||'—')+'</span></td><td style="color:var(--fiber);font-weight:600;font-size:0.82rem;">'+(d.gharama||'—')+'</td><td style="color:var(--muted)">'+(d.simu||'—')+'</td><td style="color:var(--muted)">'+(d.maelezo||'—')+'</td><td style="font-family:JetBrains Mono,monospace;font-size:0.82rem;color:var(--muted)">'+dt+'</td><td>'+statusBadge+'</td><td>'+actionBtn+'</td></tr>';
       });
       oBody.innerHTML = rows;
       document.getElementById('cuStatDone').textContent = doneCount;
@@ -4237,8 +4237,8 @@
     db.collection('clients').doc(user.uid).get().then((doc) => {
       if(doc.exists){
         const d = doc.data();
-        document.getElementById('cuInfoService').textContent = d.huduma || 'â€”';
-        const dt = d.createdAt ? d.createdAt.toDate().toLocaleDateString('sw-TZ') : 'â€”';
+        document.getElementById('cuInfoService').textContent = d.huduma || '—';
+        const dt = d.createdAt ? d.createdAt.toDate().toLocaleDateString('sw-TZ') : '—';
         document.getElementById('cuInfoDate').textContent = dt;
       }
     }).catch(()=>{});
@@ -4254,12 +4254,12 @@
         const time = d.createdAt ? d.createdAt.toDate().toLocaleTimeString('sw-TZ',{hour:'2-digit',minute:'2-digit'}) : '';
         const isMe = d.sender === 'customer';
         const cls = isMe ? 'customer' : 'admin';
-        const readTick = isMe ? (d.read ? ' âœ“âœ“' : ' âœ“') : '';
+        const readTick = isMe ? (d.read ? ' ✓✓' : ' ✓') : '';
         const imgHtml = d.image ? '<img class="chat-img" src="'+d.image+'" onclick="window.open(this.src)" alt="image">' : '';
-        html += '<div class="cu-chat-msg '+cls+'"><div><div class="bubble">'+(d.message||'')+imgHtml+'</div><div class="meta">'+(d.name||(isMe?'Wewe':'Admin'))+' Â· '+time+' <span class="read-tick'+(d.read?' read':'')+'">'+readTick+'</span></div></div></div>';
+        html += '<div class="cu-chat-msg '+cls+'"><div><div class="bubble">'+(d.message||'')+imgHtml+'</div><div class="meta">'+(d.name||(isMe?'Wewe':'Admin'))+' · '+time+' <span class="read-tick'+(d.read?' read':'')+'">'+readTick+'</span></div></div></div>';
       });
       document.getElementById('cuStatChats').textContent = msgCount;
-      if(msgCount === 0) html = '<div class="cu-empty">ðŸ’¬ Andika ujumbe wako hapa...</div>';
+      if(msgCount === 0) html = '<div class="cu-empty">💬 Andika ujumbe wako hapa...</div>';
       chatBox.innerHTML = html;
       chatBox.scrollTop = chatBox.scrollHeight;
     }, (e) => { chatBox.innerHTML = '<div class="cu-empty" style="color:#ff6b6b">Hitilafu: '+e.message+'</div>'; });
@@ -4304,7 +4304,7 @@
     const popup = document.getElementById('orderSuccessPopup');
     const isEn = currentLang === 'en';
     document.getElementById('orderSuccessService').textContent = service;
-    document.getElementById('orderSuccessTitle').textContent = isEn ? 'Order Received! âœ…' : 'Ombi Lako Limewasili! âœ…';
+    document.getElementById('orderSuccessTitle').textContent = isEn ? 'Order Received! ✅' : 'Ombi Lako Limewasili! ✅';
     document.getElementById('orderSuccessMsg').textContent = isEn
       ? 'Your service request has been received. Our team will contact you shortly.'
       : 'Ombi lako la huduma limepokelewa. Timu yetu itawasiliana nawo haraka.';
@@ -4525,8 +4525,8 @@
   const translations = {
     sw: {
       'gate-tag': 'Suluhisho la TEHAMA',
-      'gate-h1': 'Teknolojia inayofanya kazi â€” <span class="accent">kwa ajili yako.</span>',
-      'gate-p': 'Kutoka ukarabati wa haraka hadi mifumo kamili ya biashara â€” timu yetu iko tayari kukusaidia wakati wowote unapohitaji.',
+      'gate-h1': 'Teknolojia inayofanya kazi — <span class="accent">kwa ajili yako.</span>',
+      'gate-p': 'Kutoka ukarabati wa haraka hadi mifumo kamili ya biashara — timu yetu iko tayari kukusaidia wakati wowote unapohitaji.',
       'gate-stat1': 'Huduma za TEHAMA',
       'gate-stat2': 'Msaada wa Mbali',
       'gate-stat3': 'Uwazi wa Bei',
@@ -4556,10 +4556,10 @@
       'gate-need-email': 'Andika email yako kwanza, kisha bonyeza "Umesahau password?"',
       'gate-karibu': 'Karibu,',
       'gate-toka': 'Toka',
-      'hero-eyebrow': 'Huduma za TEHAMA Â· Tanzania',
+      'hero-eyebrow': 'Huduma za TEHAMA · Tanzania',
       'hero-h1': 'TEHAMA yako, <span class="accent">imesimamiwa vizuri.</span>',
-      'hero-lead': 'Kuanzia ukarabati wa kompyuta na simu, usanidi wa mitandao, mifumo ya biashara, hifadhi ya data, hadi msaada wa mbali wa 24/7 â€” PLATINUMZ inatoa huduma kamili za TEHAMA zinazoongeza ufanisi wa kazi yako, kwa haraka na kwa uwazi.',
-      'hero-btn1': 'Wasiliana Nasi â†’',
+      'hero-lead': 'Kuanzia ukarabati wa kompyuta na simu, usanidi wa mitandao, mifumo ya biashara, hifadhi ya data, hadi msaada wa mbali wa 24/7 — PLATINUMZ inatoa huduma kamili za TEHAMA zinazoongeza ufanisi wa kazi yako, kwa haraka na kwa uwazi.',
+      'hero-btn1': 'Wasiliana Nasi →',
       'hero-btn2': 'Ona Huduma Zote',
       'services-eyebrow': 'Huduma',
       'services-h2': 'Huduma Zetu Kwa Ufupi',
@@ -4576,14 +4576,14 @@
       'about-story-badge': 'Hadithi Yetu',
       'about-story-title': 'Kuanzia ndoto hadi suluhisho la kweli',
       'about-story-text-1': 'PLATINUMZ IT Support ilianzishwa na kuona changamoto kubwa: watu wengi na biashara nchini Tanzania wanapata matatizo ya TEHAMA lakini hawajui kwa nani wa kuomba, na wanakutana na bei zisizoeleweka.',
-      'about-story-text-2': 'Tuliamua kubadilisha hali hii. Timu yetu ya wasanifu TEHAMA wenye ujuzi wa kina inatoa suluhisho za haraka, za moja kwa moja, na zenye thamani ya kweli â€” kutoka ukarabati wa kompyuta hadi miundombinu ya mitandao.',
+      'about-story-text-2': 'Tuliamua kubadilisha hali hii. Timu yetu ya wasanifu TEHAMA wenye ujuzi wa kina inatoa suluhisho za haraka, za moja kwa moja, na zenye thamani ya kweli — kutoka ukarabati wa kompyuta hadi miundombinu ya mitandao.',
       'about-visual-1': 'Haraka',
       'about-visual-2': 'Salama',
       'about-visual-3': 'Uaminifu',
       'about-values-eyebrow': 'Misingi Yetu',
       'about-values-h2': 'Kwa nini watu wanatuamini?',
       'about-impact-title': 'Athari Yetu',
-      'about-impact-desc': 'Tumehudumia wateja kutoka kila kona ya Tanzania â€” kutoka Arusha hadi Mwanza, Dar es Salaam hadi Mbeya.',
+      'about-impact-desc': 'Tumehudumia wateja kutoka kila kona ya Tanzania — kutoka Arusha hadi Mwanza, Dar es Salaam hadi Mbeya.',
       'faq-eyebrow': 'Maswali',
       'faq-h2': 'Maswali Yanayoulizwa Mara Nyingi',
       'contact-eyebrow': 'Wasiliana Nasi',
@@ -4612,37 +4612,37 @@
       'pwd-reset-fail': 'Imeshindikana kutuma email. Jaribu tena.',
       'pwd-reset-invalid': 'Email si sahihi.',
       'pwd-reset-notfound': 'Hakuna akaunti na email hii.',
-      'fp-step1-eyebrow': 'ðŸ“‰ Sahau Password?',
+      'fp-step1-eyebrow': '📉 Sahau Password?',
       'fp-step1-desc': 'Andika email yako tutakutumia nambari ya uthibitisho.',
       'fp-email-label': 'Email',
-      'fp-send-btn': 'Tuma Nambari â†’',
-      'fp-step2-eyebrow': 'ðŸ” Thibitisha Nambari',
+      'fp-send-btn': 'Tuma Nambari →',
+      'fp-step2-eyebrow': '🔐 Thibitisha Nambari',
       'fp-step2-desc': 'Tafadhali weka nambari ya taratibu 6 uliopitia email.',
-      'fp-verify-btn': 'Thibitisha â†’',
-      'fp-step3-eyebrow': 'ðŸ”‘ Weka Password Mpya',
+      'fp-verify-btn': 'Thibitisha →',
+      'fp-step3-eyebrow': '🔑 Weka Password Mpya',
       'fp-step3-desc': 'Nambari imethibitishwa. Weka password mpya.',
       'fp-new-pass-label': 'Password Mpya',
       'fp-confirm-pass-label': 'Thibitisha Password',
-      'fp-reset-btn': 'Badilisha Password â†’',
+      'fp-reset-btn': 'Badilisha Password →',
       'fp-step4-eyebrow': 'Imefanikiwa!',
       'fp-step4-desc': 'Password yako imebadilishwa. Sasa unaweza kuingia.',
-      'fp-login-btn': 'Ingia Sasa â†’',
+      'fp-login-btn': 'Ingia Sasa →',
       'fp-err-email': 'Andika email sahihi.',
       'fp-err-notfound': 'Hakuna akaunti na email hii.',
       'fp-err-code-length': 'Weka nambari ya taratibu 6.',
       'fp-err-code-invalid': 'Hitilafu imetokea. Jaribu tena.',
       'fp-err-code-expired': 'Nambari imeisha muda. Tuma tena.',
       'fp-err-code-wrong': 'Nambari si sahihi. Angalia tena.',
-      'fp-err-pass-short': 'Password ina uchache â€” angalau herufi 6.',
+      'fp-err-pass-short': 'Password ina uchache — angalau herufi 6.',
       'fp-err-pass-match': 'Password hazifanani.',
       'fp-err-reset': 'Hitilafu imetokea. Jaribu tena.',
-      'pwd-mismatch': 'Password hazifanani â€” angalia tena.',
+      'pwd-mismatch': 'Password hazifanani — angalia tena.',
       'auth-error': 'Hitilafu imetokea, jaribu tena.',
-      'auth-email-used': 'Email hii tayari ina akaunti â€” jaribu kuingia (Ingia).',
+      'auth-email-used': 'Email hii tayari ina akaunti — jaribu kuingia (Ingia).',
       'auth-invalid-email': 'Email si sahihi.',
-      'auth-weak-pass': 'Password ina uchache â€” angalau herufi 6.',
+      'auth-weak-pass': 'Password ina uchache — angalau herufi 6.',
       'auth-wrong-pass': 'Email au password si sahihi.',
-      'auth-user-notfound': 'Hakuna akaunti na email hii â€” jisajili kwanza.',
+      'auth-user-notfound': 'Hakuna akaunti na email hii — jisajili kwanza.',
       'order-error': 'Hitilafu imetokea. Jaribu tena au piga simu moja kwa moja.',
       'order-modal-eyebrow': 'Omba Huduma',
       'order-modal-sub': 'Jaza maelezo yako - tutawasiliana nawe haraka iwezekanavyo.',
@@ -4652,11 +4652,11 @@
       'order-ph-name': 'Jina lako kamili',
       'order-ph-phone': '0786 868 069',
       'order-ph-desc': 'Eleza zaidi mahitaji yako...',
-      'order-submit-btn': 'Tuma Ombi â†’',
+      'order-submit-btn': 'Tuma Ombi →',
       'step-1-title': 'Wasiliana Nasi',
       'step-1-desc': 'Tueleze tatizo lako kwa ufupi kupitia simu, WhatsApp, au email.',
       'step-2-title': 'Uchunguzi',
-      'step-2-desc': 'Tunachunguza tatizo â€” ana kwa ana au kwa njia ya mbali (remote).',
+      'step-2-desc': 'Tunachunguza tatizo — ana kwa ana au kwa njia ya mbali (remote).',
       'step-3-title': 'Suluhisho',
       'step-3-desc': 'Tunakupa maelezo wazi ya tatizo na gharama kabla ya kuanza kazi.',
       'step-4-title': 'Uhakika',
@@ -4668,7 +4668,7 @@
       'about-vision-title': 'Dira Yetu',
       'about-vision-desc': 'Kuwa jina la kwanza linalokumbukwa kila mtu anapohitaji msaada wa TEHAMA nchini Tanzania.',
       'about-mission-title': 'Dhamira Yetu',
-      'about-mission-desc': 'Kutoa huduma za haraka, za uwazi, na za ubora â€” bila lugha ngumu za kiufundi.',
+      'about-mission-desc': 'Kutoa huduma za haraka, za uwazi, na za ubora — bila lugha ngumu za kiufundi.',
       'about-values-title': 'Misingi Yetu',
       'about-values-desc': 'Uaminifu, ubora wa kazi, na kujali kila mteja kama wa kwanza.',
       'svc-1-title': 'Ukarabati wa Kompyuta na Laptop',
@@ -4682,49 +4682,49 @@
       'svc-5-title': 'Hifadhi na Vifaa vya Nje',
       'svc-5-desc': 'Utambuzi wa hitilafu za hard disk na vifaa vya kuhifadhi data, na urejeshaji wa taarifa.',
       'svc-6-title': 'Msaada wa Mbali (Remote)',
-      'svc-6-desc': 'Msaada wa TEHAMA kwa njia ya simu au mtandao â€” hukuhitaji kuja ofisini kila wakati.',
+      'svc-6-desc': 'Msaada wa TEHAMA kwa njia ya simu au mtandao — hukuhitaji kuja ofisini kila wakati.',
       'ext-eyebrow': 'Wigo Kamili',
       'ext-h2': 'Huduma za Ziada za TEHAMA',
-      'ext-p': 'Zaidi ya ukarabati wa msingi â€” timu yetu inashughulikia mahitaji mapana ya TEHAMA kwa biashara za ukubwa wote.',
+      'ext-p': 'Zaidi ya ukarabati wa msingi — timu yetu inashughulikia mahitaji mapana ya TEHAMA kwa biashara za ukubwa wote.',
       'ext-title-1': 'Ushauri wa TEHAMA (IT Consulting)',
-      'ext-desc-1': 'Tunakusaidia kupanga mkakati wa TEHAMA unaofaa biashara yako â€” kutoka kuchagua vifaa hadi kuweka mifumo inayokua pamoja na biashara yako.',
+      'ext-desc-1': 'Tunakusaidia kupanga mkakati wa TEHAMA unaofaa biashara yako — kutoka kuchagua vifaa hadi kuweka mifumo inayokua pamoja na biashara yako.',
       'ext-title-2': 'Usalama wa Mtandao (Cybersecurity)',
-      'ext-desc-2': 'Tunalinda mifumo yako dhidi ya virusi, wadukuzi (hackers), na vitisho vya mtandaoni â€” ikiwemo ukaguzi wa usalama na mafunzo ya wafanyakazi.',
+      'ext-desc-2': 'Tunalinda mifumo yako dhidi ya virusi, wadukuzi (hackers), na vitisho vya mtandaoni — ikiwemo ukaguzi wa usalama na mafunzo ya wafanyakazi.',
       'ext-title-3': 'Uendelezaji wa Programu (Software Development)',
-      'ext-desc-3': 'Tunaunda programu maalum (custom software) zinazokidhi mahitaji yako â€” tovuti, mifumo ya biashara, na programu za simu.',
+      'ext-desc-3': 'Tunaunda programu maalum (custom software) zinazokidhi mahitaji yako — tovuti, mifumo ya biashara, na programu za simu.',
       'ext-title-4': 'Huduma za Wingu (Cloud Services)',
-      'ext-desc-4': 'Tunasaidia kupandisha data na mifumo yako kwenye "wingu" (cloud) â€” Google Cloud, AWS, au Azure â€” kwa usalama na upatikanaji wa saa 24.',
+      'ext-desc-4': 'Tunasaidia kupandisha data na mifumo yako kwenye "wingu" (cloud) — Google Cloud, AWS, au Azure — kwa usalama na upatikanaji wa saa 24.',
       'ext-title-5': 'Usimamizi wa Seva (Server Management)',
-      'ext-desc-5': 'Tunasimamia seva zako (servers) za ndani au za mbali â€” usanidi, usalama, masasisho, na ufuatiliaji wa utendaji wa saa 24.',
+      'ext-desc-5': 'Tunasimamia seva zako (servers) za ndani au za mbali — usanidi, usalama, masasisho, na ufuatiliaji wa utendaji wa saa 24.',
       'ext-title-6': 'Uchambuzi wa Takwimu (Data Analytics)',
-      'ext-desc-6': 'Tunakusaidia kuelewa data ya biashara yako â€” ripoti za kina, grafu za utendaji, na mifumo ya kufuatilia mwenendo wa biashara.',
+      'ext-desc-6': 'Tunakusaidia kuelewa data ya biashara yako — ripoti za kina, grafu za utendaji, na mifumo ya kufuatilia mwenendo wa biashara.',
       'ext-title-7': 'Akili Mnemba (AI & Machine Learning)',
-      'ext-desc-7': 'Tunaunganisha teknolojia ya AI kwenye biashara yako â€” chatbots, uchambuzi wa data kwa kiotomatiki, na mifumo ya kutabiri mwenendo.',
+      'ext-desc-7': 'Tunaunganisha teknolojia ya AI kwenye biashara yako — chatbots, uchambuzi wa data kwa kiotomatiki, na mifumo ya kutabiri mwenendo.',
       'ext-title-8': 'Mifumo ya ERP na CRM',
-      'ext-desc-8': 'Tunasanikisha na kusanidi mifumo ya kusimamia biashara (ERP) na uhusiano wa wateja (CRM) â€” kuokoa muda na kuongeza ufanisi wa timu yako.',
+      'ext-desc-8': 'Tunasanikisha na kusanidi mifumo ya kusimamia biashara (ERP) na uhusiano wa wateja (CRM) — kuokoa muda na kuongeza ufanisi wa timu yako.',
       'ext-title-9': 'Mafunzo ya TEHAMA (IT Training)',
-      'ext-desc-9': 'Tunafunza wafanyakazi wako jinsi ya kutumia mifumo, kompyuta, na programu mbalimbali â€” mafunzo ya ana kwa ana au ya mbali.',
+      'ext-desc-9': 'Tunafunza wafanyakazi wako jinsi ya kutumia mifumo, kompyuta, na programu mbalimbali — mafunzo ya ana kwa ana au ya mbali.',
       'ext-title-10': 'Mawasiliano ya VoIP',
-      'ext-desc-10': 'Tunasanikisha mifumo ya simu ya mtandao (VoIP) kwa ofisi yako â€” kupunguza gharama za simu na kuunganisha timu zilizopo sehemu mbalimbali.',
+      'ext-desc-10': 'Tunasanikisha mifumo ya simu ya mtandao (VoIP) kwa ofisi yako — kupunguza gharama za simu na kuunganisha timu zilizopo sehemu mbalimbali.',
       'ext-title-11': 'Suluhisho za IoT',
-      'ext-desc-11': 'Tunaunganisha vifaa vya "internet of things" kwenye mfumo mmoja â€” kamera za usalama, sensorer, na vifaa vya kufuatilia mazingira ya biashara.',
+      'ext-desc-11': 'Tunaunganisha vifaa vya "internet of things" kwenye mfumo mmoja — kamera za usalama, sensorer, na vifaa vya kufuatilia mazingira ya biashara.',
       'ext-title-12': 'Uhifadhi na Urejeshaji wa Data (Backup & Recovery)',
-      'ext-desc-12': 'Tunasanikisha mifumo ya kuhifadhi nakala ya data na kuirejesha haraka inapotoweka â€” usalama wa data yako ni kipaumbele chetu.',
+      'ext-desc-12': 'Tunasanikisha mifumo ya kuhifadhi nakala ya data na kuirejesha haraka inapotoweka — usalama wa data yako ni kipaumbele chetu.',
       'ext-title-13': 'Usimamizi wa Miradi ya TEHAMA',
-      'ext-desc-13': 'Tunasimamia miradi yako ya TEHAMA kutoka mwanzo hadi mwisho â€” kupanga, kutekeleza, na kuhakikisha inakamilika kwa wakati na bajeti iliyopangwa.',
+      'ext-desc-13': 'Tunasimamia miradi yako ya TEHAMA kutoka mwanzo hadi mwisho — kupanga, kutekeleza, na kuhakikisha inakamilika kwa wakati na bajeti iliyopangwa.',
       'ext-title-14': 'Uwekaji wa Tovuti (Web Hosting)',
-      'ext-desc-14': 'Tunasaidia kupakua na kusimamia tovuti yako mtandaoni â€” domain, hosting, na matengenezo ya tovuti kwa bei nafuu na huduma ya kuaminika.',
+      'ext-desc-14': 'Tunasaidia kupakua na kusimamia tovuti yako mtandaoni — domain, hosting, na matengenezo ya tovuti kwa bei nafuu na huduma ya kuaminika.',
       'ext-title-15': 'Ukaguzi wa Kufuata Sheria za TEHAMA (IT Compliance)',
-      'ext-desc-15': 'Tunakagua mifumo yako ihakikishe inakidhi mahitaji ya kisheria ya data na faragha â€” muhimu kwa biashara zinazoshughulika na taarifa za wateja.',
-      'ext-omba': 'Omba Huduma â†’',
+      'ext-desc-15': 'Tunakagua mifumo yako ihakikishe inakidhi mahitaji ya kisheria ya data na faragha — muhimu kwa biashara zinazoshughulika na taarifa za wateja.',
+      'ext-omba': 'Omba Huduma →',
       'promise-eyebrow': 'Ahadi Yetu',
       'promise-h2': 'Huduma Bila Wasiwasi',
-      'promise-desc': 'Tunachunguza tatizo lako bila malipo kabla ya kuanza kazi. Ukiridhika tu ndio unaendelea â€” bei ni wazi tangu mwanzo, hakuna gharama za ziada za kushtukiza.',
-      'promise-link1': 'ðŸ“ž Wasiliana Nasi Sasa',
-      'promise-link2': 'ðŸ” Ona Huduma Zote',
+      'promise-desc': 'Tunachunguza tatizo lako bila malipo kabla ya kuanza kazi. Ukiridhika tu ndio unaendelea — bei ni wazi tangu mwanzo, hakuna gharama za ziada za kushtukiza.',
+      'promise-link1': '📞 Wasiliana Nasi Sasa',
+      'promise-link2': '🔍 Ona Huduma Zote',
       'benefits-eyebrow': 'Wanachama',
       'benefits-h2': 'Faida za Akaunti Yako',
-      'benefits-p': 'Kwa kuwa umeshajisajili, unapata haya moja kwa moja â€” bila malipo ya ziada.',
+      'benefits-p': 'Kwa kuwa umeshajisajili, unapata haya moja kwa moja — bila malipo ya ziada.',
       'benefit-1-title': 'Historia ya Huduma',
       'benefit-1-desc': 'Tunahifadhi rekodi ya huduma ulizowahi kupata ili tukusaidie haraka zaidi safari ijayo.',
       'benefit-2-title': 'Kipaumbele cha Huduma',
@@ -4733,7 +4733,7 @@
       'benefit-3-desc': 'Taarifa za punguzo na ofa maalum zitawafikia wanachama kwanza kabla ya wengine.',
       'payment-eyebrow': 'Malipo',
       'payment-h2': 'Njia za Malipo',
-      'payment-desc': 'Lipa kwa urahisi kupitia mitandao ya simu â€” kisha tutuma ushahidi wa malipo kupitia WhatsApp ili tuendelee na huduma yako.',
+      'payment-desc': 'Lipa kwa urahisi kupitia mitandao ya simu — kisha tutuma ushahidi wa malipo kupitia WhatsApp ili tuendelee na huduma yako.',
       'pay-1-title': 'Airtel Money',
       'pay-1-num': 'Namba: 0786 868 069',
       'pay-1-name': 'Jina: PLATINUMZ IT Support',
@@ -4742,17 +4742,17 @@
       'pay-2-name': 'Jina: PLATINUMZ IT Support',
       'pay-3-title': 'Ushamaliza kulipa?',
       'pay-3-desc': 'Tuma risiti/ushahidi wa malipo kupitia WhatsApp ili tuanze huduma yako mara moja.',
-      'pay-3-btn': 'ðŸ’¬ Tuma Ushahidi WhatsApp',
+      'pay-3-btn': '💬 Tuma Ushahidi WhatsApp',
       'review-eyebrow': 'Maoni',
       'review-h2': 'Umepata Huduma? Tupe Maoni Yako',
-      'review-desc': 'Maoni yako yanatusaidia kuboresha huduma zetu â€” hauitaji akaunti, andika tu na tuma.',
+      'review-desc': 'Maoni yako yanatusaidia kuboresha huduma zetu — hauitaji akaunti, andika tu na tuma.',
       'review-name-label': 'Jina (hiari)',
       'review-name-ph': 'Jina lako',
       'review-service-label': 'Huduma uliyopata',
       'review-rating-label': 'Ulipendezwa kiasi gani?',
       'review-msg-label': 'Maoni yako',
       'review-msg-ph': 'Niambie zaidi kuhusu uzoefu wako...',
-      'review-submit-btn': 'Tuma Maoni â†’',
+      'review-submit-btn': 'Tuma Maoni →',
       'rev-svc-opt0': 'Chagua huduma...',
       'rev-svc-opt1': 'Ukarabati wa Kompyuta/Laptop',
       'rev-svc-opt2': 'Utatuzi wa Simu',
@@ -4762,11 +4762,11 @@
       'rev-svc-opt6': 'Msaada wa Mbali',
       'rev-svc-opt7': 'Nyingine',
       'rev-rate-opt0': 'Chagua ukadiriaji...',
-      'rev-rate-opt1': 'â­ 1 - Mbaya sana',
-      'rev-rate-opt2': 'â­â­ 2 - Mbaya',
-      'rev-rate-opt3': 'â­â­â­ 3 - Wastani',
-      'rev-rate-opt4': 'â­â­â­â­ 4 - Nzuri sana',
-      'rev-rate-opt5': 'â­â­â­â­â­ 5 - Bora',
+      'rev-rate-opt1': '⭐ 1 - Mbaya sana',
+      'rev-rate-opt2': '⭐⭐ 2 - Mbaya',
+      'rev-rate-opt3': '⭐⭐⭐ 3 - Wastani',
+      'rev-rate-opt4': '⭐⭐⭐⭐ 4 - Nzuri sana',
+      'rev-rate-opt5': '⭐⭐⭐⭐⭐ 5 - Bora',
       'stat-1-val': '1-2+',
       'stat-1-label': 'Miaka ya Uzoefu wa Timu Yetu',
       'stat-2-val': '6+',
@@ -4781,52 +4781,52 @@
       'faq-q1': 'Bei ya ukarabati wa kompyuta ni ngapi?',
       'faq-a1': 'Bei inategemea aina ya tatizo. Tunafanya uchunguzi wa bure kwanza, kisha tunakupa bei wazi kabla ya kuanza kazi yoyote. Hakuna gharama za siri.',
       'faq-q2': 'Mnaweza kuja nyumbani au ofisini kwetu?',
-      'faq-a2': 'Ndiyo, tunafanya huduma ana kwa ana (nyumbani/ofisini) na pia kwa njia ya mbali (remote) kupitia simu au mtandao â€” unachagua njia inayokufaa zaidi.',
+      'faq-a2': 'Ndiyo, tunafanya huduma ana kwa ana (nyumbani/ofisini) na pia kwa njia ya mbali (remote) kupitia simu au mtandao — unachagua njia inayokufaa zaidi.',
       'faq-q3': 'Mnafanya kazi saa ngapi?',
       'faq-a3': 'Tunafanya kazi Jumatatu hadi Jumamosi, saa 2 asubuhi hadi saa 11 jioni. Kwa dharura, msaada wa mbali unapatikana 24/7 kupitia WhatsApp.',
       'faq-q4': 'Muda gani unahitajika kutengeneza kompyuta?',
       'faq-a4': 'Matatizo mengi ya kawaida yanashughulikiwa ndani ya saa 1-3. Matatizo magumu zaidi (kama kubadilisha vipande) yanaweza kuchukua siku 1-2. Tutakuarifu mapema kuhusu muda.',
       'faq-q5': 'Je, mnatoa dhamana baada ya huduma?',
-      'faq-a5': 'Ndiyo. Kila kazi tunayofanya ina kipindi cha dhamana â€” ukipata tatizo linalohusiana na kazi tuliyofanya, tutarekebisha bila malipo ya ziada.',
+      'faq-a5': 'Ndiyo. Kila kazi tunayofanya ina kipindi cha dhamana — ukipata tatizo linalohusiana na kazi tuliyofanya, tutarekebisha bila malipo ya ziada.',
       'faq-q6': 'Ninawezaje kulipa huduma?',
       'faq-a6': 'Tunakubali malipo kupitia Airtel Money (0786 868 069) na Halotel (0615 825 969). Lipa baada ya kazi kukamilika na uthibitishwe.',
       'faq-q7': 'Data yangu itakuwa salama wakati wa ukarabati?',
       'faq-a7': 'Usalama wa data yako ni kipaumbele chetu. Hatufuti data bila ruhusa yako, na tunaweza kukusaidia kufanya nakala ya akiba (backup) kabla ya kuanza kazi.',
       'contact-h2': 'Una tatizo la kompyuta, simu au mtandao?',
-      'contact-p': 'Wasiliana nasi leo â€” tutaanza na uchunguzi bila malipo kupitia simu.',
+      'contact-p': 'Wasiliana nasi leo — tutaanza na uchunguzi bila malipo kupitia simu.',
       'admin-clients': 'Wateja Waliojisajili',
       'admin-clients-sub': 'Orodha hii inaonekana kwako pekee.',
       'admin-orders': 'Maombi ya Huduma',
-      'admin-chat': 'ðŸ’¬ Live Chat (Wateja)',
+      'admin-chat': '💬 Live Chat (Wateja)',
       'admin-loading': 'Inapakia...',
       'admin-no-clients': 'Hakuna wateja bado.',
       'admin-no-orders': 'Hakuna maombi bado.',
       'admin-no-chat': 'Hakuna ujumbe bado.',
       'admin-chat-ph': 'Andika ujumbe kwa wateja...',
       'admin-greeting': 'Karibu, Admin',
-      'admin-greeting-sub': 'Hii ni dashibodi yako â€” fuatilia wateja, maombi, mazungumzo na maoni.',
+      'admin-greeting-sub': 'Hii ni dashibodi yako — fuatilia wateja, maombi, mazungumzo na maoni.',
       'admin-stat-wateja': 'Wateja',
       'admin-stat-orders': 'Maombi',
       'admin-stat-ujumbe': 'Ujumbe',
       'admin-stat-maoni': 'Maoni',
-      'admin-tab-wateja': 'ðŸ‘¥ Wateja',
+      'admin-tab-wateja': '👥 Wateja',
       'admin-tab-orders': '📋 Maombi',
       'admin-tab-chat': '💬 Mazungumzo',
-      'admin-tab-maoni': 'â­ Maoni',
+      'admin-tab-maoni': '⭐ Maoni',
       'admin-tab-analytics': '📊 Takwimu',
-      'admin-tab-miadi': 'ðŸ—“ï¸ Miadi',
-      'admin-tab-eneo': 'ðŸ“ Eneo',
-      'admin-tab-simu': 'ðŸ“ž Simu',
+      'admin-tab-miadi': '🗓️ Miadi',
+      'admin-tab-eneo': '📍 Eneo',
+      'admin-tab-simu': '📞 Simu',
       'admin-tab-checkin': '📱 Kuingia',
-      'admin-tab-points': 'ðŸ† Pointi',
+      'admin-tab-points': '🏆 Pointi',
       'admin-tab-data': '💾 Takwimu',
-      'admin-send': 'Tuma ðŸ“¤',
+      'admin-send': 'Tuma 📤',
       'admin-chat-input-ph': 'Andika ujumbe kwa mteja...',
       'ad-chat-sidebar-head': 'Wateja',
       'ad-chat-select': 'Chagua mteja kuanza chat...',
       'admin-no-reviews': 'Hakuna maoni bado.',
-      'admin-delete': 'ðŸ—‘ï¸ Futa',
-      'admin-logout': 'ðŸšª Ondoka',
+      'admin-delete': '🗑️ Futa',
+      'admin-logout': '🚪 Ondoka',
       'admin-order-jina': 'Jina',
       'admin-order-simu': 'Simu',
       'admin-order-huduma': 'Huduma',
@@ -4838,12 +4838,12 @@
       'order-status-mpya': 'Mpya',
       'order-status-inashughulikiwa': 'Inashughulikiwa',
       'order-status-imekamilika': 'Imekamilika',
-      'order-accept-btn': 'âœ… Kubali',
-      'order-accepted-label': 'âœ” Imekubaliwa',
+      'order-accept-btn': '✅ Kubali',
+      'order-accepted-label': '✔ Imekubaliwa',
       'order-accept-confirm': 'Kubali order hii na uonyeshe kuwa unaifanyia kazi?',
-      'order-complete-btn': 'âœ… Maliza',
+      'order-complete-btn': '✅ Maliza',
       'order-complete-confirm': 'Maliza order hii na umuarifu mteja?',
-      'order-completed-label': 'âœ” Imekamilika',
+      'order-completed-label': '✔ Imekamilika',
       'order-completed-title': 'Order Imekamilika!',
       'order-completed-msg': 'Mteja atapata taarifa kuwa order yake imekamilika.',
       'order-accepted-title': 'Order Imekubaliwa!',
@@ -4870,7 +4870,7 @@
       'ad-edit-email': 'Email',
       'ad-edit-service': 'Huduma',
       'ad-edit-cancel': 'Ghairi',
-      'ad-edit-save': 'ðŸ’¾ Hifadhi',
+      'ad-edit-save': '💾 Hifadhi',
       'admin-loading': 'Inapakia...',
       'cu-orders-empty': 'Hujawahi kuomba huduma bado.',
       'cu-loading': 'Inapakia...',
@@ -4886,27 +4886,27 @@
       'cu-about-vision': 'Dira Yetu',
       'cu-about-vision-desc': 'Kuwa jina la kwanza linalokumbukwa kila mtu anapohitaji msaada wa TEHAMA nchini Tanzania.',
       'cu-about-mission': 'Dhamira Yetu',
-      'cu-about-mission-desc': 'Kutoa huduma za haraka, za uwazi, na za ubora â€” bila lugha ngumu za kiufundi.',
+      'cu-about-mission-desc': 'Kutoa huduma za haraka, za uwazi, na za ubora — bila lugha ngumu za kiufundi.',
       'cu-about-values': 'Misingi Yetu',
       'cu-about-values-desc': 'Uaminifu, ubora wa kazi, na kujali kila mteja kama wa kwanza.',
       'cu-about-impact': 'Athari Yetu',
-      'cu-about-impact-desc': 'Tumehudumia wateja kutoka kila kona ya Tanzania â€” kutoka Arusha hadi Mwanza, Dar es Salaam hadi Mbeya.',
+      'cu-about-impact-desc': 'Tumehudumia wateja kutoka kila kona ya Tanzania — kutoka Arusha hadi Mwanza, Dar es Salaam hadi Mbeya.',
       'cu-about-contact': 'Una maswali? Wasiliana nasi kupitia Live Chat au piga simu: 0786 868 069',
       'testi-eyebrow': 'Wateja Wetu Wanasema',
       'testi-h2': 'Maposti Kutoka kwa Wateja',
       'testi-desc': 'Sikiliza wateja wetu walivyopata huduma bora kutoka PLATINUMZ IT Support.',
       'testi-1-text': '"Timu ya PLATINUMZ ilisasisha mfumo wangu wa biashara ndani ya siku 3. Sasa naenda na kasi kubwa!"',
-      'testi-1-role': 'Mmiliki wa Duka â€” Dar es Salaam',
+      'testi-1-role': 'Mmiliki wa Duka — Dar es Salaam',
       'testi-2-text': '"Nilikuwa nimepoteza data yote kwenye laptop yangu. PLATINUMZ walinirudishia kila kitu!"',
-      'testi-2-role': 'Mwanafunzi â€” DSM',
+      'testi-2-role': 'Mwanafunzi — DSM',
       'testi-3-text': '"Mtandao wa ofisi yetu ulikuwa unakatika kila siku. Baada ya kusasishwa, hakuna tena hitilafu!"',
-      'testi-3-role': 'Meneja IT â€” Kampuni ya Nishati',
-      'testi-4-text': '"Usaidizi wa mbali umenibadilisha maisha â€” nimekomboa kompyuta yangu kutoka nyumbani bila kusafiri."',
-      'testi-4-role': 'Biashara ndogo â€” Arusha',
+      'testi-3-role': 'Meneja IT — Kampuni ya Nishati',
+      'testi-4-text': '"Usaidizi wa mbali umenibadilisha maisha — nimekomboa kompyuta yangu kutoka nyumbani bila kusafiri."',
+      'testi-4-role': 'Biashara ndogo — Arusha',
       'testi-5-text': '"Bei yao ni nafuu na huduma ni ya haraka sana. Nishawapendekeza kwa rafiki zangu wote!"',
-      'testi-5-role': 'Mjasiriamali â€” Mwanza',
+      'testi-5-role': 'Mjasiriamali — Mwanza',
       'testi-6-text': '"Cloud hosting yao ni imara sana. Tovuti yangu haijawaianguka tangu nianze kulipa."',
-      'testi-6-role': 'Msimamizi wa Tovuti â€” DSM',
+      'testi-6-role': 'Msimamizi wa Tovuti — DSM',
       'blog-eyebrow': 'Blog / Vidokezo',
       'blog-h2': 'Jinsi ya Kujilinda Mtandaoni',
       'blog-desc': 'Soma vidokezo muhimu kuhusu usalama na matumizi ya TEHAMA kwa kila siku.',
@@ -4940,23 +4940,23 @@
       'cu-sb-profile': 'Wasifu',
       'cu-sb-privacy': 'Faragha',
       'cu-sb-terms': 'Masharti',
-      'cu-profile-title': 'ðŸ‘¤ Wasifu Wangu',
+      'cu-profile-title': '👤 Wasifu Wangu',
       'cu-profile-sub': 'Badilisha taarifa zako za kibinafsi.',
       'cu-profile-change-avatar': 'Badilisha Picha',
       'cu-profile-name': 'Jina Kamili',
       'cu-profile-service': 'Huduma',
-      'cu-profile-save': 'ðŸ’¾ Hifadhi Mabadiliko',
-      'cu-profile-change-pass': 'ðŸ”’ Badilisha Password',
-      'cu-profile-verify': 'ðŸ“§ Uthibitisho wa Email',
+      'cu-profile-save': '💾 Hifadhi Mabadiliko',
+      'cu-profile-change-pass': '🔒 Badilisha Password',
+      'cu-profile-verify': '📧 Uthibitisho wa Email',
       'cu-profile-verify-status': 'Inakagua...',
-      'cu-profile-verify-btn': 'ðŸ“§ Tuma Email ya Uthibitisho',
-      'cu-pw-title': 'ðŸ”’ Badilisha Password',
+      'cu-profile-verify-btn': '📧 Tuma Email ya Uthibitisho',
+      'cu-pw-title': '🔒 Badilisha Password',
       'cu-pw-old': 'Password ya Zamani',
       'cu-pw-new': 'Password Mpya',
       'cu-pw-confirm': 'Thibitisha Password Mpya',
-      'cu-pw-submit': 'ðŸ”„ Badilisha Sasa',
+      'cu-pw-submit': '🔄 Badilisha Sasa',
       'cu-pw-cancel': 'Ghairi',
-      'cu-hero-title': 'ðŸ‘‹ Karibu, ',
+      'cu-hero-title': '👋 Karibu, ',
       'cu-page-sub': 'Ungependa kufanya nini leo?',
       'cu-stat-orders': 'Maombi',
       'cu-stat-pending': 'Zinazosubiri',
@@ -4967,58 +4967,58 @@
       'cu-quick-chat': 'Ongea na Admin',
       'cu-quick-review': 'Andika Maoni',
       'cu-orders-title': 'Maombi Yako',
-      'cu-huduma-title': 'ðŸ”§ Huduma Zetu',
-      'cu-malipo-title': 'ðŸ’³ Malipo',
-      'cu-chat-title': 'ðŸ’¬ Ongea na Admin',
+      'cu-huduma-title': '🔧 Huduma Zetu',
+      'cu-malipo-title': '💳 Malipo',
+      'cu-chat-title': '💬 Ongea na Admin',
       'cu-chat-ph': 'Andika ujumbe wako hapa...',
-      'cu-offa-title': 'ðŸŽ Offa Maalum',
-      'cu-maoni-title': 'â­ Andika Maoni Yako',
+      'cu-offa-title': '🎁 Offa Maalum',
+      'cu-maoni-title': '⭐ Andika Maoni Yako',
       'cu-maoni-ph': 'Andika maoni yako hapa...',
       'cu-maoni-send': 'Tuma Maoni',
-      'cu-toka': 'ðŸšª Ondoka',
+      'cu-toka': '🚪 Ondoka',
       'cu-quick-huduma': 'Huduma',
       'cu-quick-orders': 'Maombi',
       'cu-quick-chat': 'Mazungumzo',
       'cu-quick-offa': 'Offa',
-      'cu-account-title': 'ðŸ‘¤ Taarifa za Akaunti',
-      'cu-svc-1-title': 'ðŸ’» Ukarabati wa Kompyuta',
+      'cu-account-title': '👤 Taarifa za Akaunti',
+      'cu-svc-1-title': '💻 Ukarabati wa Kompyuta',
       'cu-svc-1-desc': 'Utambuzi na utatuzi wa hitilafu za kimfumo na vifaa.',
-      'cu-svc-1-btn': 'Omba â†’',
-      'cu-svc-2-title': 'ðŸ“± Utatuzi wa Simu',
+      'cu-svc-1-btn': 'Omba →',
+      'cu-svc-2-title': '📱 Utatuzi wa Simu',
       'cu-svc-2-desc': 'Matatizo ya WiFi, data, urejeshaji wa mfumo.',
-      'cu-svc-2-btn': 'Omba â†’',
-      'cu-svc-3-title': 'ðŸŒ Usanidi wa Mtandao',
+      'cu-svc-2-btn': 'Omba →',
+      'cu-svc-3-title': '🌐 Usanidi wa Mtandao',
       'cu-svc-3-desc': 'WiFi, mitandao ya ofisi, router na switches.',
-      'cu-svc-3-btn': 'Omba â†’',
-      'cu-svc-4-title': 'ðŸ“Š Mifumo ya Biashara',
+      'cu-svc-3-btn': 'Omba →',
+      'cu-svc-4-title': '📊 Mifumo ya Biashara',
       'cu-svc-4-desc': 'Excel, database, mifumo ya mikopo na mauzo.',
-      'cu-svc-4-btn': 'Omba â†’',
-      'cu-svc-5-title': 'ðŸ’¾ Hifadhi na Data',
+      'cu-svc-4-btn': 'Omba →',
+      'cu-svc-5-title': '💾 Hifadhi na Data',
       'cu-svc-5-desc': 'Urejeshaji wa data, hard disk, USB.',
-      'cu-svc-5-btn': 'Omba â†’',
-      'cu-svc-6-title': 'ðŸ–¥ï¸ Msaada wa Mbali',
+      'cu-svc-5-btn': 'Omba →',
+      'cu-svc-6-title': '🖥️ Msaada wa Mbali',
       'cu-svc-6-desc': 'Remote support saa 24/7.',
-      'cu-svc-6-btn': 'Omba â†’',
-      'cu-svc-7-title': 'ðŸ›¡ï¸ Usalama wa Mtandao',
+      'cu-svc-6-btn': 'Omba →',
+      'cu-svc-7-title': '🛡️ Usalama wa Mtandao',
       'cu-svc-7-desc': 'Firewall, antivirus, cybersecurity.',
-      'cu-svc-7-btn': 'Omba â†’',
-      'cu-svc-8-title': 'â˜ï¸ Huduma za Wingu',
+      'cu-svc-7-btn': 'Omba →',
+      'cu-svc-8-title': '☁️ Huduma za Wingu',
       'cu-svc-8-desc': 'AWS, Azure, cloud storage.',
-      'cu-svc-8-btn': 'Omba â†’',
-      'cu-svc-9-title': 'ðŸŒ Uwekaji wa Tovuti',
+      'cu-svc-8-btn': 'Omba →',
+      'cu-svc-9-title': '🌐 Uwekaji wa Tovuti',
       'cu-svc-9-desc': 'Hosting, domain, email za kitaalamu.',
-      'cu-svc-9-btn': 'Omba â†’',
-      'cu-svc-10-title': 'ðŸŽ“ Mafunzo ya TEHAMA',
+      'cu-svc-9-btn': 'Omba →',
+      'cu-svc-10-title': '🎓 Mafunzo ya TEHAMA',
       'cu-svc-10-desc': 'Kompyuta, programu, mtandao.',
-      'cu-svc-10-btn': 'Omba â†’',
-      'chat-title': 'ðŸ’¬ Ongea na Admin',
+      'cu-svc-10-btn': 'Omba →',
+      'chat-title': '💬 Ongea na Admin',
       'chat-ph': 'Andika ujumbe...',
       'chat-placeholder': 'Andika ujumbe wako hapa...',
     },
     en: {
       'gate-tag': 'IT Solutions',
-      'gate-h1': 'Technology that works â€” <span class="accent">for you.</span>',
-      'gate-p': 'From quick repairs to complete business systems â€” our team is ready to help you whenever you need us.',
+      'gate-h1': 'Technology that works — <span class="accent">for you.</span>',
+      'gate-p': 'From quick repairs to complete business systems — our team is ready to help you whenever you need us.',
       'gate-stat1': 'IT Services',
       'gate-stat2': 'Remote Support',
       'gate-stat3': 'Price Transparency',
@@ -5048,10 +5048,10 @@
       'gate-need-email': 'Enter your email first, then click "Forgot your password?"',
       'gate-karibu': 'Welcome,',
       'gate-toka': 'Logout',
-      'hero-eyebrow': 'IT Services Â· Tanzania',
+      'hero-eyebrow': 'IT Services · Tanzania',
       'hero-h1': 'Your technology, <span class="accent">expertly managed.</span>',
-      'hero-lead': 'From computer and phone repairs, network setup, business systems, data storage, to 24/7 remote support â€” PLATINUMZ delivers complete IT services that boost your productivity, fast and transparently.',
-      'hero-btn1': 'Contact Us â†’',
+      'hero-lead': 'From computer and phone repairs, network setup, business systems, data storage, to 24/7 remote support — PLATINUMZ delivers complete IT services that boost your productivity, fast and transparently.',
+      'hero-btn1': 'Contact Us →',
       'hero-btn2': 'View All Services',
       'services-eyebrow': 'Services',
       'services-h2': 'Our Services at a Glance',
@@ -5068,14 +5068,14 @@
       'about-story-badge': 'Our Story',
       'about-story-title': 'From a dream to a real solution',
       'about-story-text-1': 'PLATINUMZ IT Support was founded by seeing a big challenge: many people and businesses in Tanzania face IT problems but don\'t know who to ask, and encounter unclear pricing.',
-      'about-story-text-2': 'We decided to change this. Our team of skilled IT professionals delivers fast, straightforward, and real value solutions â€” from computer repair to network infrastructure.',
+      'about-story-text-2': 'We decided to change this. Our team of skilled IT professionals delivers fast, straightforward, and real value solutions — from computer repair to network infrastructure.',
       'about-visual-1': 'Fast',
       'about-visual-2': 'Secure',
       'about-visual-3': 'Trusted',
       'about-values-eyebrow': 'Our Foundation',
       'about-values-h2': 'Why do people trust us?',
       'about-impact-title': 'Our Impact',
-      'about-impact-desc': 'We have served clients from every corner of Tanzania â€” from Arusha to Mwanza, Dar es Salaam to Mbeya.',
+      'about-impact-desc': 'We have served clients from every corner of Tanzania — from Arusha to Mwanza, Dar es Salaam to Mbeya.',
       'faq-eyebrow': 'FAQ',
       'faq-h2': 'Frequently Asked Questions',
       'contact-eyebrow': 'Contact Us',
@@ -5104,37 +5104,37 @@
       'pwd-reset-fail': 'Failed to send email. Try again.',
       'pwd-reset-invalid': 'Invalid email.',
       'pwd-reset-notfound': 'No account with this email.',
-      'fp-step1-eyebrow': 'ðŸ“‰ Forgot Password?',
+      'fp-step1-eyebrow': '📉 Forgot Password?',
       'fp-step1-desc': 'Enter your email and we\'ll send you a verification code.',
       'fp-email-label': 'Email',
-      'fp-send-btn': 'Send Code â†’',
-      'fp-step2-eyebrow': 'ðŸ” Verify Code',
+      'fp-send-btn': 'Send Code →',
+      'fp-step2-eyebrow': '🔐 Verify Code',
       'fp-step2-desc': 'Please enter the 6-digit code sent to your email.',
-      'fp-verify-btn': 'Verify â†’',
-      'fp-step3-eyebrow': 'ðŸ”‘ Set New Password',
+      'fp-verify-btn': 'Verify →',
+      'fp-step3-eyebrow': '🔑 Set New Password',
       'fp-step3-desc': 'Code verified. Set your new password.',
       'fp-new-pass-label': 'New Password',
       'fp-confirm-pass-label': 'Confirm Password',
-      'fp-reset-btn': 'Reset Password â†’',
+      'fp-reset-btn': 'Reset Password →',
       'fp-step4-eyebrow': 'Success!',
       'fp-step4-desc': 'Your password has been changed. You can now sign in.',
-      'fp-login-btn': 'Sign In Now â†’',
+      'fp-login-btn': 'Sign In Now →',
       'fp-err-email': 'Enter a valid email.',
       'fp-err-notfound': 'No account with this email.',
       'fp-err-code-length': 'Enter the 6-digit code.',
       'fp-err-code-invalid': 'An error occurred. Try again.',
       'fp-err-code-expired': 'Code expired. Request a new one.',
       'fp-err-code-wrong': 'Incorrect code. Try again.',
-      'fp-err-pass-short': 'Password too short â€” at least 6 characters.',
+      'fp-err-pass-short': 'Password too short — at least 6 characters.',
       'fp-err-pass-match': 'Passwords don\'t match.',
       'fp-err-reset': 'An error occurred. Try again.',
-      'pwd-mismatch': 'Passwords don\'t match â€” try again.',
+      'pwd-mismatch': 'Passwords don\'t match — try again.',
       'auth-error': 'An error occurred, try again.',
-      'auth-email-used': 'This email already has an account â€” try logging in.',
+      'auth-email-used': 'This email already has an account — try logging in.',
       'auth-invalid-email': 'Invalid email.',
-      'auth-weak-pass': 'Password is too short â€” at least 6 characters.',
+      'auth-weak-pass': 'Password is too short — at least 6 characters.',
       'auth-wrong-pass': 'Email or password is incorrect.',
-      'auth-user-notfound': 'No account with this email â€” sign up first.',
+      'auth-user-notfound': 'No account with this email — sign up first.',
       'order-error': 'An error occurred. Try again or call us directly.',
       'order-modal-eyebrow': 'Request Service',
       'order-modal-sub': 'Fill in your details - we will contact you as soon as possible.',
@@ -5144,11 +5144,11 @@
       'order-ph-name': 'Your full name',
       'order-ph-phone': '0786 868 069',
       'order-ph-desc': 'Describe your needs in more detail...',
-      'order-submit-btn': 'Submit Request â†’',
+      'order-submit-btn': 'Submit Request →',
       'step-1-title': 'Contact Us',
       'step-1-desc': 'Tell us about your issue briefly via phone, WhatsApp, or email.',
       'step-2-title': 'Diagnosis',
-      'step-2-desc': 'We investigate the issue â€” in person or remotely.',
+      'step-2-desc': 'We investigate the issue — in person or remotely.',
       'step-3-title': 'Solution',
       'step-3-desc': 'We give you clear details on the issue and costs before starting work.',
       'step-4-title': 'Assurance',
@@ -5160,7 +5160,7 @@
       'about-vision-title': 'Our Vision',
       'about-vision-desc': 'To be the first name everyone remembers when they need IT support in Tanzania.',
       'about-mission-title': 'Our Mission',
-      'about-mission-desc': 'To deliver fast, transparent, and high-quality services â€” without complicated technical jargon.',
+      'about-mission-desc': 'To deliver fast, transparent, and high-quality services — without complicated technical jargon.',
       'about-values-title': 'Our Values',
       'about-values-desc': 'Honesty, quality work, and treating every customer as our first.',
       'svc-1-title': 'Computer & Laptop Repair',
@@ -5174,49 +5174,49 @@
       'svc-5-title': 'Storage & External Drives',
       'svc-5-desc': 'Diagnosis of hard drive and storage device errors, and data recovery.',
       'svc-6-title': 'Remote Support',
-      'svc-6-desc': 'IT support via phone or internet â€” no need to visit the office every time.',
+      'svc-6-desc': 'IT support via phone or internet — no need to visit the office every time.',
       'ext-eyebrow': 'Full Range',
       'ext-h2': 'Additional IT Services',
-      'ext-p': 'Beyond basic repairs â€” our team handles the full spectrum of IT needs for businesses of all sizes.',
+      'ext-p': 'Beyond basic repairs — our team handles the full spectrum of IT needs for businesses of all sizes.',
       'ext-title-1': 'IT Consulting',
-      'ext-desc-1': 'We help you plan an IT strategy that fits your business â€” from choosing equipment to building systems that grow with your business.',
+      'ext-desc-1': 'We help you plan an IT strategy that fits your business — from choosing equipment to building systems that grow with your business.',
       'ext-title-2': 'Cybersecurity',
-      'ext-desc-2': 'We protect your systems from viruses, hackers, and online threats â€” including security audits and employee training.',
+      'ext-desc-2': 'We protect your systems from viruses, hackers, and online threats — including security audits and employee training.',
       'ext-title-3': 'Software Development',
-      'ext-desc-3': 'We build custom software tailored to your needs â€” websites, business systems, and mobile apps.',
+      'ext-desc-3': 'We build custom software tailored to your needs — websites, business systems, and mobile apps.',
       'ext-title-4': 'Cloud Services',
-      'ext-desc-4': 'We help migrate your data and systems to the cloud â€” Google Cloud, AWS, or Azure â€” securely and accessible 24/7.',
+      'ext-desc-4': 'We help migrate your data and systems to the cloud — Google Cloud, AWS, or Azure — securely and accessible 24/7.',
       'ext-title-5': 'Server Management',
-      'ext-desc-5': 'We manage your on-premise or remote servers â€” configuration, security, updates, and 24/7 performance monitoring.',
+      'ext-desc-5': 'We manage your on-premise or remote servers — configuration, security, updates, and 24/7 performance monitoring.',
       'ext-title-6': 'Uchambuzi wa Takwimu',
-      'ext-desc-6': 'We help you understand your business data â€” detailed reports, performance charts, and trend tracking systems.',
+      'ext-desc-6': 'We help you understand your business data — detailed reports, performance charts, and trend tracking systems.',
       'ext-title-7': 'AI & Machine Learning',
-      'ext-desc-7': 'We integrate AI technology into your business â€” chatbots, automated data analysis, and trend prediction systems.',
+      'ext-desc-7': 'We integrate AI technology into your business — chatbots, automated data analysis, and trend prediction systems.',
       'ext-title-8': 'ERP & CRM Systems',
-      'ext-desc-8': 'We implement and configure business management (ERP) and customer relationship (CRM) systems â€” saving time and boosting team efficiency.',
+      'ext-desc-8': 'We implement and configure business management (ERP) and customer relationship (CRM) systems — saving time and boosting team efficiency.',
       'ext-title-9': 'IT Training',
-      'ext-desc-9': 'We train your staff on how to use systems, computers, and various software â€” in-person or remote training.',
+      'ext-desc-9': 'We train your staff on how to use systems, computers, and various software — in-person or remote training.',
       'ext-title-10': 'VoIP Communications',
-      'ext-desc-10': 'We set up VoIP phone systems for your office â€” reducing phone costs and connecting teams across locations.',
+      'ext-desc-10': 'We set up VoIP phone systems for your office — reducing phone costs and connecting teams across locations.',
       'ext-title-11': 'IoT Solutions',
-      'ext-desc-11': 'We connect IoT devices into one unified system â€” security cameras, sensors, and business environment monitoring equipment.',
+      'ext-desc-11': 'We connect IoT devices into one unified system — security cameras, sensors, and business environment monitoring equipment.',
       'ext-title-12': 'Backup & Recovery',
-      'ext-desc-12': 'We set up data backup and recovery systems â€” your data security is our priority.',
+      'ext-desc-12': 'We set up data backup and recovery systems — your data security is our priority.',
       'ext-title-13': 'IT Project Management',
-      'ext-desc-13': 'We manage your IT projects from start to finish â€” planning, execution, and ensuring on-time and on-budget delivery.',
+      'ext-desc-13': 'We manage your IT projects from start to finish — planning, execution, and ensuring on-time and on-budget delivery.',
       'ext-title-14': 'Web Hosting',
-      'ext-desc-14': 'We help set up and manage your website online â€” domain, hosting, and maintenance at affordable prices with reliable service.',
+      'ext-desc-14': 'We help set up and manage your website online — domain, hosting, and maintenance at affordable prices with reliable service.',
       'ext-title-15': 'IT Compliance Auditing',
-      'ext-desc-15': 'We audit your systems to ensure they meet legal data and privacy requirements â€” essential for businesses handling customer information.',
-      'ext-omba': 'Order Service â†’',
+      'ext-desc-15': 'We audit your systems to ensure they meet legal data and privacy requirements — essential for businesses handling customer information.',
+      'ext-omba': 'Order Service →',
       'promise-eyebrow': 'Our Promise',
       'promise-h2': 'Worry-Free Service',
-      'promise-desc': "We diagnose your issue for free before starting work. You only proceed if you're satisfied â€” prices are transparent from the start, no surprise charges.",
-      'promise-link1': 'ðŸ“ž Contact Us Now',
-      'promise-link2': 'ðŸ” View All Services',
+      'promise-desc': "We diagnose your issue for free before starting work. You only proceed if you're satisfied — prices are transparent from the start, no surprise charges.",
+      'promise-link1': '📞 Contact Us Now',
+      'promise-link2': '🔍 View All Services',
       'benefits-eyebrow': 'Members',
       'benefits-h2': 'Your Account Benefits',
-      'benefits-p': "Since you're already registered, you get these instantly â€” at no extra cost.",
+      'benefits-p': "Since you're already registered, you get these instantly — at no extra cost.",
       'benefit-1-title': 'Service History',
       'benefit-1-desc': 'We keep records of all past services to help you faster next time.',
       'benefit-2-title': 'Priority Service',
@@ -5225,7 +5225,7 @@
       'benefit-3-desc': 'Discount and special offer information reaches members first before others.',
       'payment-eyebrow': 'Payments',
       'payment-h2': 'Payment Methods',
-      'payment-desc': 'Pay easily via mobile networks â€” then we send payment confirmation via WhatsApp so we can proceed with your service.',
+      'payment-desc': 'Pay easily via mobile networks — then we send payment confirmation via WhatsApp so we can proceed with your service.',
       'pay-1-title': 'Airtel Money',
       'pay-1-num': 'Number: 0786 868 069',
       'pay-1-name': 'Name: PLATINUMZ IT Support',
@@ -5234,17 +5234,17 @@
       'pay-2-name': 'Name: PLATINUMZ IT Support',
       'pay-3-title': 'Done paying?',
       'pay-3-desc': 'Send your payment receipt/proof via WhatsApp so we can start your service immediately.',
-      'pay-3-btn': 'ðŸ’¬ Send Proof on WhatsApp',
+      'pay-3-btn': '💬 Send Proof on WhatsApp',
       'review-eyebrow': 'Reviews',
       'review-h2': 'Used Our Service? Leave a Review',
-      'review-desc': 'Your feedback helps us improve our services â€” no account needed, just write and send.',
+      'review-desc': 'Your feedback helps us improve our services — no account needed, just write and send.',
       'review-name-label': 'Name (optional)',
       'review-name-ph': 'Your name',
       'review-service-label': 'Service received',
       'review-rating-label': 'How satisfied were you?',
       'review-msg-label': 'Your review',
       'review-msg-ph': 'Tell us more about your experience...',
-      'review-submit-btn': 'Submit Review â†’',
+      'review-submit-btn': 'Submit Review →',
       'rev-svc-opt0': 'Choose a service...',
       'rev-svc-opt1': 'Computer/Laptop Repair',
       'rev-svc-opt2': 'Phone Fixing',
@@ -5254,11 +5254,11 @@
       'rev-svc-opt6': 'Remote Support',
       'rev-svc-opt7': 'Other',
       'rev-rate-opt0': 'Choose a rating...',
-      'rev-rate-opt1': 'â­ 1 - Very Poor',
-      'rev-rate-opt2': 'â­â­ 2 - Poor',
-      'rev-rate-opt3': 'â­â­â­ 3 - Average',
-      'rev-rate-opt4': 'â­â­â­â­ 4 - Very Good',
-      'rev-rate-opt5': 'â­â­â­â­â­ 5 - Excellent',
+      'rev-rate-opt1': '⭐ 1 - Very Poor',
+      'rev-rate-opt2': '⭐⭐ 2 - Poor',
+      'rev-rate-opt3': '⭐⭐⭐ 3 - Average',
+      'rev-rate-opt4': '⭐⭐⭐⭐ 4 - Very Good',
+      'rev-rate-opt5': '⭐⭐⭐⭐⭐ 5 - Excellent',
       'stat-1-val': '1-2+',
       'stat-1-label': 'Years of Team Experience',
       'stat-2-val': '6+',
@@ -5273,19 +5273,19 @@
       'faq-q1': 'How much does computer repair cost?',
       'faq-a1': "It depends on the issue. We do a free diagnosis first, then give you a clear price before starting any work. No hidden charges.",
       'faq-q2': 'Can you come to our home or office?',
-      'faq-a2': "Yes, we offer in-person service (home/office) as well as remote support via phone or internet â€” you choose what works best for you.",
+      'faq-a2': "Yes, we offer in-person service (home/office) as well as remote support via phone or internet — you choose what works best for you.",
       'faq-q3': 'What are your working hours?',
       'faq-a3': "We work Monday to Saturday, 8 AM to 9 PM. For emergencies, remote support is available 24/7 via WhatsApp.",
       'faq-q4': 'How long does it take to fix a computer?',
       'faq-a4': "Most common issues are handled within 1-3 hours. More complex issues (like replacing parts) may take 1-2 days. We'll inform you in advance.",
       'faq-q5': 'Do you offer a warranty after service?',
-      'faq-a5': "Yes. Every job comes with a warranty period â€” if you have an issue related to our work, we'll fix it at no extra cost.",
+      'faq-a5': "Yes. Every job comes with a warranty period — if you have an issue related to our work, we'll fix it at no extra cost.",
       'faq-q6': 'How can I pay for the service?',
       'faq-a6': 'We accept payments via Airtel Money (0786 868 069) and Halotel (0615 825 969). Pay after the work is completed and confirmed.',
       'faq-q7': 'Will my data be safe during repair?',
       'faq-a7': "Your data safety is our priority. We don't delete data without your permission, and we can help you make a backup before starting work.",
       'contact-h2': 'Have a computer, phone or network issue?',
-      'contact-p': 'Contact us today â€” we start with a free diagnosis via phone.',
+      'contact-p': 'Contact us today — we start with a free diagnosis via phone.',
       'admin-clients': 'Wateja Waliopata Usajili',
       'admin-clients-sub': 'This list is visible to you only.',
       'admin-orders': 'Service Requests',
@@ -5296,28 +5296,28 @@
       'admin-no-chat': 'No messages yet.',
       'admin-chat-ph': 'Type a message to customers...',
       'admin-greeting': 'Welcome, Admin',
-      'admin-greeting-sub': 'This is your dashboard â€” track clients, orders, chat and reviews.',
+      'admin-greeting-sub': 'This is your dashboard — track clients, orders, chat and reviews.',
       'admin-stat-wateja': 'Wateja',
       'admin-stat-orders': 'Maombi',
       'admin-stat-ujumbe': 'Messages',
       'admin-stat-maoni': 'Reviews',
-      'admin-tab-wateja': 'ðŸ‘¥ Clients',
-      'admin-tab-orders': 'ðŸ“‹ Orders',
-      'admin-tab-chat': 'ðŸ’¬ Chat',
-      'admin-tab-maoni': 'â­ Reviews',
-      'admin-tab-analytics': 'ðŸ“Š Analytics',
-      'admin-tab-miadi': 'ðŸ—“ï¸ Appointments',
-      'admin-tab-eneo': 'ðŸ“ Location',
-      'admin-tab-simu': 'ðŸ“ž Calls',
-      'admin-tab-checkin': 'ðŸ“± Check-ins',
-      'admin-tab-points': 'ðŸ† Loyalty',
-      'admin-tab-data': 'ðŸ’¾ Data',
-      'admin-send': 'Send ðŸ“¤',
+      'admin-tab-wateja': '👥 Clients',
+      'admin-tab-orders': '📋 Orders',
+      'admin-tab-chat': '💬 Chat',
+      'admin-tab-maoni': '⭐ Reviews',
+      'admin-tab-analytics': '📊 Analytics',
+      'admin-tab-miadi': '🗓️ Appointments',
+      'admin-tab-eneo': '📍 Location',
+      'admin-tab-simu': '📞 Calls',
+      'admin-tab-checkin': '📱 Check-ins',
+      'admin-tab-points': '🏆 Loyalty',
+      'admin-tab-data': '💾 Data',
+      'admin-send': 'Send 📤',
       'admin-chat-input-ph': 'Type a message to customer...',
       'ad-chat-sidebar-head': 'Customers',
       'ad-chat-select': 'Select a customer to start chat...',
       'admin-no-reviews': 'No reviews yet.',
-      'admin-delete': 'ðŸ—‘ï¸ Delete',
+      'admin-delete': '🗑️ Delete',
       'admin-logout': 'Out',
       'admin-order-jina': 'Name',
       'admin-order-simu': 'Phone',
@@ -5330,12 +5330,12 @@
       'order-status-mpya': 'New',
       'order-status-inashughulikiwa': 'In Progress',
       'order-status-imekamilika': 'Completed',
-      'order-accept-btn': 'âœ… Accept',
-      'order-accepted-label': 'âœ” Accepted',
+      'order-accept-btn': '✅ Accept',
+      'order-accepted-label': '✔ Accepted',
       'order-accept-confirm': 'Accept this order and confirm you are working on it?',
-      'order-complete-btn': 'âœ… Complete',
+      'order-complete-btn': '✅ Complete',
       'order-complete-confirm': 'Mark this order as completed and notify the customer?',
-      'order-completed-label': 'âœ” Completed',
+      'order-completed-label': '✔ Completed',
       'order-completed-title': 'Order Completed!',
       'order-completed-msg': 'The customer will be notified that their order is complete.',
       'order-accepted-title': 'Order Accepted!',
@@ -5362,7 +5362,7 @@
       'ad-edit-email': 'Email',
       'ad-edit-service': 'Service',
       'ad-edit-cancel': 'Cancel',
-      'ad-edit-save': 'ðŸ’¾ Save',
+      'ad-edit-save': '💾 Save',
       'admin-loading': 'Loading...',
       'cu-orders-empty': 'You have not requested any service yet.',
       'cu-loading': 'Loading...',
@@ -5378,27 +5378,27 @@
       'cu-about-vision': 'Our Vision',
       'cu-about-vision-desc': 'To be the first name everyone remembers when they need IT support in Tanzania.',
       'cu-about-mission': 'Our Mission',
-      'cu-about-mission-desc': 'To deliver fast, transparent, and high-quality services â€” without complicated technical jargon.',
+      'cu-about-mission-desc': 'To deliver fast, transparent, and high-quality services — without complicated technical jargon.',
       'cu-about-values': 'Our Values',
       'cu-about-values-desc': 'Honesty, quality work, and treating every customer as our first.',
       'cu-about-impact': 'Our Impact',
-      'cu-about-impact-desc': 'We have served clients from every corner of Tanzania â€” from Arusha to Mwanza, Dar es Salaam to Mbeya.',
+      'cu-about-impact-desc': 'We have served clients from every corner of Tanzania — from Arusha to Mwanza, Dar es Salaam to Mbeya.',
       'cu-about-contact': 'Have questions? Contact us via Live Chat or call: 0786 868 069',
       'testi-eyebrow': 'What Our Clients Say',
       'testi-h2': 'Testimonials',
       'testi-desc': 'Hear from our clients who have received excellent service from PLATINUMZ IT Support.',
       'testi-1-text': '"The PLATINUMZ team upgraded my business system in just 3 days. I\'m now running at top speed!"',
-      'testi-1-role': 'Shop Owner â€” Dar es Salaam',
+      'testi-1-role': 'Shop Owner — Dar es Salaam',
       'testi-2-text': '"I had lost all my data on my laptop. PLATINUMZ recovered everything for me!"',
-      'testi-2-role': 'Student â€” DSM',
+      'testi-2-role': 'Student — DSM',
       'testi-3-text': '"Our office network used to drop every day. After the upgrade, no more issues!"',
-      'testi-3-role': 'IT Manager â€” Energy Company',
-      'testi-4-text': '"Remote support changed my life â€” I got my computer fixed from home without traveling."',
-      'testi-4-role': 'Small Business â€” Arusha',
+      'testi-3-role': 'IT Manager — Energy Company',
+      'testi-4-text': '"Remote support changed my life — I got my computer fixed from home without traveling."',
+      'testi-4-role': 'Small Business — Arusha',
       'testi-5-text': '"Their prices are affordable and the service is super fast. I\'ve recommended them to all my friends!"',
-      'testi-5-role': 'Entrepreneur â€” Mwanza',
+      'testi-5-role': 'Entrepreneur — Mwanza',
       'testi-6-text': '"Their cloud hosting is rock solid. My website hasn\'t gone down since I started paying."',
-      'testi-6-role': 'Website Manager â€” DSM',
+      'testi-6-role': 'Website Manager — DSM',
       'blog-eyebrow': 'Blog / Tips',
       'blog-h2': 'How to Stay Safe Online',
       'blog-desc': 'Read important tips about cybersecurity and everyday tech use.',
@@ -5425,21 +5425,21 @@
       'cu-sb-profile': 'Profile',
       'cu-sb-privacy': 'Privacy',
       'cu-sb-terms': 'Terms',
-      'cu-profile-title': 'ðŸ‘¤ My Profile',
+      'cu-profile-title': '👤 My Profile',
       'cu-profile-sub': 'Update your personal information.',
       'cu-profile-change-avatar': 'Change Photo',
       'cu-profile-name': 'Full Name',
       'cu-profile-service': 'Service',
-      'cu-profile-save': 'ðŸ’¾ Save Changes',
-      'cu-profile-change-pass': 'ðŸ”’ Change Password',
-      'cu-profile-verify': 'ðŸ“§ Email Verification',
+      'cu-profile-save': '💾 Save Changes',
+      'cu-profile-change-pass': '🔒 Change Password',
+      'cu-profile-verify': '📧 Email Verification',
       'cu-profile-verify-status': 'Checking...',
-      'cu-profile-verify-btn': 'ðŸ“§ Send Verification Email',
-      'cu-pw-title': 'ðŸ”’ Change Password',
+      'cu-profile-verify-btn': '📧 Send Verification Email',
+      'cu-pw-title': '🔒 Change Password',
       'cu-pw-old': 'Old Password',
       'cu-pw-new': 'New Password',
       'cu-pw-confirm': 'Confirm New Password',
-      'cu-pw-submit': 'ðŸ”„ Change Now',
+      'cu-pw-submit': '🔄 Change Now',
       'cu-pw-cancel': 'Cancel',
       'cu-sb-appt': 'Appointments',
       'cu-sb-loc': 'Location',
@@ -5448,7 +5448,7 @@
       'cu-sb-record': 'Record Screen',
       'cu-sb-journey': 'My Journey',
       'cu-sb-loyalty': 'Points',
-      'cu-hero-title': 'ðŸ‘‹ Welcome, ',
+      'cu-hero-title': '👋 Welcome, ',
       'cu-page-sub': 'What would you like to do today?',
       'cu-stat-orders': 'Orders',
       'cu-stat-pending': 'Pending',
@@ -5459,52 +5459,52 @@
       'cu-quick-pay': 'Pay Bill',
       'cu-quick-chat': 'Chat with Admin',
       'cu-quick-review': 'Write Review',
-      'cu-orders-title': 'ðŸ“‹ Your Orders',
-      'cu-huduma-title': 'ðŸ”§ Our Services',
-      'cu-malipo-title': 'ðŸ’³ Payments',
-      'cu-chat-title': 'ðŸ’¬ Chat with Admin',
+      'cu-orders-title': '📋 Your Orders',
+      'cu-huduma-title': '🔧 Our Services',
+      'cu-malipo-title': '💳 Payments',
+      'cu-chat-title': '💬 Chat with Admin',
       'cu-chat-ph': 'Type your message here...',
-      'cu-offa-title': 'ðŸŽ Special Offers',
-      'cu-maoni-title': 'â­ Write Your Review',
+      'cu-offa-title': '🎁 Special Offers',
+      'cu-maoni-title': '⭐ Write Your Review',
       'cu-maoni-ph': 'Write your review here...',
       'cu-maoni-send': 'Submit Review',
-      'cu-toka': 'ðŸšª Out',
+      'cu-toka': '🚪 Out',
       'cu-quick-huduma': 'Services',
       'cu-quick-orders': 'Orders',
       'cu-quick-chat': 'Chat',
       'cu-quick-offa': 'Offers',
-      'cu-account-title': 'ðŸ‘¤ Account Info',
-      'cu-svc-1-title': 'ðŸ’» Computer Repair',
+      'cu-account-title': '👤 Account Info',
+      'cu-svc-1-title': '💻 Computer Repair',
       'cu-svc-1-desc': 'Diagnosis and fixing of system errors and hardware issues.',
-      'cu-svc-1-btn': 'Order â†’',
-      'cu-svc-2-title': 'ðŸ“± Phone Fixing',
+      'cu-svc-1-btn': 'Order →',
+      'cu-svc-2-title': '📱 Phone Fixing',
       'cu-svc-2-desc': 'WiFi, data, system restore issues.',
-      'cu-svc-2-btn': 'Order â†’',
-      'cu-svc-3-title': 'ðŸŒ Network Setup',
+      'cu-svc-2-btn': 'Order →',
+      'cu-svc-3-title': '🌐 Network Setup',
       'cu-svc-3-desc': 'WiFi, office networks, routers and switches.',
-      'cu-svc-3-btn': 'Order â†’',
-      'cu-svc-4-title': 'ðŸ“Š Business Systems',
+      'cu-svc-3-btn': 'Order →',
+      'cu-svc-4-title': '📊 Business Systems',
       'cu-svc-4-desc': 'Excel, database, loans and sales systems.',
-      'cu-svc-4-btn': 'Order â†’',
-      'cu-svc-5-title': 'ðŸ’¾ Storage & Data',
+      'cu-svc-4-btn': 'Order →',
+      'cu-svc-5-title': '💾 Storage & Data',
       'cu-svc-5-desc': 'Data recovery, hard drives, USB.',
-      'cu-svc-5-btn': 'Order â†’',
-      'cu-svc-6-title': 'ðŸ–¥ï¸ Remote Support',
+      'cu-svc-5-btn': 'Order →',
+      'cu-svc-6-title': '🖥️ Remote Support',
       'cu-svc-6-desc': 'Remote support 24/7.',
-      'cu-svc-6-btn': 'Order â†’',
-      'cu-svc-7-title': 'ðŸ›¡ï¸ Cybersecurity',
+      'cu-svc-6-btn': 'Order →',
+      'cu-svc-7-title': '🛡️ Cybersecurity',
       'cu-svc-7-desc': 'Firewall, antivirus, cybersecurity.',
-      'cu-svc-7-btn': 'Order â†’',
-      'cu-svc-8-title': 'â˜ï¸ Cloud Services',
+      'cu-svc-7-btn': 'Order →',
+      'cu-svc-8-title': '☁️ Cloud Services',
       'cu-svc-8-desc': 'AWS, Azure, cloud storage.',
-      'cu-svc-8-btn': 'Order â†’',
-      'cu-svc-9-title': 'ðŸŒ Web Hosting',
+      'cu-svc-8-btn': 'Order →',
+      'cu-svc-9-title': '🌐 Web Hosting',
       'cu-svc-9-desc': 'Hosting, domain, professional emails.',
-      'cu-svc-9-btn': 'Order â†’',
-      'cu-svc-10-title': 'ðŸŽ“ IT Training',
+      'cu-svc-9-btn': 'Order →',
+      'cu-svc-10-title': '🎓 IT Training',
       'cu-svc-10-desc': 'Computers, software, networking.',
-      'cu-svc-10-btn': 'Order â†’',
-      'chat-title': 'ðŸ’¬ Chat with Admin',
+      'cu-svc-10-btn': 'Order →',
+      'chat-title': '💬 Chat with Admin',
       'chat-ph': 'Type a message...',
       'chat-placeholder': 'Type your message here...',
     }
@@ -5677,7 +5677,7 @@
     const whatsappText = document.getElementById('status-whatsapp-text');
     if(whatsappText) whatsappText.textContent = t['status-whatsapp-text'];
 
-    // Admin dashboard is now self-contained â€” no modal translations needed
+    // Admin dashboard is now self-contained — no modal translations needed
 
     // Customer chat translations
     const chatTitle = document.querySelector('#customerChatWidget span');
@@ -5776,9 +5776,9 @@
 
     // Update chatbot welcome + PWA banner
     const chatbotWelcome = document.getElementById('chatbotWelcome');
-    if(chatbotWelcome) chatbotWelcome.textContent = lang==='sw'?'Habari! ðŸ‘‹ Mimi ni AI ya PLATINUMZ. Nikisaidiaje leo? Unaweza kuuliza kuhusu bei, huduma, muda, au malipo!':'Hello! ðŸ‘‹ I am PLATINUMZ AI. How can I help today? Ask about price, services, time, or payment!';
+    if(chatbotWelcome) chatbotWelcome.textContent = lang==='sw'?'Habari! 👋 Mimi ni AI ya PLATINUMZ. Nikisaidiaje leo? Unaweza kuuliza kuhusu bei, huduma, muda, au malipo!':'Hello! 👋 I am PLATINUMZ AI. How can I help today? Ask about price, services, time, or payment!';
     const botStatus = document.getElementById('botStatus');
-    if(botStatus) botStatus.textContent = lang==='sw'?'Mtandaoni â€” Nikisaidiaje?':'Online â€” How can I help?';
+    if(botStatus) botStatus.textContent = lang==='sw'?'Mtandaoni — Nikisaidiaje?':'Online — How can I help?';
     const pwaTitle = document.getElementById('pwaTitle');
     if(pwaTitle) pwaTitle.textContent = lang==='sw'?'Pakua PLATINUMZ App':'Install PLATINUMZ App';
     const pwaDesc = document.getElementById('pwaDesc');
@@ -5816,12 +5816,12 @@
   const mobileMenu = document.getElementById('mobileMenu');
   if(menuToggle) menuToggle.addEventListener('click', () => {
     if(mobileMenu) mobileMenu.classList.toggle('open');
-    menuToggle.textContent = mobileMenu && mobileMenu.classList.contains('open') ? 'âœ•' : 'â˜°';
+    menuToggle.textContent = mobileMenu && mobileMenu.classList.contains('open') ? '✕' : '☰';
   });
   if(mobileMenu) mobileMenu.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       mobileMenu.classList.remove('open');
-      menuToggle.textContent = 'â˜°';
+      menuToggle.textContent = '☰';
     });
   });
 
@@ -5884,7 +5884,7 @@
         const align = isMe ? 'flex-end' : 'flex-start';
         html += `<div style="display:flex; justify-content:${align}; margin-bottom:8px;">
           <div style="max-width:80%; padding:10px 14px; border-radius:14px; background:${bg}; color:${color}; font-size:0.88rem;">
-            <div style="font-weight:600; font-size:0.78rem; margin-bottom:4px; opacity:0.7;">${d.name || 'Mteja'} Â· ${time}</div>
+            <div style="font-weight:600; font-size:0.78rem; margin-bottom:4px; opacity:0.7;">${d.name || 'Mteja'} · ${time}</div>
             ${d.message || ''}
           </div>
         </div>`;
@@ -5972,7 +5972,7 @@
   }
 
   // ========== ADMIN DASHBOARD ==========
-  // Admin dashboard is simple â€” no sidebar nav needed
+  // Admin dashboard is simple — no sidebar nav needed
 
   // Customer logout handled by onAuthStateChanged in Script 2
 
@@ -5989,7 +5989,7 @@
     cuReviewStars = n;
     const spans = document.querySelectorAll('#cuStarsInput span');
     spans.forEach((s, i) => {
-      s.textContent = i < n ? 'â˜…' : 'â˜†';
+      s.textContent = i < n ? '★' : '☆';
       s.style.color = i < n ? 'var(--signal)' : 'var(--muted)';
     });
   }
@@ -6013,7 +6013,7 @@
       document.getElementById('cuReviewText').value = '';
       setReviewStars(0);
       loadCustomerReviews();
-      alert('Asante kwa maoni yako! ðŸ™');
+      alert('Asante kwa maoni yako! 🙏');
     }).catch((e) => {
       alert('Hitilafu: ' + e.message);
     });
@@ -6029,8 +6029,8 @@
       snap.forEach((doc) => {
         const d = doc.data();
         const dt = d.createdAt ? d.createdAt.toDate().toLocaleDateString('sw-TZ') : '';
-        const stars = 'â˜…'.repeat(d.stars||0) + 'â˜†'.repeat(5-(d.stars||0));
-        html += '<div class="cu-review-item"><div class="stars">'+stars+'</div><p>"'+(d.text||'')+'"</p><div class="rname">'+(d.name||'Mteja')+' Â· '+dt+'</div></div>';
+        const stars = '★'.repeat(d.stars||0) + '☆'.repeat(5-(d.stars||0));
+        html += '<div class="cu-review-item"><div class="stars">'+stars+'</div><p>"'+(d.text||'')+'"</p><div class="rname">'+(d.name||'Mteja')+' · '+dt+'</div></div>';
       });
       list.innerHTML = html;
     }).catch((e) => { list.innerHTML = '<div class="cu-empty" style="color:#ff6b6b">Hitilafu: '+e.message+'</div>'; });
@@ -6061,7 +6061,7 @@ function runDiagnosis(){
   const input = document.getElementById('diagInput').value.trim();
   const results = document.getElementById('diagResults');
   if(!input){ results.innerHTML='<p style="color:#ff6b6b;font-size:0.85rem;">Tafadhali eleza tatizo lako.</p>'; return; }
-  results.innerHTML='<div class="diag-spinner">ðŸ¤– AI inachambua...</div>';
+  results.innerHTML='<div class="diag-spinner">🤖 AI inachambua...</div>';
   setTimeout(()=>{
     const words = input.toLowerCase().split(/\s+/);
     let matches = [];
@@ -6076,9 +6076,9 @@ function runDiagnosis(){
     }
     let html='';
     matches.slice(0,3).forEach(m=>{
-      html+='<div class="diag-result-card"><h5>ðŸ”§ '+m.service+'</h5><p>'+m.solution+'</p><span class="confidence">Uaminifu: '+m.confidence+'%</span></div>';
+      html+='<div class="diag-result-card"><h5>🔧 '+m.service+'</h5><p>'+m.solution+'</p><span class="confidence">Uaminifu: '+m.confidence+'%</span></div>';
     });
-    html+='<div style="text-align:center;margin-top:14px;"><button onclick="document.getElementById(\'diagModal\').classList.remove(\'show\')" style="background:#1a2942;border:1px solid #1e3348;border-radius:10px;padding:10px 20px;color:#F2A93B;font-size:0.85rem;cursor:pointer;">Ongea na Admin â†’</button></div>';
+    html+='<div style="text-align:center;margin-top:14px;"><button onclick="document.getElementById(\'diagModal\').classList.remove(\'show\')" style="background:#1a2942;border:1px solid #1e3348;border-radius:10px;padding:10px 20px;color:#F2A93B;font-size:0.85rem;cursor:pointer;">Ongea na Admin →</button></div>';
     results.innerHTML=html;
   },1500);
 }
@@ -6089,7 +6089,7 @@ function runDiagnosis(){
 let mediaRecorder=null; let recordedChunks=[]; let recStream=null;
 function startScreenRecording(){
   if(!navigator.mediaDevices||!navigator.mediaDevices.getDisplayMedia){
-    showNotifToast('Haitumiki','Browser haina support ya screen recording','âŒ'); return;
+    showNotifToast('Haitumiki','Browser haina support ya screen recording','❌'); return;
   }
   navigator.mediaDevices.getDisplayMedia({video:{mediaSurface:'window'},audio:true}).then(stream=>{
     recStream=stream;
@@ -6101,7 +6101,7 @@ function startScreenRecording(){
     document.getElementById('recIndicator').classList.add('show');
     stream.getVideoTracks()[0].onended=()=>{ stopScreenRecording(); };
   }).catch(e=>{
-    showNotifToast('Hitilafu',e.message,'âŒ');
+    showNotifToast('Hitilafu',e.message,'❌');
   });
 }
 function stopScreenRecording(){
@@ -6111,20 +6111,20 @@ function stopScreenRecording(){
 }
 function sendRecordedVideo(){
   const blob=new Blob(recordedChunks,{type:'video/webm'});
-  if(blob.size<100){ showNotifToast('Hitilafu','Video haijaandikwa','âŒ'); return; }
+  if(blob.size<100){ showNotifToast('Hitilafu','Video haijaandikwa','❌'); return; }
   const reader=new FileReader();
   reader.onload=()=>{
     const user=firebase.auth().currentUser;
     if(!user) return;
     db.collection('chats').add({
       sender:'customer',name:user.displayName||user.email.split('@')[0],email:user.email,
-      message:'ðŸŽ¬ Screen Recording â€” '+new Date().toLocaleString('sw-TZ'),
+      message:'🎬 Screen Recording — '+new Date().toLocaleString('sw-TZ'),
       image:reader.result, read:false,
       createdAt:firebase.firestore.FieldValue.serverTimestamp()
     }).then(()=>{
-      showNotifToast('Imetumwa!','Video imetumwa kwa admin kwa ajili ya uchunguzi','ðŸŽ¬');
+      showNotifToast('Imetumwa!','Video imetumwa kwa admin kwa ajili ya uchunguzi','🎬');
     }).catch(err=>{
-      showNotifToast('Hitilafu','Video haikuweza kutumwa: '+err.message,'âŒ');
+      showNotifToast('Hitilafu','Video haikuweza kutumwa: '+err.message,'❌');
     });
   };
   reader.readAsDataURL(blob);
@@ -6134,21 +6134,21 @@ function sendRecordedVideo(){
 // LOYALTY POINTS & GAMIFICATION
 // ============================================================
 const LOYALTY_TIERS=[
-  {name:'Bronze',icon:'ðŸ¥‰',min:0,color:'#cd7f32'},
-  {name:'Silver',icon:'ðŸ¥ˆ',min:100,color:'#C0C0C0'},
-  {name:'Gold',icon:'ðŸ¥‡',min:300,color:'#FFD700'},
-  {name:'Platinum',icon:'ðŸ’Ž',min:600,color:'#E5E4E2'},
-  {name:'Diamond',icon:'ðŸ‘‘',min:1000,color:'#B9F2FF'}
+  {name:'Bronze',icon:'🥉',min:0,color:'#cd7f32'},
+  {name:'Silver',icon:'🥈',min:100,color:'#C0C0C0'},
+  {name:'Gold',icon:'🥇',min:300,color:'#FFD700'},
+  {name:'Platinum',icon:'💎',min:600,color:'#E5E4E2'},
+  {name:'Diamond',icon:'👑',min:1000,color:'#B9F2FF'}
 ];
 const BADGES_DEF=[
-  {id:'first-order',icon:'ðŸŽ¯',name:'Mteja wa Kwanza',req:1},
-  {id:'five-orders',icon:'5ï¸âƒ£',name:'Mteja wa 5',req:5},
-  {id:'ten-orders',icon:'ðŸ”Ÿ',name:'Mteja wa 10',req:10},
-  {id:'first-review',icon:'â­',name:'Mapokezi ya Kwanza',req:1,review:true},
-  {id:'early-bird',icon:'ðŸŒ…',name:'Mapema Sana',req:1,early:true},
-  {id:'loyal',icon:'â¤ï¸',name:'Mteja waaminifu',req:20},
-  {id:'vip',icon:'ðŸ‘‘',name:'VIP Customer',req:50},
-  {id:'legend',icon:'ðŸ†',name:'Legenda',req:100}
+  {id:'first-order',icon:'🎯',name:'Mteja wa Kwanza',req:1},
+  {id:'five-orders',icon:'5️⃣',name:'Mteja wa 5',req:5},
+  {id:'ten-orders',icon:'🔟',name:'Mteja wa 10',req:10},
+  {id:'first-review',icon:'⭐',name:'Mapokezi ya Kwanza',req:1,review:true},
+  {id:'early-bird',icon:'🌅',name:'Mapema Sana',req:1,early:true},
+  {id:'loyal',icon:'❤️',name:'Mteja waaminifu',req:20},
+  {id:'vip',icon:'👑',name:'VIP Customer',req:50},
+  {id:'legend',icon:'🏆',name:'Legenda',req:100}
 ];
 function getLoyaltyTier(pts){
   let tier=LOYALTY_TIERS[0];
@@ -6170,10 +6170,10 @@ function loadLoyaltyPoints(){
     if(nextTier){
       const progress=Math.min(100,((pts-tier.min)/(nextTier.min-tier.min))*100);
       document.getElementById('loyaltyBar').style.width=progress+'%';
-      document.getElementById('loyaltyNextTier').textContent=nextTier.icon+' '+nextTier.name+' â€” '+(nextTier.min-pts)+' pointi zaidi';
+      document.getElementById('loyaltyNextTier').textContent=nextTier.icon+' '+nextTier.name+' — '+(nextTier.min-pts)+' pointi zaidi';
     } else {
       document.getElementById('loyaltyBar').style.width='100%';
-      document.getElementById('loyaltyNextTier').textContent='Level ya Juu! ðŸ‘‘';
+      document.getElementById('loyaltyNextTier').textContent='Level ya Juu! 👑';
     }
     renderBadges(pts);
     renderRewards(pts);
@@ -6191,10 +6191,10 @@ function renderBadges(pts){
 function renderRewards(pts){
   const c=document.getElementById('loyaltyRewards');
   const rewards=[
-    {icon:'ðŸ’°',name:'Punguzo 5%',cost:50},
-    {icon:'ðŸ”§',name:'Service ya Bure',cost:200},
-    {icon:'â­',name:'VIP Badge',cost:100},
-    {icon:'ðŸŽ',name:'Gift Pack',cost:300}
+    {icon:'💰',name:'Punguzo 5%',cost:50},
+    {icon:'🔧',name:'Service ya Bure',cost:200},
+    {icon:'⭐',name:'VIP Badge',cost:100},
+    {icon:'🎁',name:'Gift Pack',cost:300}
   ];
   let html='';
   rewards.forEach(r=>{
@@ -6209,9 +6209,9 @@ function redeemReward(name,cost){
   if(!user) return;
   db.collection('loyalty').doc(user.uid).get().then(doc=>{
     const pts=doc.exists?(doc.data().points||0):0;
-    if(pts<cost){ showNotifToast('Pointi hazitoshi','Una '+pts+' pointi tu','ðŸ†'); return; }
+    if(pts<cost){ showNotifToast('Pointi hazitoshi','Una '+pts+' pointi tu','🏆'); return; }
     db.collection('loyalty').doc(user.uid).set({points:pts-cost,email:user.email,name:user.displayName||user.email.split('@')[0]},{merge:true}).then(()=>{
-      showNotifToast('Imetumia!','Umetumia '+cost+' pointi kwa '+name,'ðŸŽ');
+      showNotifToast('Imetumia!','Umetumia '+cost+' pointi kwa '+name,'🎁');
       loadLoyaltyPoints();
     });
   });
@@ -6230,7 +6230,7 @@ function openAutoDiag(){ document.getElementById('autoDiagModal').classList.add(
 function runAutoDiag(){
   const btn=document.getElementById('autoDiagBtn');
   const results=document.getElementById('autoDiagResults');
-  btn.disabled=true; btn.textContent='â³ Inachambua...';
+  btn.disabled=true; btn.textContent='⏳ Inachambua...';
   results.innerHTML='';
   const info={};
   info.os=navigator.platform||'Unknown';
@@ -6253,31 +6253,31 @@ function runAutoDiag(){
   const coresStatus=coresNum>=8?['Excellent','ad-good']:coresNum>=4?['Good','ad-good']:coresNum>=2?['Fair','ad-warn']:['Low','ad-bad'];
 
   let html='';
-  html+=diagCard('ðŸ’»','Platform',info.os,'');
-  html+=diagCard('ðŸŒ','Browser',info.browser,'');
-  html+=diagCard('âš™ï¸','CPU Cores',info.cores,coresStatus[1]);
-  html+=diagCard('ðŸ§ ','RAM',info.ram,'');
-  html+=diagCard('ðŸ“±','Screen',info.screen,'');
-  html+=diagCard('ðŸŽ¨','Color Depth',info.colorDepth,'');
-  html+=diagCard('ðŸ‘†','Touch Screen',info.touch,'');
-  html+=diagCard('ðŸ“¡','Network',connQuality[0],connQuality[1]);
-  html+=diagCard('ðŸª','Cookies',info.cookies,'');
-  html+=diagCard('ðŸŒ','Timezone',info.timezone,'');
-  html+=diagCard('ðŸ”’','Do Not Track',info.doNotTrack,'');
+  html+=diagCard('💻','Platform',info.os,'');
+  html+=diagCard('🌐','Browser',info.browser,'');
+  html+=diagCard('⚙️','CPU Cores',info.cores,coresStatus[1]);
+  html+=diagCard('🧠','RAM',info.ram,'');
+  html+=diagCard('📱','Screen',info.screen,'');
+  html+=diagCard('🎨','Color Depth',info.colorDepth,'');
+  html+=diagCard('👆','Touch Screen',info.touch,'');
+  html+=diagCard('📡','Network',connQuality[0],connQuality[1]);
+  html+=diagCard('🍪','Cookies',info.cookies,'');
+  html+=diagCard('🌍','Timezone',info.timezone,'');
+  html+=diagCard('🔒','Do Not Track',info.doNotTrack,'');
 
   if(navigator.getBattery){
     navigator.getBattery().then(bat=>{
       const pct=Math.round(bat.level*100);
       const batStatus=pct>50?'ad-good':pct>20?'ad-warn':'ad-bad';
-      document.getElementById('batteryCard').innerHTML=diagCardHTML('ðŸ”‹','Battery',pct+'%',batStatus);
+      document.getElementById('batteryCard').innerHTML=diagCardHTML('🔋','Battery',pct+'%',batStatus);
       sendDiagReport(info);
     });
   } else {
-    html+=diagCard('ðŸ”‹','Battery','Haiwezekani','');
+    html+=diagCard('🔋','Battery','Haiwezekani','');
     sendDiagReport(info);
   }
   results.innerHTML=html;
-  btn.disabled=false; btn.textContent='âš¡ Anzisha Uchambuzi Tena';
+  btn.disabled=false; btn.textContent='⚡ Anzisha Uchambuzi Tena';
 }
 function diagCard(icon,label,value,statusClass){
   return '<div class="autodiag-card"><div class="ad-icon">'+icon+'</div><div style="flex:1;"><div class="ad-label">'+label+'</div><div class="ad-value '+(statusClass||'')+'">'+value+'</div></div></div>';
@@ -6291,10 +6291,10 @@ function sendDiagReport(info){
   const report = Object.entries(info).map(([k,v])=>k+': '+v).join('\n');
   db.collection('chats').add({
     sender:'customer',name:user.displayName||user.email.split('@')[0],email:user.email,
-    message:'âš¡ Auto Diagnostics Report:\n'+report,read:false,
+    message:'⚡ Auto Diagnostics Report:\n'+report,read:false,
     createdAt:firebase.firestore.FieldValue.serverTimestamp()
   }).then(()=>{
-    showNotifToast('Ripoti Imetumwa','Ripoti ya kifaa chako imetumwa kwa admin','âš¡');
+    showNotifToast('Ripoti Imetumwa','Ripoti ya kifaa chako imetumwa kwa admin','⚡');
   });
 }
 
@@ -6330,7 +6330,7 @@ function generateQRCode(canvas,text){
 }
 function openQRCheckin(){
   const user=firebase.auth().currentUser;
-  if(!user){ showNotifToast('Ingia Kwanza','','ðŸ”’'); return; }
+  if(!user){ showNotifToast('Ingia Kwanza','','🔒'); return; }
   document.getElementById('qrModal').classList.add('show');
   generateQRCode(document.getElementById('qrCanvas'),'PLATINUMZ-'+user.uid+'-'+Date.now());
   loadQRCheckins();
@@ -6343,12 +6343,12 @@ function doQRCheckin(){
     timestamp:firebase.firestore.FieldValue.serverTimestamp(),
     location:'PLATINUMZ Office'
   }).then(()=>{
-    showNotifToast('Check-in!','Umefanikiwa kucheck-in kwenye ofisi','âœ…');
+    showNotifToast('Check-in!','Umefanikiwa kucheck-in kwenye ofisi','✅');
     generateQRCode(document.getElementById('qrCanvas'),'PLATINUMZ-'+user.uid+'-'+Date.now());
     loadQRCheckins();
     addLoyaltyPoints(user.uid,10,'Check-in');
   }).catch(err=>{
-    showNotifToast('Hitilafu','Check-in imeshindikana: '+err.message,'âŒ');
+    showNotifToast('Hitilafu','Check-in imeshindikana: '+err.message,'❌');
   });
 }
 function loadQRCheckins(){
@@ -6362,7 +6362,7 @@ function loadQRCheckins(){
     items.sort((a,b)=>{const ta=a.timestamp?a.timestamp.toDate().getTime():0;const tb=b.timestamp?b.timestamp.toDate().getTime():0;return tb-ta;});
     let html='<h4 style="color:var(--paper);font-size:0.85rem;margin:14px 0 8px;">Check-in Zilizopita</h4>';
     items.slice(0,5).forEach(item=>{
-      const dt=item.timestamp?item.timestamp.toDate().toLocaleString('sw-TZ'):'â€”';
+      const dt=item.timestamp?item.timestamp.toDate().toLocaleString('sw-TZ'):'—';
       html+='<div class="qr-checkin-item"><span class="ci-name">'+(item.location||'Office')+'</span><span class="ci-time">'+dt+'</span></div>';
     });
     list.innerHTML=html;
@@ -6380,7 +6380,7 @@ function openCustomerJourney(){
 }
 function loadJourneyData(user){
   const body=document.getElementById('journeyBody');
-  body.innerHTML='<div class="diag-spinner">ðŸ“Š Inapakia safari yako...</div>';
+  body.innerHTML='<div class="diag-spinner">📊 Inapakia safari yako...</div>';
   Promise.all([
     db.collection('clients').doc(user.uid).get(),
     db.collection('orders').where('uid','==',user.uid).get(),
@@ -6392,24 +6392,24 @@ function loadJourneyData(user){
     const events=[];
     if(clientSnap.exists){
       const d=clientSnap.data();
-      events.push({icon:'ðŸ‘¤',title:'Umejisajili',desc:'Umejiunga na PLATINUMZ IT Support',date:d.createdAt,status:'completed'});
+      events.push({icon:'👤',title:'Umejisajili',desc:'Umejiunga na PLATINUMZ IT Support',date:d.createdAt,status:'completed'});
     }
     ordersSnap.forEach(doc=>{
       const d=doc.data();
       const st=d.status==='imekamilika'?'completed':d.status==='inashughulikiwa'?'active':'';
-      events.push({icon:'ðŸ“‹',title:'Order: '+(d.huduma||'Service'),desc:d.maelezo||'Huduma iliyotolewa',date:d.createdAt,status:st});
+      events.push({icon:'📋',title:'Order: '+(d.huduma||'Service'),desc:d.maelezo||'Huduma iliyotolewa',date:d.createdAt,status:st});
     });
     checkinsSnap.forEach(doc=>{
       const d=doc.data();
-      events.push({icon:'ðŸ“±',title:'Check-in',desc:'Ulicheck-in '+(d.location||'Office'),date:d.timestamp,status:'completed'});
+      events.push({icon:'📱',title:'Check-in',desc:'Ulicheck-in '+(d.location||'Office'),date:d.timestamp,status:'completed'});
     });
     reviewsSnap.forEach(doc=>{
       const d=doc.data();
-      events.push({icon:'â­',title:'Maoni: '+(d.huduma||''),desc:d.comment||d.review||'',date:d.createdAt,status:'completed'});
+      events.push({icon:'⭐',title:'Maoni: '+(d.huduma||''),desc:d.comment||d.review||'',date:d.createdAt,status:'completed'});
     });
     apptsSnap.forEach(doc=>{
       const d=doc.data();
-      events.push({icon:'ðŸ—“ï¸',title:'Miadi: '+(d.service||''),desc:'Tarehe: '+(d.date||'â€”')+' Saa: '+(d.time||'â€”'),date:d.createdAt,status:d.status==='confirmed'?'completed':''});
+      events.push({icon:'🗓️',title:'Miadi: '+(d.service||''),desc:'Tarehe: '+(d.date||'—')+' Saa: '+(d.time||'—'),date:d.createdAt,status:d.status==='confirmed'?'completed':''});
     });
     events.sort((a,b)=>{
       const da=a.date?a.date.toDate().getTime():0;
@@ -6476,7 +6476,7 @@ function showNotifToast(title, msg, icon){
   const t = document.getElementById('notifToast');
   t.querySelector('.notif-title').textContent = title;
   t.querySelector('.notif-msg').textContent = msg;
-  t.querySelector('.notif-icon').textContent = icon || 'ðŸ””';
+  t.querySelector('.notif-icon').textContent = icon || '🔔';
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 6000);
   sendBrowserNotification(title, msg);
@@ -6486,24 +6486,24 @@ function showNotifToast(title, msg, icon){
 // AI CHATBOT
 // ============================================================
 const chatBotResponses = {
-  'habari': 'Habari! ðŸ‘‹ Karibu PLATINUMZ IT Support. Nikisaidiaje leo?',
-  'hello': 'Hello! ðŸ‘‹ Welcome to PLATINUMZ IT Support. How can I help you today?',
-  'hi': 'Hi there! ðŸ˜Š How can I assist you?',
-  'bei': 'ðŸ’° Bei zetu kuanzia TZS 30,000 - 200,000. Huduma ni pamoja na:\nâ€¢ Ukarabati wa PC/Laptop\nâ€¢ Ukarabati wa Simu\nâ€¢ Usanidi wa Mitandao\nâ€¢ Usanidi wa CCTV\nâ€¢ Firewall & Antivirus\nTafadhali chagua huduma ili upate bei kamili!',
-  'price': 'Our prices range from TZS 30,000 - 200,000. We offer:\nâ€¢ PC/Laptop Repair\nâ€¢ Phone Repair\nâ€¢ Network Setup\nâ€¢ CCTV Installation\nâ€¢ Firewall & Antivirus\nSelect a service for exact pricing!',
-  'huduma': 'ðŸ”§ Huduma zetu ni pamoja na:\n1. Ukarabati wa PC/Laptop\n2. Ukarabati wa Simu\n3. Usanidi wa Mitandao\n4. Usanidi wa CCTV\n5. Firewall & Antivirus\n6. Data Recovery\n7. Msaada wa Mbali (Remote)\n8. Usanidi wa Mifumo ya Biashara\nTafadhali bonyeza "Kagua" kupata maelezo zaidi!',
+  'habari': 'Habari! 👋 Karibu PLATINUMZ IT Support. Nikisaidiaje leo?',
+  'hello': 'Hello! 👋 Welcome to PLATINUMZ IT Support. How can I help you today?',
+  'hi': 'Hi there! 😊 How can I assist you?',
+  'bei': '💰 Bei zetu kuanzia TZS 30,000 - 200,000. Huduma ni pamoja na:\n• Ukarabati wa PC/Laptop\n• Ukarabati wa Simu\n• Usanidi wa Mitandao\n• Usanidi wa CCTV\n• Firewall & Antivirus\nTafadhali chagua huduma ili upate bei kamili!',
+  'price': 'Our prices range from TZS 30,000 - 200,000. We offer:\n• PC/Laptop Repair\n• Phone Repair\n• Network Setup\n• CCTV Installation\n• Firewall & Antivirus\nSelect a service for exact pricing!',
+  'huduma': '🔧 Huduma zetu ni pamoja na:\n1. Ukarabati wa PC/Laptop\n2. Ukarabati wa Simu\n3. Usanidi wa Mitandao\n4. Usanidi wa CCTV\n5. Firewall & Antivirus\n6. Data Recovery\n7. Msaada wa Mbali (Remote)\n8. Usanidi wa Mifumo ya Biashara\nTafadhali bonyeza "Kagua" kupata maelezo zaidi!',
   'services': 'Our services include:\n1. PC/Laptop Repair\n2. Phone Repair\n3. Network Setup\n4. CCTV Installation\n5. Firewall & Antivirus\n6. Data Recovery\n7. Remote Support\n8. Business Systems Setup\nClick "Explore" for more details!',
-  'muda': 'â° Muda wa huduma hutegemea aina ya tatizo:\nâ€¢ Ukarabati wa kawaida: 1-2 masaa\nâ€¢ Usanidi wa mitandao: 2-4 masaa\nâ€¢ Usanidi wa CCTV: 3-5 masaa\nâ€¢ Msaada wa mbali: dakika 30 - 1 saa\nTutakujulisha muda sahihi baada ya kukagua tatizo lako.',
-  'time': 'â±ï¸ Service time depends on the issue:\nâ€¢ Basic repair: 1-2 hours\nâ€¢ Network setup: 2-4 hours\nâ€¢ CCTV: 3-5 hours\nâ€¢ Remote support: 30min - 1 hour\nWe\'ll confirm exact time after assessment.',
-  'malipo': 'ðŸ’³ Tunakubali malipo kupitia:\nâ€¢ M-Pesa\nâ€¢ Tigo Pesa\nâ€¢ Airtel Money\nâ€¢ Bank Transfer\nâ€¢ Cash (kwa huduma za ndani)',
-  'payment': 'ðŸ’³ We accept: M-Pesa, Tigo Pesa, Airtel Money, Bank Transfer, and Cash for on-site services.',
-  'wapi': 'ðŸ“ Tunapatikana:\nâ€¢ Ofisi: Dar es Salaam, Tanzania\nâ€¢ Msaada wa Mbali: Nchi nzima\nâ€¢ Huduma za Nje: Dar es Salaam & mikoa jirani',
-  'location': 'ðŸ“ We are located in Dar es Salaam, Tanzania. Remote support available nationwide!',
-  'simu': 'ðŸ“ž Piga/Call:\nâ€¢ +255 XXX XXX XXX\nâ€¢ WhatsApp: +255 XXX XXX XXX\nâ€¢ Email: support@platinumz.co.tz',
-  'contact': 'ðŸ“ž Contact us:\nâ€¢ Phone: +255 XXX XXX XXX\nâ€¢ WhatsApp: +255 XXX XXX XXX\nâ€¢ Email: support@platinumz.co.tz',
-  'asante': 'Nashukuru! ðŸ™ Kama una maswali mengine, tafadhali usisite kuuliza. Tuko hapa kukusaidia!',
-  'thank': 'You\'re welcome! ðŸ™ If you have any more questions, don\'t hesitate to ask!',
-  'default': 'ðŸ¤” Sielewi vizuri. Tafadhali:\nâ€¢ Uliza kuhusu "bei" (price)\nâ€¢ Uliza kuhusu "huduma" (services)\nâ€¢ Uliza kuhusu "muda" (time)\nâ€¢ Uliza kuhusu "malipo" (payment)\nâ€¢ Uliza kuhusu "wapi" (location)\n\nAu bonyeza moja ya vidokezo hapa chini! ðŸ‘‡'
+  'muda': '⏰ Muda wa huduma hutegemea aina ya tatizo:\n• Ukarabati wa kawaida: 1-2 masaa\n• Usanidi wa mitandao: 2-4 masaa\n• Usanidi wa CCTV: 3-5 masaa\n• Msaada wa mbali: dakika 30 - 1 saa\nTutakujulisha muda sahihi baada ya kukagua tatizo lako.',
+  'time': '⏱️ Service time depends on the issue:\n• Basic repair: 1-2 hours\n• Network setup: 2-4 hours\n• CCTV: 3-5 hours\n• Remote support: 30min - 1 hour\nWe\'ll confirm exact time after assessment.',
+  'malipo': '💳 Tunakubali malipo kupitia:\n• M-Pesa\n• Tigo Pesa\n• Airtel Money\n• Bank Transfer\n• Cash (kwa huduma za ndani)',
+  'payment': '💳 We accept: M-Pesa, Tigo Pesa, Airtel Money, Bank Transfer, and Cash for on-site services.',
+  'wapi': '📍 Tunapatikana:\n• Ofisi: Dar es Salaam, Tanzania\n• Msaada wa Mbali: Nchi nzima\n• Huduma za Nje: Dar es Salaam & mikoa jirani',
+  'location': '📍 We are located in Dar es Salaam, Tanzania. Remote support available nationwide!',
+  'simu': '📞 Piga/Call:\n• +255 XXX XXX XXX\n• WhatsApp: +255 XXX XXX XXX\n• Email: support@platinumz.co.tz',
+  'contact': '📞 Contact us:\n• Phone: +255 XXX XXX XXX\n• WhatsApp: +255 XXX XXX XXX\n• Email: support@platinumz.co.tz',
+  'asante': 'Nashukuru! 🙏 Kama una maswali mengine, tafadhali usisite kuuliza. Tuko hapa kukusaidia!',
+  'thank': 'You\'re welcome! 🙏 If you have any more questions, don\'t hesitate to ask!',
+  'default': '🤔 Sielewi vizuri. Tafadhali:\n• Uliza kuhusu "bei" (price)\n• Uliza kuhusu "huduma" (services)\n• Uliza kuhusu "muda" (time)\n• Uliza kuhusu "malipo" (payment)\n• Uliza kuhusu "wapi" (location)\n\nAu bonyeza moja ya vidokezo hapa chini! 👇'
 };
 function getBotResponse(msg){
   const m = msg.toLowerCase().trim();
@@ -6511,7 +6511,7 @@ function getBotResponse(msg){
     if(key === 'default') continue;
     if(m.includes(key)) return val;
   }
-  if(m.includes('?') || m.includes('je') || m.includes('how')) return 'ðŸ’¡ Nzuri swali! Kwa maelezo kamili, tafadhali wasiliana na timu yetu kupitia chat au piga simu. Unaweza pia kuchagua huduma kwenye tovuti yetu kupata bei na maelezo zaidi.';
+  if(m.includes('?') || m.includes('je') || m.includes('how')) return '💡 Nzuri swali! Kwa maelezo kamili, tafadhali wasiliana na timu yetu kupitia chat au piga simu. Unaweza pia kuchagua huduma kwenye tovuti yetu kupata bei na maelezo zaidi.';
   return chatBotResponses['default'];
 }
 function toggleChatbot(){
@@ -6550,7 +6550,7 @@ function escapeHtml(t){ return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').repl
 // ============================================================
 let selectedApptDate = '', selectedApptTime = '';
 function openAppointment(){
-  if(!firebase.auth().currentUser){ showNotifToast(currentLang==='sw'?'Ingia Kwanza':'Login Required', currentLang==='sw'?'Ingia ili kufungua miadi':'Login to book an appointment','ðŸ”’'); return; }
+  if(!firebase.auth().currentUser){ showNotifToast(currentLang==='sw'?'Ingia Kwanza':'Login Required', currentLang==='sw'?'Ingia ili kufungua miadi':'Login to book an appointment','🔒'); return; }
   document.getElementById('apptOverlay').classList.add('show');
   loadMyAppointments();
 }
@@ -6602,7 +6602,7 @@ function submitAppointment(){
   }).then(() => {
     document.getElementById('apptForm').style.display='none';
     document.getElementById('apptConfirmed').style.display='block';
-    showNotifToast(currentLang==='sw'?'Miadi Imewekwa':'Appointment Booked', currentLang==='sw'?'Tarehe: '+selectedApptDate+' saa '+selectedApptTime:'Date: '+selectedApptDate+' at '+selectedApptTime,'ðŸ—“ï¸');
+    showNotifToast(currentLang==='sw'?'Miadi Imewekwa':'Appointment Booked', currentLang==='sw'?'Tarehe: '+selectedApptDate+' saa '+selectedApptTime:'Date: '+selectedApptDate+' at '+selectedApptTime,'🗓️');
     sendBrowserNotification('PLATINUMZ', currentLang==='sw'?'Miadi yako imewekwa! Tarehe: '+selectedApptDate:'Your appointment is booked! Date: '+selectedApptDate);
     setTimeout(closeAppointment, 3000);
   });
@@ -6624,7 +6624,7 @@ function loadMyAppointments(){
     items.forEach(d => {
       const stClass = d.status==='confirmed'?'confirmed':d.status==='cancelled'?'cancelled':'pending';
       const stText = d.status==='confirmed'?(currentLang==='sw'?'Imethibitishwa':'Confirmed'):d.status==='cancelled'?(currentLang==='sw'?'Imefutwa':'Cancelled'):(currentLang==='sw'?'Inasubiri':'Pending');
-      html += '<div class="appt-card"><div class="appt-info"><h5>ðŸ—“ï¸ '+d.date+' â€” '+d.time+'</h5><p>'+d.service+(d.note?' â€¢ '+d.note:'')+'</p></div><span class="appt-status '+stClass+'">'+stText+'</span></div>';
+      html += '<div class="appt-card"><div class="appt-info"><h5>🗓️ '+d.date+' — '+d.time+'</h5><p>'+d.service+(d.note?' • '+d.note:'')+'</p></div><span class="appt-status '+stClass+'">'+stText+'</span></div>';
     });
     list.innerHTML = html;
   }).catch(()=>{});
@@ -6643,30 +6643,30 @@ function closeLocationSharing(){
 function shareMyLocation(){
   const status = document.getElementById('locStatus');
   status.classList.add('show');
-  status.innerHTML = 'ðŸ“¡ '+(currentLang==='sw'?'Inapata eneo lako...':'Getting your location...');
+  status.innerHTML = '📡 '+(currentLang==='sw'?'Inapata eneo lako...':'Getting your location...');
   if(!navigator.geolocation){
-    status.innerHTML = 'âŒ '+(currentLang==='sw'?'Kifaa hiki hakina GPS':'This device has no GPS');
+    status.innerHTML = '❌ '+(currentLang==='sw'?'Kifaa hiki hakina GPS':'This device has no GPS');
     return;
   }
   navigator.geolocation.getCurrentPosition(pos => {
     const lat = pos.coords.latitude;
     const lng = pos.coords.longitude;
     const mapUrl = 'https://www.google.com/maps?q='+lat+','+lng;
-    status.innerHTML = 'âœ… <strong>'+(currentLang==='sw'?'Eneo lako:':'Your location:')+'</strong><br>Lat: '+lat.toFixed(6)+'<br>Lng: '+lng.toFixed(6)+'<br><a href="'+mapUrl+'" target="_blank" class="loc-map-link">'+(currentLang==='sw'?'Fungua Google Maps':'Open Google Maps')+'</a>';
+    status.innerHTML = '✅ <strong>'+(currentLang==='sw'?'Eneo lako:':'Your location:')+'</strong><br>Lat: '+lat.toFixed(6)+'<br>Lng: '+lng.toFixed(6)+'<br><a href="'+mapUrl+'" target="_blank" class="loc-map-link">'+(currentLang==='sw'?'Fungua Google Maps':'Open Google Maps')+'</a>';
     const user = firebase.auth().currentUser;
     if(user){
       db.collection('chats').add({
         sender: 'customer',
         name: user.displayName || user.email.split('@')[0],
         email: user.email,
-        message: 'ðŸ“ '+(currentLang==='sw'?'Nilishiriki eneo langu: ':'My location: ')+mapUrl,
+        message: '📍 '+(currentLang==='sw'?'Nilishiriki eneo langu: ':'My location: ')+mapUrl,
         read: false,
         createdAt: firebase.firestore.FieldValue.serverTimestamp()
       });
-      showNotifToast(currentLang==='sw'?'Eneo Limeshirikiwa':'Location Shared', currentLang==='sw'?'Eneo lako limetumwa kwa admin':'Your location has been sent to admin','ðŸ“');
+      showNotifToast(currentLang==='sw'?'Eneo Limeshirikiwa':'Location Shared', currentLang==='sw'?'Eneo lako limetumwa kwa admin':'Your location has been sent to admin','📍');
     }
   }, err => {
-    status.innerHTML = 'âŒ '+(currentLang==='sw'?'Imeshindikana kupata eneo: ':'Failed to get location: ')+err.message;
+    status.innerHTML = '❌ '+(currentLang==='sw'?'Imeshindikana kupata eneo: ':'Failed to get location: ')+err.message;
   }, {enableHighAccuracy:true, timeout:15000});
 }
 
@@ -6700,17 +6700,17 @@ function safeGetMedia(video,audio){
 
 function startCall(type){
   const user=firebase.auth().currentUser;
-  if(!user){ showNotifToast(currentLang==='sw'?'Ingia Kwanza':'Login Required','','ðŸ”’'); return; }
+  if(!user){ showNotifToast(currentLang==='sw'?'Ingia Kwanza':'Login Required','','🔒'); return; }
   db.collection('presence').doc('admin').get().then(docSnap=>{
     const adminData=docSnap.data();
     if(!adminData||!adminData.online){
-      showNotifToast(currentLang==='sw'?'Admin Hayupo Online':'Admin Offline',currentLang==='sw'?'Admin hayupo online hivi sasa. Tafadhali jaribu tena baadaye.':'Admin is not online right now. Please try again later.','ðŸ“´');
+      showNotifToast(currentLang==='sw'?'Admin Hayupo Online':'Admin Offline',currentLang==='sw'?'Admin hayupo online hivi sasa. Tafadhali jaribu tena baadaye.':'Admin is not online right now. Please try again later.','📴');
       sendBrowserNotification('PLATINUMZ',currentLang==='sw'?'Admin hayupo online':'Admin is not offline');
       return;
     }
     _proceedStartCall(type,user);
   }).catch(()=>{
-    showNotifToast(currentLang==='sw'?'Hitilafu':'Error',currentLang==='sw'?'Imeshindikana kuangalia admin. Jaribu tena.':'Failed to check admin status. Try again.','âŒ');
+    showNotifToast(currentLang==='sw'?'Hitilafu':'Error',currentLang==='sw'?'Imeshindikana kuangalia admin. Jaribu tena.':'Failed to check admin status. Try again.','❌');
   });
 }
 function _proceedStartCall(type,user){
@@ -6742,12 +6742,12 @@ function _proceedStartCall(type,user){
         if(d&&d.answer&&peerConnection){
           peerConnection.setRemoteDescription(new RTCSessionDescription(d.answer));
           startCallTimer();
-          document.getElementById('callStatusText').textContent=currentLang==='sw'?'Imeungana â€” '+callType:'Connected â€” '+callType;
+          document.getElementById('callStatusText').textContent=currentLang==='sw'?'Imeungana — '+callType:'Connected — '+callType;
         }
         if(d&&d.status==='ended'){ endCall(); }
         if(d&&(d.status==='rejected'||d.status==='missed')){
           endCall();
-          showNotifToast(currentLang==='sw'?'Call Rejected':'Call Rejected',currentLang==='sw'?'Simu imekatazwa na '+((d.fromName||d.from==='')?'admin':'mpokeaji'):'The call was rejected by the receiver','ðŸ“µ');
+          showNotifToast(currentLang==='sw'?'Call Rejected':'Call Rejected',currentLang==='sw'?'Simu imekatazwa na '+((d.fromName||d.from==='')?'admin':'mpokeaji'):'The call was rejected by the receiver','📵');
         }
       });
       _unsubCallICE=db.collection('calls').doc(callId+'_ice_receiver').onSnapshot(doc=>{
@@ -6758,7 +6758,7 @@ function _proceedStartCall(type,user){
       });
     });
   }).catch(err=>{
-    showNotifToast(currentLang==='sw'?'Hitilafu':'Error',err.message,'âŒ');
+    showNotifToast(currentLang==='sw'?'Hitilafu':'Error',err.message,'❌');
   });
 }
 
@@ -6796,12 +6796,12 @@ function listenForMissedCalls(){
         const cType=d.type==='video'?'Video':'Audio';
         if(d.from===user.email){
           const toName=d.targetEmail||'Admin';
-          showNotifToast(currentLang==='sw'?'Simu Haijajibiwa':'Call Not Answered',currentLang==='sw'?'Simu yako kwa '+toName+' haijajibiwa ('+cType+')':'Your call to '+toName+' was not answered ('+cType+')','ðŸ“ž');
-          sendBrowserNotification('PLATINUMZ â€” '+currentLang==='sw'?'Simu Haijajibiwa':'Call Not Answered',currentLang==='sw'?'Simu yako kwa '+toName+' haijajibiwa':'Your call to '+toName+' was not answered');
+          showNotifToast(currentLang==='sw'?'Simu Haijajibiwa':'Call Not Answered',currentLang==='sw'?'Simu yako kwa '+toName+' haijajibiwa ('+cType+')':'Your call to '+toName+' was not answered ('+cType+')','📞');
+          sendBrowserNotification('PLATINUMZ — '+currentLang==='sw'?'Simu Haijajibiwa':'Call Not Answered',currentLang==='sw'?'Simu yako kwa '+toName+' haijajibiwa':'Your call to '+toName+' was not answered');
         } else {
           const callerName=d.fromName||d.from||'Mteja';
-          showNotifToast(currentLang==='sw'?'Simu Ilipitwa':'Missed Call',currentLang==='sw'?'Ulipitwa na '+callerName+' ('+cType+')':'You missed a call from '+callerName+' ('+cType+')','ðŸ“ž');
-          sendBrowserNotification('PLATINUMZ â€” '+currentLang==='sw'?'Simu Ilipitwa':'Missed Call',currentLang==='sw'?'Ulipitwa na '+callerName:'You missed a call from '+callerName);
+          showNotifToast(currentLang==='sw'?'Simu Ilipitwa':'Missed Call',currentLang==='sw'?'Ulipitwa na '+callerName+' ('+cType+')':'You missed a call from '+callerName+' ('+cType+')','📞');
+          sendBrowserNotification('PLATINUMZ — '+currentLang==='sw'?'Simu Ilipitwa':'Missed Call',currentLang==='sw'?'Ulipitwa na '+callerName:'You missed a call from '+callerName);
         }
       }
     });
@@ -6813,12 +6813,12 @@ function listenForMissedCalls(){
         const cType=d.type==='video'?'Video':'Audio';
         if(d.from===user.email){
           const toName=d.targetEmail||'Admin';
-          showNotifToast(currentLang==='sw'?'Call Imekatazwa':'Call Rejected',currentLang==='sw'?'Simu yako kwa '+toName+' imekatazwa ('+cType+')':'Your call to '+toName+' was rejected ('+cType+')','ðŸ“µ');
-          sendBrowserNotification('PLATINUMZ â€” Call Rejected',currentLang==='sw'?'Simu yako kwa '+toName+' imekatazwa':'Your call to '+toName+' was rejected');
+          showNotifToast(currentLang==='sw'?'Call Imekatazwa':'Call Rejected',currentLang==='sw'?'Simu yako kwa '+toName+' imekatazwa ('+cType+')':'Your call to '+toName+' was rejected ('+cType+')','📵');
+          sendBrowserNotification('PLATINUMZ — Call Rejected',currentLang==='sw'?'Simu yako kwa '+toName+' imekatazwa':'Your call to '+toName+' was rejected');
         } else {
           const callerName=d.fromName||d.from||'Mteja';
-          showNotifToast(currentLang==='sw'?'Call Imekatazwa':'Call Rejected',currentLang==='sw'?''+callerName+' amekataa simu ('+cType+')':callerName+' rejected the call ('+cType+')','ðŸ“µ');
-          sendBrowserNotification('PLATINUMZ â€” Call Rejected',currentLang==='sw'?'Call imekatazwa â€” '+callerName:'Call rejected â€” '+callerName);
+          showNotifToast(currentLang==='sw'?'Call Imekatazwa':'Call Rejected',currentLang==='sw'?''+callerName+' amekataa simu ('+cType+')':callerName+' rejected the call ('+cType+')','📵');
+          sendBrowserNotification('PLATINUMZ — Call Rejected',currentLang==='sw'?'Call imekatazwa — '+callerName:'Call rejected — '+callerName);
         }
       }
     });
@@ -6868,7 +6868,7 @@ function acceptIncomingCall(){
       }
     });
   }).catch(err=>{
-    showNotifToast(currentLang==='sw'?'Hitilafu':'Error',err.message,'âŒ');
+    showNotifToast(currentLang==='sw'?'Hitilafu':'Error',err.message,'❌');
   });
 }
 
@@ -7002,7 +7002,7 @@ function saveProfile(){
   tasks.push(db.collection('clients').doc(user.uid).set({jina:newName},{merge:true}));
   Promise.all(tasks).then(()=>{
     msg.className='profile-msg success';
-    msg.textContent=currentLang==='sw'?'Imehifadhiwa! âœ…':'Saved! âœ…';
+    msg.textContent=currentLang==='sw'?'Imehifadhiwa! ✅':'Saved! ✅';
     // Update sidebar display
     const cuName=document.getElementById('cuName');
     if(cuName) cuName.textContent=newName;
@@ -7055,11 +7055,11 @@ function checkEmailVerification(){
   const btn=document.getElementById('profileVerifyBtn');
   user.reload().then(()=>{
     if(user.emailVerified){
-      statusEl.textContent=currentLang==='sw'?'âœ… Email yako imethibitishwa.':'âœ… Your email is verified.';
+      statusEl.textContent=currentLang==='sw'?'✅ Email yako imethibitishwa.':'✅ Your email is verified.';
       statusEl.style.color='var(--fiber)';
       if(btn) btn.style.display='none';
     } else {
-      statusEl.textContent=currentLang==='sw'?'âš ï¸ Email yako bado haijathibitishwa.':'âš ï¸ Your email is not yet verified.';
+      statusEl.textContent=currentLang==='sw'?'⚠️ Email yako bado haijathibitishwa.':'⚠️ Your email is not yet verified.';
       statusEl.style.color='var(--signal)';
       if(btn) btn.style.display='inline-block';
     }
@@ -7119,7 +7119,7 @@ function doChangePassword(){
     return user.updatePassword(newPw);
   }).then(()=>{
     msg.className='profile-msg success';
-    msg.textContent=currentLang==='sw'?'Password imebadilishwa! âœ…':'Password changed! âœ…';
+    msg.textContent=currentLang==='sw'?'Password imebadilishwa! ✅':'Password changed! ✅';
     setTimeout(closeChangePasswordModal,2000);
   }).catch(err=>{
     msg.className='profile-msg error';
@@ -7200,7 +7200,7 @@ function send2FACode(email){
   _2faCode=generate2FACode(); _2faEmail=email;
   return db.collection('twoFactor').doc(email.replace(/\./g,'_')).set({
     code:_2faCode,email:email,createdAt:firebase.firestore.FieldValue.serverTimestamp()
-  }).then(()=>{ return emailjs.send('service_r453frt','template_32lb4l9',{to_email:email,subject:'ðŸ” PLATINUMZ â€” 2FA Code',message:'Your 2FA code is: '+_2faCode}).catch(()=>{}); });
+  }).then(()=>{ return emailjs.send('service_r453frt','template_32lb4l9',{to_email:email,subject:'🔐 PLATINUMZ — 2FA Code',message:'Your 2FA code is: '+_2faCode}).catch(()=>{}); });
 }
 function show2FAModal(email){
   _2faPending=true; _2faEmail=email;
@@ -7230,7 +7230,7 @@ function verify2FACode(){
 function resend2FACode(){ send2FACode(_2faEmail).then(()=>{var m=document.getElementById('twoFAMsg');if(m){m.className='profile-msg success';m.textContent=currentLang==='sw'?'Nambari mpya imetumwa!':'New code sent!';}}); }
 
 // ============================================================
-// ACCESSIBILITY â€” KEYBOARD NAV + FOCUS MANAGEMENT
+// ACCESSIBILITY — KEYBOARD NAV + FOCUS MANAGEMENT
 // ============================================================
 (function(){
   // Skip link
