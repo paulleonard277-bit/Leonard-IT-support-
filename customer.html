@@ -3028,7 +3028,10 @@
   let firstAuthLoad = true;
 
   auth.onAuthStateChanged((user) => {
-    if(!user){ window.location.href='index.html'; return; }
+    if(!user){
+      setTimeout(()=>{ if(!auth.currentUser){ window.location.href='index.html'; } }, 4000);
+      return;
+    }
     document.body.classList.add('in-dashboard');
     _checkAdminRole(user).then(function(result){
       if(result==='twoFactorPending') return;

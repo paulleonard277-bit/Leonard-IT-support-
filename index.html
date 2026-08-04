@@ -2478,6 +2478,9 @@
     display:grid; grid-template-columns:1fr 1fr; gap:10px;
     width:min(420px,100%); margin:0 auto;
   }
+  .wv4-continue{
+    width:min(420px,100%); margin:18px auto 0;
+  }
   .wv-btn{
     width:100%; padding:13px 16px; border-radius:13px; font-weight:700;
     font-size:0.92rem; cursor:pointer; text-align:center;
@@ -2598,6 +2601,9 @@
     <div class="wv4-actions">
       <button class="wv-btn wv-btn-primary" onclick="openWelcomeLogin()">Ingia Sasa</button>
       <button class="wv-btn wv-btn-secondary" onclick="openWelcomeSignup()">Jisajili Bure</button>
+    </div>
+    <div class="wv4-continue" id="wv4Continue" style="display:none;">
+      <button class="wv-btn wv-btn-primary" onclick="continueToDashboard()">Endelea kwenye dashboard yako →</button>
     </div>
     <div class="wv4-skip"><a onclick="openWelcomeLogin()">Ruka na uone huduma zetu →</a></div>
   </div>
@@ -4733,6 +4739,15 @@ s0.parentNode.insertBefore(s1,s0);
       if(typeof setMode==='function') setMode('login');
     },350);
   }
+  function continueToDashboard(){
+    if(auth && auth.currentUser){
+      _checkAdminRole(auth.currentUser).then(function(isAdmin){
+        window.location.href = isAdmin ? 'admin.html' : 'customer.html';
+      }).catch(()=>{ window.location.href='customer.html'; });
+    } else {
+      openWelcomeLogin();
+    }
+  }
   function openWelcomeSignup(){
     var w=document.getElementById('welcomeOverlay');
     var g=document.getElementById('gateScreen');
@@ -5111,6 +5126,8 @@ s0.parentNode.insertBefore(s1,s0);
   let _autoRedirect = false;
 
   auth.onAuthStateChanged((user) => {
+    const _contBtn = document.getElementById('wv4Continue');
+    if(_contBtn) _contBtn.style.display = user ? 'block' : 'none';
     if(user && _autoRedirect){
       _checkAdminRole(user).then(function(result){
         if(result==='twoFactorPending') return;
