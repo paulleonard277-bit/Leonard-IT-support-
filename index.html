@@ -2397,7 +2397,7 @@
   /* ── WELCOME OVERLAY v4 ─────────────────────────────────── */
   .welcome-overlay{
     position:fixed; inset:0; z-index:90000;
-    display:flex; align-items:center; justify-content:center;
+    display:grid; place-items:center;
     background:
       radial-gradient(1000px 650px at 80% -10%, rgba(0,229,122,0.14), transparent 60%),
       radial-gradient(800px 550px at -10% 100%, rgba(0,180,95,0.12), transparent 55%),
@@ -2427,6 +2427,7 @@
     position:relative; z-index:2;
     width:min(760px, 92vw);
     max-height:92vh; overflow-y:auto;
+    margin:auto;
     padding:52px 52px 40px;
     text-align:center;
     background:var(--glass-strong);
