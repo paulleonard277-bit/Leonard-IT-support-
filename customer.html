@@ -3047,13 +3047,13 @@
       if(clBtn){ clBtn.onclick = function(){ try { showGoodbyePopup(currentUserName); } catch(e){} setTimeout(()=>{ auth.signOut().then(()=>{ window.location.href='index.html'; }); }, 1500); }; }
       try { if(!sessionStorage.getItem('platinumz-welcomed')){ showWelcomePopup(userName); sessionStorage.setItem('platinumz-welcomed','1'); } } catch(e){}
       try { loadCustomerDashboard(user); } catch(e){ console.error('Customer dashboard error:', e); }
-      requestNotificationPermission();
-      renderTimeSlots();
+      try { requestNotificationPermission(); } catch(e){}
+      try { renderTimeSlots(); } catch(e){}
       try { listenForIncomingCalls(); } catch(e){}
       try { listenForMissedCalls(); } catch(e){}
       try { loadLoyaltyPoints(); } catch(e){}
       try { _initProfileOnLogin(user); } catch(e){}
-    }).catch(()=>{ window.location.href='index.html'; });
+    }).catch((e)=>{ try{ console.error('Dashboard init error:', e); }catch(_){} });
     firstAuthLoad = false;
   });
 
@@ -6495,6 +6495,7 @@ function closeAppointment(){ document.getElementById('apptOverlay').classList.re
 const timeSlots = ['08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00'];
 function renderTimeSlots(){
   const c = document.getElementById('apptTimeSlots');
+  if(!c) return;
   c.innerHTML = timeSlots.map(t => '<button onclick="selectApptTime(this,\''+t+'\')">'+t+'</button>').join('');
   const dateInput = document.getElementById('apptDateInput');
   if(dateInput){
