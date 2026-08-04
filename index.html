@@ -5012,6 +5012,7 @@ s0.parentNode.insertBefore(s1,s0);
 
   authForm.addEventListener('submit', (e) => {
     e.preventDefault();
+    _autoRedirect = true;
     authErr.style.display = 'none';
     const email = authEmail.value.trim();
     const pass = authPassword.value;
@@ -5052,6 +5053,7 @@ s0.parentNode.insertBefore(s1,s0);
         }
       })
       .catch((error) => {
+        _autoRedirect = false;
         const t = translations[currentLang];
         let msg = t['auth-error'];
         if(error.code === 'auth/email-already-in-use') msg = t['auth-email-used'];
@@ -5101,9 +5103,10 @@ s0.parentNode.insertBefore(s1,s0);
 
   let currentUserName = '';
   let firstAuthLoad = true;
+  let _autoRedirect = false;
 
   auth.onAuthStateChanged((user) => {
-    if(user){
+    if(user && _autoRedirect){
       _checkAdminRole(user).then(function(result){
         if(result==='twoFactorPending') return;
         if(_isAdmin(user)){ window.location.href='admin.html'; }
