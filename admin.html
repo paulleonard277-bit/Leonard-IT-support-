@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="sw">
 <head>
 <meta charset="UTF-8">
@@ -2197,13 +2197,13 @@
         <div class="ad-notif-panel" id="adminNotifPanel"></div>
       </div>
       <button class="ad-top-logout" id="langToggleAdmin" style="padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:none;color:var(--paper);cursor:pointer;font-size:0.78rem;font-weight:700;letter-spacing:0.5px;">SW</button>
-      <button class="ad-top-logout" id="adminLogoutBtn" onclick="firebase.auth().signOut()">ðŸšª Out</button>
+      <button class="ad-top-logout" id="adminLogoutBtn">ðŸšª Out</button>
     </div>
   </div>
 
   <div class="ad-wrap">
     <div class="ad-greeting" id="adminGreeting">Karibu, Admin</div>
-    <div class="ad-greeting-sub">Hii ni dashibodi yako â€” fuatilia wateja, orders, chat na maoni.</div>
+    <div class="ad-greeting-sub">Hii ni dashibodi yako â€” fuatilia wateja, maombi, mazungumzo na maoni.</div>
 
     <div class="ad-stats">
       <div class="ad-stat-card"><div class="icon">ðŸ‘¥</div><div class="num" id="statClients">0</div><div class="label">Wateja</div></div>
@@ -2474,8 +2474,123 @@
   </div>
 </div>
 
+
+<div class="diamond-popup-overlay login" id="welcomePopup">
+  <div class="diamond-popup">
+    <div class="diamond-shape"></div>
+    <div class="diamond-icon" id="welcomeEmoji">&#x1F48E;</div>
+    <div class="diamond-title" id="welcomeName">Karibu!</div>
+    <div class="diamond-sub" id="welcomeMsg">Umeingia kwenye mfumo wa PLATINUMZ.</div>
+    <div class="diamond-bar"><div class="diamond-bar-inner"></div></div>
+  </div>
+</div>
+
+<div class="diamond-popup-overlay logout" id="goodbyePopup">
+  <div class="diamond-popup">
+    <div class="diamond-shape"></div>
+    <div class="diamond-icon">&#x1F48E;</div>
+    <div class="diamond-title" id="goodbyeTitle">Kwaheri! &#x1F44B;</div>
+    <div class="diamond-sub" id="goodbyeMsg">Umetoka kwenye mfumo. Tutarajia kuona tena!</div>
+    <div class="diamond-bar"><div class="diamond-bar-inner"></div></div>
+  </div>
+</div>
+<div class="diamond-popup-overlay order-success" id="orderSuccessPopup">
+  <div class="diamond-popup">
+    <div class="diamond-shape"></div>
+    <div class="diamond-icon">&#x2705;</div>
+    <div class="diamond-title" id="orderSuccessTitle">Ombi Lako Limewasili! &#x2705;</div>
+    <div class="diamond-sub"><span id="orderSuccessService"></span></div>
+    <div class="diamond-sub" id="orderSuccessMsg">Timu yetu itawasiliana nawe haraka.</div>
+    <div class="diamond-bar"><div class="diamond-bar-inner"></div></div>
+  </div>
+</div>
+<div class="diamond-popup-overlay admin-login" id="orderAcceptedPopup">
+  <div class="diamond-popup">
+    <div class="diamond-shape"></div>
+    <div class="diamond-icon">&#x1F441;&#xFE0F;</div>
+    <div class="diamond-title">Order Imekubaliwa!</div>
+    <div class="diamond-sub">Mteja atapata taarifa kuwa order yake imeona na inashughulikiwa.</div>
+    <div class="diamond-bar"><div class="diamond-bar-inner"></div></div>
+  </div>
+</div>
+<div class="diamond-popup-overlay order-success" id="orderCompletedPopup">
+  <div class="diamond-popup">
+    <div class="diamond-shape"></div>
+    <div class="diamond-icon">&#x2705;</div>
+    <div class="diamond-title">Order Imekamilika!</div>
+    <div class="diamond-sub">Mteja atapata taarifa kuwa order yake imekamilika.</div>
+    <div class="diamond-bar"><div class="diamond-bar-inner"></div></div>
+  </div>
+</div>
+
+<!-- Forgot Password Verification Modal -->
+<div class="modal-overlay" id="forgotModal" style="z-index:250;">
+  <div class="modal-box" style="max-width:440px;">
+    <button class="close-x" id="closeForgotBtn">&times;</button>
+    <div id="forgotStep1">
+      <div class="eyebrow" style="margin-bottom:10px;" data-label="fp-step1-eyebrow">&#x1F4C9; Sahau Password?</div>
+      <p style="color:var(--muted); font-size:0.88rem; margin-bottom:20px;" data-label="fp-step1-desc">Andika email yako tutakutumia nambari ya uthibitisho.</p>
+      <label data-label="fp-email-label">Email</label>
+      <input type="email" id="fpEmail" required placeholder="jina@mfano.com" style="width:100%; padding:12px 14px; background:var(--ink); border:1px solid var(--line); border-radius:8px; color:var(--paper); font-family:'Inter',sans-serif; font-size:0.95rem;">
+      <p class="err" id="fpErr1"></p>
+      <button class="submit-btn" id="fpSendCode" style="margin-top:16px; width:100%;" data-label="fp-send-btn">Tuma Nambari &#8594;</button>
+    </div>
+    <div id="forgotStep2" style="display:none;">
+      <div class="eyebrow" style="margin-bottom:10px;" data-label="fp-step2-eyebrow">&#x1F510; Thibitisha Nambari</div>
+      <p style="color:var(--muted); font-size:0.88rem; margin-bottom:20px;" data-label="fp-step2-desc">Tafadhali weka nambari ya taratibu 6 uliopitia email.</p>
+      <div style="display:flex; gap:8px; justify-content:center; margin-bottom:20px;">
+        <input type="text" maxlength="1" class="fp-code-input" data-idx="0" inputmode="numeric" pattern="[0-9]" autocomplete="one-time-code">
+        <input type="text" maxlength="1" class="fp-code-input" data-idx="1" inputmode="numeric" pattern="[0-9]">
+        <input type="text" maxlength="1" class="fp-code-input" data-idx="2" inputmode="numeric" pattern="[0-9]">
+        <input type="text" maxlength="1" class="fp-code-input" data-idx="3" inputmode="numeric" pattern="[0-9]">
+        <input type="text" maxlength="1" class="fp-code-input" data-idx="4" inputmode="numeric" pattern="[0-9]">
+        <input type="text" maxlength="1" class="fp-code-input" data-idx="5" inputmode="numeric" pattern="[0-9]">
+      </div>
+      <p class="err" id="fpErr2"></p>
+      <button class="submit-btn" id="fpVerifyCode" style="margin-top:16px; width:100%;" data-label="fp-verify-btn">Thibitisha &#8594;</button>
+    </div>
+    <div id="forgotStep3" style="display:none;">
+      <div class="eyebrow" style="margin-bottom:10px;" data-label="fp-step3-eyebrow">&#x1F511; Weka Password Mpya</div>
+      <p style="color:var(--muted); font-size:0.88rem; margin-bottom:20px;" data-label="fp-step3-desc">Nambari imethibitishwa. Weka password mpya.</p>
+      <label data-label="fp-new-pass-label">Password Mpya</label>
+      <input type="password" id="fpNewPass" required placeholder="&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;" minlength="6" style="width:100%; padding:12px 14px; background:var(--ink); border:1px solid var(--line); border-radius:8px; color:var(--paper); font-family:'Inter',sans-serif; font-size:0.95rem;">
+      <label data-label="fp-confirm-pass-label">Thibitisha Password</label>
+      <input type="password" id="fpConfirmPass" required placeholder="&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;" minlength="6" style="width:100%; padding:12px 14px; background:var(--ink); border:1px solid var(--line); border-radius:8px; color:var(--paper); font-family:'Inter',sans-serif; font-size:0.95rem;">
+      <p class="err" id="fpErr3"></p>
+      <button class="submit-btn" id="fpResetPass" style="margin-top:16px; width:100%;" data-label="fp-reset-btn">Badilisha Password &#8594;</button>
+    </div>
+    <div id="forgotStep4" style="display:none; text-align:center;">
+      <div style="font-size:3rem; margin-bottom:12px;">&#x2705;</div>
+      <div class="eyebrow" style="margin-bottom:10px;" data-label="fp-step4-eyebrow">Imefanikiwa!</div>
+      <p style="color:var(--muted); font-size:0.88rem; margin-bottom:20px;" data-label="fp-step4-desc">Password yako imebadilishwa. Sasa unaweza kuingia.</p>
+      <button class="submit-btn" id="fpGoLogin" style="width:100%;" data-label="fp-login-btn">Ingia Sasa &#8594;</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .fp-code-input{
+    width:44px; height:52px; text-align:center; font-size:1.3rem; font-weight:700;
+    background:var(--ink); border:2px solid var(--line); border-radius:10px;
+    color:var(--paper); font-family:'JetBrains Mono',monospace;
+    transition:border-color 0.2s, box-shadow 0.2s;
+  }
+  .fp-code-input:focus{ border-color:var(--fiber); box-shadow:0 0 12px rgba(62,211,199,0.25); outline:none; }
+</style>
+
+<div class="modal-overlay" id="legalModal">
+  <div class="modal-box" style="max-width:560px; max-height:80vh; overflow-y:auto;">
+    <button class="close-x" id="closeLegalBtn">&times;</button>
+    <h3 id="legalTitle">Sera ya Faragha</h3>
+    <div id="legalBody" style="color:var(--muted); font-size:0.9rem; line-height:1.7; margin-top:16px;"></div>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-  // â•â•â•â•â•â•â• SPLASH SCREEN v3 AUTO-DISMISS â•â•â•â•â•â•â•
   (function(){
     var splash = document.getElementById('splashScreen');
     var gate = document.getElementById('gateScreen');
@@ -2771,7 +2886,7 @@
   }
 
   // Safety: force hide loading screen after 3s
-  setTimeout(() => { loadingScreen.style.display = 'none'; }, 3000);
+  setTimeout(() => { if(loadingScreen) loadingScreen.style.display = 'none'; }, 3000);
 
   function handleForgotPassword(){
     const forgotModal = document.getElementById('forgotModal');
@@ -2890,13 +3005,13 @@
     setMode('login');
   });
 
-  authForm.addEventListener('submit', (e) => {
+  if(authForm) authForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    authErr.style.display = 'none';
-    const email = authEmail.value.trim();
-    const pass = authPassword.value;
-    const fullName = authName.value.trim();
-    const service = authService.value;
+    if(authErr) authErr.style.display = 'none';
+    const email = authEmail ? authEmail.value.trim() : '';
+    const pass = authPassword ? authPassword.value : '';
+    const fullName = authName ? authName.value.trim() : '';
+    const service = authService ? authService.value : '';
 
     if(mode === 'signup' && pass !== authPasswordConfirm.value){
       authErr.textContent = translations[currentLang]['pwd-mismatch'];
@@ -2973,10 +3088,10 @@
     legalBody.innerHTML = type === 'privacy' ? privacyHTML : termsHTML;
     legalModal.classList.add('open');
   }
-  document.getElementById('openPrivacy').addEventListener('click', () => openLegal('privacy'));
-  document.getElementById('openTerms').addEventListener('click', () => openLegal('terms'));
-  closeLegalBtn.addEventListener('click', () => legalModal.classList.remove('open'));
-  legalModal.addEventListener('click', (e) => { if(e.target === legalModal) legalModal.classList.remove('open'); });
+  try { document.getElementById('openPrivacy').addEventListener('click', () => openLegal('privacy')); } catch(e){}
+  try { document.getElementById('openTerms').addEventListener('click', () => openLegal('terms')); } catch(e){}
+  try { closeLegalBtn.addEventListener('click', () => legalModal.classList.remove('open')); } catch(e){}
+  try { legalModal.addEventListener('click', (e) => { if(e.target === legalModal) legalModal.classList.remove('open'); }); } catch(e){}
 
 
   let currentUserName = '';
@@ -2993,8 +3108,8 @@
       currentUserName = 'Admin';
       try { loadAdminDashboard(user); } catch(e){ console.error('Admin dashboard error:', e); }
       var alBtn = document.getElementById('adminLogoutBtn');
-      if(alBtn){ alBtn.onclick = function(){ try{db.collection('presence').doc('admin').set({online:false,ts:firebase.firestore.FieldValue.serverTimestamp()}).catch(()=>{});}catch(e){} auth.signOut().then(()=>{ window.location.href='index.html'; }); }; }
-      if(!firstAuthLoad) showAdminWelcomePopup('Admin');
+      if(alBtn){ alBtn.onclick = function(){ try{db.collection('presence').doc('admin').set({online:false,ts:firebase.firestore.FieldValue.serverTimestamp()}).catch(()=>{});}catch(e){} try { showGoodbyePopup('Admin'); } catch(e){} setTimeout(()=>{ auth.signOut().then(()=>{ window.location.href='index.html'; }); }, 1500); }; }
+      try { if(!sessionStorage.getItem('platinumz-welcomed')){ showAdminWelcomePopup('Admin'); sessionStorage.setItem('platinumz-welcomed','1'); } } catch(e){}
       requestNotificationPermission();
       renderTimeSlots();
       try { db.collection('presence').doc('admin').set({online:true,email:user.email,ts:firebase.firestore.FieldValue.serverTimestamp()}); }catch(e){}
@@ -4205,10 +4320,17 @@
   document.getElementById('orderCompletedPopup').addEventListener('click', function(e){
     if(e.target === this) this.classList.remove('show');
   });
+  document.getElementById('welcomePopup').addEventListener('click', function(e){
+    if(e.target === this) this.classList.remove('show');
+  });
+  document.getElementById('goodbyePopup').addEventListener('click', function(e){
+    if(e.target === this) this.classList.remove('show');
+  });
 
   // Welcome Popup
   function showWelcomePopup(name){
     const popup = document.getElementById('welcomePopup');
+    if(!popup) return;
     const isEn = currentLang === 'en';
     document.getElementById('welcomeName').textContent = (isEn ? 'Welcome, ' : 'Karibu, ') + name + '!';
     document.getElementById('welcomeMsg').textContent = isEn
@@ -4220,6 +4342,7 @@
 
   function showGoodbyePopup(name){
     const popup = document.getElementById('goodbyePopup');
+    if(!popup) return;
     const isEn = currentLang === 'en';
     document.getElementById('goodbyeTitle').textContent = (isEn ? 'Goodbye, ' : 'Kwaheri, ') + name + '!';
     document.getElementById('goodbyeMsg').textContent = isEn
@@ -4232,10 +4355,11 @@
   }
 
   function showAdminWelcomePopup(name){
-    const popup = document.getElementById('adminWelcomePopup');
+    const popup = document.getElementById('welcomePopup');
+    if(!popup) return;
     const isEn = currentLang === 'en';
-    document.getElementById('adminWelcomeTitle').textContent = (isEn ? 'Welcome, ' : 'Karibu, ') + (name || 'Admin') + '!';
-    document.getElementById('adminWelcomeMsg').textContent = isEn
+    document.getElementById('welcomeName').textContent = (isEn ? 'Welcome, ' : 'Karibu, ') + (name || 'Admin') + '!';
+    document.getElementById('welcomeMsg').textContent = isEn
       ? 'You have entered the PLATINUMZ IT Support dashboard.'
       : 'Umeingia kwenye dashboard ya PLATINUMZ IT Support, ' + (name || 'Admin') + '.';
     popup.classList.add('show');
@@ -4323,10 +4447,10 @@
     orderModal.classList.add('open');
   }
 
-  closeOrderBtn.addEventListener('click', () => orderModal.classList.remove('open'));
-  orderModal.addEventListener('click', (e) => { if(e.target === orderModal) orderModal.classList.remove('open'); });
+  if(closeOrderBtn) closeOrderBtn.addEventListener('click', () => orderModal.classList.remove('open'));
+  if(orderModal) orderModal.addEventListener('click', (e) => { if(e.target === orderModal) orderModal.classList.remove('open'); });
 
-  orderForm.addEventListener('submit', (e) => {
+  if(orderForm) orderForm.addEventListener('submit', (e) => {
     e.preventDefault();
     orderErr.style.display = 'none';
     const user = auth.currentUser;
@@ -4680,7 +4804,7 @@
       'admin-no-chat': 'Hakuna ujumbe bado.',
       'admin-chat-ph': 'Andika ujumbe kwa wateja...',
       'admin-greeting': 'Karibu, Admin',
-      'admin-greeting-sub': 'Hii ni dashibodi yako â€” fuatilia wateja, orders, chat na maoni.',
+      'admin-greeting-sub': 'Hii ni dashibodi yako â€” fuatilia wateja, maombi, mazungumzo na maoni.',
       'admin-stat-wateja': 'Wateja',
       'admin-stat-orders': 'Maombi',
       'admin-stat-ujumbe': 'Ujumbe',
@@ -4702,7 +4826,7 @@
       'ad-chat-select': 'Chagua mteja kuanza chat...',
       'admin-no-reviews': 'Hakuna maoni bado.',
       'admin-delete': 'ðŸ—‘ï¸ Futa',
-      'admin-logout': 'ðŸšª Out',
+      'admin-logout': 'ðŸšª Ondoka',
       'admin-order-jina': 'Jina',
       'admin-order-simu': 'Simu',
       'admin-order-huduma': 'Huduma',
@@ -4851,7 +4975,7 @@
       'cu-maoni-title': 'â­ Andika Maoni Yako',
       'cu-maoni-ph': 'Andika maoni yako hapa...',
       'cu-maoni-send': 'Tuma Maoni',
-      'cu-toka': 'ðŸšª Out',
+      'cu-toka': 'ðŸšª Ondoka',
       'cu-quick-huduma': 'Huduma',
       'cu-quick-orders': 'Maombi',
       'cu-quick-chat': 'Mazungumzo',
@@ -5194,7 +5318,7 @@
       'ad-chat-select': 'Select a customer to start chat...',
       'admin-no-reviews': 'No reviews yet.',
       'admin-delete': 'ðŸ—‘ï¸ Delete',
-      'admin-logout': 'Ondoka',
+      'admin-logout': 'Out',
       'admin-order-jina': 'Name',
       'admin-order-simu': 'Phone',
       'admin-order-huduma': 'Service',
@@ -5598,6 +5722,11 @@
           el.innerHTML = iconHTML + ' ' + t[key];
           return;
         }
+        if(el.querySelector('.door')) {
+          const doorSpan = el.querySelector('.door');
+          el.innerHTML = doorSpan.outerHTML + t[key];
+          return;
+        }
         el.textContent = t[key];
       }
     });
@@ -5685,11 +5814,11 @@
 
   const menuToggle = document.getElementById('menuToggle');
   const mobileMenu = document.getElementById('mobileMenu');
-  menuToggle.addEventListener('click', () => {
-    mobileMenu.classList.toggle('open');
-    menuToggle.textContent = mobileMenu.classList.contains('open') ? 'âœ•' : 'â˜°';
+  if(menuToggle) menuToggle.addEventListener('click', () => {
+    if(mobileMenu) mobileMenu.classList.toggle('open');
+    menuToggle.textContent = mobileMenu && mobileMenu.classList.contains('open') ? 'âœ•' : 'â˜°';
   });
-  mobileMenu.querySelectorAll('a').forEach(link => {
+  if(mobileMenu) mobileMenu.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       mobileMenu.classList.remove('open');
       menuToggle.textContent = 'â˜°';
@@ -5722,18 +5851,18 @@
 
   auth.onAuthStateChanged((user) => {
     const isAdmin = user && _isAdmin(user);
-    custChatOpen.style.display = (user && !isAdmin) ? 'none' : 'none';
-    if(!user) custChatWidget.style.display = 'none';
+    if(custChatOpen) custChatOpen.style.display = (user && !isAdmin) ? 'none' : 'none';
+    if(!user && custChatWidget) custChatWidget.style.display = 'none';
   });
 
-  custChatOpen.addEventListener('click', () => {
-    custChatWidget.style.display = 'block';
-    custChatOpen.style.display = 'none';
+  if(custChatOpen) custChatOpen.addEventListener('click', () => {
+    if(custChatWidget) custChatWidget.style.display = 'block';
+    if(custChatOpen) custChatOpen.style.display = 'none';
     listenCustomerChat();
   });
-  custChatClose.addEventListener('click', () => {
-    custChatWidget.style.display = 'none';
-    custChatOpen.style.display = 'block';
+  if(custChatClose) custChatClose.addEventListener('click', () => {
+    if(custChatWidget) custChatWidget.style.display = 'none';
+    if(custChatOpen) custChatOpen.style.display = 'block';
   });
 
   let custChatUnsub = null;
@@ -5778,8 +5907,8 @@
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     }).then(() => { custChatInput.value = ''; }).catch(e => console.error('Customer chat error:', e));
   };
-  custChatSend.addEventListener('click', sendCustomerMsg);
-  custChatInput.addEventListener('keydown', (e) => { if(e.key === 'Enter') sendCustomerMsg(); });
+  if(custChatSend) custChatSend.addEventListener('click', sendCustomerMsg);
+  if(custChatInput) custChatInput.addEventListener('keydown', (e) => { if(e.key === 'Enter') sendCustomerMsg(); });
 
   // ========== CUSTOMER DASHBOARD SIDEBAR NAV ==========
   document.querySelectorAll('.cu-sb-link').forEach(link => {
@@ -5833,13 +5962,13 @@
   // Mobile logout button
   const cuMbLogout = document.getElementById('cuMbLogout');
   if(cuMbLogout){
-    cuMbLogout.addEventListener('click', () => auth.signOut());
+    cuMbLogout.addEventListener('click', () => { try { showGoodbyePopup(currentUserName); } catch(e){} setTimeout(()=>{ auth.signOut().then(()=>{ window.location.href='index.html'; }); }, 1500); });
   }
 
   // Top logout button (always visible)
-  const cuLogoutBtnTop = document.getElementById('cuLogoutBtnTop');
-  if(cuLogoutBtnTop){
-    cuLogoutBtnTop.addEventListener('click', () => auth.signOut());
+  const cuLogoutBtnTop2 = document.getElementById('cuLogoutBtnTop');
+  if(cuLogoutBtnTop2){
+    cuLogoutBtnTop2.addEventListener('click', () => { try { showGoodbyePopup(currentUserName); } catch(e){} setTimeout(()=>{ auth.signOut().then(()=>{ window.location.href='index.html'; }); }, 1500); });
   }
 
   // ========== ADMIN DASHBOARD ==========
