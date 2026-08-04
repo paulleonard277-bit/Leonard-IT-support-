@@ -5051,6 +5051,11 @@ s0.parentNode.insertBefore(s1,s0);
           const name = fullName || email.split('@')[0];
           showWelcomePopup(name);
         }
+        if(auth.currentUser){
+          _checkAdminRole(auth.currentUser).then(function(isAdmin){
+            window.location.href = isAdmin ? 'admin.html' : 'customer.html';
+          }).catch(()=>{ window.location.href='customer.html'; });
+        }
       })
       .catch((error) => {
         _autoRedirect = false;
