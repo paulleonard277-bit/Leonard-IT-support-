@@ -1913,226 +1913,666 @@
   .fp-code-input:focus{ border-color:var(--fiber); box-shadow:0 0 12px rgba(62,211,199,0.25); outline:none; }
 </style>
 
-<!-- ═══════ SPLASH SCREEN v3 ═══════ -->
+<style>
+  /* ═══════════════════════════════════════════════════════════
+     PLATINUMZ v4 — GLASSMORPHISM GREEN THEME
+     Overrides the legacy cyber-blue theme with a modern
+     dark-green glass design. Inserted AFTER legacy CSS so it wins.
+     ═══════════════════════════════════════════════════════════ */
+
+  :root{
+    --ink:#061009;
+    --panel:#0B1911;
+    --panel-2:#102519;
+    --signal:#00E57A;
+    --fiber:#3AFF9C;
+    --paper:#E8F7EF;
+    --muted:#8FB8A3;
+    --line:rgba(122,255,187,0.16);
+    --glass:rgba(11,25,17,0.55);
+    --glass-strong:rgba(8,19,13,0.72);
+    --glow:rgba(0,229,122,0.35);
+  }
+
+  body{
+    background:
+      radial-gradient(1200px 700px at 85% -10%, rgba(0,229,122,0.10), transparent 60%),
+      radial-gradient(1000px 600px at -10% 20%, rgba(58,255,156,0.07), transparent 55%),
+      radial-gradient(900px 700px at 60% 110%, rgba(0,180,95,0.10), transparent 60%),
+      var(--ink);
+    color:var(--paper);
+  }
+  body.light{
+    background:linear-gradient(160deg,#eaf6ef,#dff0e6);
+    color:#0A120E;
+  }
+  ::selection{ background:rgba(0,229,122,0.35); color:#fff; }
+
+  /* scrollbar */
+  ::-webkit-scrollbar{ width:10px; height:10px; }
+  ::-webkit-scrollbar-track{ background:rgba(0,0,0,0.25); }
+  ::-webkit-scrollbar-thumb{ background:rgba(0,229,122,0.35); border-radius:8px; }
+
+  /* ── NAV (glass bar) ─────────────────────────────────────── */
+  nav{
+    background:rgba(6,16,10,0.6);
+    backdrop-filter:blur(18px) saturate(160%);
+    -webkit-backdrop-filter:blur(18px) saturate(160%);
+    border-bottom:1px solid var(--line);
+    box-shadow:0 8px 32px rgba(0,0,0,0.35);
+  }
+  nav .wrap{ height:74px; }
+  .brand{ letter-spacing:0.02em; }
+  .brand .dot{
+    background:linear-gradient(135deg,#00E57A,#3AFF9C);
+    box-shadow:0 0 14px var(--glow), 0 0 30px rgba(0,229,122,0.4);
+  }
+  @keyframes dotPulse{
+    0%,100%{ box-shadow:0 0 12px var(--glow), 0 0 24px rgba(0,229,122,0.3); }
+    50%{ box-shadow:0 0 20px rgba(0,229,122,0.8), 0 0 42px rgba(0,229,122,0.45); }
+  }
+  .nav-links a{
+    color:var(--muted);
+    padding:6px 4px;
+    border-bottom:2px solid transparent;
+    transition:color 0.2s, border-color 0.2s;
+  }
+  .nav-links a:hover{ color:var(--paper); border-bottom-color:var(--signal); }
+  .nav-cta{
+    background:linear-gradient(135deg,#00E57A,#00B45F);
+    color:#04140B;
+    border-radius:12px;
+    box-shadow:0 4px 20px rgba(0,229,122,0.35);
+    transition:transform 0.2s, box-shadow 0.2s;
+  }
+  .nav-cta:hover{ transform:translateY(-1px); box-shadow:0 6px 26px rgba(0,229,122,0.5); }
+
+  /* ── HERO ───────────────────────────────────────────────── */
+  .hero{
+    position:relative;
+    padding:90px 0 110px;
+    background:
+      radial-gradient(900px 500px at 15% 10%, rgba(0,229,122,0.14), transparent 60%),
+      radial-gradient(700px 500px at 90% 85%, rgba(0,180,95,0.12), transparent 55%);
+  }
+  .hero .wrap{
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:52px;
+    align-items:center;
+  }
+  .hero .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:8px 16px;
+    border-radius:999px;
+    background:rgba(0,229,122,0.10);
+    border:1px solid rgba(0,229,122,0.35);
+    color:var(--signal);
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.78rem;
+    letter-spacing:0.04em;
+  }
+  .hero .eyebrow::before{ content:"●"; color:var(--signal); font-size:0.6rem; animation:dotPulse 2.2s infinite; }
+  .hero h1{
+    font-size:clamp(2.4rem,4.6vw,3.9rem);
+    margin:22px 0 18px;
+    line-height:1.08;
+  }
+  .hero h1 .accent{
+    background:linear-gradient(120deg,#00E57A,#3AFF9C 60%,#7dffc6);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero p.lead{ color:var(--muted); font-size:1.06rem; max-width:560px; }
+  .cta-row{ display:flex; gap:16px; margin-top:34px; flex-wrap:wrap; }
+
+  .btn-primary{
+    display:inline-flex; align-items:center; gap:8px;
+    background:linear-gradient(135deg,#00E57A,#00B45F);
+    color:#04140B; font-weight:700;
+    padding:14px 28px; border-radius:14px; border:none;
+    box-shadow:0 6px 26px rgba(0,229,122,0.4);
+    transition:transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 10px 34px rgba(0,229,122,0.55); }
+  .btn-secondary{
+    display:inline-flex; align-items:center; gap:8px;
+    background:rgba(122,255,187,0.07);
+    border:1px solid var(--line);
+    color:var(--paper); font-weight:600;
+    padding:14px 26px; border-radius:14px;
+    backdrop-filter:blur(10px);
+    transition:background 0.2s, border-color 0.2s, transform 0.2s;
+  }
+  .btn-secondary:hover{ background:rgba(122,255,187,0.14); border-color:rgba(0,229,122,0.5); transform:translateY(-2px); }
+
+  /* terminal → glass console */
+  .terminal{
+    background:rgba(7,17,11,0.7);
+    backdrop-filter:blur(20px) saturate(140%);
+    border:1px solid var(--line);
+    border-radius:20px;
+    box-shadow:0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,229,122,0.05), 0 0 50px rgba(0,229,122,0.08);
+    overflow:hidden;
+  }
+  .terminal-bar{
+    background:rgba(0,229,122,0.08);
+    border-bottom:1px solid var(--line);
+  }
+  .terminal-bar span:not(.label){
+    background:linear-gradient(135deg,#00E57A,#3AFF9C);
+  }
+  .terminal .term-line{ color:var(--muted); }
+  .terminal .term-line .tag{ color:var(--signal); }
+  .terminal .term-line .tag.ok{ color:var(--fiber); }
+  .terminal .term-line .tag.status{ color:var(--signal); }
+  .terminal .term-line{ border-bottom:1px dashed rgba(122,255,187,0.08); }
+
+  /* ── SECTION HEADS ──────────────────────────────────────── */
+  .section{ position:relative; }
+  .section-head{ text-align:center; max-width:760px; margin:0 auto 56px; }
+  .section-head .eyebrow, .about-hero .eyebrow, .about-values-head .eyebrow{
+    display:inline-flex; padding:7px 16px; border-radius:999px;
+    background:rgba(0,229,122,0.10); border:1px solid rgba(0,229,122,0.35);
+    color:var(--signal); font-family:'JetBrains Mono',monospace;
+    font-size:0.75rem; letter-spacing:0.05em; text-transform:uppercase;
+  }
+  .section-head h2{ font-size:clamp(1.9rem,3.2vw,2.7rem); margin-top:18px; }
+  .section-head p{ color:var(--muted); margin-top:12px; }
+
+  /* ── GLASS CARD BASE ────────────────────────────────────── */
+  .service-card, .ext-card, .step, .about-value-card, .blog-card,
+  .faq-item, .testi-card, .about-visual-card{
+    background:var(--glass) !important;
+    backdrop-filter:blur(18px) saturate(140%);
+    -webkit-backdrop-filter:blur(18px) saturate(140%);
+    border:1px solid var(--line) !important;
+    border-radius:18px !important;
+    box-shadow:0 12px 34px rgba(0,0,0,0.35);
+    transition:transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  }
+  .service-card:hover, .ext-card:hover, .step:hover,
+  .about-value-card:hover, .blog-card:hover, .testi-card:hover{
+    transform:translateY(-4px);
+    border-color:rgba(0,229,122,0.45) !important;
+    box-shadow:0 18px 44px rgba(0,0,0,0.45), 0 0 30px rgba(0,229,122,0.12);
+  }
+
+  .service-card .icon{
+    background:rgba(0,229,122,0.12) !important;
+    color:var(--signal) !important;
+    box-shadow:inset 0 0 0 1px rgba(0,229,122,0.25), 0 0 18px rgba(0,229,122,0.15);
+    border-radius:16px;
+  }
+  .service-card h3{ margin-top:18px; }
+  .service-card p{ color:var(--muted); }
+
+  /* extended services */
+  .ext-card{ border-radius:18px; }
+  .ext-icon{
+    background:rgba(0,229,122,0.12) !important;
+    color:var(--signal) !important;
+    border-radius:14px;
+    box-shadow:inset 0 0 0 1px rgba(0,229,122,0.25);
+  }
+  .ext-order-btn{
+    background:rgba(0,229,122,0.1);
+    border:1px solid rgba(0,229,122,0.4);
+    color:var(--signal);
+    border-radius:12px;
+    transition:background 0.2s, color 0.2s, transform 0.2s;
+  }
+  .ext-order-btn:hover{ background:var(--signal); color:#04140B; transform:translateY(-1px); }
+
+  /* steps */
+  .step{ position:relative; padding:28px; }
+  .step .step-num, .step-num{
+    background:linear-gradient(135deg,#00E57A,#00B45F);
+    color:#04140B;
+    box-shadow:0 0 18px rgba(0,229,122,0.4);
+  }
+
+  /* about */
+  .about-hero{ background:rgba(122,255,187,0.05); border:1px solid var(--line); border-radius:24px; }
+  .about-hero-title .accent{ color:var(--signal); }
+  .about-stat-val{ color:var(--signal); }
+  .about-stat-divider{ background:var(--line); }
+  .about-value-card .about-value-icon-wrap{
+    background:rgba(0,229,122,0.12);
+    color:var(--signal);
+    box-shadow:inset 0 0 0 1px rgba(0,229,122,0.25);
+  }
+
+  /* trust row */
+  .trust-row{ border:1px solid var(--line); border-radius:20px; background:var(--glass); backdrop-filter:blur(16px); }
+  .trust-item .big{ color:var(--signal); }
+
+  /* status */
+  #status .status-grid{ border-radius:18px !important; }
+  #status > .wrap > div[style]{
+    background:var(--glass) !important;
+    backdrop-filter:blur(16px);
+    border:1px solid var(--line) !important;
+  }
+  #status .status-grid > div{ background:rgba(6,16,10,0.6) !important; }
+
+  /* FAQ */
+  .faq-item{ overflow:hidden; }
+  .faq-q{
+    color:var(--paper);
+    font-size:0.98rem;
+    cursor:pointer;
+  }
+  .faq-icon{ color:var(--signal); }
+  .faq-a{ color:var(--muted); }
+
+  /* blog */
+  .blog-card .blog-icon{ color:var(--signal); }
+  .blog-tag{ background:rgba(0,229,122,0.12); color:var(--signal); border-radius:999px; }
+
+  /* testimonials */
+  .testi-card{
+    background:var(--glass) !important;
+    backdrop-filter:blur(18px);
+    border:1px solid var(--line) !important;
+    border-radius:18px;
+    box-shadow:0 12px 34px rgba(0,0,0,0.35);
+  }
+  .testi-arrow{
+    background:rgba(0,229,122,0.1);
+    border:1px solid rgba(0,229,122,0.35);
+    color:var(--signal);
+    border-radius:12px;
+  }
+  .testi-dot{ background:rgba(122,255,187,0.25); }
+  .testi-dot.active{ background:var(--signal); }
+
+  /* contact banner */
+  .contact-banner{
+    background:linear-gradient(135deg, rgba(0,229,122,0.16), rgba(0,180,95,0.08));
+    border:1px solid rgba(0,229,122,0.4);
+    border-radius:26px;
+    backdrop-filter:blur(20px) saturate(140%);
+    box-shadow:0 20px 50px rgba(0,0,0,0.4), 0 0 40px rgba(0,229,122,0.08);
+  }
+  .contact-banner h2{ color:var(--paper); }
+  .contact-links a{
+    background:rgba(6,16,10,0.55);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:10px 18px;
+    transition:border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+  .contact-links a:hover{
+    border-color:var(--signal);
+    transform:translateY(-2px);
+    box-shadow:0 0 18px rgba(0,229,122,0.2);
+  }
+
+  /* footer */
+  footer{
+    border-top:1px solid var(--line);
+    background:rgba(4,10,7,0.6);
+    backdrop-filter:blur(18px);
+    padding:44px 0;
+  }
+  .social-link:hover{ color:var(--signal) !important; }
+  footer a[id^="open"]:hover{ color:var(--signal); }
+
+  /* ── GATE / LOGIN SCREEN ────────────────────────────────── */
+  .gate-screen{ background:radial-gradient(900px 600px at 50% 0%, rgba(0,229,122,0.10), transparent 60%), var(--ink); }
+  .gate-form-panel{
+    background:var(--glass-strong);
+    backdrop-filter:blur(26px) saturate(150%);
+    border:1px solid var(--line);
+    border-radius:28px;
+    box-shadow:0 30px 80px rgba(0,0,0,0.55), 0 0 60px rgba(0,229,122,0.08);
+  }
+  .gate-box{ background:transparent; }
+  .gate-box .sub{ color:var(--muted); }
+  .gate-box input, .gate-box select{
+    background:rgba(6,16,10,0.6);
+    border:1px solid var(--line);
+    border-radius:12px;
+    color:var(--paper);
+    padding:12px 16px;
+    font-size:0.92rem;
+    transition:border-color 0.2s, box-shadow 0.2s;
+  }
+  .gate-box input:focus, .gate-box select:focus{
+    border-color:var(--signal);
+    box-shadow:0 0 0 3px rgba(0,229,122,0.15);
+    outline:none;
+  }
+  .gate-box label{ color:var(--muted); font-size:0.82rem; }
+  .submit-btn{
+    background:linear-gradient(135deg,#00E57A,#00B45F);
+    color:#04140B; font-weight:700;
+    border:none; border-radius:14px; padding:14px 20px;
+    box-shadow:0 6px 24px rgba(0,229,122,0.35);
+    transition:transform 0.2s, box-shadow 0.2s;
+  }
+  .submit-btn:hover{ transform:translateY(-1px); box-shadow:0 10px 30px rgba(0,229,122,0.5); }
+  .switch-mode a, #forgotLink{ color:var(--signal) !important; }
+
+  /* ── MODALS & POPUPS (glass) ────────────────────────────── */
+  .modal-overlay{ background:rgba(3,8,5,0.72); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); }
+  .modal-box{
+    background:var(--glass-strong) !important;
+    backdrop-filter:blur(26px) saturate(150%);
+    border:1px solid var(--line);
+    border-radius:24px;
+    box-shadow:0 30px 80px rgba(0,0,0,0.55);
+  }
+  .diamond-popup{
+    background:var(--glass-strong) !important;
+    backdrop-filter:blur(26px) saturate(150%);
+    border:1px solid rgba(0,229,122,0.35);
+    border-radius:24px;
+    box-shadow:0 24px 70px rgba(0,0,0,0.55), 0 0 50px rgba(0,229,122,0.1);
+  }
+  .diamond-title{ color:var(--paper); }
+  .diamond-sub{ color:var(--muted); }
+  .diamond-bar-inner{ background:linear-gradient(90deg,#00E57A,#3AFF9C); }
+  .close-x{ color:var(--muted); }
+  .close-x:hover{ color:var(--signal); }
+
+  /* ── SPLASH SCREEN v4 ───────────────────────────────────── */
+  .splash-screen{
+    position:fixed; inset:0; z-index:99999;
+    display:flex; align-items:center; justify-content:center;
+    background:
+      radial-gradient(1100px 700px at 80% -10%, rgba(0,229,122,0.16), transparent 60%),
+      radial-gradient(900px 600px at -10% 110%, rgba(0,180,95,0.14), transparent 55%),
+      radial-gradient(700px 500px at 110% 60%, rgba(58,255,156,0.08), transparent 60%),
+      #040A06;
+    opacity:1; visibility:visible; pointer-events:auto;
+    transition:opacity 0.6s ease, visibility 0.6s ease;
+    overflow:hidden;
+  }
+  .splash-screen.hide{ opacity:0; visibility:hidden; pointer-events:none; }
+
+  .sp4-bg{ position:absolute; inset:0; overflow:hidden; }
+  .sp4-orb{ position:absolute; border-radius:50%; filter:blur(90px); opacity:0.5; animation:sp4Float 14s ease-in-out infinite; }
+  .sp4-orb-1{ width:480px; height:480px; background:rgba(0,229,122,0.35); top:-160px; right:-120px; }
+  .sp4-orb-2{ width:420px; height:420px; background:rgba(0,180,95,0.3); bottom:-140px; left:-120px; animation-delay:-5s; }
+  .sp4-orb-3{ width:320px; height:320px; background:rgba(58,255,156,0.22); top:40%; left:30%; animation-delay:-9s; }
+  @keyframes sp4Float{
+    0%,100%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(30px,-30px) scale(1.08); }
+  }
+  .sp4-grid{
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(0,229,122,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,122,0.05) 1px, transparent 1px);
+    background-size:46px 46px;
+    mask-image:radial-gradient(ellipse at center, black 30%, transparent 75%);
+    -webkit-mask-image:radial-gradient(ellipse at center, black 30%, transparent 75%);
+  }
+  .splash-screen #splashCanvas{ position:absolute; inset:0; width:100%; height:100%; }
+
+  .sp4-card{
+    position:relative; z-index:2;
+    width:min(440px, 92vw);
+    padding:46px 40px 40px;
+    display:flex; flex-direction:column; align-items:center;
+    text-align:center;
+    background:var(--glass-strong);
+    backdrop-filter:blur(30px) saturate(160%);
+    -webkit-backdrop-filter:blur(30px) saturate(160%);
+    border:1px solid rgba(122,255,187,0.22);
+    border-radius:28px;
+    box-shadow:0 30px 80px rgba(0,0,0,0.6), 0 0 70px rgba(0,229,122,0.12), inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+  .sp4-ring{
+    width:96px; height:96px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:conic-gradient(from 0deg, #00E57A, #3AFF9C, #00E57A);
+    box-shadow:0 0 34px rgba(0,229,122,0.5);
+    animation:sp4Spin 3s linear infinite;
+    margin-bottom:22px;
+  }
+  .sp4-ring-inner{
+    width:82px; height:82px; border-radius:50%;
+    background:#07130C;
+    display:flex; align-items:center; justify-content:center;
+    font-size:2.1rem;
+  }
+  @keyframes sp4Spin{ to{ transform:rotate(360deg); } }
+  .sp4-brand{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:1.7rem; font-weight:700; letter-spacing:0.01em;
+  }
+  .sp4-accent{
+    background:linear-gradient(120deg,#00E57A,#3AFF9C);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .sp4-tag{
+    font-family:'JetBrains Mono',monospace; font-size:0.72rem;
+    letter-spacing:0.28em; color:var(--muted); margin-top:8px; text-transform:uppercase;
+  }
+  .sp4-status{
+    font-family:'JetBrains Mono',monospace; font-size:0.82rem;
+    color:var(--signal); margin-top:22px; min-height:22px;
+  }
+  .sp4-status .cursor, .splash-status .cursor{
+    display:inline-block; width:8px; height:15px; vertical-align:middle;
+    background:var(--fiber); margin-left:4px; animation:sp4Blink 0.8s steps(1) infinite;
+  }
+  @keyframes sp4Blink{ 50%{ opacity:0; } }
+  .sp4-wave{ display:flex; gap:4px; height:26px; align-items:flex-end; margin-top:18px; }
+  .sp4-wave span{
+    width:4px; border-radius:4px;
+    background:linear-gradient(to top,#00B45F,#3AFF9C);
+    animation:sp4Wave 0.9s ease-in-out infinite;
+  }
+  .sp4-wave span:nth-child(2n){ animation-delay:0.15s; }
+  .sp4-wave span:nth-child(3n){ animation-delay:0.3s; }
+  @keyframes sp4Wave{
+    0%,100%{ height:6px; }
+    50%{ height:24px; }
+  }
+  .splash-progress-wrap{ width:100%; margin-top:30px; }
+  .splash-progress-label{
+    font-family:'JetBrains Mono',monospace; font-size:0.66rem;
+    letter-spacing:0.24em; color:var(--muted); margin-bottom:10px;
+  }
+  .splash-progress-segs{ display:flex; gap:6px; justify-content:center; }
+  .splash-progress-seg{
+    width:26px; height:6px; border-radius:6px;
+    background:rgba(122,255,187,0.14);
+    transition:background 0.25s, box-shadow 0.25s;
+  }
+  .splash-progress-seg.filled{
+    background:linear-gradient(90deg,#00E57A,#3AFF9C);
+    box-shadow:0 0 14px rgba(0,229,122,0.6);
+  }
+  .splash-pct{
+    font-family:'JetBrains Mono',monospace; font-size:0.9rem;
+    color:var(--signal); margin-top:14px;
+  }
+
+  /* ── WELCOME OVERLAY v4 ─────────────────────────────────── */
+  .welcome-overlay{
+    position:fixed; inset:0; z-index:90000;
+    display:flex; align-items:center; justify-content:center;
+    background:
+      radial-gradient(1000px 650px at 80% -10%, rgba(0,229,122,0.14), transparent 60%),
+      radial-gradient(800px 550px at -10% 100%, rgba(0,180,95,0.12), transparent 55%),
+      #050B07;
+    opacity:0; visibility:hidden; pointer-events:none;
+    transition:opacity 0.5s ease, visibility 0.5s ease;
+    overflow:hidden;
+  }
+  .welcome-overlay.show{ opacity:1; visibility:visible; pointer-events:auto; }
+  .welcome-overlay.hide{ opacity:0; visibility:hidden; pointer-events:none; }
+  .wv4-bg{ position:absolute; inset:0; overflow:hidden; }
+  .wv4-orb{ position:absolute; border-radius:50%; filter:blur(100px); opacity:0.45; animation:sp4Float 16s ease-in-out infinite; }
+  .wv4-orb-1{ width:520px; height:520px; background:rgba(0,229,122,0.32); top:-180px; left:-140px; }
+  .wv4-orb-2{ width:460px; height:460px; background:rgba(0,180,95,0.28); bottom:-160px; right:-120px; animation-delay:-6s; }
+  .wv4-grid{
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(0,229,122,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,122,0.05) 1px, transparent 1px);
+    background-size:46px 46px;
+    mask-image:radial-gradient(ellipse at center, black 20%, transparent 80%);
+    -webkit-mask-image:radial-gradient(ellipse at center, black 20%, transparent 80%);
+  }
+  .wv4-bg .wv-particles{ position:absolute; inset:0; }
+  .wv4-bg #wvCanvas{ position:absolute; inset:0; width:100%; height:100%; }
+  .wv4-card{
+    position:relative; z-index:2;
+    width:min(760px, 92vw);
+    max-height:92vh; overflow-y:auto;
+    padding:52px 52px 40px;
+    text-align:center;
+    background:var(--glass-strong);
+    backdrop-filter:blur(34px) saturate(160%);
+    -webkit-backdrop-filter:blur(34px) saturate(160%);
+    border:1px solid rgba(122,255,187,0.22);
+    border-radius:32px;
+    box-shadow:0 30px 90px rgba(0,0,0,0.6), 0 0 80px rgba(0,229,122,0.12), inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+  .wv4-eyebrow{
+    display:inline-flex; padding:8px 18px; border-radius:999px;
+    background:rgba(0,229,122,0.12); border:1px solid rgba(0,229,122,0.4);
+    color:var(--signal); font-family:'JetBrains Mono',monospace;
+    font-size:0.78rem; letter-spacing:0.06em; text-transform:uppercase;
+  }
+  .wv4-title{
+    font-size:clamp(1.9rem,4vw,3rem); margin:20px 0 14px; line-height:1.12;
+  }
+  .wv4-accent{
+    background:linear-gradient(120deg,#00E57A,#3AFF9C);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .wv4-desc{ color:var(--muted); max-width:600px; margin:0 auto 30px; font-size:1rem; }
+  .wv4-feats{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:16px;
+    margin:0 auto 32px;
+  }
+  .wv4-feat{
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+    padding:20px 14px; border-radius:18px;
+    background:rgba(6,16,10,0.5);
+    border:1px solid var(--line);
+    transition:border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+  .wv4-feat:hover{
+    border-color:rgba(0,229,122,0.5);
+    transform:translateY(-3px);
+    box-shadow:0 10px 30px rgba(0,0,0,0.35), 0 0 24px rgba(0,229,122,0.1);
+  }
+  .wv4-f-icon{ font-size:1.7rem; }
+  .wv4-feat b{ font-size:0.92rem; }
+  .wv4-feat span{ color:var(--muted); font-size:0.78rem; line-height:1.5; }
+  .wv4-actions{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+  .wv-btn{
+    padding:14px 34px; border-radius:14px; font-weight:700; font-size:0.98rem; cursor:pointer;
+    transition:transform 0.2s, box-shadow 0.2s, background 0.2s;
+  }
+  .wv-btn-primary{
+    background:linear-gradient(135deg,#00E57A,#00B45F);
+    color:#04140B; border:none;
+    box-shadow:0 6px 26px rgba(0,229,122,0.4);
+  }
+  .wv-btn-primary:hover{ transform:translateY(-2px); box-shadow:0 10px 34px rgba(0,229,122,0.55); }
+  .wv-btn-secondary{
+    background:rgba(122,255,187,0.07); color:var(--paper);
+    border:1px solid var(--line);
+  }
+  .wv-btn-secondary:hover{ background:rgba(122,255,187,0.14); border-color:rgba(0,229,122,0.5); transform:translateY(-2px); }
+  .wv4-skip{ margin-top:24px; }
+  .wv4-skip a{ color:var(--muted); font-size:0.86rem; cursor:pointer; text-decoration:underline dotted; }
+  .wv4-skip a:hover{ color:var(--signal); }
+
+  /* ── RESPONSIVE ─────────────────────────────────────────── */
+  @media (max-width:900px){
+    .hero .wrap{ grid-template-columns:1fr; gap:40px; padding-top:64px; padding-bottom:72px; text-align:center; }
+    .hero p.lead{ margin:0 auto; }
+    .cta-row{ justify-content:center; }
+    .wv4-feats{ grid-template-columns:1fr; }
+    .wv4-card{ padding:36px 24px 30px; }
+    .sp4-card{ padding:36px 24px 30px; }
+  }
+  @media (max-width:600px){
+    .wv4-card{ max-height:94vh; }
+    .sp4-ring{ width:80px; height:80px; }
+    .sp4-ring-inner{ width:68px; height:68px; font-size:1.7rem; }
+  }
+</style>
+
+<!-- ═══════ SPLASH SCREEN v4 ═══════ -->
 <div class="splash-screen" id="splashScreen">
-  <div class="splash-bg">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-    <div class="orb orb-4"></div>
+  <div class="sp4-bg">
+    <div class="sp4-orb sp4-orb-1"></div>
+    <div class="sp4-orb sp4-orb-2"></div>
+    <div class="sp4-orb sp4-orb-3"></div>
+    <div class="sp4-grid"></div>
   </div>
-  <div class="splash-grid"></div>
-  <div class="splash-scanline"></div>
-  <div class="splash-beam"></div>
+  <canvas id="splashCanvas"></canvas>
 
-  <!-- Circuit board SVG -->
-  <div class="splash-circuit">
-    <svg viewBox="0 0 1000 600" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path class="circuit-path cp-1" d="M0,100 H180 L220,140 H380 L400,120 H550"/>
-      <path class="circuit-path cp-2" d="M1000,200 H820 L780,240 H650 L620,220 H500"/>
-      <path class="circuit-path cp-3" d="M0,400 H150 L180,370 H350"/>
-      <path class="circuit-path cp-4" d="M1000,450 H850 L820,480 H680"/>
-      <path class="circuit-path cp-5" d="M200,0 V80 L240,120 V200"/>
-      <path class="circuit-path cp-6" d="M800,600 V500 L760,460 V380"/>
-      <circle class="circuit-node" cx="220" cy="140" r="0"/>
-      <circle class="circuit-node" cx="400" cy="120" r="0"/>
-      <circle class="circuit-node" cx="780" cy="240" r="0"/>
-      <circle class="circuit-node" cx="620" cy="220" r="0"/>
-      <circle class="circuit-node" cx="180" cy="370" r="0"/>
-      <circle class="circuit-node" cx="820" cy="480" r="0"/>
-    </svg>
-  </div>
-
-  <!-- Matrix rain (reduced) -->
-  <div class="splash-matrix">
-    <div class="m-col">01001010 11010100 00110011</div>
-    <div class="m-col">10110011 01101001 11001010</div>
-    <div class="m-col">01110010 10010110 01001101</div>
-    <div class="m-col">11001010 00110101 10100110</div>
-    <div class="m-col">00101101 11101001 01010011</div>
-  </div>
-
-  <!-- Data stream lines (reduced) -->
-  <div class="splash-streams">
-    <div class="stream stream-1"></div>
-    <div class="stream stream-2"></div>
-    <div class="stream stream-3"></div>
-    <div class="stream stream-4"></div>
-  </div>
-
-  <!-- Canvas particles -->
-  <div class="splash-canvas-wrap"><canvas id="splashCanvas"></canvas></div>
-
-  <!-- Ripple waves (reduced) -->
-  <div class="splash-ripples">
-    <div class="splash-ripple"></div>
-    <div class="splash-ripple"></div>
-    <div class="splash-ripple"></div>
-  </div>
-
-  <!-- Helix rings (reduced) -->
-  <div class="splash-helix">
-    <div class="h-ring"></div>
-    <div class="h-ring"></div>
-  </div>
-
-  <div class="splash-particles">
-    <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
-    <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
-  </div>
-  <div class="splash-rings">
-    <div class="ring"></div><div class="ring"></div><div class="ring"></div><div class="ring"></div>
-  </div>
-  <div class="splash-corner tl"></div>
-  <div class="splash-corner tr"></div>
-  <div class="splash-corner bl"></div>
-  <div class="splash-corner br"></div>
-  <div class="splash-version">v3.0 — PLATINUMZ SYSTEMS</div>
-
-  <div class="splash-center">
-    <!-- Electric glow ring -->
-    <div class="splash-electric"></div>
-
-    <div class="splash-logo">
-      <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="sLg1" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#3efadb"/>
-            <stop offset="50%" stop-color="#3ed4f8"/>
-            <stop offset="100%" stop-color="#a29bfe"/>
-          </linearGradient>
-          <linearGradient id="sLg2" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#f8a03e"/>
-            <stop offset="100%" stop-color="#ff6b6b"/>
-          </linearGradient>
-          <filter id="sGlow">
-            <feGaussianBlur stdDeviation="3" result="b"/>
-            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-        </defs>
-        <g class="hex-outer">
-          <polygon points="60,6 104,28 104,72 60,94 16,72 16,28" fill="none" stroke="url(#sLg1)" stroke-width="2" filter="url(#sGlow)" opacity="0.8"/>
-          <polygon points="60,16 94,34 94,66 60,84 26,66 26,34" fill="none" stroke="url(#sLg1)" stroke-width="1" opacity="0.3"/>
-          <circle cx="60" cy="6" r="3" fill="#3efadb" opacity="0.9"/>
-          <circle cx="104" cy="28" r="2.5" fill="#a29bfe" opacity="0.8"/>
-          <circle cx="104" cy="72" r="2.5" fill="#f8a03e" opacity="0.8"/>
-          <circle cx="60" cy="94" r="3" fill="#3ed4f8" opacity="0.9"/>
-          <circle cx="16" cy="72" r="2.5" fill="#ff6b6b" opacity="0.8"/>
-          <circle cx="16" cy="28" r="2.5" fill="#3efadb" opacity="0.8"/>
-        </g>
-        <g class="hex-core">
-          <path d="M60 36 L60 64 M44 50 L76 50" stroke="url(#sLg2)" stroke-width="4" stroke-linecap="round" filter="url(#sGlow)"/>
-          <circle cx="60" cy="50" r="6" fill="url(#sLg1)" filter="url(#sGlow)"/>
-        </g>
-      </svg>
+  <div class="sp4-card">
+    <div class="sp4-ring"><div class="sp4-ring-inner">⚡</div></div>
+    <div class="sp4-brand">PLATINUM<span class="sp4-accent">Z</span></div>
+    <div class="sp4-tag">IT Support &bull; 24/7</div>
+    <div class="sp4-status" id="splashStatus"></div>
+    <div class="sp4-wave">
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span>
     </div>
-    <div class="splash-brand glitch-active" data-text="PLATINUMZ IT Support"><span class="fiber">PLATINUM</span><span class="accent">Z</span> IT Support</div>
-    <div class="splash-tagline">TEHAMA YA KISASA • 24/7</div>
-
-    <!-- Soundwave bars -->
-    <div class="splash-wave">
-      <div class="w-bar"></div><div class="w-bar"></div><div class="w-bar"></div><div class="w-bar"></div>
-      <div class="w-bar"></div><div class="w-bar"></div><div class="w-bar"></div><div class="w-bar"></div>
-      <div class="w-bar"></div><div class="w-bar"></div><div class="w-bar"></div><div class="w-bar"></div>
+    <div class="splash-progress-wrap" id="splashProgressWrap">
+      <div class="splash-progress-label">LOADING SYSTEMS</div>
+      <div class="splash-progress-segs" id="splashSegs">
+        <div class="splash-progress-seg"></div><div class="splash-progress-seg"></div>
+        <div class="splash-progress-seg"></div><div class="splash-progress-seg"></div>
+        <div class="splash-progress-seg"></div><div class="splash-progress-seg"></div>
+        <div class="splash-progress-seg"></div><div class="splash-progress-seg"></div>
+      </div>
     </div>
-
-    <!-- System status phases -->
-    <div class="splash-status" id="splashStatus"><span class="cursor"></span></div>
-
-    <div class="splash-typing"><span></span><span></span><span></span></div>
+    <div class="splash-pct" id="splashPct">0%</div>
   </div>
-
-  <!-- Segmented progress bar -->
-  <div class="splash-progress-wrap" id="splashProgressWrap">
-    <div class="splash-progress-label">LOADING SYSTEMS</div>
-    <div class="splash-progress-segs" id="splashSegs">
-      <div class="splash-progress-seg"></div><div class="splash-progress-seg"></div>
-      <div class="splash-progress-seg"></div><div class="splash-progress-seg"></div>
-      <div class="splash-progress-seg"></div><div class="splash-progress-seg"></div>
-      <div class="splash-progress-seg"></div><div class="splash-progress-seg"></div>
-    </div>
-  </div>
-  <div class="splash-pct" id="splashPct">0%</div>
 </div>
-
-<!-- ═══════ WELCOME OVERLAY v2 ═══════ -->
+<!-- ═══════ WELCOME OVERLAY v4 ═══════ -->
 <div class="welcome-overlay" id="welcomeOverlay">
-  <div class="wv-gradient-bg"></div>
-  <div class="wv-particles" id="wvParticles"><canvas id="wvCanvas"></canvas></div>
-  <div class="wv-grid"></div>
-  <div class="wv-float-icons">
-    <span class="wv-fi">💻</span><span class="wv-fi">🔌</span><span class="wv-fi">📡</span>
-    <span class="wv-fi">🛡️</span><span class="wv-fi">⚙️</span><span class="wv-fi">📱</span>
-    <span class="wv-fi">🖥️</span><span class="wv-fi">🔧</span><span class="wv-fi">🌐</span>
-    <span class="wv-fi">⚡</span>
+  <div class="wv4-bg">
+    <div class="wv4-orb wv4-orb-1"></div>
+    <div class="wv4-orb wv4-orb-2"></div>
+    <div class="wv4-grid"></div>
+    <div class="wv-particles" id="wvParticles"><canvas id="wvCanvas"></canvas></div>
   </div>
-  <div class="wv-orbits">
-    <div class="wv-orbit-ring"></div>
-    <div class="wv-orbit-ring"></div>
-    <div class="wv-orbit-ring"></div>
-    <div class="wv-orbit-ring"></div>
-    <div class="wv-energy-rings">
-      <div class="er-ring"></div><div class="er-ring"></div><div class="er-ring"></div>
-      <div class="wv-hex-wrap">
-        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="wlg1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#3efadb"/><stop offset="50%" stop-color="#3ed4f8"/><stop offset="100%" stop-color="#a29bfe"/>
-            </linearGradient>
-            <linearGradient id="wlg2" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#f8a03e"/><stop offset="100%" stop-color="#ff6b6b"/>
-            </linearGradient>
-            <filter id="wGlow"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-          </defs>
-          <polygon points="50,5 90,25 90,75 50,95 10,75 10,25" fill="none" stroke="url(#wlg1)" stroke-width="2" filter="url(#wGlow)" opacity="0.9"/>
-          <polygon points="50,15 80,30 80,70 50,85 20,70 20,30" fill="rgba(62,211,199,0.05)" stroke="url(#wlg1)" stroke-width="1" opacity="0.35"/>
-          <path d="M50 35 L50 65 M35 50 L65 50" stroke="url(#wlg2)" stroke-width="3" stroke-linecap="round" filter="url(#wGlow)"/>
-          <circle cx="50" cy="50" r="5" fill="url(#wlg1)" filter="url(#wGlow)"/>
-          <circle cx="50" cy="50" r="11" fill="none" stroke="url(#wlg2)" stroke-width="1.5" opacity="0.5"/>
-          <circle cx="50" cy="50" r="18" fill="none" stroke="url(#wlg1)" stroke-width="0.8" opacity="0.2" stroke-dasharray="3 4"/>
-          <circle cx="50" cy="12" r="2.5" fill="#3efadb" opacity="0.6"/><circle cx="82" cy="30" r="2" fill="#a29bfe" opacity="0.5"/>
-          <circle cx="82" cy="70" r="2" fill="#f8a03e" opacity="0.5"/><circle cx="50" cy="88" r="2.5" fill="#3ed4f8" opacity="0.6"/>
-          <circle cx="18" cy="70" r="2" fill="#ff6b6b" opacity="0.5"/><circle cx="18" cy="30" r="2" fill="#3efadb" opacity="0.5"/>
-        </svg>
-      </div>
-    </div>
-  </div>
-  <div class="wv-scan"></div>
-  <div class="wv-corner tl"></div><div class="wv-corner tr"></div>
-  <div class="wv-corner bl"></div><div class="wv-corner br"></div>
-  <div class="wv-version">PLATINUMZ IT SUPPORT v3.0</div>
 
-  <div class="wv-content">
-    <div class="wv-eyebrow">Karibu PLATINUMZ</div>
-    <h1 class="wv-title">
-      <span class="wv-accent">TEHAMA Yako</span><br>Imesimamiwa Kikamilifu
-    </h1>
-    <p class="wv-desc">Huduma za TEHAMA za kiwango cha juu — ukarabati, usanidi, usalama, na msaada wa mbali 24/7. Tunatatua matatizo yako ya kompyuta, simu, na mitandao kwa uharaka na ujuzi.</p>
-    <div class="wv-features">
-      <div class="wv-feat">
-        <div class="wv-feat-icon">🔧</div>
-        <div class="wv-feat-title">Ukarabati wa Haraka</div>
-        <div class="wv-feat-desc">Kompyuta, laptop na simu zinorekebishwa kwa ujuzi na haraka</div>
+  <div class="wv4-card">
+    <div class="wv4-eyebrow">Karibu PLATINUMZ</div>
+    <h1 class="wv4-title">TEHAMA Yako <span class="wv4-accent">Imesimamiwa Kikamilifu</span></h1>
+    <p class="wv4-desc">Huduma za TEHAMA za kiwango cha juu — ukarabati, usanidi, usalama, na msaada wa mbali 24/7. Tunatatua matatizo yako ya kompyuta, simu, na mitandao kwa uharaka na ujuzi.</p>
+    <div class="wv4-feats">
+      <div class="wv4-feat">
+        <div class="wv4-f-icon">🔧</div>
+        <b>Ukarabati wa Haraka</b>
+        <span>Kompyuta, laptop na simu zinorekebishwa kwa ujuzi na haraka</span>
       </div>
-      <div class="wv-feat">
-        <div class="wv-feat-icon">🌐</div>
-        <div class="wv-feat-title">Mtandao Imara</div>
-        <div class="wv-feat-desc">Usanidi na utatuzi wa WiFi, network na server</div>
+      <div class="wv4-feat">
+        <div class="wv4-f-icon">🌐</div>
+        <b>Mtandao Imara</b>
+        <span>Usanidi na utatuzi wa WiFi, network na server</span>
       </div>
-      <div class="wv-feat">
-        <div class="wv-feat-icon">🛡️</div>
-        <div class="wv-feat-title">Usalama Kamili</div>
-        <div class="wv-feat-desc">Ulinzi wa data, antivirus na usalama wa mtandao</div>
+      <div class="wv4-feat">
+        <div class="wv4-f-icon">🛡️</div>
+        <b>Usalama Kamili</b>
+        <span>Ulinzi wa data, antivirus na usalama wa mtandao</span>
       </div>
     </div>
-    <div class="wv-actions">
+    <div class="wv4-actions">
       <button class="wv-btn wv-btn-primary" onclick="openWelcomeLogin()">Ingia Sasa</button>
       <button class="wv-btn wv-btn-secondary" onclick="openWelcomeSignup()">Jisajili Bure</button>
     </div>
-    <div class="wv-skip"><a onclick="openWelcomeLogin()">Ruka na uone huduma zetu →</a></div>
+    <div class="wv4-skip"><a onclick="openWelcomeLogin()">Ruka na uone huduma zetu →</a></div>
   </div>
 </div>
-
 <div class="gate-screen" id="gateScreen" style="display:none;" role="dialog" aria-label="Ingia au Jisajili">
 
   <div class="gate-form-panel">
@@ -2140,14 +2580,14 @@
     <div style="display:flex; justify-content:center; margin-bottom:20px;">
       <svg viewBox="0 0 80 80" width="64" height="64" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <linearGradient id="lg1" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#3efadb"/>
-            <stop offset="50%" stop-color="#3ed4f8"/>
-            <stop offset="100%" stop-color="#a29bfe"/>
+            <linearGradient id="lg1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00E57A"/>
+            <stop offset="50%" stop-color="#3AFF9C"/>
+            <stop offset="100%" stop-color="#00B45F"/>
           </linearGradient>
           <linearGradient id="lg2" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#f8a03e"/>
-            <stop offset="100%" stop-color="#ff6b6b"/>
+            <stop offset="0%" stop-color="#00E57A"/>
+            <stop offset="100%" stop-color="#3AFF9C"/>
           </linearGradient>
           <filter id="glow">
             <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
@@ -4155,7 +4595,7 @@ s0.parentNode.insertBefore(s1,s0);
           vy: (Math.random()-0.5)*0.6,
           r: Math.random()*1.5+0.5,
           o: Math.random()*0.4+0.1,
-          color: ['#3efadb','#3ed4f8','#a29bfe','#F2A93B'][Math.floor(Math.random()*4)]
+          color: ['#00E57A','#3AFF9C','#00B45F','#7dffc6'][Math.floor(Math.random()*4)]
         };
       }
       for(var pi=0;pi<25;pi++) particles.push(mkParticle());
@@ -4288,7 +4728,7 @@ s0.parentNode.insertBefore(s1,s0);
       this.x=Math.random()*W; this.y=Math.random()*H;
       this.vx=(Math.random()-0.5)*0.5; this.vy=(Math.random()-0.5)*0.5;
       this.r=Math.random()*1.8+0.5;
-      this.color=['rgba(62,211,199,','rgba(162,155,254,','rgba(242,169,59,','rgba(62,212,248,'][Math.floor(Math.random()*4)];
+      this.color=['rgba(0,229,122,','rgba(58,255,156,','rgba(0,180,95,','rgba(125,255,198,'][Math.floor(Math.random()*4)];
       this.alpha=Math.random()*0.5+0.2;
     }
     for(var i=0;i<30;i++) particles.push(new Particle());
