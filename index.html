@@ -2568,6 +2568,34 @@
     <div class="splash-pct" id="splashPct">0%</div>
   </div>
 </div>
+<script>
+  // SAFETY NET: splash always dismisses + login pop always opens,
+  // independent of external SDKs (gstatic/jsdelivr). Real functions in the
+  // main script below override these once they are defined.
+  (function(){
+    function showGate(mode){
+      var w=document.getElementById('welcomeOverlay');
+      var g=document.getElementById('gateScreen');
+      if(w){ w.classList.add('hide'); w.classList.remove('show'); w.style.display='none'; }
+      if(g){ g.style.display='flex'; }
+      if(mode==='signup'){ try{ if(window.setMode) setMode('signup'); }catch(e){} }
+    }
+    window.openWelcomeLogin=function(){ showGate('login'); };
+    window.openWelcomeSignup=function(){ showGate('signup'); };
+    window.continueToDashboard=function(){ showGate('login'); };
+    setTimeout(function(){
+      var splash=document.getElementById('splashScreen');
+      if(!splash) return;
+      if(splash.style.display==='none' || splash.classList.contains('hide')) return;
+      splash.classList.add('hide');
+      setTimeout(function(){
+        splash.style.display='none';
+        var w=document.getElementById('welcomeOverlay');
+        if(w){ w.classList.add('show'); w.classList.remove('hide'); }
+      }, 600);
+    }, 2800);
+  })();
+</script>
 <!-- ═══════ WELCOME OVERLAY v4 ═══════ -->
 <div class="welcome-overlay" id="welcomeOverlay">
   <div class="wv4-bg">
