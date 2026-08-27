@@ -1788,153 +1788,12 @@
 <a href="#mainContent" class="skip-link" id="skipLink">Ruka hadi maudhui makuu</a>
 <style>.skip-link{position:absolute;top:-100%;left:16px;z-index:99999;padding:12px 24px;background:var(--fiber);color:#0E1A2B;font-weight:700;font-size:0.9rem;border-radius:0 0 12px 12px;text-decoration:none;transition:top 0.3s;box-shadow:0 4px 20px rgba(62,211,199,0.4);}.skip-link:focus{top:0;}</style>
 
-<style>.splash-screen{display:none!important}.welcome-overlay{display:none!important}.gate-screen{display:none!important}</style>
-  <style>
-    .cu-layout{display:grid;grid-template-columns:240px 1fr;min-height:100vh;}
-    .cu-sidebar{background:var(--panel);border-right:1px solid var(--line);padding:24px 0;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;}
-    .cu-sb-brand{padding:0 24px 24px;border-bottom:1px solid var(--line);margin-bottom:12px;display:flex;align-items:center;gap:10px;}
-    .cu-sb-brand .dot{width:10px;height:10px;border-radius:50%;background:var(--fiber);box-shadow:0 0 10px var(--fiber);}
-    .cu-sb-brand span{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1rem;}
-    .cu-sb-user{padding:16px 24px;border-bottom:1px solid var(--line);margin-bottom:8px;}
-    .cu-sb-user-avatar{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--fiber),var(--signal));display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:700;color:#fff;margin-bottom:8px;}
-    .cu-sb-user-name{font-weight:600;font-size:0.9rem;}
-    .cu-sb-user-email{font-size:0.75rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-    .cu-sb-nav{flex:1;padding:8px 12px;}
-    .cu-sb-link{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:12px;cursor:pointer;font-size:0.88rem;color:var(--muted);transition:all 0.2s;margin-bottom:2px;text-decoration:none;}
-    .cu-sb-link:hover{background:rgba(62,211,199,0.06);color:var(--paper);}
-    .cu-sb-link.active{background:linear-gradient(135deg,rgba(62,211,199,0.12),rgba(62,211,199,0.06));color:var(--fiber);font-weight:600;}
-    .cu-sb-link .icon{font-size:1.15rem;width:24px;text-align:center;}
-    .cu-sb-logout{padding:16px 24px;border-top:1px solid var(--line);margin-top:auto;}
-    .cu-sb-logout button{width:100%;padding:12px;border-radius:12px;border:1px solid rgba(255,107,107,0.3);background:rgba(255,107,107,0.06);color:#ff6b6b;cursor:pointer;font-size:0.88rem;font-weight:600;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:8px;}
-    .cu-sb-logout button:hover{background:rgba(255,107,107,0.15);border-color:#ff6b6b;}
-    .cu-sb-logout .door{display:inline-block;transition:transform 0.3s;}
-    .cu-sb-logout button:hover .door{transform:rotateY(40deg) translateX(3px);}
-    .cu-main{padding:28px 32px;overflow-y:auto;}
-    .cu-page{display:none;animation:fadeSlide 0.3s ease;}
-    .cu-page.active{display:block;}
-    @keyframes fadeSlide{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-    .cu-page-title{font-size:1.4rem;font-weight:700;margin-bottom:6px;}
-    .cu-page-sub{color:var(--muted);font-size:0.9rem;margin-bottom:24px;}
-    .cu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px;margin-bottom:28px;}
-    .cu-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;transition:transform 0.2s,box-shadow 0.2s;}
-    .cu-card:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,0.3);}
-    .cu-card-icon{font-size:1.6rem;margin-bottom:8px;}
-    .cu-card-val{font-size:1.7rem;font-weight:800;font-family:'Space Grotesk',sans-serif;background:linear-gradient(135deg,var(--fiber),var(--signal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-    .cu-card-label{font-size:0.78rem;color:var(--muted);margin-top:2px;}
-    .cu-section{margin-bottom:28px;}
-    .cu-section-title{font-size:1rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
-    .cu-table-wrap{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
-    .cu-table{width:100%;border-collapse:collapse;font-size:0.85rem;}
-    .cu-table thead{background:rgba(62,211,199,0.06);}
-    .cu-table th{padding:12px 16px;text-align:left;color:var(--muted);font-weight:600;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.5px;border-bottom:1px solid var(--line);}
-    .cu-table td{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.03);}
-    .cu-table tr:hover td{background:rgba(62,211,199,0.02);}
-    .cu-badge{padding:4px 10px;border-radius:20px;font-size:0.72rem;font-weight:600;display:inline-block;}
-    .cu-badge-green{background:rgba(62,211,199,0.15);color:var(--fiber);}
-    .cu-badge-gold{background:rgba(242,169,59,0.15);color:#F2A93B;}
-    .cu-badge-blue{background:rgba(59,130,246,0.15);color:#3B82F6;}
-    .cu-badge-red{background:rgba(255,107,107,0.15);color:#ff6b6b;}
-    .cu-empty{text-align:center;padding:40px;color:var(--muted);font-size:0.88rem;}
-    .cu-btn{padding:10px 22px;border-radius:12px;border:none;font-weight:600;cursor:pointer;font-size:0.85rem;transition:all 0.15s;}
-    .cu-btn-primary{background:linear-gradient(135deg,var(--fiber),#2bc4b8);color:#fff;}
-    .cu-btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 15px rgba(62,211,199,0.3);}
-    .cu-btn-outline{background:none;border:1px solid var(--line);color:var(--paper);}
-    .cu-btn-outline:hover{border-color:var(--fiber);color:var(--fiber);}
-    .cu-quick{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-bottom:28px;}
-    .cu-quick-item{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center;cursor:pointer;transition:all 0.2s;}
-    .cu-quick-item:hover{border-color:var(--fiber);transform:translateY(-2px);box-shadow:0 6px 20px rgba(62,211,199,0.12);}
-    .cu-quick-item .qi{font-size:1.6rem;margin-bottom:6px;}
-    .cu-quick-item .ql{font-size:0.78rem;font-weight:600;}
-    .cu-chat-box{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
-    .cu-chat-messages{padding:16px;height:350px;overflow-y:auto;}
-    .cu-chat-input{padding:12px;border-top:1px solid var(--line);display:flex;gap:8px;}
-    .cu-chat-input input{flex:1;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--ink);color:var(--paper);font-size:0.88rem;}
-    .cu-chat-input button{padding:10px 20px;border-radius:10px;border:none;background:linear-gradient(135deg,var(--fiber),#2bc4b8);color:#fff;font-weight:700;cursor:pointer;}
-    .cu-chat-msg{margin-bottom:10px;display:flex;}
-    .cu-chat-msg.customer{justify-content:flex-end;}
-    .cu-chat-msg .bubble{max-width:72%;padding:10px 14px;border-radius:14px;font-size:0.85rem;line-height:1.5;}
-    .cu-chat-msg.customer .bubble{background:linear-gradient(135deg,var(--fiber),#2bc4b8);color:#fff;border-bottom-right-radius:4px;}
-    .cu-chat-msg.admin .bubble{background:var(--ink);color:var(--paper);border-bottom-left-radius:4px;border:1px solid var(--line);}
-    .cu-chat-msg .meta{font-size:0.7rem;color:var(--muted);margin-top:3px;}
-    .cu-service-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;}
-    .cu-service-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;transition:all 0.2s;}
-    .cu-service-card:hover{border-color:var(--fiber);transform:translateY(-2px);}
-    .cu-service-card h4{font-size:0.92rem;font-weight:600;margin-bottom:4px;}
-    .cu-service-card p{font-size:0.78rem;color:var(--muted);margin-bottom:12px;line-height:1.5;}
-    .cu-offer-card{background:linear-gradient(135deg,rgba(242,169,59,0.08),rgba(62,211,199,0.06));border:1px solid rgba(242,169,59,0.2);border-radius:16px;padding:24px;margin-bottom:14px;}
-    .cu-offer-card h4{font-size:1rem;font-weight:700;color:var(--signal);margin-bottom:4px;}
-    .cu-offer-card p{font-size:0.85rem;color:var(--muted);margin-bottom:8px;}
-    .cu-offer-card .discount{font-size:1.6rem;font-weight:800;background:linear-gradient(135deg,var(--signal),#ff6b6b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-    .cu-review-item{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:12px;}
-    .cu-review-item .stars{color:var(--signal);font-size:0.9rem;margin-bottom:6px;}
-    .cu-review-item p{font-size:0.85rem;color:var(--muted);margin-bottom:6px;}
-    .cu-review-item .rname{font-size:0.78rem;font-weight:600;color:var(--fiber);}
-    .cu-pay-method{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:12px;display:flex;align-items:center;gap:16px;cursor:pointer;transition:all 0.2s;}
-    .cu-pay-method:hover{border-color:var(--fiber);}
-    .cu-pay-method.selected{border-color:var(--fiber);box-shadow:0 0 20px rgba(62,211,199,0.15);}
-    .cu-pay-icon{width:48px;height:48px;border-radius:12px;background:var(--ink);display:flex;align-items:center;justify-content:center;font-size:1.5rem;}
-    .cu-pay-info h4{font-size:0.92rem;font-weight:600;margin-bottom:2px;}
-    .cu-pay-info p{font-size:0.78rem;color:var(--muted);}
-    .cu-pay-check{margin-left:auto;width:22px;height:22px;border-radius:50%;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:0.7rem;transition:all 0.2s;}
-    .cu-pay-method.selected .cu-pay-check{background:var(--fiber);border-color:var(--fiber);color:#fff;}
-    .cu-review-form{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;margin-bottom:20px;}
-    .cu-review-form textarea{width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--ink);color:var(--paper);font-family:'Inter',sans-serif;font-size:0.88rem;resize:vertical;min-height:80px;}
-    .cu-review-form .stars-input{margin:12px 0;font-size:1.4rem;}
-    .cu-review-form .stars-input span{cursor:pointer;transition:transform 0.15s;display:inline-block;}
-    .cu-review-form .stars-input span:hover{transform:scale(1.2);}
-    .cu-mobile-topbar{display:none;}
-    .cu-mb-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:199;}
-    /* CU ABOUT PAGE */
-    .cu-about-hero{text-align:center;padding:24px 0 32px;}
-    .cu-about-badge{display:inline-block;background:rgba(62,211,199,0.1);color:var(--fiber);padding:6px 16px;border-radius:20px;font-size:0.78rem;font-weight:600;margin-bottom:12px;letter-spacing:0.5px;}
-    .cu-about-title{font-size:1.6rem;font-weight:700;background:linear-gradient(135deg,var(--paper) 30%,var(--fiber));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px;}
-    .cu-about-desc{color:var(--muted);font-size:0.92rem;line-height:1.7;max-width:520px;margin:0 auto;}
-    .cu-about-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:32px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px 16px;}
-    .cu-about-stat{text-align:center;}
-    .cu-about-stat-val{font-family:'Space Grotesk',sans-serif;font-size:1.4rem;font-weight:700;color:var(--fiber);}
-    .cu-about-stat-lbl{font-size:0.78rem;color:var(--muted);margin-top:4px;}
-    .cu-about-values h3{text-align:center;font-size:1.15rem;font-weight:600;margin-bottom:20px;}
-    .cu-about-values-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:28px;}
-    .cu-about-val-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px 20px;text-align:center;transition:all 0.3s;}
-    .cu-about-val-card:hover{border-color:rgba(62,211,199,0.3);transform:translateY(-2px);}
-    .cu-about-val-icon{font-size:1.5rem;margin-bottom:10px;width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:rgba(62,211,199,0.08);border-radius:12px;margin:0 auto 12px;}
-    .cu-about-val-card h4{font-size:0.92rem;font-weight:600;color:var(--fiber);margin-bottom:8px;}
-    .cu-about-val-card p{font-size:0.82rem;color:var(--muted);line-height:1.6;}
-    .cu-about-contact{text-align:center;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;font-size:0.9rem;color:var(--muted);}
-    @media(max-width:760px){
-      .cu-layout{grid-template-columns:1fr;}
-      .cu-sidebar{display:none;position:fixed;top:0;left:0;width:260px;height:100vh;z-index:200;}
-      .cu-sidebar.open{display:flex;}
-      .cu-main{padding:16px;}
-      .cu-mobile-topbar{display:flex !important;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--panel);border-bottom:1px solid var(--line);margin:-16px -16px 16px -16px;position:sticky;top:0;z-index:100;}
-      .cu-mb-menu{background:none;border:1px solid var(--line);color:var(--paper);width:38px;height:38px;border-radius:8px;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;}
-      .cu-mb-brand{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:0.9rem;display:flex;align-items:center;gap:8px;}
-      .cu-mb-brand .dot{width:8px;height:8px;border-radius:50%;background:var(--fiber);box-shadow:0 0 8px var(--fiber);}
-      .cu-mb-logout{background:none;border:1px solid rgba(255,107,107,0.3);color:#ff6b6b;padding:8px 14px;border-radius:8px;font-size:0.82rem;cursor:pointer;font-weight:600;display:flex;align-items:center;gap:6px;}
-    .cu-mb-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:199;}
-    .cu-mb-overlay.open{display:block;}
-    @media(max-width:600px){
-      .cu-service-grid{grid-template-columns:1fr !important;}
-      .cu-grid{grid-template-columns:1fr 1fr !important;}
-      .cu-quick{grid-template-columns:repeat(3,1fr) !important;}
-      .cu-quick-item{padding:14px 10px !important;}
-      .cu-table-wrap{overflow-x:auto; -webkit-overflow-scrolling:touch;}
-      .cu-table{min-width:480px;}
-      .cu-page-title{font-size:1.15rem !important;}
-      .cu-card-val{font-size:1.3rem !important;}
-      .cu-chat-messages{height:260px !important; min-height:150px;}
-      .cu-info-grid{grid-template-columns:1fr !important;}
-      .cu-pay-info p{font-size:0.72rem; word-break:break-all;}
-      .cu-offer-card{padding:18px 16px !important;}
-      .cu-review-form{padding:18px 14px !important;}
-      .profile-card{padding:18px 14px !important;}
-      .profile-avatar{width:72px;height:72px;font-size:1.8rem;}
-      .profile-actions{flex-direction:column;}
-      .profile-actions .cu-btn{width:100%;text-align:center;}
-      #cuPageOrders > div:first-child{flex-direction:column !important; gap:10px;}
-      #cuPageOrders > div:first-child .cu-btn{width:100%;}
-    }
-  </style>
+<!-- Loading Screen -->
+<div class="loading-screen" id="loadingScreen" role="status" aria-label="Inapakia">
+  <div class="spinner"></div>
+  <div class="brand"><span class="dot"></span>PLATINUMZ IT Support</div>
+</div>
+
 <div id="customerDashboard" style="min-height:100vh; background:var(--ink); color:var(--paper);">
 
   <style>
@@ -2668,6 +2527,69 @@
   </div>
 </div>
 
+<!-- Password Change Modal -->
+<div class="modal-overlay pw-modal" id="pwModal">
+  <div class="modal-box" style="max-width:440px;">
+    <button class="close-x" onclick="document.getElementById('pwModal').classList.remove('show')">&times;</button>
+    <h3 style="margin-bottom:16px;">🔒 Badilisha Password</h3>
+    <label>Password ya Zamani</label>
+    <input type="password" id="pwOldInput" placeholder="••••••••" style="width:100%;padding:12px 14px;background:var(--ink);border:1px solid var(--line);border-radius:8px;color:var(--paper);font-family:'Inter',sans-serif;font-size:0.95rem;">
+    <label>Password Mpya</label>
+    <input type="password" id="pwNewInput" placeholder="••••••••" minlength="6" style="width:100%;padding:12px 14px;background:var(--ink);border:1px solid var(--line);border-radius:8px;color:var(--paper);font-family:'Inter',sans-serif;font-size:0.95rem;">
+    <label>Thibitisha Password Mpya</label>
+    <input type="password" id="pwConfirmInput" placeholder="••••••••" minlength="6" style="width:100%;padding:12px 14px;background:var(--ink);border:1px solid var(--line);border-radius:8px;color:var(--paper);font-family:'Inter',sans-serif;font-size:0.95rem;">
+    <p class="err" id="pwMsg"></p>
+    <button class="submit-btn" onclick="doChangePassword()" style="margin-top:16px;width:100%;">Badilisha Password →</button>
+  </div>
+</div>
+
+<!-- Call Modal -->
+<div class="modal-overlay call-modal" id="callModal">
+  <div style="background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:32px;max-width:480px;width:100%;text-align:center;position:relative;">
+    <div id="callStatusText" style="color:var(--fiber);font-size:1.1rem;font-weight:600;margin-bottom:20px;">Inaunganisha...</div>
+    <div id="callTimer" style="color:var(--muted);font-size:0.88rem;margin-bottom:20px;">00:00</div>
+    <div style="position:relative;width:100%;height:200px;background:var(--ink);border-radius:14px;margin-bottom:20px;overflow:hidden;">
+      <video id="callRemoteVideo" style="width:100%;height:100%;object-fit:cover;display:none;"></video>
+      <video id="callLocalVideo" style="position:absolute;bottom:10px;right:10px;width:120px;height:80px;border-radius:10px;border:2px solid var(--fiber);object-fit:cover;display:none;"></video>
+      <div id="callAvatar" style="display:flex;align-items:center;justify-content:center;height:100%;font-size:3rem;">📞</div>
+    </div>
+    <div style="display:flex;gap:12px;justify-content:center;">
+      <button onclick="endCall()" style="width:56px;height:56px;border-radius:50%;background:#ff4444;border:none;color:#fff;font-size:1.4rem;cursor:pointer;">📞</button>
+      <button id="callMuteBtn" onclick="toggleMute()" style="width:48px;height:48px;border-radius:50%;background:var(--ink);border:1px solid var(--line);color:var(--paper);font-size:1.1rem;cursor:pointer;">🎤</button>
+      <button id="callVideoBtn" onclick="toggleCallVideo()" style="width:48px;height:48px;border-radius:50%;background:var(--ink);border:1px solid var(--line);color:var(--paper);font-size:1.1rem;cursor:pointer;">📹</button>
+      <button id="callSpeakerBtn" onclick="toggleSpeaker()" style="width:48px;height:48px;border-radius:50%;background:var(--ink);border:1px solid var(--line);color:var(--paper);font-size:1.1rem;cursor:pointer;">🔊</button>
+    </div>
+  </div>
+</div>
+
+<!-- Incoming Call Modal -->
+<div class="modal-overlay" id="incomingCallModal" style="z-index:300;">
+  <div style="background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:32px;max-width:380px;width:100%;text-align:center;">
+    <div style="font-size:3rem;margin-bottom:12px;">📞</div>
+    <div style="color:var(--fiber);font-size:1.1rem;font-weight:600;margin-bottom:4px;">Simu Inaita...</div>
+    <div id="incomingCallerName" style="color:var(--muted);font-size:0.92rem;margin-bottom:24px;">—</div>
+    <div style="display:flex;gap:16px;justify-content:center;">
+      <button onclick="declineIncomingCall()" style="width:60px;height:60px;border-radius:50%;background:#ff4444;border:none;color:#fff;font-size:1.5rem;cursor:pointer;">✕</button>
+      <button onclick="acceptIncomingCall()" style="width:60px;height:60px;border-radius:50%;background:#4CAF50;border:none;color:#fff;font-size:1.5rem;cursor:pointer;">📞</button>
+    </div>
+  </div>
+</div>
+
+<!-- Notification Toast -->
+<div id="notifToast" style="position:fixed;bottom:24px;right:24px;z-index:500;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 20px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 30px rgba(0,0,0,0.4);transform:translateY(120%);transition:transform 0.3s ease;max-width:340px;">
+  <div class="notif-icon" style="font-size:1.5rem;">🔔</div>
+  <div style="flex:1;">
+    <div class="notif-title" style="font-weight:600;font-size:0.88rem;color:var(--paper);"></div>
+    <div class="notif-msg" style="font-size:0.78rem;color:var(--muted);margin-top:2px;"></div>
+  </div>
+</div>
+<style>
+  #notifToast.show{transform:translateY(0)!important;}
+</style>
+
+<!-- Main Content wrapper for accessibility -->
+<div id="mainContent" style="display:none;"></div>
+
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
@@ -2935,31 +2857,31 @@
 
   function setMode(newMode){
     mode = newMode;
-    authErr.style.display = 'none';
-    authOk.style.display = 'none';
-    const t = translations[currentLang];
+    if(authErr) authErr.style.display = 'none';
+    if(authOk) authOk.style.display = 'none';
+    const t = translations[currentLang] || translations['sw'];
     if(mode === 'login'){
-      authTitle.textContent = '';
-      authSub.textContent = t['gate-login-sub'];
-      authSubmitBtn.textContent = t['gate-login-btn'];
-      switchModeText.innerHTML = t['gate-no-account'] + ' <a id="switchModeLink">' + t['gate-signup-link'] + '</a>';
-      forgotWrap.style.display = 'block';
-      nameWrap.style.display = 'none';
-      serviceWrap.style.display = 'none';
-      confirmWrap.style.display = 'none';
-      authName.required = false;
-      authPasswordConfirm.required = false;
+      if(authTitle) authTitle.textContent = '';
+      if(authSub) authSub.textContent = t['gate-login-sub'];
+      if(authSubmitBtn) authSubmitBtn.textContent = t['gate-login-btn'];
+      if(switchModeText) switchModeText.innerHTML = t['gate-no-account'] + ' <a id="switchModeLink">' + t['gate-signup-link'] + '</a>';
+      if(forgotWrap) forgotWrap.style.display = 'block';
+      if(nameWrap) nameWrap.style.display = 'none';
+      if(serviceWrap) serviceWrap.style.display = 'none';
+      if(confirmWrap) confirmWrap.style.display = 'none';
+      if(authName) authName.required = false;
+      if(authPasswordConfirm) authPasswordConfirm.required = false;
     } else {
-      authTitle.textContent = '';
-      authSub.textContent = t['gate-signup-sub'];
-      authSubmitBtn.textContent = t['gate-signup-btn'];
-      switchModeText.innerHTML = t['gate-has-account'] + ' <a id="switchModeLink">' + t['gate-login-link'] + '</a>';
-      forgotWrap.style.display = 'none';
-      nameWrap.style.display = 'block';
-      serviceWrap.style.display = 'none';
-      confirmWrap.style.display = 'block';
-      authName.required = true;
-      authPasswordConfirm.required = true;
+      if(authTitle) authTitle.textContent = '';
+      if(authSub) authSub.textContent = t['gate-signup-sub'];
+      if(authSubmitBtn) authSubmitBtn.textContent = t['gate-signup-btn'];
+      if(switchModeText) switchModeText.innerHTML = t['gate-has-account'] + ' <a id="switchModeLink">' + t['gate-login-link'] + '</a>';
+      if(forgotWrap) forgotWrap.style.display = 'none';
+      if(nameWrap) nameWrap.style.display = 'block';
+      if(serviceWrap) serviceWrap.style.display = 'none';
+      if(confirmWrap) confirmWrap.style.display = 'block';
+      if(authName) authName.required = true;
+      if(authPasswordConfirm) authPasswordConfirm.required = true;
     }
     const switchLink = document.getElementById('switchModeLink');
     if(switchLink) switchLink.addEventListener('click', () => setMode(mode === 'login' ? 'signup' : 'login'));
@@ -3181,7 +3103,7 @@
 
   auth.onAuthStateChanged((user) => {
     if(!user){
-      setTimeout(()=>{ if(!auth.currentUser){ window.location.href='index.html'; } }, 4000);
+      setTimeout(()=>{ if(!auth.currentUser){ window.location.href='index.html'; } }, 1000);
       return;
     }
     document.body.classList.add('in-dashboard');
@@ -6135,7 +6057,7 @@
 // ============================================================
 // AI PROBLEM DIAGNOSTIC
 // ============================================================
-function openDiagnostic(){ document.getElementById('diagModal').classList.add('show'); }
+function openDiagnostic(){ var el=document.getElementById('diagModal'); if(el) el.classList.add('show'); }
 const diagDB = [
   {keywords:['simu','screen','skrini','nyeupe','black','blacking','blank','nyeusi'],solution:'Jinsi ya Kusahihisha: 1) Bonyeza power button kwa sekunde 10. 2) Ifanye hard reset. 3) Ikiwa bado haijaamka, inaweza kuwa loose display cable.',service:'Phone Repair',confidence:85},
   {keywords:['slow','kutu','polepole','hang','freeze','buffering','lag'],solution:'Jinsi ya Kusahihisha: 1) Funga programu zote. 2) Angalia RAM kwenye Task Manager. 3) Ondoa programu nyingi za background. 4) Sasisha OS. 5) Ongeza RAM au SSD.',service:'PC/Laptop Repair',confidence:80},
@@ -6189,7 +6111,7 @@ function startScreenRecording(){
     mediaRecorder.ondataavailable=e=>{ if(e.data.size>0) recordedChunks.push(e.data); };
     mediaRecorder.onstop=()=>{ sendRecordedVideo(); };
     mediaRecorder.start();
-    document.getElementById('recIndicator').classList.add('show');
+    var ri=document.getElementById('recIndicator'); if(ri) ri.classList.add('show');
     stream.getVideoTracks()[0].onended=()=>{ stopScreenRecording(); };
   }).catch(e=>{
     showNotifToast('Hitilafu',e.message,'❌');
@@ -6198,7 +6120,7 @@ function startScreenRecording(){
 function stopScreenRecording(){
   if(mediaRecorder&&mediaRecorder.state!=='inactive') mediaRecorder.stop();
   if(recStream) recStream.getTracks().forEach(t=>t.stop());
-  document.getElementById('recIndicator').classList.remove('show');
+  var ri=document.getElementById('recIndicator'); if(ri) ri.classList.remove('show');
 }
 function sendRecordedVideo(){
   const blob=new Blob(recordedChunks,{type:'video/webm'});
@@ -6317,7 +6239,7 @@ function addLoyaltyPoints(uid,pts,reason){
 // ============================================================
 // AUTO DIAGNOSTICS
 // ============================================================
-function openAutoDiag(){ document.getElementById('autoDiagModal').classList.add('show'); }
+function openAutoDiag(){ var el=document.getElementById('autoDiagModal'); if(el) el.classList.add('show'); }
 function runAutoDiag(){
   const btn=document.getElementById('autoDiagBtn');
   const results=document.getElementById('autoDiagResults');
@@ -6564,13 +6486,17 @@ function sendBrowserNotification(title, body, icon){
   try { new Notification(title, {body, icon: icon||'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Crect width="100" height="100" rx="20" fill="%230E1A2B"/%3E%3Ctext x="50" y="68" font-size="55" font-family="Arial" font-weight="700" fill="%23F2A93B" text-anchor="middle"%3EP%3C/text%3E%3C/svg%3E'}); } catch(e){}
 }
 function showNotifToast(title, msg, icon){
-  const t = document.getElementById('notifToast');
-  t.querySelector('.notif-title').textContent = title;
-  t.querySelector('.notif-msg').textContent = msg;
-  t.querySelector('.notif-icon').textContent = icon || '🔔';
+  var t = document.getElementById('notifToast');
+  if(!t) return;
+  var titleEl = t.querySelector('.notif-title');
+  var msgEl = t.querySelector('.notif-msg');
+  var iconEl = t.querySelector('.notif-icon');
+  if(titleEl) titleEl.textContent = title;
+  if(msgEl) msgEl.textContent = msg;
+  if(iconEl) iconEl.textContent = icon || '🔔';
   t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 6000);
-  sendBrowserNotification(title, msg);
+  setTimeout(() => { if(t) t.classList.remove('show'); }, 6000);
+  try { sendBrowserNotification(title, msg); } catch(e){}
 }
 
 // ============================================================
@@ -6974,15 +6900,13 @@ function rejectIncomingCall(){
 
 function toggleMute(){
   if(!localStream) return;
-  const btn=document.querySelector('.call-ctrl-btn.mute');
   const audioTrack=localStream.getAudioTracks()[0];
-  if(audioTrack){ audioTrack.enabled=!audioTrack.enabled; btn.classList.toggle('active'); }
+  if(audioTrack) audioTrack.enabled=!audioTrack.enabled;
 }
 function toggleCallVideo(){
   if(!localStream) return;
-  const btn=document.querySelector('.call-ctrl-btn.video-toggle');
   const videoTrack=localStream.getVideoTracks()[0];
-  if(videoTrack){ videoTrack.enabled=!videoTrack.enabled; btn.classList.toggle('active'); }
+  if(videoTrack) videoTrack.enabled=!videoTrack.enabled;
 }
 async function toggleScreenShare(){
   const btn=document.querySelector('.call-ctrl-btn.screen-share');
@@ -7171,24 +7095,24 @@ function sendVerifyEmail(){
 // CHANGE PASSWORD
 // ============================================================
 function openChangePasswordModal(){
-  const modal=document.getElementById('pwModal');
+  var modal=document.getElementById('pwModal');
   if(modal) modal.classList.add('show');
-  document.getElementById('pwOldInput').value='';
-  document.getElementById('pwNewInput').value='';
-  document.getElementById('pwConfirmInput').value='';
-  document.getElementById('pwMsg').textContent='';
+  var oi=document.getElementById('pwOldInput'); if(oi) oi.value='';
+  var ni=document.getElementById('pwNewInput'); if(ni) ni.value='';
+  var ci=document.getElementById('pwConfirmInput'); if(ci) ci.value='';
+  var mi=document.getElementById('pwMsg'); if(mi) mi.textContent='';
 }
 function closeChangePasswordModal(){
-  const modal=document.getElementById('pwModal');
+  var modal=document.getElementById('pwModal');
   if(modal) modal.classList.remove('show');
 }
 function doChangePassword(){
-  const user=firebase.auth().currentUser;
+  var user=firebase.auth().currentUser;
   if(!user) return;
-  const oldPw=document.getElementById('pwOldInput').value;
-  const newPw=document.getElementById('pwNewInput').value;
-  const confirmPw=document.getElementById('pwConfirmInput').value;
-  const msg=document.getElementById('pwMsg');
+  var oldPw=document.getElementById('pwOldInput').value;
+  var newPw=document.getElementById('pwNewInput').value;
+  var confirmPw=document.getElementById('pwConfirmInput').value;
+  var msg=document.getElementById('pwMsg');
   if(!oldPw||!newPw||!confirmPw){
     msg.className='profile-msg error';
     msg.textContent=currentLang==='sw'?'Jaza sehemu zote':'Fill all fields';
@@ -7336,7 +7260,7 @@ function resend2FACode(){ send2FACode(_2faEmail).then(()=>{var m=document.getEle
   // Escape key closes modals/overlays
   document.addEventListener('keydown',function(e){
     if(e.key==='Escape'){
-      document.querySelectorAll('.modal-overlay.open,.diag-modal.show,.qr-modal.show,.pw-modal.show,.loc-modal.show,.call-modal.show').forEach(function(m){
+      document.querySelectorAll('.modal-overlay.open,.modal-overlay.show,.diag-modal.show,.qr-modal.show,.pw-modal.show,.loc-modal.show,.call-modal.show').forEach(function(m){
         m.classList.remove('open','show');
       });
       // Close mobile sidebar
@@ -7348,7 +7272,7 @@ function resend2FACode(){ send2FACode(_2faEmail).then(()=>{var m=document.getEle
   // Focus trap for modals
   document.addEventListener('keydown',function(e){
     if(e.key!=='Tab') return;
-    var activeModal=document.querySelector('.modal-overlay.open,.pw-modal.show,.call-modal.show');
+    var activeModal=document.querySelector('.modal-overlay.open,.modal-overlay.show,.pw-modal.show,.call-modal.show');
     if(!activeModal) return;
     var focusables=activeModal.querySelectorAll('button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),a[href],[tabindex]:not([tabindex="-1"])');
     if(focusables.length===0) return;
