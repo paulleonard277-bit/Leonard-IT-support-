@@ -360,7 +360,7 @@
     background:rgba(6,12,20,0.7); backdrop-filter:blur(4px);
     align-items:center; justify-content:center; padding:20px;
   }
-  .modal-overlay.open{display:flex;}
+  .modal-overlay.open,.modal-overlay.show{display:flex;}
 
   /* ═══════ SPLASH SCREEN ═══════ */
   .splash-screen{
@@ -2397,11 +2397,142 @@
         </div>
       </div>
 
+      <!-- TERMS PAGE -->
+      <div class="cu-page" id="cuPageTerms">
+        <h2 class="cu-page-title" data-label="cu-terms-title">📜 Masharti ya Huduma</h2>
+        <p class="cu-page-sub" data-label="cu-terms-sub">Soma masharti ya matumizi ya huduma zetu.</p>
+        <div style="background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:32px;">
+          <h3 style="color:var(--fiber);font-size:1.1rem;margin-bottom:16px;">1. Jumla</h3>
+          <p style="color:var(--muted);font-size:0.92rem;line-height:1.7;margin-bottom:20px;">Huduma za PLATINUMZ IT Support zinatolewa kulingana na masharti yaliyoainishwa hapa. Kwa kutumia huduma zetu, unakubali masharti haya.</p>
+          <h3 style="color:var(--fiber);font-size:1.1rem;margin-bottom:16px;">2. Huduma Zinazotolewa</h3>
+          <p style="color:var(--muted);font-size:0.92rem;line-height:1.7;margin-bottom:20px;">Tunatoa huduma za ukarabati wa vifaa, usanidi wa mitandao, usalama wa mtandao, na msaada wa TEHAMA. Kila huduma ina masharti yake mahsusi kulingana na mpango uliochagua.</p>
+          <h3 style="color:var(--fiber);font-size:1.1rem;margin-bottom:16px;">3. Malipo</h3>
+          <p style="color:var(--muted);font-size:0.92rem;line-height:1.7;margin-bottom:20px;">Malipo hufanywa kabla au baada ya huduma kutegemeana na aina ya mpango. Tulia muda wa malipo unapotumia huduma zetu.</p>
+          <h3 style="color:var(--fiber);font-size:1.1rem;margin-bottom:16px;">4. Dhamana</h3>
+          <p style="color:var(--muted);font-size:0.92rem;line-height:1.7;margin-bottom:20px;">Huduma zetu zina dhamana ya siku 30 kwa ukarabati. Ikiwa kuna hitilafu ndani ya muda huu, tutarekebisha bila malipo ya ziada.</p>
+          <h3 style="color:var(--fiber);font-size:1.1rem;margin-bottom:16px;">5. Jukumu</h3>
+          <p style="color:var(--muted);font-size:0.92rem;line-height:1.7;">PLATINUMZ IT Support haitawajibika kwa upotevu wa data au hasara zisizotabirika. Wateja wanapaswa kuhifadhi nakala za data zao kabla ya huduma.</p>
+        </div>
+      </div>
+
+      <!-- PRIVACY PAGE -->
+      <div class="cu-page" id="cuPagePrivacy">
+        <h2 class="cu-page-title" data-label="cu-privacy-title">🔒 Sera ya Faragha</h2>
+        <p class="cu-page-sub" data-label="cu-privacy-sub">Jinsi tunavyolinda taarifa zako.</p>
+        <div style="background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:32px;">
+          <h3 style="color:var(--fiber);font-size:1.1rem;margin-bottom:16px;">1. Taarifa Tunazokusanya</h3>
+          <p style="color:var(--muted);font-size:0.92rem;line-height:1.7;margin-bottom:20px;">Tunakusanya jina lako, barua pepe, nambari ya simu, na taarifa za huduma unazohitaji. Pia tunakusanya data ya matumizi ya programu ili kuboresha huduma zetu.</p>
+          <h3 style="color:var(--fiber);font-size:1.1rem;margin-bottom:16px;">2. Matumizi ya Taarifa</h3>
+          <p style="color:var(--muted);font-size:0.92rem;line-height:1.7;margin-bottom:20px;">Taarifa zako zinatumika kwa kutoa huduma, mawasiliano, na kuboresha uzoefu wako. Hatuzitauzi taarifa zako kwa watu wa tatu bila idhini yako.</p>
+          <h3 style="color:var(--fiber);font-size:1.1rem;margin-bottom:16px;">3. Usalama</h3>
+          <p style="color:var(--muted);font-size:0.92rem;line-height:1.7;margin-bottom:20px;">Tunatumia teknolojia ya sasa kulinda taarifa zako. Firebase inatumika kwa hifadhi ya data na usimamizi wa mtumiaji.</p>
+          <h3 style="color:var(--fiber);font-size:1.1rem;margin-bottom:16px;">4. Haki Zako</h3>
+          <p style="color:var(--muted);font-size:0.92rem;line-height:1.7;margin-bottom:20px;">Una haki ya kuona, kusasisha, au kufuta taarifa zako. Wasiliana nasi ili kutekeleza haki hizi.</p>
+          <h3 style="color:var(--fiber);font-size:1.1rem;margin-bottom:16px;">5. Mawasiliano</h3>
+          <p style="color:var(--muted);font-size:0.92rem;line-height:1.7;">Kwa maswali kuhusu sera ya faragha, wasiliana nasi kupitia: support@platinumzit.com</p>
+        </div>
+      </div>
+
     </div>
   </div>
 
   <div class="cu-mb-overlay" id="cuMbOverlay"></div>
 
+</div>
+
+<!-- ═══ APPOINTMENT OVERLAY ═══ -->
+<div class="modal-overlay" id="apptOverlay">
+  <div style="background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:32px;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;position:relative;">
+    <button onclick="closeAppointment()" style="position:absolute;top:16px;right:16px;background:none;border:none;color:var(--muted);font-size:1.3rem;cursor:pointer;">✕</button>
+    <h2 style="color:var(--fiber);font-size:1.3rem;margin-bottom:8px;">🗓️ Panga Miadi</h2>
+    <p style="color:var(--muted);font-size:0.88rem;margin-bottom:20px;">Chagua huduma, tarehe, na muda unaofaa.</p>
+    <div id="apptForm">
+      <div style="margin-bottom:16px;">
+        <label style="color:var(--muted);font-size:0.82rem;display:block;margin-bottom:6px;">Huduma</label>
+        <select id="apptServiceSelect" style="width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--ink);color:var(--paper);font-size:0.9rem;">
+          <option value="">Chagua huduma...</option>
+          <option value="Ukarabati wa Kompyuta">Ukarabati wa Kompyuta</option>
+          <option value="Ukarabati wa Simu">Ukarabati wa Simu</option>
+          <option value="Usanidi wa Mtandao">Usanidi wa Mtandao</option>
+          <option value="Usalama wa Mtandao">Usalama wa Mtandao</option>
+          <option value="Hifadhi ya Data">Hifadhi ya Data</option>
+          <option value="Msaada wa Mbali">Msaada wa Mbali</option>
+        </select>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="color:var(--muted);font-size:0.82rem;display:block;margin-bottom:6px;">Tarehe</label>
+        <input type="date" id="apptDateInput" style="width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--ink);color:var(--paper);font-size:0.9rem;" onchange="selectApptDate()">
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="color:var(--muted);font-size:0.82rem;display:block;margin-bottom:6px;">Muda</label>
+        <div id="apptTimeSlots" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;"></div>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="color:var(--muted);font-size:0.82rem;display:block;margin-bottom:6px;">Maelezo</label>
+        <textarea id="apptNote" rows="3" placeholder="Maelezo ya ziada..." style="width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--ink);color:var(--paper);font-size:0.9rem;resize:vertical;"></textarea>
+      </div>
+      <button id="apptSubmitBtn" class="cu-btn cu-btn-primary" style="width:100%;" onclick="submitAppointment()" disabled>🗓o Weka Miadi</button>
+    </div>
+    <div id="apptConfirmed" style="display:none;text-align:center;padding:20px 0;">
+      <div style="font-size:3rem;margin-bottom:12px;">✅</div>
+      <h3 style="color:var(--fiber);margin-bottom:8px;">Miadi Imewekwa!</h3>
+      <p style="color:var(--muted);font-size:0.9rem;">Utapokea uthibitisho kupitia chat.</p>
+    </div>
+    <h3 style="color:var(--paper);font-size:1rem;margin:20px 0 12px;">Miadi Yangu</h3>
+    <div id="myApptList" style="max-height:200px;overflow-y:auto;"></div>
+  </div>
+</div>
+
+<!-- ═══ LOCATION SHARING MODAL ═══ -->
+<div class="modal-overlay" id="locModal">
+  <div style="background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:32px;max-width:420px;width:100%;position:relative;text-align:center;">
+    <button onclick="closeLocationSharing()" style="position:absolute;top:16px;right:16px;background:none;border:none;color:var(--muted);font-size:1.3rem;cursor:pointer;">✕</button>
+    <h2 style="color:var(--fiber);font-size:1.3rem;margin-bottom:8px;">📍 Shiriki Eneo Lako</h2>
+    <p style="color:var(--muted);font-size:0.88rem;margin-bottom:20px;">Tuma eneo lako ili kusaidia kutumikia vizuri zaidi.</p>
+    <button class="cu-btn cu-btn-primary" style="width:100%;margin-bottom:12px;" onclick="shareMyLocation()">📍 Tuma Eneo Langu</button>
+    <p id="locStatus" style="color:var(--muted);font-size:0.82rem;"></p>
+  </div>
+</div>
+
+<!-- ═══ AI DIAGNOSTIC MODAL ═══ -->
+<div class="modal-overlay" id="diagModal">
+  <div style="background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:32px;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;position:relative;">
+    <button onclick="document.getElementById('diagModal').classList.remove('show')" style="position:absolute;top:16px;right:16px;background:none;border:none;color:var(--muted);font-size:1.3rem;cursor:pointer;">✕</button>
+    <h2 style="color:var(--fiber);font-size:1.3rem;margin-bottom:8px;">🤖 AI Diagnostic</h2>
+    <p style="color:var(--muted);font-size:0.88rem;margin-bottom:20px;">Eleza tatizo lako na AI itakusaidia kupata suluhisho.</p>
+    <textarea id="diagInput" rows="4" placeholder="Eleza tatizo lako hapa... (mfano: Kompyuta yangu haizai, inatumia polepole...)" style="width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--ink);color:var(--paper);font-size:0.9rem;resize:vertical;margin-bottom:16px;"></textarea>
+    <button class="cu-btn cu-btn-primary" style="width:100%;" onclick="runDiagnosis()">🔍 Chunguza Tatizo</button>
+    <div id="diagResults" style="margin-top:20px;"></div>
+  </div>
+</div>
+
+<!-- ═══ AUTO DIAGNOSTICS MODAL ═══ -->
+<div class="modal-overlay" id="autoDiagModal">
+  <div style="background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:32px;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;position:relative;">
+    <button onclick="document.getElementById('autoDiagModal').classList.remove('show')" style="position:absolute;top:16px;right:16px;background:none;border:none;color:var(--muted);font-size:1.3rem;cursor:pointer;">✕</button>
+    <h2 style="color:var(--fiber);font-size:1.3rem;margin-bottom:8px;">⚡ Auto Diagnostics</h2>
+    <p style="color:var(--muted);font-size:0.88rem;margin-bottom:20px;">Chunguza kiotomatiki hali ya mfumo wako.</p>
+    <button class="cu-btn cu-btn-primary" style="width:100%;margin-bottom:16px;" id="autoDiagBtn" onclick="runAutoDiag()">⚡ Anzisha Uchunguzi</button>
+    <div id="autoDiagResults"></div>
+  </div>
+</div>
+
+<!-- ═══ SCREEN RECORDING INDICATOR ═══ -->
+<div id="recIndicator" style="display:none;position:fixed;bottom:80px;right:22px;z-index:70;background:#ff4444;color:#fff;padding:10px 18px;border-radius:12px;font-size:0.82rem;font-weight:600;display:none;align-items:center;gap:8px;box-shadow:0 4px 20px rgba(255,0,0,0.3);cursor:pointer;" onclick="stopScreenRecording()">
+  <span style="width:10px;height:10px;border-radius:50%;background:#fff;animation:blink 1s infinite;"></span> ⏺ Inarekodi... Bonyeza kuishisha
+</div>
+<style>@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}</style>
+
+<!-- ═══ CUSTOMER JOURNEY MODAL ═══ -->
+<div class="modal-overlay" id="journeyModal">
+  <div style="background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:32px;max-width:550px;width:100%;max-height:90vh;overflow-y:auto;position:relative;">
+    <button onclick="document.getElementById('journeyModal').classList.remove('show')" style="position:absolute;top:16px;right:16px;background:none;border:none;color:var(--muted);font-size:1.3rem;cursor:pointer;">✕</button>
+    <h2 style="color:var(--fiber);font-size:1.3rem;margin-bottom:8px;">📊 Safari Yangu</h2>
+    <p style="color:var(--muted);font-size:0.88rem;margin-bottom:20px;">Historia yako kamili na PLATINUMZ IT.</p>
+    <div id="journeyBody" style="min-height:100px;">
+      <p style="color:var(--muted);font-size:0.85rem;">Inapakia data...</p>
+    </div>
+  </div>
 </div>
 
 
