@@ -1819,21 +1819,13 @@
     <p id="cuGateSub">Ingia ili uone orders na huduma zako.</p>
     <div id="cuGateErr" class="cu-gate-err"></div>
     <form id="cuGateForm" autocomplete="on">
-      <div id="cuGateNameWrap" style="display:none;">
-        <label>Jina Kamili</label>
-        <input type="text" id="cuGateName" placeholder="Jina lako kamili">
-      </div>
       <label>Email</label>
       <input type="email" id="cuGateEmail" required placeholder="jina@mfano.com">
       <label>Password</label>
       <input type="password" id="cuGatePass" required placeholder="••••••••" minlength="6">
-      <div id="cuGateConfirmWrap" style="display:none;">
-        <label>Thibitisha Password</label>
-        <input type="password" id="cuGateConfirm" placeholder="••••••••" minlength="6">
-      </div>
       <button type="submit" class="cu-gate-btn" id="cuGateSubmit">Ingia →</button>
     </form>
-    <div class="cu-gate-switch" id="cuGateSwitch">Huna akaunti? <a id="cuGateSwitchLink">Jisajili</a></div>
+    <div class="cu-gate-switch" id="cuGateSwitch" style="display:none;"></div>
     <div class="cu-gate-forgot" id="cuGateForgotWrap"><a onclick="document.getElementById('forgotModal').classList.add('open');">Umesahau password?</a></div>
   </div>
 </div>
@@ -3147,71 +3139,36 @@
   let cuGateMode = 'login';
 
   function cuSetGateMode(m){
-    cuGateMode = m;
+    forceCuGateLogin();
+  }
+  function forceCuGateLogin(){
+    cuGateMode = 'login';
     var err=document.getElementById('cuGateErr'); if(err) err.style.display='none';
     var title=document.getElementById('cuGateTitle');
     var sub=document.getElementById('cuGateSub');
     var btn=document.getElementById('cuGateSubmit');
-    var sw=document.getElementById('cuGateSwitch');
-    var nw=document.getElementById('cuGateNameWrap');
-    var cw=document.getElementById('cuGateConfirmWrap');
     var fw=document.getElementById('cuGateForgotWrap');
-    if(m==='login'){
-      if(title) title.textContent='Ingia';
-      if(sub) sub.textContent='Ingia ili uone orders na huduma zako.';
-      if(btn) btn.textContent='Ingia →';
-      if(sw) sw.innerHTML='Huna akaunti? <a id="cuGateSwitchLink" onclick="cuSetGateMode(\'signup\')">Jisajili</a>';
-      if(nw) nw.style.display='none';
-      if(cw) cw.style.display='none';
-      if(fw) fw.style.display='block';
-    } else {
-      if(title) title.textContent='Jisajili';
-      if(sub) sub.textContent='Fungua akaunti mpya ili upate huduma zetu.';
-      if(btn) btn.textContent='Jisajili →';
-      if(sw) sw.innerHTML='Tayari una akaunti? <a id="cuGateSwitchLink" onclick="cuSetGateMode(\'login\')">Ingia</a>';
-      if(nw) nw.style.display='block';
-      if(cw) cw.style.display='block';
-      if(fw) fw.style.display='none';
-    }
+    if(title) title.textContent='Ingia';
+    if(sub) sub.textContent='Ingia ili uone orders na huduma zako.';
+    if(btn) btn.textContent='Ingia →';
+    if(fw) fw.style.display='block';
   }
 
   var cuGateForm = document.getElementById('cuGateForm');
   if(cuGateForm) cuGateForm.addEventListener('submit', function(e){
     e.preventDefault();
+    cuGateMode = 'login';
     var err=document.getElementById('cuGateErr');
     var email=document.getElementById('cuGateEmail').value.trim();
     var pass=document.getElementById('cuGatePass').value;
-    var name=document.getElementById('cuGateName') ? document.getElementById('cuGateName').value.trim() : '';
-    var confirm=document.getElementById('cuGateConfirm') ? document.getElementById('cuGateConfirm').value : '';
     if(err) err.style.display='none';
-
-    if(cuGateMode==='signup'){
-      if(!name){ if(err){err.textContent='Weka jina lako';err.style.display='block';} return; }
-      if(pass!==confirm){ if(err){err.textContent='Password hazifanani';err.style.display='block';} return; }
-      auth.createUserWithEmailAndPassword(email, pass).then(function(result){
-        var tasks=[];
-        tasks.push(result.user.updateProfile({displayName:name}));
-        tasks.push(db.collection('clients').doc(result.user.uid).set({jina:name,email:email,huduma:'',createdAt:firebase.firestore.FieldValue.serverTimestamp()}));
-        tasks.push(result.user.sendEmailVerification());
-        return Promise.all(tasks);
-      }).then(function(){
-        cuGateForm.reset();
-      }).catch(function(error){
-        var msg='Hitilafu imetokea.';
-        if(error.code==='auth/email-already-in-use') msg='Email tayari imesajiliwa — ingia.';
-        if(error.code==='auth/weak-password') msg='Password ni fupi — angalau herufi 6.';
-        if(error.code==='auth/invalid-email') msg='Email si sahihi.';
-        if(err){err.textContent=msg;err.style.display='block';}
-      });
-    } else {
-      auth.signInWithEmailAndPassword(email, pass).then(function(){
-        cuGateForm.reset();
-      }).catch(function(error){
-        var msg='Hitilafu imetokea.';
-        if(error.code==='auth/invalid-credential'||error.code==='auth/wrong-password'||error.code==='auth/user-not-found') msg='Email au password si sahihi.';
-        if(err){err.textContent=msg;err.style.display='block';}
-      });
-    }
+    auth.signInWithEmailAndPassword(email, pass).then(function(){
+      cuGateForm.reset();
+    }).catch(function(error){
+      var msg='Hitilafu imetokea.';
+      if(error.code==='auth/invalid-credential'||error.code==='auth/wrong-password'||error.code==='auth/user-not-found') msg='Email au password si sahihi.';
+      if(err){err.textContent=msg;err.style.display='block';}
+    });
   });
 
   auth.onAuthStateChanged((user) => {
