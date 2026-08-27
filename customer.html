@@ -2535,6 +2535,27 @@
   </div>
 </div>
 
+<div class="modal-overlay" id="orderModal">
+  <div class="modal-box" style="max-width:480px;">
+    <button class="close-x" id="closeOrderBtn">&times;</button>
+    <div class="eyebrow" style="margin-bottom:10px;" data-label="order-modal-eyebrow">Omba Huduma</div>
+    <h3 id="orderServiceName" style="margin-bottom:6px; color:var(--fiber);" data-label="order-svc-name"></h3>
+    <div id="orderPriceDisplay" style="display:none; background:rgba(62,211,199,0.08); border:1px solid rgba(62,211,199,0.2); border-radius:10px; padding:10px 16px; margin-bottom:14px; font-size:0.92rem;"><span style="color:var(--muted);" data-label="order-price-label">Bei ya Takwimu:</span> <strong id="orderPriceVal" style="color:var(--fiber);"></strong></div>
+    <p class="sub" style="margin-bottom:20px;" data-label="order-modal-sub">Jaza maelezo yako - tutawasiliana nawe haraka iwezekanavyo.</p>
+    <form id="orderForm">
+      <label data-label="order-label-name">Jina Kamili</label>
+      <input type="text" id="orderName" required data-ph="order-ph-name" placeholder="Jina lako kamili">
+      <label data-label="order-label-phone">Namba ya Simu</label>
+      <input type="tel" id="orderPhone" required placeholder="0786 868 069">
+      <label data-label="order-label-desc">Maelezo ya Ziada (hiari)</label>
+      <textarea id="orderDesc" rows="3" placeholder="Eleza zaidi mahitaji yako..." style="width:100%; padding:12px 14px; background:var(--ink); border:1px solid var(--line); border-radius:8px; color:var(--paper); font-family:'Inter',sans-serif; font-size:0.95rem; resize:vertical;"></textarea>
+      <button type="submit" class="submit-btn" style="margin-top:20px;" data-label="order-submit-btn">Tuma Ombi →</button>
+      <p class="err" id="orderErr"></p>
+      <p class="err" id="orderOk" style="color:var(--fiber); display:none;"></p>
+    </form>
+  </div>
+</div>
+
 
 <div class="diamond-popup-overlay login" id="welcomePopup">
   <div class="diamond-popup">
