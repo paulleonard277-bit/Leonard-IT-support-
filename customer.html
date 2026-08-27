@@ -3932,8 +3932,8 @@
   }
 
   document.addEventListener('click', function(e){
-    if(!e.target.closest('.ad-notif-wrap')) document.getElementById('adminNotifPanel').classList.remove('show');
-    if(!e.target.closest('.cu-notif-wrap')) document.getElementById('cuNotifPanel').classList.remove('show');
+    if(!e.target.closest('.ad-notif-wrap')){ var anp=document.getElementById('adminNotifPanel'); if(anp) anp.classList.remove('show'); }
+    if(!e.target.closest('.cu-notif-wrap')){ var cnp=document.getElementById('cuNotifPanel'); if(cnp) cnp.classList.remove('show'); }
 
     // Backup: customer chat send button
     if(e.target.id === 'cuChatSend' || e.target.closest('#cuChatSend')){
