@@ -1794,7 +1794,51 @@
   <div class="brand"><span class="dot"></span>PLATINUMZ IT Support</div>
 </div>
 
-<div id="customerDashboard" style="min-height:100vh; background:var(--ink); color:var(--paper);">
+<div id="customerGate" style="position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;background:var(--ink);color:var(--paper);">
+  <style>
+    .cu-gate-box{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:40px 32px;max-width:420px;width:90%;text-align:center;animation:fadeSlide 0.4s ease;}
+    .cu-gate-box h2{font-size:1.4rem;font-weight:700;margin-bottom:6px;font-family:'Space Grotesk',sans-serif;}
+    .cu-gate-box p{color:var(--muted);font-size:0.88rem;margin-bottom:24px;}
+    .cu-gate-box label{display:block;text-align:left;font-size:0.78rem;color:var(--muted);margin-bottom:4px;margin-top:14px;}
+    .cu-gate-box input{width:100%;padding:12px 14px;background:var(--ink);border:1px solid var(--line);border-radius:10px;color:var(--paper);font-size:0.92rem;font-family:'Inter',sans-serif;outline:none;transition:border-color 0.2s;}
+    .cu-gate-box input:focus{border-color:var(--fiber);}
+    .cu-gate-box .cu-gate-btn{width:100%;padding:14px;margin-top:20px;border:none;border-radius:12px;background:linear-gradient(135deg,var(--fiber),#2bc4b8);color:#fff;font-weight:700;font-size:0.95rem;cursor:pointer;transition:transform 0.15s,box-shadow 0.2s;font-family:'Inter',sans-serif;}
+    .cu-gate-box .cu-gate-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(62,211,199,0.3);}
+    .cu-gate-err{color:#ff6b6b;font-size:0.82rem;margin-top:10px;display:none;}
+    .cu-gate-switch{margin-top:18px;font-size:0.84rem;color:var(--muted);}
+    .cu-gate-switch a{color:var(--fiber);cursor:pointer;font-weight:600;text-decoration:none;}
+    .cu-gate-forgot{margin-top:12px;font-size:0.78rem;}
+    .cu-gate-forgot a{color:var(--fiber);cursor:pointer;text-decoration:none;}
+    .cu-gate-brand{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:16px;}
+    .cu-gate-brand .dot{width:10px;height:10px;border-radius:50%;background:var(--fiber);box-shadow:0 0 10px var(--fiber);}
+    .cu-gate-brand span{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;}
+  </style>
+  <div class="cu-gate-box">
+    <div class="cu-gate-brand"><span class="dot"></span><span>PLATINUMZ</span></div>
+    <h2 id="cuGateTitle">Ingia</h2>
+    <p id="cuGateSub">Ingia ili uone orders na huduma zako.</p>
+    <div id="cuGateErr" class="cu-gate-err"></div>
+    <form id="cuGateForm" autocomplete="on">
+      <div id="cuGateNameWrap" style="display:none;">
+        <label>Jina Kamili</label>
+        <input type="text" id="cuGateName" placeholder="Jina lako kamili">
+      </div>
+      <label>Email</label>
+      <input type="email" id="cuGateEmail" required placeholder="jina@mfano.com">
+      <label>Password</label>
+      <input type="password" id="cuGatePass" required placeholder="••••••••" minlength="6">
+      <div id="cuGateConfirmWrap" style="display:none;">
+        <label>Thibitisha Password</label>
+        <input type="password" id="cuGateConfirm" placeholder="••••••••" minlength="6">
+      </div>
+      <button type="submit" class="cu-gate-btn" id="cuGateSubmit">Ingia →</button>
+    </form>
+    <div class="cu-gate-switch" id="cuGateSwitch">Huna akaunti? <a id="cuGateSwitchLink">Jisajili</a></div>
+    <div class="cu-gate-forgot" id="cuGateForgotWrap"><a onclick="document.getElementById('forgotModal').classList.add('open');">Umesahau password?</a></div>
+  </div>
+</div>
+
+<div id="customerDashboard" style="display:none; min-height:100vh; background:var(--ink); color:var(--paper);">
 
   <style>
     .cu-layout{display:grid;grid-template-columns:240px 1fr;min-height:100vh;}
@@ -3100,13 +3144,85 @@
 
   let currentUserName = '';
   let firstAuthLoad = true;
+  let cuGateMode = 'login';
+
+  function cuSetGateMode(m){
+    cuGateMode = m;
+    var err=document.getElementById('cuGateErr'); if(err) err.style.display='none';
+    var title=document.getElementById('cuGateTitle');
+    var sub=document.getElementById('cuGateSub');
+    var btn=document.getElementById('cuGateSubmit');
+    var sw=document.getElementById('cuGateSwitch');
+    var nw=document.getElementById('cuGateNameWrap');
+    var cw=document.getElementById('cuGateConfirmWrap');
+    var fw=document.getElementById('cuGateForgotWrap');
+    if(m==='login'){
+      if(title) title.textContent='Ingia';
+      if(sub) sub.textContent='Ingia ili uone orders na huduma zako.';
+      if(btn) btn.textContent='Ingia →';
+      if(sw) sw.innerHTML='Huna akaunti? <a id="cuGateSwitchLink" onclick="cuSetGateMode(\'signup\')">Jisajili</a>';
+      if(nw) nw.style.display='none';
+      if(cw) cw.style.display='none';
+      if(fw) fw.style.display='block';
+    } else {
+      if(title) title.textContent='Jisajili';
+      if(sub) sub.textContent='Fungua akaunti mpya ili upate huduma zetu.';
+      if(btn) btn.textContent='Jisajili →';
+      if(sw) sw.innerHTML='Tayari una akaunti? <a id="cuGateSwitchLink" onclick="cuSetGateMode(\'login\')">Ingia</a>';
+      if(nw) nw.style.display='block';
+      if(cw) cw.style.display='block';
+      if(fw) fw.style.display='none';
+    }
+  }
+
+  var cuGateForm = document.getElementById('cuGateForm');
+  if(cuGateForm) cuGateForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var err=document.getElementById('cuGateErr');
+    var email=document.getElementById('cuGateEmail').value.trim();
+    var pass=document.getElementById('cuGatePass').value;
+    var name=document.getElementById('cuGateName') ? document.getElementById('cuGateName').value.trim() : '';
+    var confirm=document.getElementById('cuGateConfirm') ? document.getElementById('cuGateConfirm').value : '';
+    if(err) err.style.display='none';
+
+    if(cuGateMode==='signup'){
+      if(!name){ if(err){err.textContent='Weka jina lako';err.style.display='block';} return; }
+      if(pass!==confirm){ if(err){err.textContent='Password hazifanani';err.style.display='block';} return; }
+      auth.createUserWithEmailAndPassword(email, pass).then(function(result){
+        var tasks=[];
+        tasks.push(result.user.updateProfile({displayName:name}));
+        tasks.push(db.collection('clients').doc(result.user.uid).set({jina:name,email:email,huduma:'',createdAt:firebase.firestore.FieldValue.serverTimestamp()}));
+        tasks.push(result.user.sendEmailVerification());
+        return Promise.all(tasks);
+      }).then(function(){
+        cuGateForm.reset();
+      }).catch(function(error){
+        var msg='Hitilafu imetokea.';
+        if(error.code==='auth/email-already-in-use') msg='Email tayari imesajiliwa — ingia.';
+        if(error.code==='auth/weak-password') msg='Password ni fupi — angalau herufi 6.';
+        if(error.code==='auth/invalid-email') msg='Email si sahihi.';
+        if(err){err.textContent=msg;err.style.display='block';}
+      });
+    } else {
+      auth.signInWithEmailAndPassword(email, pass).then(function(){
+        cuGateForm.reset();
+      }).catch(function(error){
+        var msg='Hitilafu imetokea.';
+        if(error.code==='auth/invalid-credential'||error.code==='auth/wrong-password'||error.code==='auth/user-not-found') msg='Email au password si sahihi.';
+        if(err){err.textContent=msg;err.style.display='block';}
+      });
+    }
+  });
 
   auth.onAuthStateChanged((user) => {
     if(!user){
-      setTimeout(()=>{ if(!auth.currentUser){ window.location.href='index.html'; } }, 1000);
+      document.getElementById('customerGate').style.display='flex';
+      document.getElementById('customerDashboard').style.display='none';
       return;
     }
     document.body.classList.add('in-dashboard');
+    document.getElementById('customerGate').style.display='none';
+    document.getElementById('customerDashboard').style.display='block';
     _checkAdminRole(user).then(function(result){
       if(result==='twoFactorPending') return;
       if(_isAdmin(user)){ window.location.href='admin.html'; return; }
