@@ -6,23 +6,191 @@
 <title>Login — PLATINUMZ</title>
 <style>
   *{margin:0;padding:0;box-sizing:border-box;}
-  body{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0E1A2B;font-family:Arial,sans-serif;}
-  .login-form{display:flex;flex-direction:column;gap:10px;max-width:300px;width:90%;padding:20px;background:#1e1e1e;border-radius:8px;color:#fff;font-family:Arial;}
+  body{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:transparent;
+    font-family:Arial,sans-serif;
+    overflow:hidden;
+  }
+  body::before{
+    content:'';
+    position:fixed;inset:0;z-index:-2;
+    background:linear-gradient(160deg,#0E1A2B 0%,#12263a 50%,#0a1826 100%);
+  }
+  body::after{
+    content:'';
+    position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(62,211,199,0.10), transparent 40%),
+      radial-gradient(circle at 80% 80%, rgba(242,169,59,0.08), transparent 40%);
+  }
+
+  /* ═══════ INTRO SCENE ═══════ */
+  .intro-scene{
+    position:fixed;inset:0;z-index:5;
+    display:flex;flex-direction:column;
+    align-items:center;justify-content:center;
+    background:transparent;
+  }
+  .stage{
+    position:relative;
+    width:min(480px,80vw);
+    height:340px;
+  }
+  /* ground line */
+  .ground{
+    position:absolute;left:10%;right:10%;bottom:26px;height:2px;
+    background:linear-gradient(90deg,transparent,rgba(62,211,199,0.5),transparent);
+  }
+  /* character (person) */
+  .person{
+    position:absolute;bottom:40px;left:50%;
+    width:120px;height:180px;
+    transform:translateX(-50%);
+    animation:personWalk 0.9s ease-out forwards;
+  }
+  @keyframes personWalk{
+    0%{ transform:translateX(60vw) translateX(-50%); }
+    60%{ transform:translateX(-50%) translateX(0); }
+    100%{ transform:translateX(-50%) translateX(0); }
+  }
+  /* body */
+  .p-body{
+    position:absolute;left:35px;bottom:40px;width:50px;height:70px;
+    border-radius:18px 18px 8px 8px;
+    background:linear-gradient(180deg,#2b6ad8,#1e4fa8);
+  }
+  /* head */
+  .p-head{
+    position:absolute;left:38px;bottom:110px;width:44px;height:44px;border-radius:50%;
+    background:linear-gradient(180deg,#f0c39a,#d9a878);
+    box-shadow:inset -6px -4px 0 rgba(0,0,0,0.08);
+  }
+  /* legs */
+  .p-leg{position:absolute;bottom:16px;width:12px;height:30px;background:#1c366b;border-radius:4px;}
+  .p-leg-l{left:40px;animation:legL 0.9s ease-out;}
+  .p-leg-r{left:66px;animation:legR 0.9s ease-out;}
+  @keyframes legL{0%{transform:rotate(18deg) translateY(-4px);}50%{transform:rotate(-14deg) translateY(0);}100%{transform:rotate(0);}}
+  @keyframes legR{0%{transform:rotate(-14deg) translateY(-4px);}50%{transform:rotate(18deg) translateY(0);}100%{transform:rotate(0);}}
+  /* arms */
+  .p-arm{position:absolute;top:118px;width:12px;height:42px;background:#2b6ad8;border-radius:6px;transform-origin:top;}
+  .p-arm-l{left:28px;}
+  .p-arm-r{right:26px;}
+  /* bag / briefcase */
+  .bag{
+    position:absolute;left:50%;bottom:26px;
+    width:96px;height:66px;
+    transform:translateX(-50%);
+    opacity:0;
+    animation:bagPlace 0.9s ease-out 0.55s forwards;
+    filter:drop-shadow(0 10px 18px rgba(0,0,0,0.4));
+    z-index:2;
+  }
+  .bag-body{
+    position:absolute;inset:0;
+    background:linear-gradient(160deg,#8a4a2f,#5e2f1c);
+    border-radius:10px;
+    border:2px solid #3f2012;
+  }
+  .bag-handle{
+    position:absolute;left:50%;bottom:100%;width:30px;height:16px;
+    transform:translateX(-50%);
+    border:4px solid #5e2f1c;border-bottom:none;border-radius:8px 8px 0 0;
+  }
+  .bag-lock{
+    position:absolute;left:50%;top:24px;width:22px;height:16px;transform:translateX(-50%);
+    background:#e2c687;border-radius:4px;border:1px solid #8a6a2f;
+  }
+  .bag-lock::after{content:'';position:absolute;left:50%;top:3px;width:10px;height:8px;transform:translateX(-50%);background:#f5e3ae;border-radius:3px;}
+  @keyframes bagPlace{
+    0%{ opacity:1; transform:translateX(-50%) translateY(-90px) rotate(-6deg); }
+    70%{ opacity:1; transform:translateX(-50%) translateY(2px) rotate(0); }
+    100%{ opacity:1; transform:translateX(-50%) translateY(0) rotate(0); }
+  }
+  /* slight ground dust on bag placement */
+  .dust{
+    position:absolute;bottom:22px;left:50%;width:8px;height:8px;border-radius:50%;
+    background:rgba(62,211,199,0.4);opacity:0;
+    transform:translateX(-50%);
+  }
+  /* intro label */
+  .intro-label{
+    margin-top:26px;
+    font-family:'Space Grotesk',sans-serif;
+    color:#7ec9c2;letter-spacing:1px;
+    opacity:0;animation:introFade 0.8s ease 0.3s forwards;
+  }
+  @keyframes introFade{to{opacity:1;}}
+  .intro-label span{color:#F2A93B;}
+
+  /* ═══════ LOGIN FORM (opens after bag placed) ═══════ */
+  .login-form{
+    display:flex;flex-direction:column;gap:12px;
+    max-width:300px;width:90%;
+    padding:20px;
+    background:rgba(16,16,20,0.6);
+    backdrop-filter:blur(6px);
+    border-radius:8px;color:#fff;font-family:Arial;
+    border:1px solid rgba(255,255,255,0.08);
+    box-shadow:0 20px 50px rgba(0,0,0,0.4);
+    z-index:10;
+    position:relative;
+    opacity:0;visibility:hidden;
+    transform:translateY(20px) scale(0.95);
+    transition:opacity 0.6s ease, transform 0.6s ease, visibility 0.6s;
+  }
+  .login-form.open{
+    opacity:1;visibility:visible;
+    transform:translateY(0) scale(1);
+  }
+  .login-form-title{text-align:center;font-size:1.15rem;font-weight:700;margin-bottom:2px;font-family:'Space Grotesk',sans-serif;}
   input,button{padding:10px;border:none;border-radius:5px;}
-  input{background:#2a2a2a;color:#fff;border:1px solid #333;outline:none;}
+  input{background:rgba(34,34,38,0.8);color:#fff;border:1px solid #333;outline:none;}
   input:focus{border-color:#F2A93B;}
   button{background:#007bff;color:#fff;cursor:pointer;font-weight:600;}
   button:hover{background:#0056b3;}
+  button:disabled{opacity:0.6;cursor:wait;}
   .error{color:#ff6b6b;font-size:0.82rem;display:none;text-align:center;}
   .signup{font-size:0.82rem;text-align:center;color:#888;}
   .signup a{color:#F2A93B;text-decoration:none;font-weight:600;}
-  h2{text-align:center;margin-bottom:4px;}
+  .role-tag{
+    text-align:center;font-size:0.72rem;color:#7ec9c2;
+    background:rgba(62,211,199,0.1);padding:4px 10px;border-radius:12px;
+    margin-bottom:6px;display:inline-block;align-self:center;
+  }
 </style>
 </head>
 <body>
 
+<!-- INTRO SCENE: person carrying a bag walks in and places it on the ground -->
+<div class="intro-scene" id="introScene">
+  <div class="stage">
+    <div class="dust"></div>
+    <div class="ground"></div>
+    <div class="bag" id="bag">
+      <div class="bag-handle"></div>
+      <div class="bag-body"></div>
+      <div class="bag-lock"></div>
+    </div>
+    <div class="person" id="person">
+      <div class="p-head"></div>
+      <div class="p-body"></div>
+      <div class="p-arm p-arm-l"></div>
+      <div class="p-arm p-arm-r"></div>
+      <div class="p-leg p-leg-l"></div>
+      <div class="p-leg p-leg-r"></div>
+    </div>
+  </div>
+  <div class="intro-label"><span>PLATINUMZ</span> — Karibu · Welcome</div>
+</div>
+
+<!-- LOGIN FORM -->
 <form class="login-form" id="loginForm">
-  <h2>Login</h2>
+  <span class="role-tag">PLATINUMZ IT Support</span>
+  <div class="login-form-title">Login</div>
   <input type="email" id="loginEmail" placeholder="Email" required>
   <input type="password" id="loginPass" placeholder="Password" required>
   <div class="error" id="loginError"></div>
@@ -70,11 +238,35 @@ function _route(user){
   });
 }
 
+/* If already logged in, route immediately (no need for animation) */
 auth.onAuthStateChanged(function(user){
-  if(user){
-    _route(user);
-  }
+  if(user){ _route(user); }
 });
+
+/* Show the login form once the bag has been placed on the ground */
+var formOpened = false;
+function openLoginForm(){
+  if(formOpened) return;
+  formOpened = true;
+  var form = document.getElementById('loginForm');
+  var scene = document.getElementById('introScene');
+  form.classList.add('open');
+  /* fade the intro scene out after the form appears */
+  setTimeout(function(){
+    if(scene) scene.style.transition = 'opacity 0.5s ease';
+    scene.style.opacity = '0';
+  }, 900);
+  setTimeout(function(){
+    if(scene) scene.style.display = 'none';
+  }, 1500);
+}
+
+/* Wait for the bag placement animation to finish, then open the form */
+window.addEventListener('load', function(){
+  setTimeout(openLoginForm, 1700);
+});
+/* fallback: also open if animations are disabled/complete early */
+setTimeout(openLoginForm, 2500);
 
 document.getElementById('loginForm').addEventListener('submit', function(e){
   e.preventDefault();
@@ -86,8 +278,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e){
   btn.textContent = 'Logging in...';
   btn.disabled = true;
   auth.signInWithEmailAndPassword(email, pass).then(function(){
-    btn.textContent = 'Login';
-    btn.disabled = false;
+    /* routed by onAuthStateChanged */
   }).catch(function(error){
     btn.textContent = 'Login';
     btn.disabled = false;
