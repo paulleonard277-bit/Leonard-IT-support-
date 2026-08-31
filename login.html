@@ -48,169 +48,109 @@
     position:absolute;left:10%;right:10%;bottom:26px;height:2px;
     background:linear-gradient(90deg,transparent,rgba(62,211,199,0.5),transparent);
   }
-  /* ═══ SONIC-STYLE CHARACTER (bright blue, spikes, spins his legs to run) ═══ */
-  .person{
-    position:absolute;bottom:28px;left:50%;
-    width:170px;height:190px;
+  /* ═══ LAMP SCENE ═══ */
+  /* suspended hanging lamp that shines light downward */
+  .lamp{
+    position:absolute;top:10px;left:50%;
     transform:translateX(-50%);
-    animation:personWalk 2.2s ease-in forwards;
+    display:flex;flex-direction:column;align-items:center;
+    transform-origin:top center;
+    animation:lampSway 3s ease-in-out infinite alternate;
   }
-  @keyframes personWalk{
-    0%{ transform:translateX(calc(-50% - 70vw)) rotate(-12deg); }
-    30%{ transform:translateX(calc(-50% - 40vw)) rotate(-12deg); }
-    60%{ transform:translateX(calc(-50% + 6vw)) rotate(-12deg) translateY(3px); }
-    100%{ transform:translateX(-50%) rotate(-12deg) translateY(0); }
+  @keyframes lampSway{from{transform:translateX(-50%) rotate(-3deg);}to{transform:translateX(-50%) rotate(3deg);}}
+  .lamp-cord{
+    width:3px;height:70px;background:linear-gradient(#444,#222);
+    box-shadow:0 0 6px rgba(0,0,0,0.5);
   }
-
-  /* ═══ SPIN BALL (Sonic curls into a ball to start running) ═══ */
-  .person.spin { animation:sonicSpin 0.7s cubic-bezier(.5,.1,.4,1) forwards; }
-  @keyframes sonicSpin{
-    0%{ transform:translateX(calc(-50% - 70vw)) rotate(-12deg); }
-    100%{ transform:translateX(calc(-50% - 12vw)) rotate(720deg); }
+  .lamp-head{
+    width:34px;height:22px;background:radial-gradient(circle at 50% 0%, #3a3a42,#15151b);
+    border-radius:4px 4px 6px 6px;position:relative;
+    box-shadow:inset 0 2px 4px rgba(255,255,255,0.15), 0 0 20px 6px rgba(255,244,214,0.55);
   }
-  .spin .p-head,.spin .p-body,.spin .p-arm,.spin .p-leg,.spin .p-belly-hip,.spin .bag{ visibility:hidden; }
-  .spin-ball{
-    position:absolute;left:50%;top:50%;width:74px;height:74px;
-    transform:translate(-50%,-50%);
-    background:radial-gradient(circle at 38% 34%, #5A8BFF, #2351e0 60%);
-    border-radius:50%;display:none;
-    box-shadow:inset -10px -8px 0 rgba(0,20,90,0.25);
-    z-index:3;
+  .lamp-head::after{
+    content:'';position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);
+    width:20px;height:10px;border-radius:0 0 50% 50%;
+    background:#ffd98a;
+    box-shadow:0 0 18px 6px rgba(255,214,130,0.8);
   }
-  .person.spin .spin-ball{ display:block; }
-  .spin-ball .hair{position:absolute;left:-8px;top:-8px;width:30px;height:22px;background:#2351e0;border-radius:50% 8px 8px 50%;transform:rotate(20deg);}
-
-  /* spikes (bright blue) at the back of the head */
-  .p-spike{
-    position:absolute;left:4px;top:-6px;width:28px;height:28px;background:#2351e0;
-    transform:rotate(30deg);border-radius:4px 8px 2px 8px;
-  }
-  .p-spike.s2{left:-14px;top:6px;transform:rotate(58deg);width:32px;height:24px;}
-  .p-spike.s3{left:-32px;top:22px;transform:rotate(78deg);width:36px;height:22px;}
-
-  /* large Sonic head (bright blue) with face */
-  .p-head{
-    position:absolute;left:40px;bottom:108px;width:96px;height:82px;border-radius:46% 46% 42% 42% / 55% 55% 40% 40%;
-    background:radial-gradient(circle at 38% 34%, #5A8BFF, #2351e0 70%);
-    box-shadow:inset -9px -7px 0 rgba(0,20,90,0.25);
-    z-index:2;
-  }
-  /* Sonic muzzle (cream/peach snout) */
-  .p-head::before{
-    content:'';position:absolute;left:30px;bottom:0;width:52px;height:34px;border-radius:22px 22px 14px 14px;
-    background:#f6d8bb;
-  }
-  /* Sonic nose (black) */
-  .p-nose{
-    position:absolute;left:60px;bottom:14px;width:14px;height:10px;border-radius:50%;
-    background:#111118;z-index:3;
-  }
-  /* eyes (big green) */
-  .p-eye{
-    position:absolute;top:24px;width:17px;height:20px;border-radius:50%;
-    background:radial-gradient(circle at 40% 40%, #0faa5a,#066f3f 70%);border:2px solid #111118;
-  }
-  .p-eye-l{left:22px;}
-  .p-eye-r{right:20px;}
-
-  /* blue body */
-  .p-body{
-    position:absolute;left:54px;bottom:48px;width:62px;height:56px;border-radius:16px 16px 10px 10px;
-    background:linear-gradient(180deg,#5A8BFF,#2351e0);
-    box-shadow:inset 0 -9px 0 rgba(0,20,90,0.2);
-  }
-  /* belly (cream) */
-  .p-belly-hip{position:absolute;left:52px;bottom:32px;width:66px;height:26px;border-radius:10px;background:#f6d8bb;}
-
-  /* legs — spin 360° like Sonic running wheels */
-  .p-leg{
-    position:absolute;bottom:0;width:16px;height:28px;
-    transform-origin:top;border-radius:6px;background:#2351e0;
-  }
-  .p-leg .shoe{position:absolute;bottom:-4px;left:-5px;width:28px;height:15px;border-radius:6px 2px 6px 4px;background:#d62828;border:1px solid #8f1a1a;}
-  .p-leg-l{left:60px;animation:legSpinL 0.5s linear infinite;transform-origin:55% 0%;}
-  .p-leg-r{right:34px;animation:legSpinR 0.5s linear infinite;transform-origin:55% 0%;}
-  @keyframes legSpinL{
-    0%{ transform:rotate(0deg) translateX(2px); }
-    25%{ transform:rotate(90deg) translateX(2px); }
-    50%{ transform:rotate(180deg) translateX(2px); }
-    75%{ transform:rotate(270deg) translateX(2px); }
-    100%{ transform:rotate(360deg) translateX(2px); }
-  }
-  @keyframes legSpinR{
-    0%{ transform:rotate(360deg) translateX(-2px); }
-    25%{ transform:rotate(270deg) translateX(-2px); }
-    50%{ transform:rotate(180deg) translateX(-2px); }
-    75%{ transform:rotate(90deg) translateX(-2px); }
-    100%{ transform:rotate(0deg) translateX(-2px); }
-  }
-  /* legs stop after the run */
-  .stop .p-leg-l{animation:none;transform:rotate(0);}
-  .stop .p-leg-r{animation:none;transform:rotate(0);}
-
-  /* arms */
-  .p-arm{position:absolute;top:104px;width:12px;height:36px;background:#2351e0;border-radius:6px;transform-origin:top;}
-  .p-arm-l{left:54px;animation:armSwingL 0.5s linear infinite;}
-  .p-arm-r{right:34px;}
-  /* free arm swings, bag arm steady */
-  @keyframes armSwingL{0%,100%{transform:rotate(-28deg);}50%{transform:rotate(6deg);}}
-  /* arms raise up after bag placed */
-  .raise .p-arm-l{animation:armUpL 0.6s ease-out 0.2s forwards;}
-  .raise .p-arm-r{animation:armUpR 0.6s ease-out 0.2s forwards;}
-  @keyframes armUpL{0%{transform:rotate(0) translateY(0);}100%{transform:rotate(152deg) translateY(-50px);}}
-  @keyframes armUpR{0%{transform:rotate(0) translateY(0);}100%{transform:rotate(-152deg) translateY(-50px);}}
-  /* free arm stops after run */
-  .stop .p-arm-l{animation:none;transform:rotate(0);}
-
-  /* bag / black travel bag — carried by ONE hand (right), then placed */
-  .bag{
-    position:absolute;right:8px;bottom:70px;
-    width:96px;height:64px;
-    transform:translateY(0) rotate(-10deg);
-    animation:bagCarry 0.22s ease-in-out infinite alternate;
-    filter:drop-shadow(0 8px 14px rgba(0,0,0,0.45));
-    z-index:2;
-  }
-  @keyframes bagCarry{from{transform:translateY(0) rotate(-10deg);}to{transform:translateY(-5px) rotate(-16deg);}}
-  .bag-body{
-    position:absolute;inset:0;
-    background:linear-gradient(160deg,#3a3a40,#19191d);
-    border-radius:10px;border:2px solid #000;
-  }
-  .bag-handle{
-    position:absolute;left:50%;bottom:100%;width:32px;height:18px;
+  /* light cone shining down to the ground */
+  .light-cone{
+    position:absolute;left:50%;top:0;width:0;height:0;
     transform:translateX(-50%);
-    border:4px solid #000;border-bottom:none;border-radius:8px 8px 0 0;
+    border-left:130px solid transparent;
+    border-right:130px solid transparent;
+    border-top:210px solid rgba(255,236,190,0.28);
+    filter:blur(2px);
+    pointer-events:none;
+    opacity:0;
+    transition:opacity 0.4s ease;
   }
-  .bag-lock{
-    position:absolute;left:50%;top:22px;width:24px;height:16px;transform:translateX(-50%);
-    background:#c9a227;border-radius:4px;border:1px solid #7a5f14;
+  @keyframes lightPulse{from{opacity:0.55;}to{opacity:1;}}
+  .light-cone.on{opacity:1;animation:lightPulse 2.6s ease-in-out infinite alternate;}
+  /* soft glow pool on the ground */
+  .light-pool{
+    position:absolute;bottom:18px;left:50%;transform:translateX(-50%);
+    width:260px;height:34px;border-radius:50%;
+    background:radial-gradient(ellipse at 50% 50%, rgba(255,236,190,0.5), transparent 70%);
+    opacity:0;
   }
-  .bag-lock::after{content:'';position:absolute;left:50%;top:3px;width:11px;height:8px;transform:translateX(-50%);background:#e9c65c;border-radius:3px;}
-  /* bag placed down after the run */
-  .bag.placed{animation:bagPlace 0.55s cubic-bezier(.5,-.4,.3,1.3) forwards;}
-  @keyframes bagPlace{
-    0%{ transform:translateY(0) rotate(-10deg); }
-    60%{ transform:translateY(62px) rotate(4deg); }
-    100%{ transform:translateY(62px) rotate(0); }
-  }
-  /* slight ground dust on bag placement */
-  .dust{
-    position:absolute;bottom:22px;left:50%;width:8px;height:8px;border-radius:50%;
-    background:rgba(62,211,199,0.4);opacity:0;
+  .light-pool.on{opacity:1;}
+
+  /* small green head with big ears on the ground, looking up at the light */
+  .critter{
+    position:absolute;left:50%;bottom:24px;width:120px;height:120px;
     transform:translateX(-50%);
+    transform-origin:bottom center;
+    opacity:0;
   }
-  /* intro label */
-  .intro-label{
-    margin-top:26px;
-    font-family:'Space Grotesk',sans-serif;
-    color:#7ec9c2;letter-spacing:1px;
-    opacity:0;animation:introFade 0.8s ease 0.3s forwards;
+  .critter.on{opacity:1;animation:lookUp 1.1s ease-out forwards;}
+  @keyframes lookUp{
+    0%{ transform:translateY(40%) translateX(-50%) rotate(0); }
+    100%{ transform:translateY(0) translateX(-50%) rotate(-2deg); }
   }
-  @keyframes introFade{to{opacity:1;}}
+  /* big ears on top of the head */
+  .c-ear{
+    position:absolute;top:0;width:34px;height:52px;border-radius:50% 50% 8px 8px;
+    background:radial-gradient(circle at 50% 20%, #7BD14E,#3e8e2e 75%);
+    border:2px solid #2a6b1f;
+    z-index:1;
+  }
+  .c-ear::after{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);width:16px;height:34px;border-radius:50%;background:#f2b8a6;}
+  .c-ear-l{left:2px;transform:rotate(-14deg);}
+  .c-ear-r{right:2px;transform:rotate(14deg);}
+  /* green head */
+  .c-head{
+    position:absolute;left:50%;bottom:0;transform:translateX(-50%);
+    width:96px;height:86px;border-radius:46% 46% 42% 42% / 60% 60% 42% 42%;
+    background:radial-gradient(circle at 40% 34%, #8fd95c,#4aa534 72%);
+    box-shadow:inset -8px -6px 0 rgba(20,70,10,0.25);
+  }
+  /* eyes looking UP (pupils toward the top) */
+  .c-eye{
+    position:absolute;top:28px;width:26px;height:30px;border-radius:50%;
+    background:radial-gradient(circle at 50% 30%, #fff 0 55%, #ffe98a 60% 100%);
+    border:2px solid #1c3a12;
+  }
+  .c-eye .pupil{
+    position:absolute;left:50%;top:3px;transform:translateX(-50%);
+    width:10px;height:13px;border-radius:50%;
+    background:#1c3a12;
+  }
+  .c-eye-l{left:12px;}
+  .c-eye-r{right:12px;}
+  /* downward (neutral) mouth */
+  .c-mouth{
+    position:absolute;left:50%;top:58px;transform:translateX(-50%);
+    width:16px;height:10px;border-bottom:3px solid #1c3a12;border-radius:0 0 60% 60%;
+  }
+  /* upward (happy smile) when it sees the light */
+  .critter.happy .c-mouth{
+    border-bottom:none;border-top:3px solid #1c3a12;border-radius:60% 60% 0 0;
+  }
+  .c-nose{position:absolute;left:50%;top:50px;transform:translateX(-50%);width:12px;height:9px;border-radius:50%;background:#2a6b1f;}
   .intro-label span{color:#F2A93B;}
 
-  /* ═══════ LOGIN FORM (opens beside the person) ═══════ */
+  /* ═══════ LOGIN FORM (opens beside the scene) ═══════ */
   .login-form{
     display:flex;flex-direction:column;gap:12px;
     max-width:300px;width:min(300px,80vw);
@@ -247,7 +187,7 @@
   }
 
   @media (max-width:680px){
-    /* stack form below the person on small screens */
+    /* stack form below the scene on small screens */
     .intro-scene{flex-direction:column;gap:6px;overflow-y:auto;}
     .stage{width:min(300px,86vw);height:280px;}
     .login-form.open{transform:translateX(0) scale(1);}
@@ -256,36 +196,28 @@
 </head>
 <body>
 
-<!-- INTRO SCENE: person carrying a bag walks in, places it, raises arms, form opens beside -->
+<!-- INTRO SCENE: lamp shines light down, a green critter with big ears looks up, form opens -->
 <div class="intro-scene" id="introScene">
   <div class="stage">
-    <div class="dust"></div>
-    <div class="ground"></div>
-    <div class="person" id="person">
-      <div class="spin-ball"><div class="hair"></div></div>
-      <div class="p-spike s1"></div>
-      <div class="p-spike s2"></div>
-      <div class="p-spike s3"></div>
-      <div class="p-head">
-        <div class="p-eye p-eye-l"></div>
-        <div class="p-eye p-eye-r"></div>
-        <div class="p-nose"></div>
-      </div>
-      <div class="p-belly-hip"></div>
-      <div class="p-body"></div>
-      <div class="p-arm p-arm-l"></div>
-      <div class="p-arm p-arm-r"></div>
-      <div class="p-leg p-leg-l"><div class="shoe"></div></div>
-      <div class="p-leg p-leg-r"><div class="shoe"></div></div>
-      <div class="bag" id="bag">
-        <div class="bag-handle"></div>
-        <div class="bag-body"></div>
-        <div class="bag-lock"></div>
+    <div class="light-cone" id="lightCone"></div>
+    <div class="light-pool" id="lightPool"></div>
+    <div class="lamp">
+      <div class="lamp-cord"></div>
+      <div class="lamp-head"></div>
+    </div>
+    <div class="critter" id="critter">
+      <div class="c-ear c-ear-l"></div>
+      <div class="c-ear c-ear-r"></div>
+      <div class="c-head">
+        <div class="c-eye c-eye-l"><div class="pupil"></div></div>
+        <div class="c-eye c-eye-r"><div class="pupil"></div></div>
+        <div class="c-nose"></div>
+        <div class="c-mouth"></div>
       </div>
     </div>
   </div>
 
-  <!-- LOGIN FORM (opens beside the person) -->
+  <!-- LOGIN FORM (opens beside the scene) -->
   <form class="login-form" id="loginForm" style="align-self:center;">
     <span class="role-tag">PLATINUMZ IT Support</span>
     <div class="login-form-title">Login</div>
@@ -342,39 +274,30 @@ auth.onAuthStateChanged(function(user){
   if(user){ _route(user); }
 });
 
-/* Intro sequence: walk in -> stop -> place bag on ground -> raise arms -> open form beside */
+/* Intro sequence: lamp lights up -> cone shines down -> green critter looks up -> form opens */
 var formOpened = false;
 function openLoginForm(){
   if(formOpened) return;
   formOpened = true;
-  var person = document.getElementById('person');
-  var bag = document.getElementById('bag');
   var form = document.getElementById('loginForm');
-  /* person stops walking */
-  person.classList.add('stop');
-  /* place the bag down on the ground (drops over 0.55s) */
-  bag.classList.add('placed');
-  /* after the bag lands, raise arms and open the form beside the person */
-  setTimeout(function(){
-    person.classList.add('raise');
-    form.classList.add('open');
-  }, 620);
+  form.classList.add('open');
 }
 
 /* timeline:
-   1) Sonic spins up into a ball (0 -> 0.7s)
-   2) person runs/walks (0.7 -> 2.9s), then we trigger the placing sequence */
+   1) lamp turns on, light cone + pool fade in (0 -> 0.9s)
+   2) critter head appears and looks up at the light (0.6 -> 1.8s)
+   3) critter smiles, then the registration form opens (2.1s) */
 window.addEventListener('load', function(){
-  var person = document.getElementById('person');
-  person.classList.add('spin');
-  /* after the spin, switch to the running pose (ball hides, character appears) */
-  setTimeout(function(){
-    person.classList.remove('spin');
-  }, 700);
-  setTimeout(openLoginForm, 3000);
+  var cone = document.getElementById('lightCone');
+  var pool = document.getElementById('lightPool');
+  var critter = document.getElementById('critter');
+  setTimeout(function(){ cone.classList.add('on'); pool.classList.add('on'); }, 150);
+  setTimeout(function(){ critter.classList.add('on'); }, 650);
+  setTimeout(function(){ critter.classList.add('happy'); }, 1700);
+  setTimeout(openLoginForm, 2100);
 });
 /* fallback: also trigger if animations are disabled/slow */
-setTimeout(openLoginForm, 3700);
+setTimeout(openLoginForm, 2800);
 
 document.getElementById('loginForm').addEventListener('submit', function(e){
   e.preventDefault();
