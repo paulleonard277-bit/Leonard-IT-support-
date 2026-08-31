@@ -1341,8 +1341,6 @@
     .gate-box input, .gate-box select{padding:10px 12px; font-size:0.88rem;}
     .gate-box .submit-btn{padding:11px; font-size:0.88rem; margin-top:16px;}
     .switch-mode{font-size:0.8rem !important; margin-top:12px !important;}
-    .gate-box #forgotWrap{margin-top:6px;}
-    .gate-box #forgotWrap a{font-size:0.78rem;}
   }
 
   /* ═══════ COMPREHENSIVE MOBILE RESPONSIVE ═══════ */
@@ -1427,8 +1425,6 @@
     #orderModal .modal-box textarea{font-size:0.88rem; padding:11px 12px;}
     #servicesModal .modal-box{padding:18px 14px; max-height:90vh;}
     #servicesModal .extended-services .ext-card{padding:14px 12px !important;}
-    #forgotModal .modal-box{padding:22px 16px;}
-    .fp-code-input{width:40px; height:48px; font-size:1.1rem;}
     #legalModal .modal-box{max-width:100%; padding:20px 16px; max-height:85vh;}
 
     #customerChatWidget{bottom:80px; right:8px; left:8px;}
@@ -1534,7 +1530,6 @@
     .cu-quick-item .ql{font-size:0.65rem;}
     .ad-stats{grid-template-columns:1fr 1fr !important; gap:8px;}
     .ad-stat-card .num{font-size:1.3rem !important;}
-    .fp-code-input{width:36px; height:44px; font-size:1rem;}
     .cu-offer-card .discount{font-size:1.1rem !important;}
     .cu-offer-card h4{font-size:0.88rem !important;}
     .cu-offer-card p{font-size:0.78rem !important;}
@@ -2499,61 +2494,6 @@
   </div>
 </div>
 
-<!-- Forgot Password Verification Modal -->
-<div class="modal-overlay" id="forgotModal" style="z-index:250;">
-  <div class="modal-box" style="max-width:440px;">
-    <button class="close-x" id="closeForgotBtn">&times;</button>
-    <div id="forgotStep1">
-      <div class="eyebrow" style="margin-bottom:10px;" data-label="fp-step1-eyebrow">&#x1F4C9; Sahau Password?</div>
-      <p style="color:var(--muted); font-size:0.88rem; margin-bottom:20px;" data-label="fp-step1-desc">Andika email yako tutakutumia nambari ya uthibitisho.</p>
-      <label data-label="fp-email-label">Email</label>
-      <input type="email" id="fpEmail" required placeholder="jina@mfano.com" style="width:100%; padding:12px 14px; background:var(--ink); border:1px solid var(--line); border-radius:8px; color:var(--paper); font-family:'Inter',sans-serif; font-size:0.95rem;">
-      <p class="err" id="fpErr1"></p>
-      <button class="submit-btn" id="fpSendCode" style="margin-top:16px; width:100%;" data-label="fp-send-btn">Tuma Nambari &#8594;</button>
-    </div>
-    <div id="forgotStep2" style="display:none;">
-      <div class="eyebrow" style="margin-bottom:10px;" data-label="fp-step2-eyebrow">&#x1F510; Thibitisha Nambari</div>
-      <p style="color:var(--muted); font-size:0.88rem; margin-bottom:20px;" data-label="fp-step2-desc">Tafadhali weka nambari ya taratibu 6 uliopitia email.</p>
-      <div style="display:flex; gap:8px; justify-content:center; margin-bottom:20px;">
-        <input type="text" maxlength="1" class="fp-code-input" data-idx="0" inputmode="numeric" pattern="[0-9]" autocomplete="one-time-code">
-        <input type="text" maxlength="1" class="fp-code-input" data-idx="1" inputmode="numeric" pattern="[0-9]">
-        <input type="text" maxlength="1" class="fp-code-input" data-idx="2" inputmode="numeric" pattern="[0-9]">
-        <input type="text" maxlength="1" class="fp-code-input" data-idx="3" inputmode="numeric" pattern="[0-9]">
-        <input type="text" maxlength="1" class="fp-code-input" data-idx="4" inputmode="numeric" pattern="[0-9]">
-        <input type="text" maxlength="1" class="fp-code-input" data-idx="5" inputmode="numeric" pattern="[0-9]">
-      </div>
-      <p class="err" id="fpErr2"></p>
-      <button class="submit-btn" id="fpVerifyCode" style="margin-top:16px; width:100%;" data-label="fp-verify-btn">Thibitisha &#8594;</button>
-    </div>
-    <div id="forgotStep3" style="display:none;">
-      <div class="eyebrow" style="margin-bottom:10px;" data-label="fp-step3-eyebrow">&#x1F511; Weka Password Mpya</div>
-      <p style="color:var(--muted); font-size:0.88rem; margin-bottom:20px;" data-label="fp-step3-desc">Nambari imethibitishwa. Weka password mpya.</p>
-      <label data-label="fp-new-pass-label">Password Mpya</label>
-      <input type="password" id="fpNewPass" required placeholder="&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;" minlength="6" style="width:100%; padding:12px 14px; background:var(--ink); border:1px solid var(--line); border-radius:8px; color:var(--paper); font-family:'Inter',sans-serif; font-size:0.95rem;">
-      <label data-label="fp-confirm-pass-label">Thibitisha Password</label>
-      <input type="password" id="fpConfirmPass" required placeholder="&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;" minlength="6" style="width:100%; padding:12px 14px; background:var(--ink); border:1px solid var(--line); border-radius:8px; color:var(--paper); font-family:'Inter',sans-serif; font-size:0.95rem;">
-      <p class="err" id="fpErr3"></p>
-      <button class="submit-btn" id="fpResetPass" style="margin-top:16px; width:100%;" data-label="fp-reset-btn">Badilisha Password &#8594;</button>
-    </div>
-    <div id="forgotStep4" style="display:none; text-align:center;">
-      <div style="font-size:3rem; margin-bottom:12px;">&#x2705;</div>
-      <div class="eyebrow" style="margin-bottom:10px;" data-label="fp-step4-eyebrow">Imefanikiwa!</div>
-      <p style="color:var(--muted); font-size:0.88rem; margin-bottom:20px;" data-label="fp-step4-desc">Password yako imebadilishwa. Sasa unaweza kuingia.</p>
-      <button class="submit-btn" id="fpGoLogin" style="width:100%;" data-label="fp-login-btn">Ingia Sasa &#8594;</button>
-    </div>
-  </div>
-</div>
-
-<style>
-  .fp-code-input{
-    width:44px; height:52px; text-align:center; font-size:1.3rem; font-weight:700;
-    background:var(--ink); border:2px solid var(--line); border-radius:10px;
-    color:var(--paper); font-family:'JetBrains Mono',monospace;
-    transition:border-color 0.2s, box-shadow 0.2s;
-  }
-  .fp-code-input:focus{ border-color:var(--fiber); box-shadow:0 0 12px rgba(62,211,199,0.25); outline:none; }
-</style>
-
 <div class="modal-overlay" id="legalModal">
   <div class="modal-box" style="max-width:560px; max-height:80vh; overflow-y:auto;">
     <button class="close-x" id="closeLegalBtn">&times;</button>
@@ -2879,7 +2819,6 @@
   const switchModeText = document.getElementById('switchModeText');
   const authErr = document.getElementById('authErr');
   const authOk = document.getElementById('authOk');
-  const forgotWrap = document.getElementById('forgotWrap');
   const authArea = document.getElementById('authArea');
   const authName = document.getElementById('authName');
   const nameWrap = document.getElementById('nameWrap');
@@ -2900,7 +2839,6 @@
       if(authSub) authSub.textContent = t['gate-login-sub'];
       if(authSubmitBtn) authSubmitBtn.textContent = t['gate-login-btn'];
       if(switchModeText) switchModeText.innerHTML = t['gate-no-account'] + ' <a id="switchModeLink">' + t['gate-signup-link'] + '</a>';
-      if(forgotWrap) forgotWrap.style.display = 'block';
       if(nameWrap) nameWrap.style.display = 'none';
       if(serviceWrap) serviceWrap.style.display = 'none';
       if(confirmWrap) confirmWrap.style.display = 'none';
@@ -2911,7 +2849,6 @@
       if(authSub) authSub.textContent = t['gate-signup-sub'];
       if(authSubmitBtn) authSubmitBtn.textContent = t['gate-signup-btn'];
       if(switchModeText) switchModeText.innerHTML = t['gate-has-account'] + ' <a id="switchModeLink">' + t['gate-login-link'] + '</a>';
-      if(forgotWrap) forgotWrap.style.display = 'none';
       if(nameWrap) nameWrap.style.display = 'block';
       if(serviceWrap) serviceWrap.style.display = 'none';
       if(confirmWrap) confirmWrap.style.display = 'block';
@@ -2920,129 +2857,10 @@
     }
     const switchLink = document.getElementById('switchModeLink');
     if(switchLink) switchLink.addEventListener('click', () => setMode(mode === 'login' ? 'signup' : 'login'));
-    const forgotLink = document.getElementById('forgotLink');
-    if(forgotLink) forgotLink.addEventListener('click', handleForgotPassword);
   }
 
   // Safety: force hide loading screen after 3s
   setTimeout(() => { if(loadingScreen) loadingScreen.style.display = 'none'; }, 3000);
-
-  function handleForgotPassword(){
-    const forgotModal = document.getElementById('forgotModal');
-    const forgotStep1 = document.getElementById('forgotStep1');
-    const forgotStep2 = document.getElementById('forgotStep2');
-    const forgotStep3 = document.getElementById('forgotStep3');
-    const forgotStep4 = document.getElementById('forgotStep4');
-    forgotStep1.style.display = 'block';
-    forgotStep2.style.display = 'none';
-    forgotStep3.style.display = 'none';
-    forgotStep4.style.display = 'none';
-    document.getElementById('fpEmail').value = authEmail.value.trim() || '';
-    document.getElementById('fpErr1').style.display = 'none';
-    document.getElementById('fpErr2').style.display = 'none';
-    document.getElementById('fpErr3').style.display = 'none';
-    document.querySelectorAll('.fp-code-input').forEach(i => { i.value = ''; });
-    forgotModal.classList.add('open');
-  }
-
-  let fpEmail = '';
-  let fpCode = '';
-
-  document.getElementById('closeForgotBtn').addEventListener('click', () => {
-    document.getElementById('forgotModal').classList.remove('open');
-  });
-  document.getElementById('forgotModal').addEventListener('click', (e) => {
-    if(e.target.id === 'forgotModal') document.getElementById('forgotModal').classList.remove('open');
-  });
-
-  document.getElementById('fpSendCode').addEventListener('click', () => {
-    const errEl = document.getElementById('fpErr1');
-    const t = translations[currentLang];
-    fpEmail = document.getElementById('fpEmail').value.trim();
-    errEl.style.display = 'none';
-    if(!fpEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fpEmail)){ errEl.textContent = t['fp-err-email']; errEl.style.display = 'block'; return; }
-    fpCode = String(Math.floor(100000 + Math.random() * 900000));
-    db.collection('passwordResets').doc(fpEmail).set({
-      code: fpCode,
-      email: fpEmail,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      expiresAt: new Date(Date.now() + 10 * 60 * 1000)
-    }).then(() => {
-      console.log('EmailJS typeof:', typeof emailjs);
-      console.log('EmailJS send:', EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, { to_email: fpEmail, code: fpCode });
-      if(typeof emailjs === 'undefined'){
-        errEl.textContent = 'EmailJS haija load. Jaribu tena.';
-        errEl.style.display = 'block';
-        return;
-      }
-      emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-        to_email: fpEmail,
-        code: fpCode,
-        from_name: 'PLATINUMZ IT Support',
-        email: fpEmail,
-        name: 'PLATINUMZ IT Support',
-        message: 'Nambari yako ya uthibitisho ni: ' + fpCode + '. Inaisha baada ya dakika 10.',
-        time: new Date().toLocaleString('sw-TZ')
-      }, EMAILJS_PUBLIC_KEY).then((res) => {
-        document.getElementById('forgotStep1').style.display = 'none';
-        document.getElementById('forgotStep2').style.display = 'block';
-        document.querySelector('.fp-code-input[data-idx="0"]').focus();
-      }).catch((err) => {
-        errEl.textContent = 'EmailJS error: ' + (err.text || JSON.stringify(err));
-        errEl.style.display = 'block';
-      });
-    }).catch(() => { errEl.textContent = t['fp-err-email']; errEl.style.display = 'block'; });
-  });
-
-  document.querySelectorAll('.fp-code-input').forEach((input, idx, arr) => {
-    input.addEventListener('input', () => {
-      if(input.value.length === 1 && idx < arr.length - 1) arr[idx + 1].focus();
-    });
-    input.addEventListener('keydown', (e) => {
-      if(e.key === 'Backspace' && !input.value && idx > 0) arr[idx - 1].focus();
-    });
-  });
-
-  document.getElementById('fpVerifyCode').addEventListener('click', () => {
-    const errEl = document.getElementById('fpErr2');
-    const t = translations[currentLang];
-    errEl.style.display = 'none';
-    let entered = '';
-    document.querySelectorAll('.fp-code-input').forEach(i => { entered += i.value; });
-    if(entered.length !== 6){ errEl.textContent = t['fp-err-code-length']; errEl.style.display = 'block'; return; }
-    db.collection('passwordResets').doc(fpEmail).get().then((doc) => {
-      if(!doc.exists){ errEl.textContent = t['fp-err-code-invalid']; errEl.style.display = 'block'; return; }
-      const data = doc.data();
-      const expiry = data.expiresAt ? data.expiresAt.toDate() : new Date(0);
-      if(new Date() > expiry){ errEl.textContent = t['fp-err-code-expired']; errEl.style.display = 'block'; return; }
-      if(entered !== data.code){ errEl.textContent = t['fp-err-code-wrong']; errEl.style.display = 'block'; return; }
-      document.getElementById('forgotStep2').style.display = 'none';
-      document.getElementById('forgotStep3').style.display = 'block';
-    }).catch(() => { errEl.textContent = t['fp-err-code-invalid']; errEl.style.display = 'block'; });
-  });
-
-  document.getElementById('fpResetPass').addEventListener('click', () => {
-    const errEl = document.getElementById('fpErr3');
-    const t = translations[currentLang];
-    errEl.style.display = 'none';
-    const newPass = document.getElementById('fpNewPass').value;
-    const confirmPass = document.getElementById('fpConfirmPass').value;
-    if(newPass.length < 6){ errEl.textContent = t['fp-err-pass-short']; errEl.style.display = 'block'; return; }
-    if(newPass !== confirmPass){ errEl.textContent = t['fp-err-pass-match']; errEl.style.display = 'block'; return; }
-    auth.sendPasswordResetEmail(fpEmail).then(() => {
-      db.collection('passwordResets').doc(fpEmail).delete().catch(() => {});
-      document.getElementById('forgotStep3').style.display = 'none';
-      document.getElementById('forgotStep4').style.display = 'block';
-    }).catch((err) => {
-      errEl.textContent = t['fp-err-reset'];
-      errEl.style.display = 'block';
-    });
-  });
-
-  document.getElementById('fpGoLogin').addEventListener('click', () => {
-    document.getElementById('forgotModal').classList.remove('open');
-    setMode('login');
-  });
 
   if(authForm) authForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -3752,7 +3570,7 @@
   }
 
   // ========== DATA EXPORT / IMPORT ==========
-  const _dataCollections = ['orders','clients','reviews','chats','appointments','loyalty','checkins','calls','typing','presence','passwordResets'];
+  const _dataCollections = ['orders','clients','reviews','chats','appointments','loyalty','checkins','calls','typing','presence'];
 
   function exportAllData(){
     const btn=event.target; btn.textContent='Inapakia...'; btn.disabled=true;
@@ -5603,9 +5421,6 @@
       const el = document.getElementById(id);
       if(el && t[id]) el.innerHTML = t[id];
     });
-    const forgotEl = document.getElementById('forgotLink');
-    if(forgotEl && t['gate-forgot']) forgotEl.textContent = t['gate-forgot'];
-
     // Gate form labels
     const setExt = (id, val) => { const el = document.getElementById(id); if(el && val) el.innerHTML = val; };
     const setTxt = (id, val) => { const el = document.getElementById(id); if(el && val) el.textContent = val; };
