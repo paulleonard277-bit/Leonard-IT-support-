@@ -1789,40 +1789,7 @@
   <div class="brand"><span class="dot"></span>PLATINUMZ IT Support</div>
 </div>
 
-<div id="customerGate" style="position:fixed;inset:0;z-index:400;display:flex;align-items:center;justify-content:center;background:var(--ink);color:var(--paper);">
-  <style>
-    .cu-gate-box{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:40px 32px;max-width:420px;width:90%;text-align:center;animation:fadeSlide 0.4s ease;}
-    .cu-gate-box h2{font-size:1.4rem;font-weight:700;margin-bottom:6px;font-family:'Space Grotesk',sans-serif;}
-    .cu-gate-box p{color:var(--muted);font-size:0.88rem;margin-bottom:24px;}
-    .cu-gate-box label{display:block;text-align:left;font-size:0.78rem;color:var(--muted);margin-bottom:4px;margin-top:14px;}
-    .cu-gate-box input{width:100%;padding:12px 14px;background:var(--ink);border:1px solid var(--line);border-radius:10px;color:var(--paper);font-size:0.92rem;font-family:'Inter',sans-serif;outline:none;transition:border-color 0.2s;}
-    .cu-gate-box input:focus{border-color:var(--fiber);}
-    .cu-gate-box .cu-gate-btn{width:100%;padding:14px;margin-top:20px;border:none;border-radius:12px;background:linear-gradient(135deg,var(--fiber),#2bc4b8);color:#fff;font-weight:700;font-size:0.95rem;cursor:pointer;transition:transform 0.15s,box-shadow 0.2s;font-family:'Inter',sans-serif;}
-    .cu-gate-box .cu-gate-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(62,211,199,0.3);}
-    .cu-gate-err{color:#ff6b6b;font-size:0.82rem;margin-top:10px;display:none;}
-    .cu-gate-switch{margin-top:18px;font-size:0.84rem;color:var(--muted);}
-    .cu-gate-switch a{color:var(--fiber);cursor:pointer;font-weight:600;text-decoration:none;}
-    .cu-gate-forgot{margin-top:12px;font-size:0.78rem;}
-    .cu-gate-forgot a{color:var(--fiber);cursor:pointer;text-decoration:none;}
-    .cu-gate-brand{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:16px;}
-    .cu-gate-brand .dot{width:10px;height:10px;border-radius:50%;background:var(--fiber);box-shadow:0 0 10px var(--fiber);}
-    .cu-gate-brand span{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;}
-  </style>
-  <div class="cu-gate-box">
-    <div class="cu-gate-brand"><span class="dot"></span><span>PLATINUMZ</span></div>
-    <h2 id="cuGateTitle">Ingia</h2>
-    <p id="cuGateSub">Ingia ili uone orders na huduma zako.</p>
-    <div id="cuGateErr" class="cu-gate-err"></div>
-    <form id="cuGateForm" autocomplete="on">
-      <label>Email</label>
-      <input type="email" id="cuGateEmail" required placeholder="jina@mfano.com">
-      <label>Password</label>
-      <input type="password" id="cuGatePass" required placeholder="••••••••" minlength="6">
-      <button type="submit" class="cu-gate-btn" id="cuGateSubmit">Ingia →</button>
-    </form>
-    <div class="cu-gate-switch" id="cuGateSwitch" style="display:none;"></div>
-  </div>
-</div>
+<div id="customerGate" style="display:none;"></div>
 
 <div id="customerDashboard" style="display:none; min-height:100vh; background:var(--ink); color:var(--paper);">
 
@@ -2953,47 +2920,13 @@
 
   let currentUserName = '';
   let firstAuthLoad = true;
-  let cuGateMode = 'login';
-
-  function cuSetGateMode(m){
-    forceCuGateLogin();
-  }
-  function forceCuGateLogin(){
-    cuGateMode = 'login';
-    var err=document.getElementById('cuGateErr'); if(err) err.style.display='none';
-    var title=document.getElementById('cuGateTitle');
-    var sub=document.getElementById('cuGateSub');
-    var btn=document.getElementById('cuGateSubmit');
-    if(title) title.textContent='Ingia';
-    if(sub) sub.textContent='Ingia ili uone orders na huduma zako.';
-    if(btn) btn.textContent='Ingia →';
-  }
-
-  var cuGateForm = document.getElementById('cuGateForm');
-  if(cuGateForm) cuGateForm.addEventListener('submit', function(e){
-    e.preventDefault();
-    cuGateMode = 'login';
-    var err=document.getElementById('cuGateErr');
-    var email=document.getElementById('cuGateEmail').value.trim();
-    var pass=document.getElementById('cuGatePass').value;
-    if(err) err.style.display='none';
-    auth.signInWithEmailAndPassword(email, pass).then(function(){
-      cuGateForm.reset();
-    }).catch(function(error){
-      var msg='Hitilafu imetokea.';
-      if(error.code==='auth/invalid-credential'||error.code==='auth/wrong-password'||error.code==='auth/user-not-found') msg='Email au password si sahihi.';
-      if(err){err.textContent=msg;err.style.display='block';}
-    });
-  });
 
   auth.onAuthStateChanged((user) => {
     if(!user){
-      document.getElementById('customerGate').style.display='flex';
-      document.getElementById('customerDashboard').style.display='none';
+      window.location.href='login.html';
       return;
     }
     document.body.classList.add('in-dashboard');
-    document.getElementById('customerGate').style.display='none';
     document.getElementById('customerDashboard').style.display='block';
     _checkAdminRole(user).then(function(result){
       if(result==='twoFactorPending') return;
