@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login — PLATINUMZ</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0E1A2B;font-family:Arial,sans-serif;}
+  .login-form{display:flex;flex-direction:column;gap:10px;max-width:300px;width:90%;padding:20px;background:#1e1e1e;border-radius:8px;color:#fff;font-family:Arial;}
+  input,button{padding:10px;border:none;border-radius:5px;}
+  input{background:#2a2a2a;color:#fff;border:1px solid #333;outline:none;}
+  input:focus{border-color:#F2A93B;}
+  button{background:#007bff;color:#fff;cursor:pointer;font-weight:600;}
+  button:hover{background:#0056b3;}
+  .error{color:#ff6b6b;font-size:0.82rem;display:none;text-align:center;}
+  .signup{font-size:0.82rem;text-align:center;color:#888;}
+  .signup a{color:#F2A93B;text-decoration:none;font-weight:600;}
+  h2{text-align:center;margin-bottom:4px;}
+</style>
+</head>
+<body>
+
+<form class="login-form" id="loginForm">
+  <h2>Login</h2>
+  <input type="email" id="loginEmail" placeholder="Email" required>
+  <input type="password" id="loginPass" placeholder="Password" required>
+  <div class="error" id="loginError"></div>
+  <button type="submit" id="loginBtn">Login</button>
+</form>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script>
+var firebaseConfig = {
+  apiKey: "AIzaSyBPhpL4O8Zfy7InnfKL8neM7hM7sBUQdWY",
+  authDomain: "platinumz--it-support.firebaseapp.com",
+  projectId: "platinumz--it-support",
+  storageBucket: "platinumz--it-support.firebasestorage.app",
+  messagingSenderId: "753254762964",
+  appId: "1:753254762964:web:e7ee9436a48d3274c42e41"
+};
+firebase.initializeApp(firebaseConfig);
+var auth = firebase.auth();
+
+auth.onAuthStateChanged(function(user){
+  if(user){
+    window.location.href = 'customer.html';
+  }
+});
+
+document.getElementById('loginForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  var email = document.getElementById('loginEmail').value.trim();
+  var pass = document.getElementById('loginPass').value;
+  var err = document.getElementById('loginError');
+  var btn = document.getElementById('loginBtn');
+  err.style.display = 'none';
+  btn.textContent = 'Logging in...';
+  btn.disabled = true;
+  auth.signInWithEmailAndPassword(email, pass).then(function(){
+    btn.textContent = 'Login';
+    btn.disabled = false;
+  }).catch(function(error){
+    btn.textContent = 'Login';
+    btn.disabled = false;
+    var msg = 'Something went wrong.';
+    if(error.code==='auth/invalid-credential'||error.code==='auth/wrong-password'||error.code==='auth/user-not-found') msg='Email or password is incorrect.';
+    err.textContent = msg;
+    err.style.display = 'block';
+  });
+});
+</script>
+</body>
+</html>
