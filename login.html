@@ -66,25 +66,49 @@
     border-radius:18px 18px 8px 8px;
     background:linear-gradient(180deg,#2b6ad8,#1e4fa8);
   }
-  /* head */
+  /* head with eyes and nose */
   .p-head{
     position:absolute;left:38px;bottom:110px;width:44px;height:44px;border-radius:50%;
     background:linear-gradient(180deg,#f0c39a,#d9a878);
     box-shadow:inset -6px -4px 0 rgba(0,0,0,0.08);
   }
-  /* legs — swing repeatedly while walking (2.2s), then settle */
+  /* eyes */
+  .p-head::before{
+    content:'';position:absolute;top:16px;left:10px;width:8px;height:9px;
+    border-radius:50%;background:#1c1c24;
+  }
+  .p-head::after{
+    content:'';position:absolute;top:16px;right:10px;width:8px;height:9px;
+    border-radius:50%;background:#1c1c24;
+  }
+  /* nose (small) */
+  .p-nose{
+    position:absolute;top:26px;left:50%;transform:translateX(-50%);
+    width:6px;height:8px;border-radius:50% 50% 60% 60%;
+    background:linear-gradient(180deg,#e2b083,#c99666);
+  }
+  /* legs — realistic walk: legs pass each other (swing out, cross, swing back), then settle */
   .p-leg{position:absolute;bottom:16px;width:12px;height:30px;background:#1c366b;border-radius:4px;}
-  .p-leg-l{left:40px;animation:legL 0.44s linear infinite;}
-  .p-leg-r{left:66px;animation:legR 0.44s linear infinite;}
+  .p-leg-l{left:40px;animation:legL 0.44s linear infinite;transform-origin:top;}
+  .p-leg-r{left:66px;animation:legR 0.44s linear infinite;transform-origin:top;}
   /* legs stop after the walk */
   .stop .p-leg-l{animation:none;transform:rotate(0);}
   .stop .p-leg-r{animation:none;transform:rotate(0);}
-  @keyframes legL{0%,100%{transform:rotate(24deg);}50%{transform:rotate(-20deg);}}
-  @keyframes legR{0%,100%{transform:rotate(-20deg);}50%{transform:rotate(24deg);}}
+  .stop .p-arm-l{animation:none;transform:rotate(0);}
+  @keyframes legL{
+    0%,100%{ transform:translateX(-16px) rotate(22deg); }
+    50%{ transform:translateX(16px) rotate(-18deg); }
+  }
+  @keyframes legR{
+    0%,100%{ transform:translateX(16px) rotate(-18deg); }
+    50%{ transform:translateX(-16px) rotate(22deg); }
+  }
   /* arms */
   .p-arm{position:absolute;top:118px;width:12px;height:42px;background:#2b6ad8;border-radius:6px;transform-origin:top;transform:rotate(0);}
-  .p-arm-l{left:28px;}
+  .p-arm-l{left:28px;animation:armSwingL 0.44s linear infinite;}
   .p-arm-r{right:26px;}
+  /* free left arm swings while walking; right arm (bag hand) stays steady */
+  @keyframes armSwingL{0%,100%{transform:rotate(-16deg);}50%{transform:rotate(14deg);}}
   /* arms raise up after the bag is placed on the ground */
   .raise .p-arm-l{animation:armUpL 0.6s ease-out 0.2s forwards;}
   .raise .p-arm-r{animation:armUpR 0.6s ease-out 0.2s forwards;}
@@ -96,17 +120,17 @@
     0%{ transform:rotate(0) translateY(0); }
     100%{ transform:rotate(-152deg) translateY(-50px); }
   }
-  /* bag / briefcase — carried by the person, then placed on the ground */
+  /* bag / briefcase — carried by ONE hand (right side), then placed on the ground */
   .bag{
-    position:absolute;left:24px;bottom:74px;
+    position:absolute;right:2px;bottom:76px;
     width:96px;height:66px;
-    transform:translateY(0) rotate(0);
+    transform:translateY(0) rotate(8deg);
     animation:bagCarry 0.22s ease-in-out infinite alternate;
     filter:drop-shadow(0 8px 14px rgba(0,0,0,0.35));
     z-index:2;
   }
-  /* slight bob while walking */
-  @keyframes bagCarry{from{transform:translateY(0) rotate(0);}to{transform:translateY(-4px) rotate(-2deg);}}
+  /* slight swing while walking (bag held by one hand) */
+  @keyframes bagCarry{from{transform:translateY(0) rotate(8deg);}to{transform:translateY(-5px) rotate(3deg);}}
   .bag-body{
     position:absolute;inset:0;
     background:linear-gradient(160deg,#8a4a2f,#5e2f1c);
@@ -128,8 +152,8 @@
     animation:bagPlace 0.55s cubic-bezier(.5,-.4,.3,1.3) forwards;
   }
   @keyframes bagPlace{
-    0%{ transform:translateY(0) rotate(0); }
-    60%{ transform:translateY(58px) rotate(4deg); }
+    0%{ transform:translateY(0) rotate(8deg); }
+    60%{ transform:translateY(58px) rotate(-4deg); }
     100%{ transform:translateY(58px) rotate(0); }
   }
   /* slight ground dust on bag placement */
@@ -201,7 +225,7 @@
     <div class="dust"></div>
     <div class="ground"></div>
     <div class="person" id="person">
-      <div class="p-head"></div>
+      <div class="p-head"><div class="p-nose"></div></div>
       <div class="p-body"></div>
       <div class="p-arm p-arm-l"></div>
       <div class="p-arm p-arm-r"></div>
