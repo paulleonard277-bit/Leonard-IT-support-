@@ -2186,6 +2186,111 @@
       .ad-top-right{gap:8px;}
       .ad-top-right .admin-tag{font-size:0.6rem; padding:3px 8px;}
     }
+
+    /* ═══ MODERN GLASSMORPHISM + NEON UPGRADE ═══ */
+    #adminDashboard{
+      background:
+        radial-gradient(1200px 600px at 15% -10%, rgba(62,195,201,0.16), transparent 55%),
+        radial-gradient(1000px 600px at 110% 10%, rgba(242,169,59,0.12), transparent 55%),
+        radial-gradient(900px 700px at 50% 120%, rgba(108,92,231,0.14), transparent 55%),
+        linear-gradient(160deg,#0a111e 0%,#0e1a2b 55%,#08101f 100%);
+    }
+    .ad-topbar{
+      background:linear-gradient(135deg, rgba(18,26,40,0.72), rgba(14,22,36,0.55));
+      -webkit-backdrop-filter:blur(20px) saturate(150%);
+      backdrop-filter:blur(20px) saturate(150%);
+      border-bottom:1px solid rgba(62,195,201,0.18);
+      box-shadow:0 10px 40px rgba(0,0,0,0.4), 0 0 40px rgba(62,195,201,0.05);
+    }
+    .ad-brand .dot{
+      background:linear-gradient(135deg,#3EC3C9,#F2A93B);
+      box-shadow:0 0 12px #3EC3C9, 0 0 30px rgba(62,195,201,0.5);
+    }
+    .ad-top-right .admin-tag{
+      color:#7ef0f5;border:1px solid rgba(62,195,201,0.35);
+      background:linear-gradient(135deg,rgba(62,195,201,0.15),rgba(242,169,59,0.10));
+      box-shadow:0 0 14px rgba(62,195,201,0.15);
+    }
+    .ad-stat-card{
+      background:linear-gradient(160deg, rgba(22,30,46,0.66), rgba(13,20,33,0.55));
+      -webkit-backdrop-filter:blur(14px) saturate(140%);
+      backdrop-filter:blur(14px) saturate(140%);
+      border:1px solid rgba(62,195,201,0.16);
+      border-radius:20px;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,0.07), 0 10px 34px rgba(0,0,0,0.4);
+      transition:transform 0.3s cubic-bezier(.22,.61,.36,1), box-shadow 0.3s, border-color 0.3s;
+    }
+    .ad-stat-card .label{letter-spacing:0.6px;}
+    .ad-stat-card:nth-child(1){box-shadow:inset 0 1px 0 rgba(255,255,255,0.07), 0 10px 34px rgba(0,0,0,0.4), 0 0 34px rgba(62,195,201,0.12);}
+    .ad-stat-card:nth-child(2){box-shadow:inset 0 1px 0 rgba(255,255,255,0.07), 0 10px 34px rgba(0,0,0,0.4), 0 0 34px rgba(242,169,59,0.12);}
+    .ad-stat-card:nth-child(3){box-shadow:inset 0 1px 0 rgba(255,255,255,0.07), 0 10px 34px rgba(0,0,0,0.4), 0 0 34px rgba(162,155,254,0.12);}
+    .ad-stat-card:nth-child(4){box-shadow:inset 0 1px 0 rgba(255,255,255,0.07), 0 10px 34px rgba(0,0,0,0.4), 0 0 34px rgba(0,206,201,0.12);}
+    .ad-stat-card:hover{
+      transform:translateY(-6px) scale(1.02);
+      border-color:rgba(62,195,201,0.4);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,0.08), 0 18px 50px rgba(0,0,0,0.5), 0 0 50px rgba(62,195,201,0.2);
+    }
+    .ad-tabs{
+      background:linear-gradient(135deg, rgba(22,30,46,0.6), rgba(13,20,33,0.5));
+      -webkit-backdrop-filter:blur(14px) saturate(140%);
+      backdrop-filter:blur(14px) saturate(140%);
+      border:1px solid rgba(62,195,201,0.14);
+      border-radius:16px;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,0.06), 0 8px 30px rgba(0,0,0,0.3);
+    }
+    .ad-tab.active{
+      background:linear-gradient(135deg,#3EC3C9,#2bc4b8);
+      box-shadow:0 6px 22px rgba(62,195,201,0.4);
+      color:#04121a;
+    }
+    .ad-tab.active .count{background:rgba(0,0,0,0.25);color:#fff;}
+    .ad-greeting{
+      background:linear-gradient(120deg,#eafeff,#7ef0f5 40%,#F2A93B);
+      -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+      letter-spacing:0.3px;
+    }
+    .ad-table-wrap,.ad-chart-card,.ad-edit-modal,.testi-card{
+      background:linear-gradient(160deg, rgba(22,30,46,0.66), rgba(12,19,32,0.5));
+      -webkit-backdrop-filter:blur(12px) saturate(140%);
+      backdrop-filter:blur(12px) saturate(140%);
+      border:1px solid rgba(62,195,201,0.12);
+      border-radius:16px;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,0.05), 0 12px 36px rgba(0,0,0,0.35);
+    }
+    .ad-table thead{background:linear-gradient(90deg, rgba(62,195,201,0.10), rgba(62,195,201,0.03));}
+    .ad-table th{color:rgba(180,240,244,0.85);}
+    .ad-table tbody tr:hover{background:rgba(62,195,201,0.05);}
+    .ad-chart-card:hover{border-color:rgba(62,195,201,0.4);box-shadow:0 8px 30px rgba(0,0,0,0.4), 0 0 30px rgba(62,195,201,0.12);}
+    .ad-section-title{letter-spacing:0.3px;}
+    .ad-accept-btn,.ad-edit-save{
+      background:linear-gradient(135deg,#3EC3C9,#18b3a8);
+      box-shadow:0 6px 20px rgba(62,195,201,0.35);
+    }
+    .ad-filter-btn.active{background:linear-gradient(135deg,#3EC3C9,#18b3a8);box-shadow:0 4px 16px rgba(62,195,201,0.35);}
+    .ad-badge-green{background:linear-gradient(135deg,rgba(62,195,201,0.22),rgba(62,195,201,0.06));box-shadow:0 0 12px rgba(62,195,201,0.15);}
+    .ad-badge-gold{background:linear-gradient(135deg,rgba(242,169,59,0.22),rgba(242,169,59,0.06));box-shadow:0 0 12px rgba(242,169,59,0.15);}
+    .ad-badge-blue{background:linear-gradient(135deg,rgba(59,130,246,0.22),rgba(59,130,246,0.06));box-shadow:0 0 12px rgba(59,130,246,0.15);}
+    .ad-badge-purple{background:linear-gradient(135deg,rgba(108,92,231,0.22),rgba(108,92,231,0.06));box-shadow:0 0 12px rgba(108,92,231,0.15);}
+    .ad-badge-red{background:linear-gradient(135deg,rgba(255,107,107,0.22),rgba(255,107,107,0.06));box-shadow:0 0 12px rgba(255,107,107,0.15);}
+    .ad-notif-panel,.cu-notif-panel{
+      background:linear-gradient(160deg, rgba(22,30,46,0.9), rgba(12,19,32,0.88));
+      -webkit-backdrop-filter:blur(16px) saturate(150%);
+      backdrop-filter:blur(16px) saturate(150%);
+      border:1px solid rgba(62,195,201,0.18);
+      box-shadow:0 16px 48px rgba(0,0,0,0.5), 0 0 30px rgba(62,195,201,0.08);
+    }
+    .notif-item.unread{background:rgba(62,195,201,0.10);}
+    .ad-search,.ad-edit-field input,.ad-edit-field select{
+      background:rgba(10,16,26,0.55);
+      -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+      border:1px solid rgba(62,195,201,0.15);
+    }
+    .ad-search:focus,.ad-edit-field input:focus,.ad-edit-field select:focus{border-color:#3EC3C9;box-shadow:0 0 0 3px rgba(62,195,201,0.15);}
+    .ad-stats>*,.ad-tabs,.ad-panel.active,.ad-greeting,.ad-greeting-sub{animation:ad-modIn 0.7s cubic-bezier(.22,.61,.36,1) both;}
+    .ad-stats>*:nth-child(2){animation-delay:0.08s;}
+    .ad-stats>*:nth-child(3){animation-delay:0.16s;}
+    .ad-stats>*:nth-child(4){animation-delay:0.24s;}
+    @keyframes ad-modIn{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
   </style>
 
   <div class="ad-topbar">
