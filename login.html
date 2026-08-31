@@ -48,17 +48,17 @@
     position:absolute;left:10%;right:10%;bottom:26px;height:2px;
     background:linear-gradient(90deg,transparent,rgba(62,211,199,0.5),transparent);
   }
-  /* character (person) */
+  /* character (person) — walks in from the left over ~2.2s, stops in the middle */
   .person{
     position:absolute;bottom:40px;left:50%;
     width:120px;height:180px;
     transform:translateX(-50%);
-    animation:personWalk 0.9s ease-out forwards;
+    animation:personWalk 2.2s ease-in-out forwards;
   }
   @keyframes personWalk{
-    0%{ transform:translateX(60vw) translateX(-50%); }
-    60%{ transform:translateX(-50%) translateX(0); }
-    100%{ transform:translateX(-50%) translateX(0); }
+    0%{ transform:translateX(calc(-50% - 70vw)); }
+    70%{ transform:translateX(calc(-50% + 8vw)); }
+    100%{ transform:translateX(-50%); }
   }
   /* body */
   .p-body{
@@ -72,12 +72,15 @@
     background:linear-gradient(180deg,#f0c39a,#d9a878);
     box-shadow:inset -6px -4px 0 rgba(0,0,0,0.08);
   }
-  /* legs */
+  /* legs — swing repeatedly while walking (2.2s), then settle */
   .p-leg{position:absolute;bottom:16px;width:12px;height:30px;background:#1c366b;border-radius:4px;}
-  .p-leg-l{left:40px;animation:legL 0.9s ease-out;}
-  .p-leg-r{left:66px;animation:legR 0.9s ease-out;}
-  @keyframes legL{0%{transform:rotate(18deg) translateY(-4px);}50%{transform:rotate(-14deg) translateY(0);}100%{transform:rotate(0);}}
-  @keyframes legR{0%{transform:rotate(-14deg) translateY(-4px);}50%{transform:rotate(18deg) translateY(0);}100%{transform:rotate(0);}}
+  .p-leg-l{left:40px;animation:legL 0.44s linear infinite;}
+  .p-leg-r{left:66px;animation:legR 0.44s linear infinite;}
+  /* legs stop after the walk */
+  .stop .p-leg-l{animation:none;transform:rotate(0);}
+  .stop .p-leg-r{animation:none;transform:rotate(0);}
+  @keyframes legL{0%,100%{transform:rotate(24deg);}50%{transform:rotate(-20deg);}}
+  @keyframes legR{0%,100%{transform:rotate(-20deg);}50%{transform:rotate(24deg);}}
   /* arms */
   .p-arm{position:absolute;top:118px;width:12px;height:42px;background:#2b6ad8;border-radius:6px;transform-origin:top;transform:rotate(0);}
   .p-arm-l{left:28px;}
@@ -93,16 +96,17 @@
     0%{ transform:rotate(0) translateY(0); }
     100%{ transform:rotate(-152deg) translateY(-50px); }
   }
-  /* bag / briefcase */
+  /* bag / briefcase — carried by the person, then placed on the ground */
   .bag{
-    position:absolute;left:50%;bottom:26px;
+    position:absolute;left:24px;bottom:74px;
     width:96px;height:66px;
-    transform:translateX(-50%);
-    opacity:0;
-    animation:bagPlace 0.9s ease-out 0.55s forwards;
-    filter:drop-shadow(0 10px 18px rgba(0,0,0,0.4));
+    transform:translateY(0) rotate(0);
+    animation:bagCarry 0.22s ease-in-out infinite alternate;
+    filter:drop-shadow(0 8px 14px rgba(0,0,0,0.35));
     z-index:2;
   }
+  /* slight bob while walking */
+  @keyframes bagCarry{from{transform:translateY(0) rotate(0);}to{transform:translateY(-4px) rotate(-2deg);}}
   .bag-body{
     position:absolute;inset:0;
     background:linear-gradient(160deg,#8a4a2f,#5e2f1c);
@@ -119,10 +123,14 @@
     background:#e2c687;border-radius:4px;border:1px solid #8a6a2f;
   }
   .bag-lock::after{content:'';position:absolute;left:50%;top:3px;width:10px;height:8px;transform:translateX(-50%);background:#f5e3ae;border-radius:3px;}
+  /* bag placed down on the ground after the walk (drops 58px to sit beside the feet) */
+  .bag.placed{
+    animation:bagPlace 0.55s cubic-bezier(.5,-.4,.3,1.3) forwards;
+  }
   @keyframes bagPlace{
-    0%{ opacity:1; transform:translateX(-50%) translateY(-90px) rotate(-6deg); }
-    70%{ opacity:1; transform:translateX(-50%) translateY(2px) rotate(0); }
-    100%{ opacity:1; transform:translateX(-50%) translateY(0) rotate(0); }
+    0%{ transform:translateY(0) rotate(0); }
+    60%{ transform:translateY(58px) rotate(4deg); }
+    100%{ transform:translateY(58px) rotate(0); }
   }
   /* slight ground dust on bag placement */
   .dust{
@@ -181,7 +189,6 @@
     .intro-scene{flex-direction:column;gap:6px;overflow-y:auto;}
     .stage{width:min(280px,80vw);height:260px;}
     .person{transform:translateX(-50%) scale(0.8);}
-    .bag{transform:translateX(-50%) scale(0.8);}
     .login-form.open{transform:translateX(0) scale(1);}
   }
 </style>
@@ -193,11 +200,6 @@
   <div class="stage">
     <div class="dust"></div>
     <div class="ground"></div>
-    <div class="bag" id="bag">
-      <div class="bag-handle"></div>
-      <div class="bag-body"></div>
-      <div class="bag-lock"></div>
-    </div>
     <div class="person" id="person">
       <div class="p-head"></div>
       <div class="p-body"></div>
@@ -205,6 +207,11 @@
       <div class="p-arm p-arm-r"></div>
       <div class="p-leg p-leg-l"></div>
       <div class="p-leg p-leg-r"></div>
+      <div class="bag" id="bag">
+        <div class="bag-handle"></div>
+        <div class="bag-body"></div>
+        <div class="bag-lock"></div>
+      </div>
     </div>
   </div>
 
@@ -265,25 +272,32 @@ auth.onAuthStateChanged(function(user){
   if(user){ _route(user); }
 });
 
-/* Show the login form once the bag has been placed: raise arms, open form beside */
+/* Intro sequence: walk in -> stop -> place bag on ground -> raise arms -> open form beside */
 var formOpened = false;
 function openLoginForm(){
   if(formOpened) return;
   formOpened = true;
-  var form = document.getElementById('loginForm');
   var person = document.getElementById('person');
-  /* person raises both arms up */
-  if(person) person.classList.add('raise');
-  /* open the login form beside the person */
-  form.classList.add('open');
+  var bag = document.getElementById('bag');
+  var form = document.getElementById('loginForm');
+  /* person stops walking */
+  person.classList.add('stop');
+  /* place the bag down on the ground (drops over 0.55s) */
+  bag.classList.add('placed');
+  /* after the bag lands, raise arms and open the form beside the person */
+  setTimeout(function(){
+    person.classList.add('raise');
+    form.classList.add('open');
+  }, 620);
 }
 
-/* Wait for the bag placement animation to finish, then open the form */
+/* timeline:
+   person walks 0 -> 2.2s, then we trigger the placing sequence */
 window.addEventListener('load', function(){
-  setTimeout(openLoginForm, 1700);
+  setTimeout(openLoginForm, 2300);
 });
-/* fallback: also open if animations are disabled/complete early */
-setTimeout(openLoginForm, 2500);
+/* fallback: also trigger if animations are disabled/slow */
+setTimeout(openLoginForm, 3000);
 
 document.getElementById('loginForm').addEventListener('submit', function(e){
   e.preventDefault();
