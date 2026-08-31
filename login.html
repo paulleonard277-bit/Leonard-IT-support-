@@ -48,69 +48,87 @@
     position:absolute;left:10%;right:10%;bottom:26px;height:2px;
     background:linear-gradient(90deg,transparent,rgba(62,211,199,0.5),transparent);
   }
-  /* ═══ SONIC-STYLE CHARACTER (blue, spikes, spins his legs to run) ═══ */
+  /* ═══ SONIC-STYLE CHARACTER (bright blue, spikes, spins his legs to run) ═══ */
   .person{
-    position:absolute;bottom:30px;left:50%;
-    width:150px;height:170px;
+    position:absolute;bottom:28px;left:50%;
+    width:170px;height:190px;
     transform:translateX(-50%);
     animation:personWalk 2.2s ease-in forwards;
   }
   @keyframes personWalk{
     0%{ transform:translateX(calc(-50% - 70vw)) rotate(-12deg); }
     30%{ transform:translateX(calc(-50% - 40vw)) rotate(-12deg); }
-    70%{ transform:translateX(calc(-50% + 6vw)) rotate(-12deg); }
-    100%{ transform:translateX(-50%) rotate(-12deg); }
+    60%{ transform:translateX(calc(-50% + 6vw)) rotate(-12deg) translateY(3px); }
+    100%{ transform:translateX(-50%) rotate(-12deg) translateY(0); }
   }
 
-  /* spikes (blue) at the back of the head */
+  /* ═══ SPIN BALL (Sonic curls into a ball to start running) ═══ */
+  .person.spin { animation:sonicSpin 0.7s cubic-bezier(.5,.1,.4,1) forwards; }
+  @keyframes sonicSpin{
+    0%{ transform:translateX(calc(-50% - 70vw)) rotate(-12deg); }
+    100%{ transform:translateX(calc(-50% - 12vw)) rotate(720deg); }
+  }
+  .spin .p-head,.spin .p-body,.spin .p-arm,.spin .p-leg,.spin .p-belly-hip,.spin .bag{ visibility:hidden; }
+  .spin-ball{
+    position:absolute;left:50%;top:50%;width:74px;height:74px;
+    transform:translate(-50%,-50%);
+    background:radial-gradient(circle at 38% 34%, #5A8BFF, #2351e0 60%);
+    border-radius:50%;display:none;
+    box-shadow:inset -10px -8px 0 rgba(0,20,90,0.25);
+    z-index:3;
+  }
+  .person.spin .spin-ball{ display:block; }
+  .spin-ball .hair{position:absolute;left:-8px;top:-8px;width:30px;height:22px;background:#2351e0;border-radius:50% 8px 8px 50%;transform:rotate(20deg);}
+
+  /* spikes (bright blue) at the back of the head */
   .p-spike{
-    position:absolute;left:4px;top:-6px;width:26px;height:26px;background:#1f5fdb;
+    position:absolute;left:4px;top:-6px;width:28px;height:28px;background:#2351e0;
     transform:rotate(30deg);border-radius:4px 8px 2px 8px;
   }
-  .p-spike.s2{left:-14px;top:6px;transform:rotate(58deg);width:30px;height:22px;}
-  .p-spike.s3{left:-30px;top:22px;transform:rotate(78deg);width:34px;height:20px;}
+  .p-spike.s2{left:-14px;top:6px;transform:rotate(58deg);width:32px;height:24px;}
+  .p-spike.s3{left:-32px;top:22px;transform:rotate(78deg);width:36px;height:22px;}
 
-  /* large Sonic head (blue) with face */
+  /* large Sonic head (bright blue) with face */
   .p-head{
-    position:absolute;left:32px;bottom:98px;width:86px;height:74px;border-radius:46% 46% 42% 42% / 55% 55% 40% 40%;
-    background:radial-gradient(circle at 38% 34%, #3B82F6, #1f5fdb 70%);
-    box-shadow:inset -8px -6px 0 rgba(0,30,90,0.25);
+    position:absolute;left:40px;bottom:108px;width:96px;height:82px;border-radius:46% 46% 42% 42% / 55% 55% 40% 40%;
+    background:radial-gradient(circle at 38% 34%, #5A8BFF, #2351e0 70%);
+    box-shadow:inset -9px -7px 0 rgba(0,20,90,0.25);
     z-index:2;
   }
   /* Sonic muzzle (cream/peach snout) */
   .p-head::before{
-    content:'';position:absolute;left:26px;bottom:0;width:46px;height:30px;border-radius:20px 20px 12px 12px;
+    content:'';position:absolute;left:30px;bottom:0;width:52px;height:34px;border-radius:22px 22px 14px 14px;
     background:#f6d8bb;
   }
   /* Sonic nose (black) */
   .p-nose{
-    position:absolute;left:52px;bottom:14px;width:12px;height:9px;border-radius:50%;
-    background:#1c1c24;z-index:3;
+    position:absolute;left:60px;bottom:14px;width:14px;height:10px;border-radius:50%;
+    background:#111118;z-index:3;
   }
   /* eyes (big green) */
   .p-eye{
-    position:absolute;top:22px;width:15px;height:17px;border-radius:50%;
-    background:radial-gradient(circle at 40% 40%, #0f9,#066f3f 70%);border:2px solid #1c1c24;
+    position:absolute;top:24px;width:17px;height:20px;border-radius:50%;
+    background:radial-gradient(circle at 40% 40%, #0faa5a,#066f3f 70%);border:2px solid #111118;
   }
-  .p-eye-l{left:20px;}
-  .p-eye-r{right:18px;}
+  .p-eye-l{left:22px;}
+  .p-eye-r{right:20px;}
 
   /* blue body */
   .p-body{
-    position:absolute;left:46px;bottom:44px;width:56px;height:52px;border-radius:16px 16px 10px 10px;
-    background:linear-gradient(180deg,#3B82F6,#1f5fdb);
-    box-shadow:inset 0 -8px 0 rgba(0,30,90,0.2);
+    position:absolute;left:54px;bottom:48px;width:62px;height:56px;border-radius:16px 16px 10px 10px;
+    background:linear-gradient(180deg,#5A8BFF,#2351e0);
+    box-shadow:inset 0 -9px 0 rgba(0,20,90,0.2);
   }
   /* belly (cream) */
-  .p-belly-hip{position:absolute;left:44px;bottom:30px;width:60px;height:24px;border-radius:10px;background:#f6d8bb;}
+  .p-belly-hip{position:absolute;left:52px;bottom:32px;width:66px;height:26px;border-radius:10px;background:#f6d8bb;}
 
   /* legs — spin 360° like Sonic running wheels */
   .p-leg{
-    position:absolute;bottom:0;width:14px;height:26px;
-    transform-origin:top;border-radius:6px;
+    position:absolute;bottom:0;width:16px;height:28px;
+    transform-origin:top;border-radius:6px;background:#2351e0;
   }
-  .p-leg .shoe{position:absolute;bottom:-4px;left:-4px;width:26px;height:14px;border-radius:6px 2px 6px 4px;background:#d62828;}
-  .p-leg-l{left:52px;animation:legSpinL 0.5s linear infinite;transform-origin:55% 0%;}
+  .p-leg .shoe{position:absolute;bottom:-4px;left:-5px;width:28px;height:15px;border-radius:6px 2px 6px 4px;background:#d62828;border:1px solid #8f1a1a;}
+  .p-leg-l{left:60px;animation:legSpinL 0.5s linear infinite;transform-origin:55% 0%;}
   .p-leg-r{right:34px;animation:legSpinR 0.5s linear infinite;transform-origin:55% 0%;}
   @keyframes legSpinL{
     0%{ transform:rotate(0deg) translateX(2px); }
@@ -131,9 +149,9 @@
   .stop .p-leg-r{animation:none;transform:rotate(0);}
 
   /* arms */
-  .p-arm{position:absolute;top:96px;width:11px;height:34px;background:#1f5fdb;border-radius:6px;transform-origin:top;}
-  .p-arm-l{left:46px;animation:armSwingL 0.5s linear infinite;}
-  .p-arm-r{right:30px;}
+  .p-arm{position:absolute;top:104px;width:12px;height:36px;background:#2351e0;border-radius:6px;transform-origin:top;}
+  .p-arm-l{left:54px;animation:armSwingL 0.5s linear infinite;}
+  .p-arm-r{right:34px;}
   /* free arm swings, bag arm steady */
   @keyframes armSwingL{0%,100%{transform:rotate(-28deg);}50%{transform:rotate(6deg);}}
   /* arms raise up after bag placed */
@@ -144,37 +162,37 @@
   /* free arm stops after run */
   .stop .p-arm-l{animation:none;transform:rotate(0);}
 
-  /* bag / briefcase — carried by ONE hand (right), then placed */
+  /* bag / black travel bag — carried by ONE hand (right), then placed */
   .bag{
-    position:absolute;right:6px;bottom:66px;
-    width:92px;height:62px;
+    position:absolute;right:8px;bottom:70px;
+    width:96px;height:64px;
     transform:translateY(0) rotate(-10deg);
     animation:bagCarry 0.22s ease-in-out infinite alternate;
-    filter:drop-shadow(0 8px 14px rgba(0,0,0,0.35));
+    filter:drop-shadow(0 8px 14px rgba(0,0,0,0.45));
     z-index:2;
   }
   @keyframes bagCarry{from{transform:translateY(0) rotate(-10deg);}to{transform:translateY(-5px) rotate(-16deg);}}
   .bag-body{
     position:absolute;inset:0;
-    background:linear-gradient(160deg,#8a4a2f,#5e2f1c);
-    border-radius:10px;border:2px solid #3f2012;
+    background:linear-gradient(160deg,#3a3a40,#19191d);
+    border-radius:10px;border:2px solid #000;
   }
   .bag-handle{
-    position:absolute;left:50%;bottom:100%;width:30px;height:16px;
+    position:absolute;left:50%;bottom:100%;width:32px;height:18px;
     transform:translateX(-50%);
-    border:4px solid #5e2f1c;border-bottom:none;border-radius:8px 8px 0 0;
+    border:4px solid #000;border-bottom:none;border-radius:8px 8px 0 0;
   }
   .bag-lock{
-    position:absolute;left:50%;top:22px;width:22px;height:16px;transform:translateX(-50%);
-    background:#e2c687;border-radius:4px;border:1px solid #8a6a2f;
+    position:absolute;left:50%;top:22px;width:24px;height:16px;transform:translateX(-50%);
+    background:#c9a227;border-radius:4px;border:1px solid #7a5f14;
   }
-  .bag-lock::after{content:'';position:absolute;left:50%;top:3px;width:10px;height:8px;transform:translateX(-50%);background:#f5e3ae;border-radius:3px;}
+  .bag-lock::after{content:'';position:absolute;left:50%;top:3px;width:11px;height:8px;transform:translateX(-50%);background:#e9c65c;border-radius:3px;}
   /* bag placed down after the run */
   .bag.placed{animation:bagPlace 0.55s cubic-bezier(.5,-.4,.3,1.3) forwards;}
   @keyframes bagPlace{
     0%{ transform:translateY(0) rotate(-10deg); }
-    60%{ transform:translateY(58px) rotate(4deg); }
-    100%{ transform:translateY(58px) rotate(0); }
+    60%{ transform:translateY(62px) rotate(4deg); }
+    100%{ transform:translateY(62px) rotate(0); }
   }
   /* slight ground dust on bag placement */
   .dust{
@@ -244,6 +262,7 @@
     <div class="dust"></div>
     <div class="ground"></div>
     <div class="person" id="person">
+      <div class="spin-ball"><div class="hair"></div></div>
       <div class="p-spike s1"></div>
       <div class="p-spike s2"></div>
       <div class="p-spike s3"></div>
@@ -343,12 +362,19 @@ function openLoginForm(){
 }
 
 /* timeline:
-   person walks 0 -> 2.2s, then we trigger the placing sequence */
+   1) Sonic spins up into a ball (0 -> 0.7s)
+   2) person runs/walks (0.7 -> 2.9s), then we trigger the placing sequence */
 window.addEventListener('load', function(){
-  setTimeout(openLoginForm, 2300);
+  var person = document.getElementById('person');
+  person.classList.add('spin');
+  /* after the spin, switch to the running pose (ball hides, character appears) */
+  setTimeout(function(){
+    person.classList.remove('spin');
+  }, 700);
+  setTimeout(openLoginForm, 3000);
 });
 /* fallback: also trigger if animations are disabled/slow */
-setTimeout(openLoginForm, 3000);
+setTimeout(openLoginForm, 3700);
 
 document.getElementById('loginForm').addEventListener('submit', function(e){
   e.preventDefault();
