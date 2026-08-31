@@ -31,6 +31,7 @@
 
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script>
 var firebaseConfig = {
   apiKey: "AIzaSyBPhpL4O8Zfy7InnfKL8neM7hM7sBUQdWY",
@@ -42,10 +43,36 @@ var firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 var auth = firebase.auth();
+auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
+var db = firebase.firestore();
+var ADMIN_EMAIL = 'paulleonard277@gmail.com';
+var _adminRoleCache = {};
+
+function _isAdmin(user){
+  if(!user) return false;
+  if(user.email === ADMIN_EMAIL) return true;
+  return !!_adminRoleCache[user.uid];
+}
+function _checkAdminRole(user){
+  return db.collection('clients').doc(user.uid).get().then(function(doc){
+    if(doc.exists && doc.data().role === 'admin'){
+      _adminRoleCache[user.uid] = true;
+      return true;
+    }
+    return false;
+  }).catch(function(){ return false; });
+}
+function _route(user){
+  _checkAdminRole(user).then(function(){
+    window.location.href = _isAdmin(user) ? 'admin.html' : 'customer.html';
+  }).catch(function(){
+    window.location.href = 'customer.html';
+  });
+}
 
 auth.onAuthStateChanged(function(user){
   if(user){
-    window.location.href = 'customer.html';
+    _route(user);
   }
 });
 
