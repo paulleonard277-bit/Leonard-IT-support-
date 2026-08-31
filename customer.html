@@ -2942,7 +2942,7 @@
       document.getElementById('cuInfoName').textContent = userName;
       document.getElementById('cuInfoEmail').textContent = user.email;
       var clBtn = document.getElementById('cuLogoutBtn');
-      if(clBtn){ clBtn.onclick = function(){ try { showGoodbyePopup(currentUserName); } catch(e){} setTimeout(()=>{ auth.signOut().then(()=>{ window.location.href='index.html'; }); }, 1500); }; }
+      if(clBtn){ clBtn.onclick = function(){ try { showGoodbyePopup(currentUserName); } catch(e){}           setTimeout(()=>{ auth.signOut().then(()=>{ window.location.href='login.html'; }); }, 1500); }; }            
       try { if(!sessionStorage.getItem('platinumz-welcomed')){ showWelcomePopup(userName); sessionStorage.setItem('platinumz-welcomed','1'); } } catch(e){}
       try { loadCustomerDashboard(user); } catch(e){ console.error('Customer dashboard error:', e); }
       try { requestNotificationPermission(); } catch(e){}
@@ -5793,13 +5793,13 @@
   // Mobile logout button
   const cuMbLogout = document.getElementById('cuMbLogout');
   if(cuMbLogout){
-    cuMbLogout.addEventListener('click', () => { try { showGoodbyePopup(currentUserName); } catch(e){} setTimeout(()=>{ auth.signOut().then(()=>{ window.location.href='index.html'; }); }, 1500); });
+    cuMbLogout.addEventListener('click', () => { try { showGoodbyePopup(currentUserName); } catch(e){}       setTimeout(()=>{ auth.signOut().then(()=>{ window.location.href='login.html'; }); }, 1500); });
   }
 
   // Top logout button (always visible)
   const cuLogoutBtnTop = document.getElementById('cuLogoutBtnTop');
   if(cuLogoutBtnTop){
-    cuLogoutBtnTop.addEventListener('click', () => { try { showGoodbyePopup(currentUserName); } catch(e){} setTimeout(()=>{ auth.signOut().then(()=>{ window.location.href='index.html'; }); }, 1500); });
+    cuLogoutBtnTop.addEventListener('click', () => { try { showGoodbyePopup(currentUserName); } catch(e){}   setTimeout(()=>{ auth.signOut().then(()=>{ window.location.href='login.html'; }); }, 1500); });
   }
 
   // ========== ADMIN DASHBOARD ==========
