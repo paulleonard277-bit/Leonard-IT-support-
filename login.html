@@ -331,6 +331,19 @@
     margin-bottom:6px;display:inline-block;align-self:center;
   }
 
+  /* signup-only fields: hidden in login mode, revealed when switching to signup */
+  #loginName,#loginPass2{
+    display:none;
+    animation:fieldIn 0.35s ease;
+  }
+  .login-form.signup-mode #loginName,
+  .login-form.signup-mode #loginPass2{
+    display:flex;
+  }
+  @keyframes fieldIn{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:translateY(0);}}
+  /* switch link looks like a button-ish green link */
+  .signup a{cursor:pointer;}
+
   /* ═══ RESPONSIVE : works on phones + computers ═══ */
   @media (max-width:900px){
     /* stack form below the scene instead of beside it */
@@ -388,14 +401,17 @@
     </div>
   </div>
 
-  <!-- LOGIN FORM (opens beside the scene) -->
+  <!-- LOGIN / SIGNUP FORM (opens beside the scene) -->
   <form class="login-form" id="loginForm" style="align-self:center;">
     <span class="role-tag">PLATINUMZ IT Support</span>
-    <div class="login-form-title">Login</div>
+    <div class="login-form-title" id="loginFormTitle">Login</div>
+    <input type="text" id="loginName" placeholder="Jina lako (kwa kujisajili)" autocomplete="name">
     <input type="email" id="loginEmail" placeholder="Email" required>
     <input type="password" id="loginPass" placeholder="Password" required>
+    <input type="password" id="loginPass2" placeholder="Rudia Password" autocomplete="new-password">
     <div class="error" id="loginError"></div>
     <button type="submit" id="loginBtn">Login</button>
+    <p class="signup" id="switchModeText">Huna akaunti? <a id="switchModeLink">Jisajili hapa</a></p>
   </form>
 </div>
 
@@ -487,26 +503,93 @@ window.addEventListener('load', function(){
 /* fallback: also trigger if animations are disabled/slow */
 setTimeout(openLoginForm, 2800);
 
+/* switch between Login and Signup modes */
+var authMode = 'login';
+function setAuthMode(mode){
+  authMode = mode;
+  var form = document.getElementById('loginForm');
+  var title = document.getElementById('loginFormTitle');
+  var btn = document.getElementById('loginBtn');
+  var sw = document.getElementById('switchModeText');
+  var err = document.getElementById('loginError');
+  err.style.display = 'none';
+  if(mode === 'signup'){
+    form.classList.add('signup-mode');
+    title.textContent = 'Jisajili';
+    btn.textContent = 'Jisajili';
+    sw.innerHTML = 'Una akaunti? <a id="switchModeLink">Ingia</a>';
+  } else {
+    form.classList.remove('signup-mode');
+    title.textContent = 'Login';
+    btn.textContent = 'Login';
+    sw.innerHTML = 'Huna akaunti? <a id="switchModeLink">Jisajili hapa</a>';
+  }
+  document.getElementById('switchModeLink').addEventListener('click', function(){
+    setAuthMode(authMode === 'login' ? 'signup' : 'login');
+  });
+}
+
 document.getElementById('loginForm').addEventListener('submit', function(e){
   e.preventDefault();
   var email = document.getElementById('loginEmail').value.trim();
   var pass = document.getElementById('loginPass').value;
+  var name = document.getElementById('loginName').value.trim();
   var err = document.getElementById('loginError');
   var btn = document.getElementById('loginBtn');
   err.style.display = 'none';
-  btn.textContent = 'Logging in...';
   btn.disabled = true;
-  auth.signInWithEmailAndPassword(email, pass).then(function(){
+
+  var action;
+  if(authMode === 'signup'){
+    var pass2 = document.getElementById('loginPass2').value;
+    if(pass.length < 6){
+      err.textContent = 'Password lazima iwe angalau herufi 6.';
+      err.style.display = 'block';
+      btn.disabled = false;
+      return;
+    }
+    if(pass !== pass2){
+      err.textContent = 'Password hazifanani.';
+      err.style.display = 'block';
+      btn.disabled = false;
+      return;
+    }
+    btn.textContent = 'Inajisajili...';
+    action = auth.createUserWithEmailAndPassword(email, pass);
+  } else {
+    btn.textContent = 'Inaingia...';
+    action = auth.signInWithEmailAndPassword(email, pass);
+  }
+
+  action.then(function(result){
+    if(authMode === 'signup' && result.user){
+      var tasks = [];
+      if(name) tasks.push(result.user.updateProfile({ displayName: name }));
+      tasks.push(db.collection('clients').doc(result.user.uid).set({
+        jina: name || '',
+        email: email,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      }));
+      tasks.push(result.user.sendEmailVerification());
+      return Promise.all(tasks);
+    }
+    return null;
+  }).then(function(){
     /* routed by onAuthStateChanged */
   }).catch(function(error){
-    btn.textContent = 'Login';
+    btn.textContent = authMode === 'signup' ? 'Jisajili' : 'Login';
     btn.disabled = false;
     var msg = 'Something went wrong.';
-    if(error.code==='auth/invalid-credential'||error.code==='auth/wrong-password'||error.code==='auth/user-not-found') msg='Email or password is incorrect.';
+    if(error.code==='auth/email-already-in-use') msg='Email hii tayari imetumika.';
+    else if(error.code==='auth/invalid-email') msg='Email si sahihi.';
+    else if(error.code==='auth/weak-password') msg='Password ni dhaifu sana.';
+    else if(error.code==='auth/invalid-credential'||error.code==='auth/wrong-password'||error.code==='auth/user-not-found') msg='Email au password si sahihi.';
     err.textContent = msg;
     err.style.display = 'block';
   });
 });
+
+setAuthMode('login');
 </script>
 </body>
 </html>
