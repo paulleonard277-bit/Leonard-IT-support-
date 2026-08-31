@@ -49,49 +49,69 @@
     background:linear-gradient(90deg,transparent,rgba(62,211,199,0.5),transparent);
   }
   /* ═══ LAMP SCENE ═══ */
-  /* suspended hanging lamp that shines light downward */
+  /* modern tech luminaire that projects light downward */
   .lamp{
-    position:absolute;top:10px;left:50%;
+    position:absolute;top:6px;left:50%;z-index:4;
     transform:translateX(-50%);
-    display:flex;flex-direction:column;align-items:center;
     transform-origin:top center;
     animation:lampSway 3s ease-in-out infinite alternate;
   }
-  @keyframes lampSway{from{transform:translateX(-50%) rotate(-3deg);}to{transform:translateX(-50%) rotate(3deg);}}
-  .lamp-cord{
-    width:3px;height:70px;background:linear-gradient(#444,#222);
-    box-shadow:0 0 6px rgba(0,0,0,0.5);
+  @keyframes lampSway{from{transform:translateX(-50%) rotate(-2deg);}to{transform:translateX(-50%) rotate(2deg);}}
+  /* thin high-tech mounting arm */
+  .lamp-arm{
+    width:22px;height:54px;margin:0 auto;
+    background:linear-gradient(90deg,#333, #555 50%, #222);
+    border-radius:4px 4px 0 0;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,0.06);
   }
+  /* sleek hexagonal/glass luminaire head */
   .lamp-head{
-    width:34px;height:22px;background:radial-gradient(circle at 50% 0%, #3a3a42,#15151b);
-    border-radius:4px 4px 6px 6px;position:relative;
-    box-shadow:inset 0 2px 4px rgba(255,255,255,0.15), 0 0 20px 6px rgba(255,244,214,0.55);
+    width:86px;height:34px;background:#1a222e;
+    border:1.5px solid rgba(62,195,201,0.55);
+    border-radius:14px 14px 4px 4px;position:relative;
+    box-shadow:0 0 24px rgba(62,195,201,0.35), inset 0 2px 8px rgba(255,255,255,0.08);
   }
+  /* modern LED strip on the bar */
+  .lamp-head::before{
+    content:'';position:absolute;top:6px;left:8px;right:8px;height:3px;border-radius:6px;
+    background:linear-gradient(90deg,rgba(255,244,214,0.2),#0df,rgba(255,244,214,0.2));
+    opacity:0.7;
+  }
+  /* recessed glass lens underneath, diffusing light */
   .lamp-head::after{
-    content:'';position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);
-    width:20px;height:10px;border-radius:0 0 50% 50%;
-    background:#ffd98a;
-    box-shadow:0 0 18px 6px rgba(255,214,130,0.8);
+    content:'';position:absolute;left:50%;bottom:-8px;transform:translateX(-50%);
+    width:52px;height:18px;border-radius:8px;
+    background:radial-gradient(ellipse at 50% 40%, #fff8dd, #ffe9a8 55%, rgba(255,217,120,0.3));
+    box-shadow:0 0 26px 12px rgba(255,236,190,0.6);
   }
+  /* small side status LEDs */
+  .lamp-led{
+    position:absolute;top:12px;width:6px;height:6px;border-radius:50%;
+    background:#3EC3C9;box-shadow:0 0 8px 2px rgba(62,195,201,0.8);
+    animation:ledBlink 1.8s ease-in-out infinite alternate;
+  }
+  .lamp-led.l1{left:10px;}
+  .lamp-led.l2{right:10px;animation-delay:0.9s;}
+  @keyframes ledBlink{from{opacity:0.3;}to{opacity:1;}}
   /* light cone shining down to the ground */
   .light-cone{
     position:absolute;left:50%;top:0;width:0;height:0;
     transform:translateX(-50%);
     border-left:130px solid transparent;
     border-right:130px solid transparent;
-    border-top:210px solid rgba(255,236,190,0.28);
+    border-top:210px solid rgba(255,244,214,0.26);
     filter:blur(2px);
     pointer-events:none;
     opacity:0;
     transition:opacity 0.4s ease;
   }
-  @keyframes lightPulse{from{opacity:0.55;}to{opacity:1;}}
+  @keyframes lightPulse{from{opacity:0.5;}to{opacity:1;}}
   .light-cone.on{opacity:1;animation:lightPulse 2.6s ease-in-out infinite alternate;}
   /* soft glow pool on the ground */
   .light-pool{
     position:absolute;bottom:18px;left:50%;transform:translateX(-50%);
-    width:260px;height:34px;border-radius:50%;
-    background:radial-gradient(ellipse at 50% 50%, rgba(255,236,190,0.5), transparent 70%);
+    width:270px;height:36px;border-radius:50%;
+    background:radial-gradient(ellipse at 50% 50%, rgba(255,240,200,0.5), transparent 70%);
     opacity:0;
   }
   .light-pool.on{opacity:1;}
@@ -227,14 +247,17 @@
 </head>
 <body>
 
-<!-- INTRO SCENE: lamp shines light down, a modern AI head with moving eyes looks up, form opens -->
+<!-- INTRO SCENE: modern tech lamp shines light down, a modern AI head with moving eyes looks up, form opens -->
 <div class="intro-scene" id="introScene">
   <div class="stage">
     <div class="light-cone" id="lightCone"></div>
     <div class="light-pool" id="lightPool"></div>
     <div class="lamp">
-      <div class="lamp-cord"></div>
-      <div class="lamp-head"></div>
+      <div class="lamp-arm"></div>
+      <div class="lamp-head">
+        <div class="lamp-led l1"></div>
+        <div class="lamp-led l2"></div>
+      </div>
     </div>
     <div class="critter" id="critter">
       <div class="c-ant"></div>
