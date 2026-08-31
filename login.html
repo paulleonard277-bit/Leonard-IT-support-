@@ -48,94 +48,116 @@
     position:absolute;left:10%;right:10%;bottom:26px;height:2px;
     background:linear-gradient(90deg,transparent,rgba(62,211,199,0.5),transparent);
   }
-  /* character (person) — walks in from the left over ~2.2s, stops in the middle */
+  /* ═══ SONIC-STYLE CHARACTER (blue, spikes, spins his legs to run) ═══ */
   .person{
-    position:absolute;bottom:40px;left:50%;
-    width:120px;height:180px;
+    position:absolute;bottom:30px;left:50%;
+    width:150px;height:170px;
     transform:translateX(-50%);
-    animation:personWalk 2.2s ease-in-out forwards;
+    animation:personWalk 2.2s ease-in forwards;
   }
   @keyframes personWalk{
-    0%{ transform:translateX(calc(-50% - 70vw)); }
-    70%{ transform:translateX(calc(-50% + 8vw)); }
-    100%{ transform:translateX(-50%); }
+    0%{ transform:translateX(calc(-50% - 70vw)) rotate(-12deg); }
+    30%{ transform:translateX(calc(-50% - 40vw)) rotate(-12deg); }
+    70%{ transform:translateX(calc(-50% + 6vw)) rotate(-12deg); }
+    100%{ transform:translateX(-50%) rotate(-12deg); }
   }
-  /* body */
-  .p-body{
-    position:absolute;left:35px;bottom:40px;width:50px;height:70px;
-    border-radius:18px 18px 8px 8px;
-    background:linear-gradient(180deg,#2b6ad8,#1e4fa8);
+
+  /* spikes (blue) at the back of the head */
+  .p-spike{
+    position:absolute;left:4px;top:-6px;width:26px;height:26px;background:#1f5fdb;
+    transform:rotate(30deg);border-radius:4px 8px 2px 8px;
   }
-  /* head with eyes and nose */
+  .p-spike.s2{left:-14px;top:6px;transform:rotate(58deg);width:30px;height:22px;}
+  .p-spike.s3{left:-30px;top:22px;transform:rotate(78deg);width:34px;height:20px;}
+
+  /* large Sonic head (blue) with face */
   .p-head{
-    position:absolute;left:38px;bottom:110px;width:44px;height:44px;border-radius:50%;
-    background:linear-gradient(180deg,#f0c39a,#d9a878);
-    box-shadow:inset -6px -4px 0 rgba(0,0,0,0.08);
+    position:absolute;left:32px;bottom:98px;width:86px;height:74px;border-radius:46% 46% 42% 42% / 55% 55% 40% 40%;
+    background:radial-gradient(circle at 38% 34%, #3B82F6, #1f5fdb 70%);
+    box-shadow:inset -8px -6px 0 rgba(0,30,90,0.25);
+    z-index:2;
   }
-  /* eyes */
+  /* Sonic muzzle (cream/peach snout) */
   .p-head::before{
-    content:'';position:absolute;top:16px;left:10px;width:8px;height:9px;
-    border-radius:50%;background:#1c1c24;
+    content:'';position:absolute;left:26px;bottom:0;width:46px;height:30px;border-radius:20px 20px 12px 12px;
+    background:#f6d8bb;
   }
-  .p-head::after{
-    content:'';position:absolute;top:16px;right:10px;width:8px;height:9px;
-    border-radius:50%;background:#1c1c24;
-  }
-  /* nose (small) */
+  /* Sonic nose (black) */
   .p-nose{
-    position:absolute;top:26px;left:50%;transform:translateX(-50%);
-    width:6px;height:8px;border-radius:50% 50% 60% 60%;
-    background:linear-gradient(180deg,#e2b083,#c99666);
+    position:absolute;left:52px;bottom:14px;width:12px;height:9px;border-radius:50%;
+    background:#1c1c24;z-index:3;
   }
-  /* legs — realistic walk: legs pass each other (swing out, cross, swing back), then settle */
-  .p-leg{position:absolute;bottom:16px;width:12px;height:30px;background:#1c366b;border-radius:4px;}
-  .p-leg-l{left:40px;animation:legL 0.44s linear infinite;transform-origin:top;}
-  .p-leg-r{left:66px;animation:legR 0.44s linear infinite;transform-origin:top;}
-  /* legs stop after the walk */
+  /* eyes (big green) */
+  .p-eye{
+    position:absolute;top:22px;width:15px;height:17px;border-radius:50%;
+    background:radial-gradient(circle at 40% 40%, #0f9,#066f3f 70%);border:2px solid #1c1c24;
+  }
+  .p-eye-l{left:20px;}
+  .p-eye-r{right:18px;}
+
+  /* blue body */
+  .p-body{
+    position:absolute;left:46px;bottom:44px;width:56px;height:52px;border-radius:16px 16px 10px 10px;
+    background:linear-gradient(180deg,#3B82F6,#1f5fdb);
+    box-shadow:inset 0 -8px 0 rgba(0,30,90,0.2);
+  }
+  /* belly (cream) */
+  .p-belly-hip{position:absolute;left:44px;bottom:30px;width:60px;height:24px;border-radius:10px;background:#f6d8bb;}
+
+  /* legs — spin 360° like Sonic running wheels */
+  .p-leg{
+    position:absolute;bottom:0;width:14px;height:26px;
+    transform-origin:top;border-radius:6px;
+  }
+  .p-leg .shoe{position:absolute;bottom:-4px;left:-4px;width:26px;height:14px;border-radius:6px 2px 6px 4px;background:#d62828;}
+  .p-leg-l{left:52px;animation:legSpinL 0.5s linear infinite;transform-origin:55% 0%;}
+  .p-leg-r{right:34px;animation:legSpinR 0.5s linear infinite;transform-origin:55% 0%;}
+  @keyframes legSpinL{
+    0%{ transform:rotate(0deg) translateX(2px); }
+    25%{ transform:rotate(90deg) translateX(2px); }
+    50%{ transform:rotate(180deg) translateX(2px); }
+    75%{ transform:rotate(270deg) translateX(2px); }
+    100%{ transform:rotate(360deg) translateX(2px); }
+  }
+  @keyframes legSpinR{
+    0%{ transform:rotate(360deg) translateX(-2px); }
+    25%{ transform:rotate(270deg) translateX(-2px); }
+    50%{ transform:rotate(180deg) translateX(-2px); }
+    75%{ transform:rotate(90deg) translateX(-2px); }
+    100%{ transform:rotate(0deg) translateX(-2px); }
+  }
+  /* legs stop after the run */
   .stop .p-leg-l{animation:none;transform:rotate(0);}
   .stop .p-leg-r{animation:none;transform:rotate(0);}
-  .stop .p-arm-l{animation:none;transform:rotate(0);}
-  @keyframes legL{
-    0%,100%{ transform:translateX(-16px) rotate(22deg); }
-    50%{ transform:translateX(16px) rotate(-18deg); }
-  }
-  @keyframes legR{
-    0%,100%{ transform:translateX(16px) rotate(-18deg); }
-    50%{ transform:translateX(-16px) rotate(22deg); }
-  }
+
   /* arms */
-  .p-arm{position:absolute;top:118px;width:12px;height:42px;background:#2b6ad8;border-radius:6px;transform-origin:top;transform:rotate(0);}
-  .p-arm-l{left:28px;animation:armSwingL 0.44s linear infinite;}
-  .p-arm-r{right:26px;}
-  /* free left arm swings while walking; right arm (bag hand) stays steady */
-  @keyframes armSwingL{0%,100%{transform:rotate(-16deg);}50%{transform:rotate(14deg);}}
-  /* arms raise up after the bag is placed on the ground */
+  .p-arm{position:absolute;top:96px;width:11px;height:34px;background:#1f5fdb;border-radius:6px;transform-origin:top;}
+  .p-arm-l{left:46px;animation:armSwingL 0.5s linear infinite;}
+  .p-arm-r{right:30px;}
+  /* free arm swings, bag arm steady */
+  @keyframes armSwingL{0%,100%{transform:rotate(-28deg);}50%{transform:rotate(6deg);}}
+  /* arms raise up after bag placed */
   .raise .p-arm-l{animation:armUpL 0.6s ease-out 0.2s forwards;}
   .raise .p-arm-r{animation:armUpR 0.6s ease-out 0.2s forwards;}
-  @keyframes armUpL{
-    0%{ transform:rotate(0) translateY(0); }
-    100%{ transform:rotate(152deg) translateY(-50px); }
-  }
-  @keyframes armUpR{
-    0%{ transform:rotate(0) translateY(0); }
-    100%{ transform:rotate(-152deg) translateY(-50px); }
-  }
-  /* bag / briefcase — carried by ONE hand (right side), then placed on the ground */
+  @keyframes armUpL{0%{transform:rotate(0) translateY(0);}100%{transform:rotate(152deg) translateY(-50px);}}
+  @keyframes armUpR{0%{transform:rotate(0) translateY(0);}100%{transform:rotate(-152deg) translateY(-50px);}}
+  /* free arm stops after run */
+  .stop .p-arm-l{animation:none;transform:rotate(0);}
+
+  /* bag / briefcase — carried by ONE hand (right), then placed */
   .bag{
-    position:absolute;right:2px;bottom:76px;
-    width:96px;height:66px;
-    transform:translateY(0) rotate(8deg);
+    position:absolute;right:6px;bottom:66px;
+    width:92px;height:62px;
+    transform:translateY(0) rotate(-10deg);
     animation:bagCarry 0.22s ease-in-out infinite alternate;
     filter:drop-shadow(0 8px 14px rgba(0,0,0,0.35));
     z-index:2;
   }
-  /* slight swing while walking (bag held by one hand) */
-  @keyframes bagCarry{from{transform:translateY(0) rotate(8deg);}to{transform:translateY(-5px) rotate(3deg);}}
+  @keyframes bagCarry{from{transform:translateY(0) rotate(-10deg);}to{transform:translateY(-5px) rotate(-16deg);}}
   .bag-body{
     position:absolute;inset:0;
     background:linear-gradient(160deg,#8a4a2f,#5e2f1c);
-    border-radius:10px;
-    border:2px solid #3f2012;
+    border-radius:10px;border:2px solid #3f2012;
   }
   .bag-handle{
     position:absolute;left:50%;bottom:100%;width:30px;height:16px;
@@ -143,17 +165,15 @@
     border:4px solid #5e2f1c;border-bottom:none;border-radius:8px 8px 0 0;
   }
   .bag-lock{
-    position:absolute;left:50%;top:24px;width:22px;height:16px;transform:translateX(-50%);
+    position:absolute;left:50%;top:22px;width:22px;height:16px;transform:translateX(-50%);
     background:#e2c687;border-radius:4px;border:1px solid #8a6a2f;
   }
   .bag-lock::after{content:'';position:absolute;left:50%;top:3px;width:10px;height:8px;transform:translateX(-50%);background:#f5e3ae;border-radius:3px;}
-  /* bag placed down on the ground after the walk (drops 58px to sit beside the feet) */
-  .bag.placed{
-    animation:bagPlace 0.55s cubic-bezier(.5,-.4,.3,1.3) forwards;
-  }
+  /* bag placed down after the run */
+  .bag.placed{animation:bagPlace 0.55s cubic-bezier(.5,-.4,.3,1.3) forwards;}
   @keyframes bagPlace{
-    0%{ transform:translateY(0) rotate(8deg); }
-    60%{ transform:translateY(58px) rotate(-4deg); }
+    0%{ transform:translateY(0) rotate(-10deg); }
+    60%{ transform:translateY(58px) rotate(4deg); }
     100%{ transform:translateY(58px) rotate(0); }
   }
   /* slight ground dust on bag placement */
@@ -211,8 +231,7 @@
   @media (max-width:680px){
     /* stack form below the person on small screens */
     .intro-scene{flex-direction:column;gap:6px;overflow-y:auto;}
-    .stage{width:min(280px,80vw);height:260px;}
-    .person{transform:translateX(-50%) scale(0.8);}
+    .stage{width:min(300px,86vw);height:280px;}
     .login-form.open{transform:translateX(0) scale(1);}
   }
 </style>
@@ -225,12 +244,20 @@
     <div class="dust"></div>
     <div class="ground"></div>
     <div class="person" id="person">
-      <div class="p-head"><div class="p-nose"></div></div>
+      <div class="p-spike s1"></div>
+      <div class="p-spike s2"></div>
+      <div class="p-spike s3"></div>
+      <div class="p-head">
+        <div class="p-eye p-eye-l"></div>
+        <div class="p-eye p-eye-r"></div>
+        <div class="p-nose"></div>
+      </div>
+      <div class="p-belly-hip"></div>
       <div class="p-body"></div>
       <div class="p-arm p-arm-l"></div>
       <div class="p-arm p-arm-r"></div>
-      <div class="p-leg p-leg-l"></div>
-      <div class="p-leg p-leg-r"></div>
+      <div class="p-leg p-leg-l"><div class="shoe"></div></div>
+      <div class="p-leg p-leg-r"><div class="shoe"></div></div>
       <div class="bag" id="bag">
         <div class="bag-handle"></div>
         <div class="bag-body"></div>
