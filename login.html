@@ -93,13 +93,13 @@
   .lamp-led.l1{left:10px;}
   .lamp-led.l2{right:10px;animation-delay:0.9s;}
   @keyframes ledBlink{from{opacity:0.3;}to{opacity:1;}}
-  /* light cone shining down to the ground */
+  /* light cone shining down to the ground (narrow at top, wide at bottom) */
   .light-cone{
-    position:absolute;left:50%;top:0;width:0;height:0;
+    position:absolute;left:50%;top:-18px;width:0;height:0;
     transform:translateX(-50%);
-    border-left:130px solid transparent;
-    border-right:130px solid transparent;
-    border-top:210px solid rgba(255,244,214,0.26);
+    border-left:95px solid transparent;
+    border-right:95px solid transparent;
+    border-bottom:240px solid rgba(255,244,214,0.24);
     filter:blur(2px);
     pointer-events:none;
     opacity:0;
