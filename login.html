@@ -24,9 +24,26 @@
     content:'';
     position:fixed;inset:0;z-index:-1;
     background:
-      radial-gradient(circle at 20% 20%, rgba(62,211,199,0.10), transparent 40%),
-      radial-gradient(circle at 80% 80%, rgba(242,169,59,0.08), transparent 40%);
+      radial-gradient(circle at 20% 20%, rgba(62,211,199,0.12), transparent 42%),
+      radial-gradient(circle at 80% 80%, rgba(242,169,59,0.10), transparent 42%),
+      radial-gradient(circle at 60% 30%, rgba(155,135,245,0.10), transparent 40%);
+    animation:bgShift 14s ease-in-out infinite alternate;
   }
+  @keyframes bgShift{
+    0%{ filter:hue-rotate(0deg) brightness(1); }
+    50%{ filter:hue-rotate(18deg) brightness(1.05); }
+    100%{ filter:hue-rotate(-18deg) brightness(1); }
+  }
+  /* twinkling star/code speckle field over the whole page */
+  .ambient{
+    position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+  }
+  .ambient i{
+    position:absolute;border-radius:50%;
+    background:radial-gradient(circle at 40% 35%, #fff, rgba(62,211,199,0.7) 60%);
+    animation:twinkle 5s ease-in-out infinite;
+  }
+  @keyframes twinkle{0%,100%{opacity:0.15;transform:scale(0.7);}50%{opacity:1;transform:scale(1.25);}}
 
   /* ═══════ INTRO SCENE ═══════ */
   .intro-scene{
@@ -150,6 +167,9 @@
   .sparkle.s1{left:34%;--drift:-14px;animation-delay:0s;}
   .sparkle.s2{left:50%;--drift:10px;animation-delay:1.1s;width:8px;height:8px;}
   .sparkle.s3{left:66%;--drift:-8px;animation-delay:2.2s;width:5px;height:5px;}
+  .sparkle.s4{left:24%;--drift:6px;animation-delay:0.6s;width:5px;height:5px;background:radial-gradient(circle at 40% 35%, #fff,#7ef0f5 60%);}
+  .sparkle.s5{left:78%;--drift:-12px;animation-delay:1.7s;width:7px;height:7px;background:radial-gradient(circle at 40% 35%, #fff,#ffe98a 60%);}
+  .sparkle.s6{left:60%;--drift:14px;animation-delay:2.9s;width:6px;height:6px;}
 
   /* modern AI/robot head on the ground, looking up at the light */
   .critter{
@@ -261,7 +281,7 @@
     padding:20px;
     background:rgba(24,80,42,0.32);
     backdrop-filter:blur(6px);
-    border-radius:8px;color:#fff;font-family:Arial;
+    border-radius:14px;color:#fff;font-family:Arial;
     border:1px solid rgba(74,222,128,0.45);
     box-shadow:0 20px 50px rgba(0,0,0,0.4), 0 0 30px rgba(34,197,94,0.25);
     z-index:10;
@@ -273,15 +293,35 @@
   .login-form.open{
     opacity:1;visibility:visible;
     transform:translateX(0) scale(1);
+    animation:formGlow 3s ease-in-out infinite alternate;
   }
+  @keyframes formGlow{
+    from{box-shadow:0 20px 50px rgba(0,0,0,0.4), 0 0 25px rgba(34,197,94,0.2);}
+    to{box-shadow:0 20px 60px rgba(0,0,0,0.45), 0 0 55px rgba(34,197,94,0.5);}
+  }
+  /* animated gradient edge (attractive glowing frame) */
+  .login-form::before{
+    content:'';position:absolute;inset:-1px;border-radius:14px;padding:1.5px;
+    background:linear-gradient(120deg, rgba(74,222,128,0.9), rgba(62,195,201,0.4), rgba(74,222,128,0.9), rgba(242,169,59,0.4));
+    background-size:300% 100%;
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor; mask-composite:exclude;
+    animation:edgeFlow 5s linear infinite;
+    pointer-events:none;
+    opacity:0;
+  }
+  .login-form.open::before{opacity:1;}
+  @keyframes edgeFlow{from{background-position:0% 0;}to{background-position:300% 0;}}
   .login-form-title{text-align:center;font-size:1.15rem;font-weight:700;margin-bottom:2px;font-family:'Space Grotesk',sans-serif;}
-  input,button{padding:10px;border:none;border-radius:5px;}
-  input{background:rgba(20,60,32,0.45);color:#fff;border:1px solid rgba(74,222,128,0.35);outline:none;}
+  input,button{padding:10px;border:none;border-radius:7px;}
+  input{background:rgba(20,60,32,0.45);color:#fff;border:1px solid rgba(74,222,128,0.35);outline:none;transition:border-color .3s, box-shadow .3s;}
   input::placeholder{color:rgba(220,255,230,0.55);}
-  input:focus{border-color:#4ade80;box-shadow:0 0 10px rgba(74,222,128,0.3);}
-  button{background:rgba(34,197,94,0.45);color:#fff;cursor:pointer;font-weight:600;border:1px solid rgba(134,239,172,0.5);backdrop-filter:blur(4px);}
-  button:hover{background:rgba(34,197,94,0.7);}
-  button:disabled{opacity:0.6;cursor:wait;}
+  input:focus{border-color:#4ade80;box-shadow:0 0 12px rgba(74,222,128,0.4);}
+  button{background:rgba(34,197,94,0.45);color:#fff;cursor:pointer;font-weight:600;border:1px solid rgba(134,239,172,0.5);backdrop-filter:blur(4px);transition:transform .15s, background .2s;}
+  button:hover{background:rgba(34,197,94,0.7);transform:translateY(-1px);}
+  button:active{transform:translateY(0);}
+  button:disabled{opacity:0.6;cursor:wait;transform:none;}
   .error{color:#ff6b6b;font-size:0.82rem;display:none;text-align:center;}
   .signup{font-size:0.82rem;text-align:center;color:rgba(220,255,230,0.7);}
   .signup a{color:#4ade80;text-decoration:none;font-weight:600;}
@@ -314,6 +354,8 @@
 </head>
 <body>
 
+<div class="ambient" id="ambient"></div>
+
 <!-- INTRO SCENE: modern tech lamp shines light down, a modern AI head with moving eyes looks up, form opens -->
 <div class="intro-scene" id="introScene">
   <div class="stage">
@@ -324,6 +366,9 @@
     <div class="sparkle s1"></div>
     <div class="sparkle s2"></div>
     <div class="sparkle s3"></div>
+    <div class="sparkle s4"></div>
+    <div class="sparkle s5"></div>
+    <div class="sparkle s6"></div>
     <div class="lamp">
       <div class="lamp-arm"></div>
       <div class="lamp-head">
@@ -417,6 +462,23 @@ window.addEventListener('load', function(){
   var cone = document.getElementById('lightCone');
   var pool = document.getElementById('lightPool');
   var critter = document.getElementById('critter');
+  /* generate a field of twinkling tech speckles across the page */
+  (function(){
+    var amb = document.getElementById('ambient');
+    if(!amb) return;
+    var n = (window.innerWidth < 480) ? 26 : 46;
+    for(var k=0;k<n;k++){
+      var i = document.createElement('i');
+      var s = (Math.random()*3+1).toFixed(1);
+      i.style.width = s+'px';
+      i.style.height = s+'px';
+      i.style.left = (Math.random()*100)+'%';
+      i.style.top = (Math.random()*100)+'%';
+      i.style.animationDelay = (Math.random()*5)+'s';
+      i.style.animationDuration = (Math.random()*3+3.2).toFixed(2)+'s';
+      amb.appendChild(i);
+    }
+  })();
   setTimeout(function(){ cone.classList.add('on'); pool.classList.add('on'); }, 150);
   setTimeout(function(){ critter.classList.add('on'); }, 650);
   setTimeout(function(){ critter.classList.add('happy'); }, 1700);
