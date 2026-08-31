@@ -3099,19 +3099,19 @@
 
   auth.onAuthStateChanged((user) => {
     if(!user){
-      setTimeout(()=>{ if(!auth.currentUser){ window.location.href='index.html'; } }, 4000);
+      setTimeout(()=>{ if(!auth.currentUser){ window.location.href='login.html'; } }, 4000);
       return;
     }
     document.body.classList.add('in-dashboard');
     var adminDash = document.getElementById('adminDashboard');
     _checkAdminRole(user).then(function(result){
       if(result==='twoFactorPending') return;
-      if(!_isAdmin(user)){ window.location.href='index.html'; return; }
+      if(!_isAdmin(user)){ window.location.href='login.html'; return; }
       adminDash.style.display = 'block';
       currentUserName = 'Admin';
       try { loadAdminDashboard(user); } catch(e){ console.error('Admin dashboard error:', e); }
       var alBtn = document.getElementById('adminLogoutBtn');
-      if(alBtn){ alBtn.onclick = function(){ try{db.collection('presence').doc('admin').set({online:false,ts:firebase.firestore.FieldValue.serverTimestamp()}).catch(()=>{});}catch(e){} try { showGoodbyePopup('Admin'); } catch(e){} setTimeout(()=>{ auth.signOut().then(()=>{ window.location.href='index.html'; }); }, 1500); }; }
+      if(alBtn){ alBtn.onclick = function(){ try{db.collection('presence').doc('admin').set({online:false,ts:firebase.firestore.FieldValue.serverTimestamp()}).catch(()=>{});}catch(e){} try {            showGoodbyePopup('Admin'); } catch(e){} setTimeout(()=>{ auth.signOut().then(()=>{                           window.location.href='login.html'; }); }, 1500); }; }
       try { if(!sessionStorage.getItem('platinumz-welcomed')){ showAdminWelcomePopup('Admin'); sessionStorage.setItem('platinumz-welcomed','1'); } } catch(e){}
       try { requestNotificationPermission(); } catch(e){}
       try { renderTimeSlots(); } catch(e){}
@@ -5965,13 +5965,13 @@
   // Mobile logout button
   const cuMbLogout = document.getElementById('cuMbLogout');
   if(cuMbLogout){
-    cuMbLogout.addEventListener('click', () => { try { showGoodbyePopup(currentUserName); } catch(e){} setTimeout(()=>{ auth.signOut().then(()=>{ window.location.href='index.html'; }); }, 1500); });
+    cuMbLogout.addEventListener('click', () => { try { showGoodbyePopup(currentUserName); } catch(e){}       setTimeout(()=>{ auth.signOut().then(()=>{ window.location.href='login.html'; }); }, 1500); });
   }
 
   // Top logout button (always visible)
   const cuLogoutBtnTop2 = document.getElementById('cuLogoutBtnTop');
   if(cuLogoutBtnTop2){
-    cuLogoutBtnTop2.addEventListener('click', () => { try { showGoodbyePopup(currentUserName); } catch(e){} setTimeout(()=>{ auth.signOut().then(()=>{ window.location.href='index.html'; }); }, 1500); });
+    cuLogoutBtnTop2.addEventListener('click', () => { try { showGoodbyePopup(currentUserName); } catch(e){} setTimeout(()=>{ auth.signOut().then(()=>{ window.location.href='login.html'; }); }, 1500); });
   }
 
   // ========== ADMIN DASHBOARD ==========
