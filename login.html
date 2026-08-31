@@ -31,14 +31,17 @@
   /* ═══════ INTRO SCENE ═══════ */
   .intro-scene{
     position:fixed;inset:0;z-index:5;
-    display:flex;flex-direction:column;
+    display:flex;flex-direction:row;
     align-items:center;justify-content:center;
+    gap:clamp(8px,4vw,80px);
     background:transparent;
+    padding:20px;
   }
   .stage{
     position:relative;
-    width:min(480px,80vw);
+    width:min(360px,70vw);
     height:340px;
+    flex-shrink:0;
   }
   /* ground line */
   .ground{
@@ -76,9 +79,20 @@
   @keyframes legL{0%{transform:rotate(18deg) translateY(-4px);}50%{transform:rotate(-14deg) translateY(0);}100%{transform:rotate(0);}}
   @keyframes legR{0%{transform:rotate(-14deg) translateY(-4px);}50%{transform:rotate(18deg) translateY(0);}100%{transform:rotate(0);}}
   /* arms */
-  .p-arm{position:absolute;top:118px;width:12px;height:42px;background:#2b6ad8;border-radius:6px;transform-origin:top;}
+  .p-arm{position:absolute;top:118px;width:12px;height:42px;background:#2b6ad8;border-radius:6px;transform-origin:top;transform:rotate(0);}
   .p-arm-l{left:28px;}
   .p-arm-r{right:26px;}
+  /* arms raise up after the bag is placed on the ground */
+  .raise .p-arm-l{animation:armUpL 0.6s ease-out 0.2s forwards;}
+  .raise .p-arm-r{animation:armUpR 0.6s ease-out 0.2s forwards;}
+  @keyframes armUpL{
+    0%{ transform:rotate(0) translateY(0); }
+    100%{ transform:rotate(152deg) translateY(-50px); }
+  }
+  @keyframes armUpR{
+    0%{ transform:rotate(0) translateY(0); }
+    100%{ transform:rotate(-152deg) translateY(-50px); }
+  }
   /* bag / briefcase */
   .bag{
     position:absolute;left:50%;bottom:26px;
@@ -126,10 +140,10 @@
   @keyframes introFade{to{opacity:1;}}
   .intro-label span{color:#F2A93B;}
 
-  /* ═══════ LOGIN FORM (opens after bag placed) ═══════ */
+  /* ═══════ LOGIN FORM (opens beside the person) ═══════ */
   .login-form{
     display:flex;flex-direction:column;gap:12px;
-    max-width:300px;width:90%;
+    max-width:300px;width:min(300px,80vw);
     padding:20px;
     background:rgba(16,16,20,0.6);
     backdrop-filter:blur(6px);
@@ -139,12 +153,12 @@
     z-index:10;
     position:relative;
     opacity:0;visibility:hidden;
-    transform:translateY(20px) scale(0.95);
+    transform:translateX(30px) scale(0.95);
     transition:opacity 0.6s ease, transform 0.6s ease, visibility 0.6s;
   }
   .login-form.open{
     opacity:1;visibility:visible;
-    transform:translateY(0) scale(1);
+    transform:translateX(0) scale(1);
   }
   .login-form-title{text-align:center;font-size:1.15rem;font-weight:700;margin-bottom:2px;font-family:'Space Grotesk',sans-serif;}
   input,button{padding:10px;border:none;border-radius:5px;}
@@ -161,11 +175,20 @@
     background:rgba(62,211,199,0.1);padding:4px 10px;border-radius:12px;
     margin-bottom:6px;display:inline-block;align-self:center;
   }
+
+  @media (max-width:680px){
+    /* stack form below the person on small screens */
+    .intro-scene{flex-direction:column;gap:6px;overflow-y:auto;}
+    .stage{width:min(280px,80vw);height:260px;}
+    .person{transform:translateX(-50%) scale(0.8);}
+    .bag{transform:translateX(-50%) scale(0.8);}
+    .login-form.open{transform:translateX(0) scale(1);}
+  }
 </style>
 </head>
 <body>
 
-<!-- INTRO SCENE: person carrying a bag walks in and places it on the ground -->
+<!-- INTRO SCENE: person carrying a bag walks in, places it, raises arms, form opens beside -->
 <div class="intro-scene" id="introScene">
   <div class="stage">
     <div class="dust"></div>
@@ -184,18 +207,17 @@
       <div class="p-leg p-leg-r"></div>
     </div>
   </div>
-  <div class="intro-label"><span>PLATINUMZ</span> — Karibu · Welcome</div>
-</div>
 
-<!-- LOGIN FORM -->
-<form class="login-form" id="loginForm">
-  <span class="role-tag">PLATINUMZ IT Support</span>
-  <div class="login-form-title">Login</div>
-  <input type="email" id="loginEmail" placeholder="Email" required>
-  <input type="password" id="loginPass" placeholder="Password" required>
-  <div class="error" id="loginError"></div>
-  <button type="submit" id="loginBtn">Login</button>
-</form>
+  <!-- LOGIN FORM (opens beside the person) -->
+  <form class="login-form" id="loginForm" style="align-self:center;">
+    <span class="role-tag">PLATINUMZ IT Support</span>
+    <div class="login-form-title">Login</div>
+    <input type="email" id="loginEmail" placeholder="Email" required>
+    <input type="password" id="loginPass" placeholder="Password" required>
+    <div class="error" id="loginError"></div>
+    <button type="submit" id="loginBtn">Login</button>
+  </form>
+</div>
 
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
@@ -243,22 +265,17 @@ auth.onAuthStateChanged(function(user){
   if(user){ _route(user); }
 });
 
-/* Show the login form once the bag has been placed on the ground */
+/* Show the login form once the bag has been placed: raise arms, open form beside */
 var formOpened = false;
 function openLoginForm(){
   if(formOpened) return;
   formOpened = true;
   var form = document.getElementById('loginForm');
-  var scene = document.getElementById('introScene');
+  var person = document.getElementById('person');
+  /* person raises both arms up */
+  if(person) person.classList.add('raise');
+  /* open the login form beside the person */
   form.classList.add('open');
-  /* fade the intro scene out after the form appears */
-  setTimeout(function(){
-    if(scene) scene.style.transition = 'opacity 0.5s ease';
-    scene.style.opacity = '0';
-  }, 900);
-  setTimeout(function(){
-    if(scene) scene.style.display = 'none';
-  }, 1500);
 }
 
 /* Wait for the bag placement animation to finish, then open the form */
