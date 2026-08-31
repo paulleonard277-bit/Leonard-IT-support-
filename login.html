@@ -96,58 +96,89 @@
   }
   .light-pool.on{opacity:1;}
 
-  /* small green head with big ears on the ground, looking up at the light */
+  /* modern AI/robot head on the ground, looking up at the light */
   .critter{
-    position:absolute;left:50%;bottom:24px;width:120px;height:120px;
+    position:absolute;left:50%;bottom:24px;width:140px;height:140px;
     transform:translateX(-50%);
     transform-origin:bottom center;
     opacity:0;
   }
   .critter.on{opacity:1;animation:lookUp 1.1s ease-out forwards;}
   @keyframes lookUp{
-    0%{ transform:translateY(40%) translateX(-50%) rotate(0); }
-    100%{ transform:translateY(0) translateX(-50%) rotate(-2deg); }
+    0%{ transform:translateY(40%) translateX(-50%) rotate(-3deg) scale(0.9); }
+    60%{ transform:translateY(-8%) translateX(-50%) rotate(0) scale(1.03); }
+    100%{ transform:translateY(0) translateX(-50%) rotate(0) scale(1); }
   }
-  /* big ears on top of the head */
-  .c-ear{
-    position:absolute;top:0;width:34px;height:52px;border-radius:50% 50% 8px 8px;
-    background:radial-gradient(circle at 50% 20%, #7BD14E,#3e8e2e 75%);
-    border:2px solid #2a6b1f;
-    z-index:1;
-  }
-  .c-ear::after{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);width:16px;height:34px;border-radius:50%;background:#f2b8a6;}
-  .c-ear-l{left:2px;transform:rotate(-14deg);}
-  .c-ear-r{right:2px;transform:rotate(14deg);}
-  /* green head */
+  /* rounded modern head shell (dark glass) */
   .c-head{
     position:absolute;left:50%;bottom:0;transform:translateX(-50%);
-    width:96px;height:86px;border-radius:46% 46% 42% 42% / 60% 60% 42% 42%;
-    background:radial-gradient(circle at 40% 34%, #8fd95c,#4aa534 72%);
-    box-shadow:inset -8px -6px 0 rgba(20,70,10,0.25);
+    width:108px;height:100px;border-radius:34px;
+    background:linear-gradient(180deg,#2a3546,#141b26 70%);
+    border:1.5px solid #3EC3C9;
+    box-shadow:0 0 0 4px rgba(62,195,201,0.08), 0 0 30px rgba(62,195,201,0.35), inset 0 4px 10px rgba(255,255,255,0.08);
+    z-index:2;
   }
-  /* eyes looking UP (pupils toward the top) */
+  /* subtle top accent glow line */
+  .c-head::before{
+    content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);
+    width:60%;height:4px;border-radius:6px;
+    background:linear-gradient(90deg,transparent,#3EC3C9,transparent);
+  }
+  /* antenna */
+  .c-ant{
+    position:absolute;left:50%;top:-22px;transform:translateX(-50%);
+    width:3px;height:20px;background:#3EC3C9;
+  }
+  .c-ant::after{
+    content:'';position:absolute;left:50%;top:-6px;transform:translateX(-50%);
+    width:12px;height:12px;border-radius:50%;
+    background:#3EC3C9;box-shadow:0 0 14px 4px rgba(62,195,201,0.7);
+  }
+  /* moving eyes — each is a dark visor slot with a cyan pupil that roams */
   .c-eye{
-    position:absolute;top:28px;width:26px;height:30px;border-radius:50%;
-    background:radial-gradient(circle at 50% 30%, #fff 0 55%, #ffe98a 60% 100%);
-    border:2px solid #1c3a12;
-  }
-  .c-eye .pupil{
-    position:absolute;left:50%;top:3px;transform:translateX(-50%);
-    width:10px;height:13px;border-radius:50%;
-    background:#1c3a12;
+    position:absolute;top:36px;width:34px;height:26px;
+    background:#0b101a;border-radius:14px;
+    border:1px solid rgba(62,195,201,0.5);
+    overflow:hidden;
   }
   .c-eye-l{left:12px;}
   .c-eye-r{right:12px;}
-  /* downward (neutral) mouth */
+  .c-eye .pupil{
+    position:absolute;left:50%;top:50%;
+    width:12px;height:12px;border-radius:50%;
+    background:radial-gradient(circle at 40% 35%, #7ef0f5,#17a8ad 70%);
+    box-shadow:0 0 10px 2px rgba(62,195,201,0.8);
+    animation:eyeMove 3.6s ease-in-out infinite;
+  }
+  /* pupils look up at the light, then roam side to side */
+  @keyframes eyeMove{
+    0%,18%{ transform:translate(-50%,-50%) translate(0,-6px); }
+    22%,34%{ transform:translate(-50%,-50%) translate(-9px,0); }
+    38%,50%{ transform:translate(-50%,-50%) translate(9px,2px); }
+    54%,66%{ transform:translate(-50%,-50%) translate(0,-7px); }
+    70%,100%{ transform:translate(-50%,-50%) translate(4px,-5px); }
+  }
+  .c-eye-l .pupil{animation-delay:-1.8s;}
+  .c-eye-r .pupil{animation-delay:-1.8s;}
+  /* mouth — a modern slim glowing line */
   .c-mouth{
-    position:absolute;left:50%;top:58px;transform:translateX(-50%);
-    width:16px;height:10px;border-bottom:3px solid #1c3a12;border-radius:0 0 60% 60%;
+    position:absolute;left:50%;top:74px;transform:translateX(-50%);
+    width:26px;height:4px;border-radius:6px;
+    background:linear-gradient(90deg,transparent,#3EC3C9,transparent);
   }
-  /* upward (happy smile) when it sees the light */
+  /* happy -> mouth becomes a brighter, wider glow */
   .critter.happy .c-mouth{
-    border-bottom:none;border-top:3px solid #1c3a12;border-radius:60% 60% 0 0;
+    width:34px;height:6px;
+    box-shadow:0 0 12px 3px rgba(62,195,201,0.7);
+    animation:mouthGlow 0.8s ease-in-out infinite alternate;
   }
-  .c-nose{position:absolute;left:50%;top:50px;transform:translateX(-50%);width:12px;height:9px;border-radius:50%;background:#2a6b1f;}
+  @keyframes mouthGlow{from{box-shadow:0 0 8px 2px rgba(62,195,201,0.5);}to{box-shadow:0 0 18px 5px rgba(62,195,201,0.9);}}
+  /* chest light strip */
+  .c-chest{
+    position:absolute;left:50%;top:86px;transform:translateX(-50%);
+    width:20px;height:6px;border-radius:6px;
+    background:#F2A93B;box-shadow:0 0 12px 2px rgba(242,169,59,0.6);
+  }
   .intro-label span{color:#F2A93B;}
 
   /* ═══════ LOGIN FORM (opens beside the scene) ═══════ */
@@ -196,7 +227,7 @@
 </head>
 <body>
 
-<!-- INTRO SCENE: lamp shines light down, a green critter with big ears looks up, form opens -->
+<!-- INTRO SCENE: lamp shines light down, a modern AI head with moving eyes looks up, form opens -->
 <div class="intro-scene" id="introScene">
   <div class="stage">
     <div class="light-cone" id="lightCone"></div>
@@ -206,13 +237,12 @@
       <div class="lamp-head"></div>
     </div>
     <div class="critter" id="critter">
-      <div class="c-ear c-ear-l"></div>
-      <div class="c-ear c-ear-r"></div>
+      <div class="c-ant"></div>
       <div class="c-head">
         <div class="c-eye c-eye-l"><div class="pupil"></div></div>
         <div class="c-eye c-eye-r"><div class="pupil"></div></div>
-        <div class="c-nose"></div>
         <div class="c-mouth"></div>
+        <div class="c-chest"></div>
       </div>
     </div>
   </div>
@@ -274,7 +304,7 @@ auth.onAuthStateChanged(function(user){
   if(user){ _route(user); }
 });
 
-/* Intro sequence: lamp lights up -> cone shines down -> green critter looks up -> form opens */
+/* Intro sequence: lamp lights up -> cone shines down -> modern AI head looks up (eyes moving) -> form opens */
 var formOpened = false;
 function openLoginForm(){
   if(formOpened) return;
@@ -285,8 +315,8 @@ function openLoginForm(){
 
 /* timeline:
    1) lamp turns on, light cone + pool fade in (0 -> 0.9s)
-   2) critter head appears and looks up at the light (0.6 -> 1.8s)
-   3) critter smiles, then the registration form opens (2.1s) */
+   2) AI head appears and looks up at the light; eyes keep moving (0.6 -> 1.8s)
+   3) head gets happy, then the registration form opens (2.1s) */
 window.addEventListener('load', function(){
   var cone = document.getElementById('lightCone');
   var pool = document.getElementById('lightPool');
