@@ -337,10 +337,11 @@ function _checkAdminRole(user){
   }).catch(function(){ return false; });
 }
 function _route(user){
+  var v = 'v=' + Date.now();
   _checkAdminRole(user).then(function(){
-    window.location.href = _isAdmin(user) ? 'admin.html' : 'customer.html';
+    window.location.href = (_isAdmin(user) ? 'admin.html' : 'customer.html') + '?' + v;
   }).catch(function(){
-    window.location.href = 'customer.html';
+    window.location.href = 'customer.html?' + v;
   });
 }
 
