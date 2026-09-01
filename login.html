@@ -51,11 +51,10 @@
   /* ═══════ LOGIN CARD ═══════ */
   .login-container{
     position:relative;
-    text-align:center;
-    padding:46px 38px 40px;
+    padding:40px 34px 36px;
     background:linear-gradient(180deg,#0f3d34,#0a1f1c 70%);
     border-radius:20px;
-    width:min(340px,94vw);
+    width:min(560px,94vw);
     color:#fff;
     box-shadow:0 20px 60px rgba(0,0,0,.6), 0 0 50px rgba(43,227,168,0.10);
     animation:fadeIn 0.9s ease;
@@ -69,15 +68,29 @@
     to{opacity:1;transform:translateY(0) scale(1);}
   }
 
+  /* side-by-side layout: robot left, form right */
+  .login-row{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:26px;
+  }
+  .form-side{
+    flex:1 1 auto;
+    max-width:300px;
+    width:100%;
+    text-align:center;
+  }
+
   /* spotlight cone shining down from top */
   .spotlight{
     position:absolute;
     top:-40px; left:50%;
     transform:translateX(-50%);
     width:0; height:0;
-    border-left:90px solid transparent;
-    border-right:90px solid transparent;
-    border-top:150px solid rgba(120,255,210,0.16);
+    border-left:150px solid transparent;
+    border-right:150px solid transparent;
+    border-top:180px solid rgba(120,255,210,0.14);
     filter:blur(2px);
     animation:flicker 3.2s infinite ease-in-out;
     pointer-events:none;
@@ -87,11 +100,12 @@
     50%{opacity:0.95;}
   }
 
-  /* robot head (green neon core) */
+  /* ═══════ ROBOT HEAD (with headphones + top light) ═══════ */
   .robot-head{
     position:relative;
-    width:96px; height:96px;
-    margin:6px auto 12px;
+    flex:0 0 auto;
+    width:104px; height:104px;
+    margin:8px auto;
     background:radial-gradient(circle at 50% 40%, #143a33, #0b1f1c 80%);
     border:3px solid #2be3a8;
     border-radius:50%;
@@ -103,36 +117,76 @@
     0%,100%{box-shadow:0 0 26px rgba(43,227,168,0.5), inset 0 0 20px rgba(43,227,168,0.2);}
     50%{box-shadow:0 0 48px rgba(43,227,168,0.95), inset 0 0 26px rgba(43,227,168,0.4);}
   }
-  /* antenna */
-  .robot-head::before{
-    content:'';position:absolute;top:-20px;left:50%;transform:translateX(-50%);
-    width:3px;height:16px;background:#2be3a8;
+
+  /* headphone headband arching over the top of the head */
+  .headband{
+    position:absolute;
+    top:-6px; left:50%;
+    transform:translateX(-50%);
+    width:96px; height:58px;
+    border-top:6px solid #1de9a8;
+    border-radius:60px 60px 0 0;
+    box-shadow:0 0 12px rgba(29,233,168,0.5);
+    z-index:3;
+    pointer-events:none;
   }
-  .robot-head::after{
-    content:'';position:absolute;top:-28px;left:50%;transform:translateX(-50%);
-    width:10px;height:10px;border-radius:50%;
-    background:#2be3a8;box-shadow:0 0 12px 3px rgba(43,227,168,0.7);
+
+  /* headphone ear cups on both sides */
+  .ear{
+    position:absolute;
+    top:28px;
+    width:26px; height:44px;
+    background:linear-gradient(45deg,#1de9a8,#0fbf82);
+    border-radius:40%;
+    box-shadow:0 0 14px rgba(29,233,168,0.75);
+    z-index:3;
   }
+  .ear.left{right:100%; margin-right:-10px;}
+  .ear.right{left:100%; margin-left:-10px;}
+
+  /* glowing light on top of the head that turns on */
+  .top-light{
+    position:absolute;
+    top:-22px; left:50%;
+    transform:translateX(-50%);
+    width:16px; height:16px;
+    border-radius:50%;
+    background:#fff7d6;
+    box-shadow:0 0 16px 6px rgba(255,230,120,0.9);
+    animation:lightOn 2.6s infinite ease-in-out;
+    z-index:4;
+  }
+  @keyframes lightOn{
+    0%,100%{background:#fff7d6;box-shadow:0 0 16px 6px rgba(255,230,120,0.9);}
+    50%{background:#ffffff;box-shadow:0 0 30px 12px rgba(255,255,255,1);}
+  }
+
   .eye{
     position:absolute;
-    top:38px;
+    top:40px;
     width:14px; height:14px;
     background:#eafff6;
     border-radius:50%;
     box-shadow:0 0 10px 3px rgba(43,227,168,0.9);
     animation:blink 4s infinite;
   }
-  .eye.left{left:23px;}
-  .eye.right{right:23px;}
+  .eye.left{left:22px;}
+  .eye.right{right:22px;}
   @keyframes blink{0%,94%,100%{transform:scaleY(1);} 96%{transform:scaleY(0.1);} 98%{transform:scaleY(1);}}
   .mouth{
     position:absolute;
-    bottom:22px; left:50%;
+    bottom:24px; left:50%;
     transform:translateX(-50%);
     width:36px; height:16px;
     border-bottom:3px solid #eafff6;
     border-radius:0 0 22px 22px;
     box-shadow:0 2px 8px rgba(43,227,168,0.6);
+  }
+
+  /* mobile: stack robot above form */
+  @media (max-width:520px){
+    .login-row{flex-direction:column; gap:10px;}
+    .login-container{padding:30px 20px 26px;}
   }
 
   .role-tag{
@@ -184,26 +238,34 @@
 
 <div class="login-container" id="loginFormWrap">
   <div class="spotlight"></div>
-  <div class="robot-head">
-    <div class="eye left"></div>
-    <div class="eye right"></div>
-    <div class="mouth"></div>
+  <div class="login-row">
+    <div class="robot-head">
+      <div class="top-light"></div>
+      <div class="headband"></div>
+      <div class="ear right"></div>
+      <div class="ear left"></div>
+      <div class="eye left"></div>
+      <div class="eye right"></div>
+      <div class="mouth"></div>
+    </div>
+
+    <div class="form-side">
+      <span class="role-tag">PLATINUMZ IT Support</span>
+      <h2 id="cardTitle">Welcome Back</h2>
+      <p class="card-sub" id="cardSub">Ingia kwenye akaunti yako</p>
+
+      <form id="loginForm">
+        <input type="text" id="loginName" placeholder="Jina lako (kwa kujisajili)" autocomplete="name">
+        <input type="email" id="loginEmail" placeholder="Email" required>
+        <input type="password" id="loginPass" placeholder="Password" required>
+        <input type="password" id="loginPass2" placeholder="Rudia Password" autocomplete="new-password">
+        <div class="error" id="loginError"></div>
+        <button type="submit" id="loginBtn">Login</button>
+      </form>
+
+      <p class="signup" id="switchModeText">Huna akaunti? <a id="switchModeLink">Jisajili hapa</a></p>
+    </div>
   </div>
-
-  <span class="role-tag">PLATINUMZ IT Support</span>
-  <h2 id="cardTitle">Welcome Back</h2>
-  <p class="card-sub" id="cardSub">Ingia kwenye akaunti yako</p>
-
-  <form id="loginForm">
-    <input type="text" id="loginName" placeholder="Jina lako (kwa kujisajili)" autocomplete="name">
-    <input type="email" id="loginEmail" placeholder="Email" required>
-    <input type="password" id="loginPass" placeholder="Password" required>
-    <input type="password" id="loginPass2" placeholder="Rudia Password" autocomplete="new-password">
-    <div class="error" id="loginError"></div>
-    <button type="submit" id="loginBtn">Login</button>
-  </form>
-
-  <p class="signup" id="switchModeText">Huna akaunti? <a id="switchModeLink">Jisajili hapa</a></p>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
