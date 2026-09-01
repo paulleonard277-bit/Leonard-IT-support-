@@ -2377,10 +2377,30 @@
     .notif-item{color:#111827 !important;border-bottom:1px solid #f1f3f9 !important;}
     .notif-item.unread{background:#eef2ff !important;}
     .notif-time{color:#9ca3af !important;}
+
+    /* NEW MODERN ADMIN STRUCTURE */
+    .ad-brand-logo{
+      width:38px;height:38px;border-radius:12px;flex:0 0 auto;
+      background:linear-gradient(135deg,#6366f1,#a855f7);color:#fff;font-family:'Space Grotesk',sans-serif;
+      font-weight:800;font-size:1.15rem;display:flex;align-items:center;justify-content:center;
+      box-shadow:0 6px 16px rgba(99,102,241,0.4);
+    }
+    .ad-brand-txt{display:flex;flex-direction:column;line-height:1.2;margin-left:10px;}
+    .ad-brand-txt strong{font-family:'Space Grotesk',sans-serif;font-size:0.95rem;color:#111827;letter-spacing:0.3px;}
+    .ad-brand-txt span{font-size:0.68rem;color:#6b7280;font-weight:500;letter-spacing:0.3px;}
+    .ad-hero{
+      background:linear-gradient(135deg,#4f46e5,#7c3aed 60%,#ec4899);
+      border-radius:18px;padding:26px 28px;margin-bottom:24px;color:#fff;position:relative;overflow:hidden;
+      box-shadow:0 12px 30px rgba(99,102,241,0.28);
+    }
+    .ad-hero::after{content:'';position:absolute;top:-60%;right:-8%;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,0.14);}
+    .ad-hero .ad-greeting{color:#fff;background:none;-webkit-text-fill-color:#fff;font-size:1.5rem;}
+    .ad-hero .ad-greeting-sub{color:rgba(255,255,255,0.85) !important;}
+    .ad-topbar{box-shadow:0 2px 16px rgba(16,30,60,0.06) !important;}
   </style>
 
   <div class="ad-topbar">
-    <div class="ad-brand"><span class="dot"></span>PLATINUMZ Admin</div>
+    <div class="ad-brand"><div class="ad-brand-logo">P</div><div class="ad-brand-txt"><strong>PLATINUMZ</strong><span>Admin Panel</span></div></div>
     <div class="ad-top-right">
       <span class="admin-tag">🛡️ ADMIN</span>
       <div class="ad-notif-wrap" id="adminNotifWrap">
@@ -2393,8 +2413,12 @@
   </div>
 
   <div class="ad-wrap">
-    <div class="ad-greeting" id="adminGreeting">Karibu, Admin</div>
-    <div class="ad-greeting-sub">Hii ni dashibodi yako — fuatilia wateja, maombi, mazungumzo na maoni.</div>
+    <div class="ad-hero">
+      <div>
+        <div class="ad-greeting" id="adminGreeting">Karibu, Admin</div>
+        <div class="ad-greeting-sub">Hii ni dashibodi yako — fuatilia wateja, maombi, mazungumzo na maoni.</div>
+      </div>
+    </div>
 
     <div class="ad-stats">
       <div class="ad-stat-card"><div class="icon">👥</div><div class="num" id="statClients">0</div><div class="label">Wateja</div></div>
