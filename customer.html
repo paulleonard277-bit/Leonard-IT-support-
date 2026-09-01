@@ -2178,6 +2178,187 @@
       .cu-grid{gap:12px !important;}
       .cu-section-title{font-size:0.95rem;}
     }
+
+    /* ═══════════ LIGHT CLEAN MODERN REDESIGN (Google/Stripe style) ═══════════ */
+    body{background:#f4f6fb !important;}
+    .cu-layout{
+      background:#f4f6fb !important;
+      font-family:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    .cu-layout::before{background:none !important;}
+
+    .cu-sidebar{
+      background:#ffffff !important;
+      border-right:1px solid #e6eaf2 !important;
+      box-shadow:0 1px 30px rgba(16,30,60,0.06) !important;
+    }
+    .cu-sb-brand{border-bottom:1px solid #eef1f7 !important;}
+    .cu-sb-brand .dot{background:#4f46e5 !important;box-shadow:0 0 10px rgba(79,70,229,0.5);}
+    .cu-sb-brand span{
+      background:linear-gradient(90deg,#4f46e5,#7c3aed);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+    }
+    .cu-sb-user{border-bottom:1px solid #eef1f7 !important;}
+    .cu-sb-user-avatar{background:linear-gradient(135deg,#6366f1,#a855f7) !important;box-shadow:0 6px 18px rgba(99,102,241,0.35);color:#fff !important;}
+    .cu-sb-user-name{color:#111827 !important;}
+    .cu-sb-user-email{color:#6b7280 !important;}
+    .cu-sb-link{color:#6b7280 !important;margin:3px 8px;}
+    .cu-sb-link:hover{background:#f3f4f6 !important;color:#111827 !important;transform:none;}
+    .cu-sb-link.active{
+      background:linear-gradient(135deg,#6366f1,#8b5cf6) !important;
+      color:#ffffff !important;
+      box-shadow:0 6px 16px rgba(99,102,241,0.35);
+    }
+    .cu-sb-logout{border-top:1px solid #eef1f7 !important;}
+    .cu-sb-logout button{background:#fef2f2 !important;border:1px solid #fecaca !important;color:#dc2626 !important;}
+    .cu-sb-logout button:hover{background:#fee2e2 !important;}
+
+    .cu-main{padding:28px 32px;}
+    .cu-mobile-topbar{background:#ffffff !important;border-bottom:1px solid #e6eaf2 !important;padding:12px 16px;}
+    .cu-mb-brand span{background:linear-gradient(90deg,#4f46e5,#7c3aed);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+    .cu-mb-brand .dot{background:#4f46e5;box-shadow:0 0 8px rgba(79,70,229,0.5);}
+    .cu-mb-menu{background:#fff !important;border:1px solid #e6eaf2 !important;color:#374151 !important;}
+    .cu-mb-overlay{background:rgba(17,24,39,0.4);}
+
+    .cu-page-title{background:linear-gradient(90deg,#111827,#4f46e5);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+    .cu-page-sub{color:#6b7280;}
+    .cu-section-title{color:#111827;}
+    .cu-section-title::before{background:linear-gradient(180deg,#6366f1,#a855f7) !important;box-shadow:0 0 8px rgba(99,102,241,0.6);}
+
+    /* stat cards - clean white */
+    .cu-card{
+      background:#ffffff !important;
+      backdrop-filter:none !important;
+      border:1px solid #eef1f7 !important;
+      border-radius:16px;
+      box-shadow:0 1px 3px rgba(16,30,60,0.04), 0 6px 18px rgba(16,30,60,0.04);
+      transition:transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .cu-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(16,30,60,0.10);border-color:#e3e8f1 !important;}
+    .cu-card::after{display:none !important;}
+    .cu-card-icon{filter:none;}
+    .cu-card-val{background:linear-gradient(135deg,#4f46e5,#7c3aed);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+    .cu-card-label{color:#6b7280;}
+
+    /* quick actions */
+    .cu-quick-item{
+      background:#ffffff !important;
+      backdrop-filter:none !important;
+      border:1px solid #eef1f7 !important;
+      border-radius:14px;
+      box-shadow:0 1px 3px rgba(16,30,60,0.04);
+      transition:all 0.2s;
+    }
+    .cu-quick-item:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(16,30,60,0.10);border-color:#d8dff0 !important;}
+    .cu-quick-item .ql{color:#374151 !important;}
+
+    /* tables & panels - white */
+    .cu-table-wrap,.cu-chat-box,.cu-review-form,.cu-offer-card{
+      background:#ffffff !important;
+      backdrop-filter:none !important;
+      border:1px solid #eef1f7 !important;
+      border-radius:16px;
+      box-shadow:0 1px 3px rgba(16,30,60,0.04), 0 8px 20px rgba(16,30,60,0.04);
+    }
+    .cu-table thead{background:#f8fafc !important;}
+    .cu-table th{color:#6b7280 !important;border-bottom:1px solid #eef1f7 !important;}
+    .cu-table td{border-bottom:1px solid #f1f3f9 !important;color:#111827 !important;}
+    .cu-table tr:hover td{background:#f8fafc !important;}
+    .cu-badge-green{background:#ecfdf5 !important;color:#059669 !important;}
+    .cu-badge-gold{background:#fffbeb !important;color:#d97706 !important;}
+    .cu-badge-blue{background:#eff6ff !important;color:#2563eb !important;}
+    .cu-badge-red{background:#fef2f2 !important;color:#dc2626 !important;}
+
+    /* buttons */
+    .cu-btn-primary{background:linear-gradient(135deg,#6366f1,#8b5cf6) !important;color:#fff !important;box-shadow:0 6px 16px rgba(99,102,241,0.3);}
+    .cu-btn-primary:hover{box-shadow:0 8px 22px rgba(99,102,241,0.4);}
+    .cu-btn-outline{border:1px solid #e5e7eb !important;color:#374151 !important;background:#fff !important;}
+    .cu-btn-outline:hover{border-color:#6366f1 !important;color:#4f46e5 !important;background:#f5f3ff !important;}
+
+    /* service cards */
+    .cu-service-card{
+      background:#ffffff !important;
+      backdrop-filter:none !important;
+      border:1px solid #eef1f7 !important;
+      border-radius:16px;
+      box-shadow:0 1px 3px rgba(16,30,60,0.04);
+      transition:all 0.2s;
+    }
+    .cu-service-card:hover{border-color:#d8dff0 !important;box-shadow:0 10px 24px rgba(16,30,60,0.08);transform:translateY(-2px);}
+    .cu-service-card h4{color:#111827 !important;}
+    .cu-service-card p{color:#6b7280 !important;}
+
+    /* chat */
+    .cu-chat-input input{background:#f9fafb !important;border:1px solid #e5e7eb !important;color:#111827 !important;}
+    .cu-chat-input input:focus{border-color:#6366f1 !important;box-shadow:0 0 0 3px rgba(99,102,241,0.15);}
+    .cu-chat-input button{background:linear-gradient(135deg,#6366f1,#8b5cf6) !important;color:#fff !important;}
+    .cu-chat-msg.customer .bubble{background:linear-gradient(135deg,#6366f1,#8b5cf6) !important;color:#fff !important;}
+    .cu-chat-msg.admin .bubble{background:#f3f4f6 !important;border:1px solid #e5e7eb !important;color:#111827 !important;}
+    .cu-chat-msg .meta{color:#9ca3af !important;}
+
+    /* payment */
+    .cu-pay-method{
+      background:#ffffff !important;
+      backdrop-filter:none !important;
+      border:1px solid #eef1f7 !important;
+      border-radius:14px;
+    }
+    .cu-pay-method:hover{border-color:#d8dff0 !important;box-shadow:0 8px 18px rgba(16,30,60,0.06);}
+    .cu-pay-method.selected{border-color:#6366f1 !important;box-shadow:0 0 0 3px rgba(99,102,241,0.15) !important;}
+    .cu-pay-icon{background:#f3f4f6 !important;border:1px solid #e5e7eb !important;}
+    .cu-pay-info h4{color:#111827 !important;}
+    .cu-pay-info p{color:#6b7280 !important;}
+    .cu-pay-method.selected .cu-pay-check{background:#6366f1 !important;border-color:#6366f1 !important;color:#fff !important;}
+
+    /* reviews */
+    .cu-review-item{
+      background:#ffffff !important;
+      backdrop-filter:none !important;
+      border:1px solid #eef1f7 !important;
+      border-radius:14px;
+    }
+    .cu-review-item .stars{color:#f59e0b !important;}
+    .cu-review-item .rname{color:#4f46e5 !important;}
+    .cu-review-item p{color:#4b5563 !important;}
+    .cu-review-form textarea{background:#f9fafb !important;border:1px solid #e5e7eb !important;color:#111827 !important;border-radius:12px;}
+    .cu-review-form textarea:focus{border-color:#6366f1 !important;box-shadow:0 0 0 3px rgba(99,102,241,0.15);}
+
+    /* about */
+    .cu-about-badge{background:#eef2ff !important;color:#4f46e5 !important;}
+    .cu-about-title{background:linear-gradient(135deg,#111827,#4f46e5);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+    .cu-about-stats{background:#ffffff !important;border:1px solid #eef1f7 !important;box-shadow:0 1px 3px rgba(16,30,60,0.04);}
+    .cu-about-stat-val{color:#4f46e5 !important;}
+    .cu-about-val-card{background:#ffffff !important;border:1px solid #eef1f7 !important;}
+    .cu-about-val-card h4{color:#4f46e5 !important;}
+    .cu-about-val-card p{color:#4b5563 !important;}
+    .cu-about-val-icon{background:#eef2ff !important;}
+    .cu-about-contact{background:#ffffff !important;border:1px solid #eef1f7 !important;color:#4b5563 !important;}
+
+    /* profile */
+    .profile-card{background:#ffffff !important;border:1px solid #eef1f7 !important;border-radius:16px;box-shadow:0 1px 3px rgba(16,30,60,0.04);}
+    .profile-avatar{background:linear-gradient(135deg,#6366f1,#a855f7) !important;border:3px solid #eef2ff !important;color:#fff !important;box-shadow:0 6px 18px rgba(99,102,241,0.3);}
+    .profile-avatar-btn{border:1px solid #6366f1 !important;color:#4f46e5 !important;}
+    .profile-avatar-btn:hover{background:#eef2ff !important;}
+    .profile-input{background:#f9fafb !important;border:1px solid #e5e7eb !important;color:#111827 !important;}
+    .profile-input:focus{border-color:#6366f1 !important;box-shadow:0 0 0 3px rgba(99,102,241,0.15);}
+    .profile-msg.success{color:#059669 !important;}
+    .profile-msg.error{color:#dc2626 !important;}
+
+    /* modals */
+    .pw-modal{background:rgba(17,24,39,0.5) !important;}
+    .pw-box{background:#ffffff !important;border:1px solid #eef1f7 !important;box-shadow:0 20px 50px rgba(16,30,60,0.20) !important;}
+    .pw-box h3{color:#111827 !important;}
+    .pw-box .pw-close{color:#6b7280 !important;}
+
+    /* notifications */
+    .cu-notif-bell{color:#374151 !important;}
+    .cu-notif-panel,.cu-notif-wrap .cu-notif-panel{background:#ffffff !important;border:1px solid #eef1f7 !important;box-shadow:0 14px 40px rgba(16,30,60,0.16);}
+    .cu-notif-wrap .notif-item{border-bottom:1px solid #f1f3f9 !important;color:#111827 !important;}
+    .cu-notif-wrap .notif-item.unread{background:#eef2ff !important;}
+    .cu-empty{color:#9ca3af !important;}
+    .cu-body, .cu-sb-nav a{color:#374151;}
+
+    /* smooth modern touch */
+    .cu-card,.cu-quick-item,.cu-service-card,.cu-pay-method,.cu-review-item{will-change:transform;}
   </style>
 
   <div class="cu-layout">
