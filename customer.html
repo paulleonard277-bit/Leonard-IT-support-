@@ -1940,11 +1940,23 @@
     }
 
     /* ═══════════ GREEN NEON + GLASSMORPHISM REDESIGN ═══════════ */
+    body{background:#05070a !important;}
     .cu-layout{
       background:
         radial-gradient(900px 600px at 90% -5%, rgba(43,227,168,0.14), transparent 55%),
         radial-gradient(800px 600px at -5% 100%, rgba(29,233,168,0.10), transparent 55%),
-        #05070a;
+        #05070a !important;
+    }
+    .cu-sidebar{
+      background:linear-gradient(180deg, rgba(15,28,28,0.92), rgba(8,20,22,0.95)) !important;
+      backdrop-filter:blur(14px);
+      border-right:1px solid rgba(43,227,168,0.14) !important;
+    }
+    .cu-main{
+      background:
+        radial-gradient(900px 500px at 100% 0%, rgba(43,227,168,0.10), transparent 55%),
+        radial-gradient(700px 500px at 0% 100%, rgba(29,233,168,0.08), transparent 55%),
+        transparent !important;
     }
     .cu-layout::before{
       content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.5;
@@ -1997,9 +2009,9 @@
 
     /* glass stat cards */
     .cu-card{
-      background:linear-gradient(150deg, rgba(20,45,40,0.55), rgba(10,22,22,0.55));
+      background:linear-gradient(150deg, rgba(20,45,40,0.55), rgba(10,22,22,0.55)) !important;
       backdrop-filter:blur(12px);
-      border:1px solid rgba(43,227,168,0.16);
+      border:1px solid rgba(43,227,168,0.16) !important;
       border-radius:18px;
       box-shadow:0 10px 30px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.05);
       transition:transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s;
@@ -2015,9 +2027,9 @@
 
     /* quick actions */
     .cu-quick-item{
-      background:linear-gradient(150deg, rgba(20,45,40,0.5), rgba(10,22,22,0.5));
+      background:linear-gradient(150deg, rgba(20,45,40,0.5), rgba(10,22,22,0.5)) !important;
       backdrop-filter:blur(10px);
-      border:1px solid rgba(43,227,168,0.14);
+      border:1px solid rgba(43,227,168,0.14) !important;
       border-radius:16px;
       transition:all 0.25s;
     }
@@ -2027,9 +2039,9 @@
 
     /* glass tables & panels */
     .cu-table-wrap,.cu-chat-box,.cu-review-form,.cu-offer-card{
-      background:linear-gradient(150deg, rgba(20,45,40,0.55), rgba(10,22,22,0.55));
+      background:linear-gradient(150deg, rgba(20,45,40,0.55), rgba(10,22,22,0.55)) !important;
       backdrop-filter:blur(12px);
-      border:1px solid rgba(43,227,168,0.16);
+      border:1px solid rgba(43,227,168,0.16) !important;
       border-radius:18px;
       box-shadow:0 10px 30px rgba(0,0,0,0.3);
     }
@@ -2051,9 +2063,9 @@
 
     /* service cards */
     .cu-service-card{
-      background:linear-gradient(150deg, rgba(20,45,40,0.55), rgba(10,22,22,0.55));
+      background:linear-gradient(150deg, rgba(20,45,40,0.55), rgba(10,22,22,0.55)) !important;
       backdrop-filter:blur(10px);
-      border:1px solid rgba(43,227,168,0.14);
+      border:1px solid rgba(43,227,168,0.14) !important;
       border-radius:16px;
       transition:all 0.25s;
     }
@@ -2071,9 +2083,9 @@
 
     /* payment */
     .cu-pay-method{
-      background:linear-gradient(150deg, rgba(20,45,40,0.55), rgba(10,22,22,0.55));
+      background:linear-gradient(150deg, rgba(20,45,40,0.55), rgba(10,22,22,0.55)) !important;
       backdrop-filter:blur(10px);
-      border:1px solid rgba(43,227,168,0.14);
+      border:1px solid rgba(43,227,168,0.14) !important;
       border-radius:16px;
       transition:all 0.25s;
     }
@@ -2086,9 +2098,9 @@
 
     /* reviews */
     .cu-review-item{
-      background:linear-gradient(150deg, rgba(20,45,40,0.5), rgba(10,22,22,0.5));
+      background:linear-gradient(150deg, rgba(20,45,40,0.5), rgba(10,22,22,0.5)) !important;
       backdrop-filter:blur(10px);
-      border:1px solid rgba(43,227,168,0.14);
+      border:1px solid rgba(43,227,168,0.14) !important;
       border-radius:16px;
     }
     .cu-review-item .stars{color:#ffd664;}
@@ -2100,31 +2112,31 @@
     .cu-about-badge{background:rgba(43,227,168,0.12);color:#2be3a8;box-shadow:0 0 14px rgba(43,227,168,0.2);}
     .cu-about-title{background:linear-gradient(135deg,#eafff6,#2be3a8);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
     .cu-about-stats{
-      background:linear-gradient(150deg, rgba(20,45,40,0.55), rgba(10,22,22,0.55));
+      background:linear-gradient(150deg, rgba(20,45,40,0.55), rgba(10,22,22,0.55)) !important;
       backdrop-filter:blur(10px);
-      border:1px solid rgba(43,227,168,0.16);
+      border:1px solid rgba(43,227,168,0.16) !important;
       box-shadow:0 10px 30px rgba(0,0,0,0.3);
     }
     .cu-about-stat-val{color:#2be3a8;}
     .cu-about-val-card{
-      background:linear-gradient(150deg, rgba(20,45,40,0.55), rgba(10,22,22,0.55));
+      background:linear-gradient(150deg, rgba(20,45,40,0.55), rgba(10,22,22,0.55)) !important;
       backdrop-filter:blur(10px);
-      border:1px solid rgba(43,227,168,0.14);
+      border:1px solid rgba(43,227,168,0.14) !important;
     }
     .cu-about-val-card:hover{border-color:rgba(43,227,168,0.4);}
     .cu-about-val-card h4{color:#2be3a8;}
     .cu-about-val-icon{background:rgba(43,227,168,0.1);}
     .cu-about-contact{
-      background:linear-gradient(150deg, rgba(20,45,40,0.55), rgba(10,22,22,0.55));
+      background:linear-gradient(150deg, rgba(20,45,40,0.55), rgba(10,22,22,0.55)) !important;
       backdrop-filter:blur(10px);
-      border:1px solid rgba(43,227,168,0.16);
+      border:1px solid rgba(43,227,168,0.16) !important;
     }
 
     /* profile */
     .profile-card{
-      background:linear-gradient(150deg, rgba(20,45,40,0.55), rgba(10,22,22,0.55));
+      background:linear-gradient(150deg, rgba(20,45,40,0.55), rgba(10,22,22,0.55)) !important;
       backdrop-filter:blur(12px);
-      border:1px solid rgba(43,227,168,0.16);
+      border:1px solid rgba(43,227,168,0.16) !important;
       border-radius:18px;
       box-shadow:0 10px 30px rgba(0,0,0,0.3);
     }
