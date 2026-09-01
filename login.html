@@ -144,21 +144,50 @@
   .ear.left{right:100%; margin-right:-10px;}
   .ear.right{left:100%; margin-left:-10px;}
 
-  /* glowing light on top of the head that turns on */
+  /* modern floating light above the head (on a small mast) that shines a light beam */
   .top-light{
     position:absolute;
-    top:-22px; left:50%;
+    top:-26px; left:50%;
     transform:translateX(-50%);
-    width:16px; height:16px;
-    border-radius:50%;
-    background:#fff7d6;
-    box-shadow:0 0 16px 6px rgba(255,230,120,0.9);
-    animation:lightOn 2.6s infinite ease-in-out;
+    width:6px; height:14px;
+    background:#1de9a8;
+    border-radius:2px;
     z-index:4;
   }
+  .top-light::after{
+    content:'';
+    position:absolute;
+    top:-12px; left:50%;
+    transform:translateX(-50%);
+    width:14px; height:14px;
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #ffffff, #fff3a3 55%, rgba(255,230,120,0.2));
+    border:2px solid rgba(255,255,255,0.85);
+    box-shadow:0 0 22px 8px rgba(255,240,150,0.9), 0 0 44px 16px rgba(255,220,90,0.4);
+    animation:lightOn 2.2s infinite ease-in-out;
+  }
   @keyframes lightOn{
-    0%,100%{background:#fff7d6;box-shadow:0 0 16px 6px rgba(255,230,120,0.9);}
-    50%{background:#ffffff;box-shadow:0 0 30px 12px rgba(255,255,255,1);}
+    0%,100%{box-shadow:0 0 22px 8px rgba(255,240,150,0.9), 0 0 44px 16px rgba(255,220,90,0.4);}
+    50%{box-shadow:0 0 34px 14px rgba(255,255,255,1), 0 0 60px 24px rgba(255,230,120,0.7);}
+  }
+
+  /* triangle spotlight beam coming from the top light, sweeping left-right */
+  .beam{
+    position:absolute;
+    top:-10px; left:50%;
+    transform-origin:50% 0%;
+    width:0; height:0;
+    border-left:44px solid transparent;
+    border-right:44px solid transparent;
+    border-top:70px solid rgba(140,255,215,0.20);
+    filter:blur(2px);
+    z-index:1;
+    pointer-events:none;
+    animation:sweep 5s ease-in-out infinite;
+  }
+  @keyframes sweep{
+    0%,100%{transform:translate(-50%,0) rotate(-16deg);}
+    50%{transform:translate(-50%,0) rotate(16deg);}
   }
 
   .eye{
@@ -241,6 +270,7 @@
   <div class="login-row">
     <div class="robot-head">
       <div class="top-light"></div>
+      <div class="beam"></div>
       <div class="headband"></div>
       <div class="ear right"></div>
       <div class="ear left"></div>
