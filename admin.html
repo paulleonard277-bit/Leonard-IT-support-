@@ -2397,6 +2397,74 @@
     .ad-hero .ad-greeting{color:#fff;background:none;-webkit-text-fill-color:#fff;font-size:1.5rem;}
     .ad-hero .ad-greeting-sub{color:rgba(255,255,255,0.85) !important;}
     .ad-topbar{box-shadow:0 2px 16px rgba(16,30,60,0.06) !important;}
+
+    /* ═══════════ ADMIN ANIMATIONS ═══════════ */
+    @keyframes adHeroShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    @keyframes adShimmer{0%{transform:translateX(-140%) skewX(-18deg)}100%{transform:translateX(340%) skewX(-18deg)}}
+    @keyframes adOrbFloat{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(22px,-26px) scale(1.15)}}
+    @keyframes adOrbFloat2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-26px,20px) scale(0.88)}}
+    @keyframes adFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+    @keyframes adSlideDown{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes adRowIn{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:translateX(0)}}
+    @keyframes adTabPulse{0%,100%{box-shadow:0 6px 16px rgba(99,102,241,0.35)}50%{box-shadow:0 6px 24px rgba(139,92,246,0.6)}}
+    @keyframes adBrandPulse{0%{box-shadow:0 6px 16px rgba(99,102,241,0.4),0 0 0 0 rgba(99,102,241,0.5)}70%{box-shadow:0 6px 16px rgba(99,102,241,0.4),0 0 0 14px rgba(99,102,241,0)}100%{box-shadow:0 6px 16px rgba(99,102,241,0.4),0 0 0 0 rgba(99,102,241,0)}}
+    @keyframes adNotifRing{0%,100%{transform:rotate(0)}15%{transform:rotate(16deg)}30%{transform:rotate(-14deg)}45%{transform:rotate(9deg)}60%{transform:rotate(-6deg)}75%{transform:rotate(3deg)}}
+    @keyframes adBgDrift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+    /* Topbar slide-in */
+    .ad-topbar{animation:adSlideDown 0.55s cubic-bezier(.22,.61,.36,1) both;}
+
+    /* Brand logo pulse ring */
+    .ad-brand-logo{animation:adBrandPulse 2.6s ease-out infinite;transition:transform 0.3s;}
+    .ad-brand-logo:hover{transform:scale(1.1) rotate(4deg);}
+
+    /* Hero: animated flowing gradient + light shimmer + floating orbs */
+    .ad-hero{
+      background:linear-gradient(135deg,#4f46e5,#7c3aed 35%,#d946ef 60%,#ec4899) !important;
+      background-size:260% 260% !important;
+      animation:adHeroShift 12s ease-in-out infinite;
+    }
+    .ad-hero::before{
+      content:'';position:absolute;top:0;left:0;width:55%;height:100%;pointer-events:none;
+      background:linear-gradient(105deg,transparent,rgba(255,255,255,0.28),transparent);
+      animation:adShimmer 5.5s ease-in-out infinite;
+    }
+    .ad-hero::after{animation:adOrbFloat 7s ease-in-out infinite;}
+    .ad-h-orb{position:absolute;border-radius:50%;background:rgba(255,255,255,0.16);pointer-events:none;z-index:1;}
+    .ad-h-orb.o1{width:88px;height:88px;top:-30px;left:20%;animation:adOrbFloat 8s ease-in-out infinite;}
+    .ad-h-orb.o2{width:46px;height:46px;right:20%;bottom:14px;animation:adOrbFloat2 9s ease-in-out infinite;}
+    .ad-h-orb.o3{width:20px;height:20px;left:11%;bottom:24px;background:rgba(255,255,255,0.3);animation:adFloat 5s ease-in-out infinite;}
+    .ad-hero>div{position:relative;z-index:2;}
+    .ad-hero .ad-greeting{animation:adSlideDown 0.7s cubic-bezier(.22,.61,.36,1) 0.15s both;}
+    .ad-hero .ad-greeting-sub{animation:adSlideDown 0.7s cubic-bezier(.22,.61,.36,1) 0.3s both;}
+
+    /* Stat card icons gently float */
+    .ad-stat-card .icon{display:inline-block;animation:adFloat 3.6s ease-in-out infinite;}
+    .ad-stat-card:nth-child(1) .icon{animation-delay:0s;}
+    .ad-stat-card:nth-child(2) .icon{animation-delay:0.3s;}
+    .ad-stat-card:nth-child(3) .icon{animation-delay:0.6s;}
+    .ad-stat-card:nth-child(4) .icon{animation-delay:0.9s;}
+
+    /* Active tab soft pulse */
+    .ad-tab.active{animation:adTabPulse 2.4s ease-in-out infinite;}
+
+    /* Table rows slide in */
+    .ad-table tbody tr{animation:adRowIn 0.45s ease both;}
+
+    /* Notification bell wiggle on hover */
+    .ad-notif-bell{display:inline-block;transition:transform 0.2s;}
+    .ad-notif-bell:hover{animation:adNotifRing 0.8s ease;}
+
+    /* Subtle animated page background glow */
+    #adminDashboard{
+      background:linear-gradient(135deg,#f4f6fb,#eef2ff 50%,#f4f6fb) !important;
+      background-size:200% 200% !important;
+      animation:adBgDrift 18s ease-in-out infinite;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .ad-topbar,.ad-hero,.ad-h-orb,.ad-brand-logo,.ad-stat-card .icon,.ad-tab.active,.ad-table tbody tr,.ad-notif-bell,#adminDashboard{animation:none !important;}
+    }
   </style>
 
   <div class="ad-topbar">
@@ -2414,6 +2482,9 @@
 
   <div class="ad-wrap">
     <div class="ad-hero">
+      <span class="ad-h-orb o1"></span>
+      <span class="ad-h-orb o2"></span>
+      <span class="ad-h-orb o3"></span>
       <div>
         <div class="ad-greeting" id="adminGreeting">Karibu, Admin</div>
         <div class="ad-greeting-sub">Hii ni dashibodi yako — fuatilia wateja, maombi, mazungumzo na maoni.</div>
@@ -7512,6 +7583,31 @@ function resend2FACode(){ send2FACode(_2faEmail).then(()=>{var m=document.getEle
   liveRegion.style.cssText='position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);border:0;';
   document.body.appendChild(liveRegion);
   window.announce=function(msg){ liveRegion.textContent=msg; setTimeout(function(){liveRegion.textContent='';},3000); };
+})();
+
+// ═══════════ ADMIN STAT COUNT-UP ANIMATION ═══════════
+(function(){
+  function animateCount(el){
+    var target=parseInt(String(el.textContent).replace(/[^\d]/g,''))||0;
+    if(target===0){el.textContent='0';return;}
+    var dur=1000,start=null;
+    function step(ts){
+      if(start===null) start=ts;
+      var p=Math.min((ts-start)/dur,1);
+      var ease=1-Math.pow(1-p,3);
+      el.textContent=Math.floor(ease*target);
+      if(p<1) requestAnimationFrame(step);
+      else el.textContent=target;
+    }
+    requestAnimationFrame(step);
+  }
+  document.querySelectorAll('.ad-stat-card .num').forEach(function(el){
+    var last=el.textContent;
+    new MutationObserver(function(){
+      var now=el.textContent;
+      if(now!==last){last=now;animateCount(el);}
+    }).observe(el,{childList:true,subtree:true,characterData:true});
+  });
 })();
 
 </script>
