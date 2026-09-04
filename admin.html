@@ -2876,6 +2876,7 @@
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
 <script>
   (function(){
     var splash = document.getElementById('splashScreen');
@@ -3139,6 +3140,7 @@
 
   function setMode(newMode){
     mode = newMode;
+    if(!authErr) return; // admin dashboard has no login/gate form
     authErr.style.display = 'none';
     authOk.style.display = 'none';
     const t = translations[currentLang];
