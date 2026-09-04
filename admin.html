@@ -14,6 +14,23 @@
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="manifest" href="manifest.json">
 <style>#jsErrors{position:fixed;bottom:0;left:0;right:0;background:red;color:#fff;font:11px/1.4 monospace;padding:6px 10px;z-index:99999;max-height:100px;overflow:auto;display:none;}</style>
+<script>
+window.__shown=[];
+window.onerror=function(msg,src,line,col){
+  try{
+    var el=document.getElementById('jsErrors');
+    if(el){
+      var key=msg+'|'+line;
+      if(window.__shown.indexOf(key)===-1){
+        window.__shown.push(key);
+        el.style.display='block';
+        el.innerHTML += '<div>JS: '+msg+' @'+(src||'')+':'+line+':'+(col||'')+'</div>';
+      }
+    }
+    console.error(msg, src, line, col);
+  }catch(e){}
+};
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -6093,23 +6110,27 @@
 
   // Global admin language toggle (guaranteed to work via onclick)
   window.toggleAdminLang = function(){
+    const langs = ['sw','en'];
+    const idx = langs.indexOf(currentLang);
+    const next = langs[(idx + 1) % langs.length];
+    // Update button labels FIRST so the toggle always visibly responds
+    const langLabels = {sw:'EN',en:'SW'};
+    const langFull = {sw:'English',en:'Kiswahili'};
+    document.querySelectorAll('[id^="langToggle"]').forEach(el => {
+      if(el.tagName !== 'A'){ el.textContent = langLabels[next]; }
+      else { el.textContent = langFull[next]; }
+    });
     try{
-      var langs = ['sw','en'];
-      var idx = langs.indexOf(currentLang);
-      if(idx < 0) idx = 0;
-      var next = langs[(idx + 1) % langs.length];
       applyLang(next);
-    }catch(err){ if(window.announce) window.announce('Language error: ' + err.message); }
+    }catch(err){
+      currentLang = next;
+      localStorage.setItem('platinumz-lang', next);
+      try{ if(window.announce) window.announce('Language error: ' + err.message); }catch(e){}
+    }
   };
 
   // Wire up lang toggles
-  document.querySelectorAll('[id^="langToggle"]').forEach(el => el.addEventListener('click', () => {
-    const langs = ['sw','en'];
-    const langLabels = {sw:'SW',en:'EN'};
-    const idx = langs.indexOf(currentLang);
-    const next = langs[(idx + 1) % langs.length];
-    applyLang(next);
-  }));
+  document.querySelectorAll('[id^="langToggle"]').forEach(el => el.addEventListener('click', window.toggleAdminLang));
 
   applyLang(currentLang);
   updateStatus();
