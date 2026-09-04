@@ -2475,7 +2475,7 @@
         <button class="ad-notif-bell" id="adminNotifBell" onclick="toggleNotifPanel('admin')">🔔 <span class="ad-notif-badge" id="adminNotifBadge">0</span></button>
         <div class="ad-notif-panel" id="adminNotifPanel"></div>
       </div>
-      <button class="ad-top-logout" id="langToggleAdmin" style="padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:none;color:var(--paper);cursor:pointer;font-size:0.78rem;font-weight:700;letter-spacing:0.5px;">SW</button>
+      <button class="ad-top-logout" id="langToggleAdmin" onclick="toggleAdminLang()" style="padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:none;color:var(--paper);cursor:pointer;font-size:0.78rem;font-weight:700;letter-spacing:0.5px;">SW</button>
       <button class="ad-top-logout" id="adminLogoutBtn">🚪 Out</button>
     </div>
   </div>
@@ -6087,6 +6087,17 @@
       loadCustomerDashboard(_customerUser);
     }
   }
+
+  // Global admin language toggle (guaranteed to work via onclick)
+  window.toggleAdminLang = function(){
+    try{
+      var langs = ['sw','en'];
+      var idx = langs.indexOf(currentLang);
+      if(idx < 0) idx = 0;
+      var next = langs[(idx + 1) % langs.length];
+      applyLang(next);
+    }catch(err){ if(window.announce) window.announce('Language error: ' + err.message); }
+  };
 
   // Wire up lang toggles
   document.querySelectorAll('[id^="langToggle"]').forEach(el => el.addEventListener('click', () => {
