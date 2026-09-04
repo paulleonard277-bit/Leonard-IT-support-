@@ -6776,6 +6776,7 @@ function sendBrowserNotification(title, body, icon){
 }
 function showNotifToast(title, msg, icon){
   const t = document.getElementById('notifToast');
+  if(!t) return;
   t.querySelector('.notif-title').textContent = title;
   t.querySelector('.notif-msg').textContent = msg;
   t.querySelector('.notif-icon').textContent = icon || '🔔';
@@ -7625,5 +7626,17 @@ function resend2FACode(){ send2FACode(_2faEmail).then(()=>{var m=document.getEle
 
 </script>
 <div id="jsErrors"></div>
+
+<div id="notifToast" style="position:fixed;bottom:24px;right:24px;z-index:5000;background:#ffffff;border:1px solid #e6eaf2;border-radius:14px;padding:16px 20px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 30px rgba(16,30,60,0.15);transform:translateY(140%);transition:transform 0.35s ease;max-width:340px;">
+  <div class="notif-icon" style="font-size:1.5rem;">🔔</div>
+  <div style="flex:1;">
+    <div class="notif-title" style="font-weight:700;font-size:0.88rem;color:#111827;"></div>
+    <div class="notif-msg" style="font-size:0.78rem;color:#6b7280;margin-top:2px;"></div>
+  </div>
+</div>
+<style>
+  #notifToast.show{transform:translateY(0)!important;}
+</style>
+
 </body>
 </html>

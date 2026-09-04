@@ -1,0 +1,9 @@
+{
+    "theme_color":  "#4f46e5",
+    "name":  "PLATINUMZ IT Support",
+    "display":  "standalone",
+    "short_name":  "PLATINUMZ",
+    "background_color":  "#f4f6fb",
+    "description":  "PLATINUMZ IT Support Dashboard",
+    "start_url":  "./login.html"
+}
