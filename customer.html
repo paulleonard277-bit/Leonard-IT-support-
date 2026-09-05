@@ -2466,6 +2466,9 @@
       <!-- NYUMBANI -->
       <div class="cu-page active" id="cuPageNyumbani">
         <div class="cu-hero" id="cuHero">
+          <span class="cu-h-orb o1"></span>
+          <span class="cu-h-orb o2"></span>
+          <span class="cu-h-orb o3"></span>
           <div class="cu-hero-left">
             <h2 class="cu-page-title" id="cuHeroTitle" style="margin-bottom:6px;">👋 Karibu!</h2>
             <p class="cu-page-sub" data-label="cu-page-sub" style="margin-bottom:0;">Ungependa kufanya nini leo?</p>
@@ -3008,6 +3011,95 @@
 </div>
 <style>
   #notifToast.show{transform:translateY(0)!important;}
+</style>
+<style>
+  /* ═══════════ CUSTOMER ANIMATIONS ═══════════ */
+  @keyframes cuHeroShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+  @keyframes cuShimmer{0%{transform:translateX(-140%) skewX(-18deg)}100%{transform:translateX(340%) skewX(-18deg)}}
+  @keyframes cuOrbFloat{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(20px,-24px) scale(1.15)}}
+  @keyframes cuOrbFloat2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-24px,18px) scale(0.88)}}
+  @keyframes cuFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  @keyframes cuSlideDown{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes cuRowIn{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:translateX(0)}}
+  @keyframes cuAvatarPulse{0%{box-shadow:0 0 0 0 rgba(62,211,199,0.5)}70%{box-shadow:0 0 0 14px rgba(62,211,199,0)}100%{box-shadow:0 0 0 0 rgba(62,211,199,0)}}
+  @keyframes cuNotifRing{0%,100%{transform:rotate(0)}15%{transform:rotate(16deg)}30%{transform:rotate(-14deg)}45%{transform:rotate(9deg)}60%{transform:rotate(-6deg)}75%{transform:rotate(3deg)}}
+  @keyframes cuBgDrift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+  /* Hero: animated flowing gradient + light shimmer + floating orbs */
+  .cu-hero{
+    background:linear-gradient(135deg,#6366f1,#a855f7 35%,#ec4899 60%,#f43f5e) !important;
+    background-size:280% 280% !important;
+    animation:cuHeroShift 12s ease-in-out infinite;
+  }
+  .cu-hero::before{
+    content:'';position:absolute;top:0;left:0;width:55%;height:100%;pointer-events:none;z-index:1;
+    background:linear-gradient(105deg,transparent,rgba(255,255,255,0.28),transparent);
+    animation:cuShimmer 5.5s ease-in-out infinite;
+  }
+  .cu-h-orb{position:absolute;border-radius:50%;background:rgba(255,255,255,0.16);pointer-events:none;z-index:1;}
+  .cu-h-orb.o1{width:88px;height:88px;top:-30px;left:20%;animation:cuOrbFloat 8s ease-in-out infinite;}
+  .cu-h-orb.o2{width:46px;height:46px;right:18%;bottom:14px;animation:cuOrbFloat2 9s ease-in-out infinite;}
+  .cu-h-orb.o3{width:20px;height:20px;left:11%;bottom:24px;background:rgba(255,255,255,0.3);animation:cuFloat 5s ease-in-out infinite;}
+  .cu-hero-left,.cu-hero-right{position:relative;z-index:2;}
+  .cu-hero .cu-page-title{animation:cuSlideDown 0.7s cubic-bezier(.22,.61,.36,1) 0.15s both;}
+  .cu-hero .cu-page-sub{animation:cuSlideDown 0.7s cubic-bezier(.22,.61,.36,1) 0.3s both;}
+
+  /* Sidebar avatar pulse */
+  .cu-sb-user-avatar{animation:cuAvatarPulse 2.6s ease-out infinite;transition:transform 0.3s;}
+  .cu-sb-user-avatar:hover{transform:scale(1.08) rotate(3deg);}
+
+  /* Stat card icons gently float */
+  .cu-card .cu-card-ic{display:inline-block;animation:cuFloat 3.6s ease-in-out infinite;}
+  .cu-card:nth-child(1) .cu-card-ic{animation-delay:0s;}
+  .cu-card:nth-child(2) .cu-card-ic{animation-delay:0.3s;}
+  .cu-card:nth-child(3) .cu-card-ic{animation-delay:0.6s;}
+  .cu-card:nth-child(4) .cu-card-ic{animation-delay:0.9s;}
+
+  /* Quick items slide in with stagger */
+  .cu-quick-item{animation:cuSlideDown 0.5s cubic-bezier(.22,.61,.36,1) both;}
+  .cu-quick-item:nth-child(1){animation-delay:0.05s;}
+  .cu-quick-item:nth-child(2){animation-delay:0.12s;}
+  .cu-quick-item:nth-child(3){animation-delay:0.19s;}
+  .cu-quick-item:nth-child(4){animation-delay:0.26s;}
+  .cu-quick-item:nth-child(5){animation-delay:0.33s;}
+  .cu-quick-item:nth-child(6){animation-delay:0.4s;}
+  .cu-quick-item:nth-child(7){animation-delay:0.47s;}
+  .cu-quick-item:nth-child(8){animation-delay:0.54s;}
+  .cu-quick-item:nth-child(9){animation-delay:0.61s;}
+  .cu-quick-item:nth-child(10){animation-delay:0.68s;}
+
+  /* Service cards subtle entrance */
+  .cu-service-card{animation:cuSlideDown 0.5s cubic-bezier(.22,.61,.36,1) both;}
+  .cu-service-card:nth-child(1){animation-delay:0.03s;}
+  .cu-service-card:nth-child(2){animation-delay:0.08s;}
+  .cu-service-card:nth-child(3){animation-delay:0.13s;}
+  .cu-service-card:nth-child(4){animation-delay:0.18s;}
+  .cu-service-card:nth-child(5){animation-delay:0.23s;}
+  .cu-service-card:nth-child(6){animation-delay:0.28s;}
+  .cu-service-card:nth-child(7){animation-delay:0.33s;}
+  .cu-service-card:nth-child(8){animation-delay:0.38s;}
+  .cu-service-card:nth-child(9){animation-delay:0.43s;}
+  .cu-service-card:nth-child(10){animation-delay:0.48s;}
+
+  /* Table rows slide in */
+  .cu-table tbody tr{animation:cuRowIn 0.45s ease both;}
+
+  /* Notification bell wiggle on hover */
+  .cu-notif-bell{display:inline-block;transition:transform 0.2s;}
+  .cu-notif-bell:hover{animation:cuNotifRing 0.8s ease;}
+
+  /* Subtle animated page background glow */
+  #customerDashboard{
+    background:
+      radial-gradient(900px 600px at 90% -5%, rgba(43,227,168,0.14), transparent 55%),
+      radial-gradient(800px 600px at -5% 100%, rgba(29,233,168,0.10), transparent 55%) !important;
+    background-size:200% 200% !important;
+    animation:cuBgDrift 18s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .cu-hero,.cu-h-orb,.cu-sb-user-avatar,.cu-card .cu-card-ic,.cu-quick-item,.cu-service-card,.cu-table tbody tr,.cu-notif-bell,#customerDashboard{animation:none !important;}
+  }
 </style>
 
 <!-- Main Content wrapper for accessibility -->
@@ -7608,6 +7700,31 @@ function resend2FACode(){ send2FACode(_2faEmail).then(()=>{var m=document.getEle
   liveRegion.style.cssText='position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);border:0;';
   document.body.appendChild(liveRegion);
   window.announce=function(msg){ liveRegion.textContent=msg; setTimeout(function(){liveRegion.textContent='';},3000); };
+})();
+
+// ═══════════ CUSTOMER STAT COUNT-UP ANIMATION ═══════════
+(function(){
+  function animateCount(el){
+    var target=parseInt(String(el.textContent).replace(/[^\d]/g,''))||0;
+    if(target===0){el.textContent='0';return;}
+    var dur=1000,start=null;
+    function step(ts){
+      if(start===null) start=ts;
+      var p=Math.min((ts-start)/dur,1);
+      var ease=1-Math.pow(1-p,3);
+      el.textContent=Math.floor(ease*target);
+      if(p<1) requestAnimationFrame(step);
+      else el.textContent=target;
+    }
+    requestAnimationFrame(step);
+  }
+  document.querySelectorAll('.cu-card-val').forEach(function(el){
+    var last=el.textContent;
+    new MutationObserver(function(){
+      var now=el.textContent;
+      if(now!==last){last=now;animateCount(el);}
+    }).observe(el,{childList:true,subtree:true,characterData:true});
+  });
 })();
 
 </script>
