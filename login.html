@@ -3,330 +3,190 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login — PLATINUMZ</title>
+<title>Sign in — PLATINUMZ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-  *{margin:0;padding:0;box-sizing:border-box;}
   :root{
-    --teal:#2be3a8;
-    --teal2:#1de9a8;
-    --ink:#05070a;
-    --panel:rgba(13,28,26,0.72);
-    --line:rgba(43,227,168,0.16);
-    --muted:#7fa89c;
-    --gold:#F2A93B;
+    --bg:#0a0a0b;
+    --fg:#f4f4f5;
+    --muted:#8b8b94;
+    --line:rgba(255,255,255,0.08);
+    --line2:rgba(255,255,255,0.12);
+    --accent:#2be3a8;
+    --accent2:#1de9a8;
   }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{height:100%;}
   body{
-    min-height:100vh;
-    background:#05070a;
-    font-family:'Segoe UI',Arial,sans-serif;
-    color:#fff;
+    background:var(--bg);
+    color:var(--fg);
+    font-family:'Inter',-apple-system,'Segoe UI',Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
   }
-  /* cosmic radial glows */
-  body::before{
-    content:'';position:fixed;inset:0;z-index:-3;pointer-events:none;
+
+  /* soft studio glow behind everything */
+  .backdrop{position:fixed;inset:0;z-index:-2;overflow:hidden;background:var(--bg);}
+  .backdrop::before{
+    content:'';position:absolute;inset:0;
     background:
-      radial-gradient(900px 620px at 8% 12%, rgba(43,227,168,0.10), transparent 55%),
-      radial-gradient(800px 600px at 95% 100%, rgba(29,233,168,0.08), transparent 55%),
-      radial-gradient(700px 500px at 55% -10%, rgba(99,102,241,0.06), transparent 55%),
-      #05070a;
+      radial-gradient(620px 480px at 50% -18%, rgba(43,227,168,0.10), transparent 60%),
+      radial-gradient(700px 520px at 85% 110%, rgba(99,102,241,0.07), transparent 60%),
+      radial-gradient(520px 420px at 8% 100%, rgba(29,233,168,0.05), transparent 60%);
   }
-  /* aurora blobs */
-  .aurora{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden;filter:blur(70px);opacity:0.5;}
-  .aurora span{position:absolute;border-radius:50%;}
-  .aurora .a1{width:420px;height:420px;top:-120px;left:-80px;background:rgba(43,227,168,0.35);animation:auDrift 22s ease-in-out infinite;}
-  .aurora .a2{width:380px;height:380px;bottom:-140px;right:-60px;background:rgba(29,233,168,0.25);animation:auDrift2 26s ease-in-out infinite;}
-  .aurora .a3{width:300px;height:300px;top:40%;left:55%;background:rgba(99,102,241,0.22);animation:auDrift 30s ease-in-out infinite reverse;}
-  @keyframes auDrift{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(60px,40px) scale(1.18)}}
-  @keyframes auDrift2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-50px,-30px) scale(1.12)}}
-
-  /* twinkling speckles */
-  .ambient{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;}
-  .ambient i{
-    position:absolute;border-radius:50%;
-    background:radial-gradient(circle at 40% 35%, #eafff6, rgba(43,227,168,0.7) 60%);
-    animation:twinkle 5s ease-in-out infinite;
+  .backdrop::after{
+    content:'';position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size:56px 56px;
+    -webkit-mask-image:radial-gradient(ellipse at 50% 0%, #000 0%, transparent 75%);
+    mask-image:radial-gradient(ellipse at 50% 0%, #000 0%, transparent 75%);
   }
-  @keyframes twinkle{0%,100%{opacity:0.12;transform:scale(0.7);}50%{opacity:1;transform:scale(1.25);}}
+  .blob{position:fixed;border-radius:50%;filter:blur(90px);z-index:-1;pointer-events:none;}
+  .blob.b1{width:420px;height:420px;top:-160px;left:50%;transform:translateX(-50%);background:rgba(43,227,168,0.10);animation:blobA 18s ease-in-out infinite;}
+  .blob.b2{width:360px;height:360px;bottom:-140px;right:-80px;background:rgba(99,102,241,0.09);animation:blobB 22s ease-in-out infinite;}
+  @keyframes blobA{0%,100%{transform:translateX(-50%) translateY(0) scale(1)}50%{transform:translateX(-44%) translateY(24px) scale(1.15)}}
+  @keyframes blobB{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-30px,-20px) scale(1.1)}}
 
-  .login-shell{display:flex;min-height:100vh;width:100%;}
+  .auth-shell{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 20px;}
 
-  /* ═══════════ LEFT: LIVE DASHBOARD PREVIEW ═══════════ */
-  .dash-preview{
-    flex:1.15;display:flex;flex-direction:column;justify-content:center;
-    padding:48px 52px;gap:24px;position:relative;
+  /* brand mark */
+  .brand{display:flex;flex-direction:column;align-items:center;gap:14px;margin-bottom:28px;}
+  .brand-logo{
+    width:44px;height:44px;border-radius:13px;font-family:'Space Grotesk',sans-serif;
+    font-size:1.2rem;font-weight:700;color:#0a0a0b;
+    display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    box-shadow:0 8px 24px rgba(43,227,168,0.25);
+    opacity:0;transform:translateY(-8px);
+    animation:rise 0.6s cubic-bezier(.22,.61,.36,1) 0.05s forwards;
   }
-  .pv-brand{display:flex;align-items:center;gap:14px;}
-  .pv-logo{
-    width:52px;height:52px;border-radius:15px;font-size:1.4rem;font-weight:800;
-    display:flex;align-items:center;justify-content:center;color:#fff;
-    background:linear-gradient(135deg,rgba(43,227,168,0.22),rgba(29,233,168,0.08));
-    border:1px solid rgba(43,227,168,0.4);
-    animation:pvLogoPulse 2.6s ease-out infinite;
+  .brand-name{
+    font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.95rem;letter-spacing:2.5px;color:var(--fg);
+    text-align:center;opacity:0;transform:translateY(-8px);
+    animation:rise 0.6s cubic-bezier(.22,.61,.36,1) 0.12s forwards;
   }
-  @keyframes pvLogoPulse{0%{box-shadow:0 0 0 0 rgba(43,227,168,0.45)}70%{box-shadow:0 0 0 16px rgba(43,227,168,0)}100%{box-shadow:0 0 0 0 rgba(43,227,168,0)}}
-  .pv-brand-name{font-size:1.05rem;font-weight:800;letter-spacing:0.5px;}
-  .pv-brand-name span{display:block;font-size:0.66rem;font-weight:600;color:var(--muted);letter-spacing:2.5px;margin-top:2px;}
-  .pv-live{margin-left:auto;display:inline-flex;align-items:center;gap:7px;font-size:0.68rem;font-weight:700;color:#a7f3d0;letter-spacing:1px;background:rgba(43,227,168,0.10);border:1px solid rgba(43,227,168,0.22);padding:7px 14px;border-radius:20px;}
-  .pv-live i{width:8px;height:8px;border-radius:50%;background:var(--teal);animation:liveDot 1.6s ease-in-out infinite;}
-  @keyframes liveDot{0%,100%{box-shadow:0 0 0 0 rgba(43,227,168,0.6)}50%{box-shadow:0 0 0 7px rgba(43,227,168,0)}}
+  .brand-name small{display:block;font-family:'Inter',sans-serif;font-weight:500;font-size:0.6rem;letter-spacing:3px;color:var(--muted);margin-top:4px;}
 
-  .pv-title h1{
-    font-size:clamp(1.7rem,3vw,2.4rem);line-height:1.15;font-weight:800;
-    background:linear-gradient(135deg,#ffffff 20%,var(--teal2) 70%);
-    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  /* card */
+  .auth-card{
+    width:min(400px,100%);
+    background:rgba(255,255,255,0.028);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:34px 32px 28px;
+    -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
+    box-shadow:0 24px 90px rgba(0,0,0,0.5);
+    opacity:0;transform:translateY(14px);
+    animation:rise 0.7s cubic-bezier(.22,.61,.36,1) 0.2s forwards;
   }
-  .pv-title p{color:var(--muted);font-size:0.9rem;margin-top:10px;max-width:460px;line-height:1.6;}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 
-  .pv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
-  .pv-stat{
-    background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px 14px;
-    -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
-    transition:transform 0.2s, box-shadow 0.2s;
-    animation:pvUp 0.55s cubic-bezier(.22,.61,.36,1) both;
+  .auth-head h1{font-size:1.3rem;font-weight:600;letter-spacing:-0.01em;}
+  .auth-head p{color:var(--muted);font-size:0.86rem;margin-top:6px;line-height:1.5;}
+
+  form{margin-top:26px;display:flex;flex-direction:column;gap:6px;}
+
+  .g-field{display:flex;flex-direction:column;gap:6px;}
+  .g-field label{font-size:0.72rem;font-weight:500;color:var(--muted);letter-spacing:0.2px;}
+  .g-field input{
+    height:44px;padding:0 14px;
+    background:rgba(255,255,255,0.04);
+    border:1px solid var(--line2);
+    border-radius:11px;color:var(--fg);outline:none;font-size:0.9rem;
+    transition:border-color 0.2s, box-shadow 0.2s, background 0.2s;
   }
-  .pv-stat:hover{transform:translateY(-3px);box-shadow:0 12px 34px rgba(43,227,168,0.10);}
-  .pv-stat:nth-child(1){animation-delay:0.05s;}
-  .pv-stat:nth-child(2){animation-delay:0.14s;}
-  .pv-stat:nth-child(3){animation-delay:0.23s;}
-  .pv-stat:nth-child(4){animation-delay:0.32s;}
-  @keyframes pvUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-  .pv-stat .ic{font-size:1.25rem;display:inline-block;animation:pvFloat 3.6s ease-in-out infinite;}
-  .pv-stat:nth-child(2) .ic{animation-delay:0.3s;}
-  .pv-stat:nth-child(3) .ic{animation-delay:0.6s;}
-  .pv-stat:nth-child(4) .ic{animation-delay:0.9s;}
-  @keyframes pvFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-  .pv-stat .num{
-    font-size:1.55rem;font-weight:800;font-family:'Segoe UI',sans-serif;
-    background:linear-gradient(135deg,var(--teal2),#2bc4b8);
-    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-    margin-top:8px;line-height:1.05;
+  .g-field input::placeholder{color:#57575f;}
+  .g-field input:focus{
+    border-color:var(--accent);
+    box-shadow:0 0 0 3px rgba(43,227,168,0.14);
+    background:rgba(255,255,255,0.05);
   }
-  .pv-stat .lbl{font-size:0.66rem;color:var(--muted);margin-top:3px;font-weight:600;letter-spacing:0.4px;}
+  #loginName,#loginPass2{display:none;}
+  .auth-card.signup-mode #loginName,.auth-card.signup-mode #loginPass2{display:flex;}
 
-  .pv-panels{display:grid;grid-template-columns:1.25fr 1fr;gap:12px;}
-  .pv-card{
-    background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px 18px 16px;
-    -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
-    animation:pvUp 0.55s cubic-bezier(.22,.61,.36,1) 0.3s both;
-  }
-  .pv-card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
-  .pv-card-title{font-size:0.74rem;font-weight:700;letter-spacing:1px;color:#d9fdf0;}
-  .pv-card-title small{display:block;color:var(--muted);font-weight:500;letter-spacing:0;font-size:0.66rem;margin-top:2px;}
+  .g-error{color:#ff6b6b;font-size:0.78rem;display:none;text-align:center;margin-top:4px;min-height:0;}
 
-  @keyframes pvGrow{from{transform:scaleY(0.15);opacity:0.4}to{transform:scaleY(1);opacity:1}}
-  .chart{display:flex;align-items:flex-end;gap:7px;height:120px;}
-  .chart div{
-    flex:1;border-radius:5px 5px 2px 2px;transform-origin:bottom;
-    background:linear-gradient(180deg,var(--teal2),rgba(43,227,168,0.28));
-    animation:pvGrow 0.7s cubic-bezier(.22,.61,.36,1) both;
-  }
-  .chart div:nth-child(1){height:42%;animation-delay:0.34s;}
-  .chart div:nth-child(2){height:66%;animation-delay:0.42s;}
-  .chart div:nth-child(3){height:52%;animation-delay:0.5s;}
-  .chart div:nth-child(4){height:80%;animation-delay:0.58s;}
-  .chart div:nth-child(5){height:60%;animation-delay:0.66s;}
-  .chart div:nth-child(6){height:92%;animation-delay:0.74s;background:linear-gradient(180deg,#fff,var(--teal));}
-  .chart div:nth-child(7){height:72%;animation-delay:0.82s;}
-  .chart div:nth-child(8){height:55%;animation-delay:0.9s;}
-  .chart div:nth-child(9){height:86%;animation-delay:0.98s;}
-  .chart div:nth-child(10){height:68%;animation-delay:1.06s;}
-  .chart div:nth-child(11){height:95%;animation-delay:1.14s;}
-  .chart div:nth-child(12){height:62%;animation-delay:1.22s;}
-
-  .feed{display:flex;flex-direction:column;gap:11px;}
-  .feed-row{display:flex;align-items:center;gap:11px;animation:pvUp 0.5s cubic-bezier(.22,.61,.36,1) both;}
-  .feed-row:nth-child(1){animation-delay:0.4s;}
-  .feed-row:nth-child(2){animation-delay:0.52s;}
-  .feed-row:nth-child(3){animation-delay:0.64s;}
-  .feed-row:nth-child(4){animation-delay:0.76s;}
-  .feed-dot{width:9px;height:9px;border-radius:50%;flex:0 0 auto;animation:liveDot 2s ease-in-out infinite;}
-  .feed-dot.g{background:var(--teal);}
-  .feed-dot.go{background:var(--gold);animation-delay:0.4s;}
-  .feed-dot.b{background:#3B82F6;animation-delay:0.8s;}
-  .feed-txt{flex:1;min-width:0;}
-  .feed-txt b{font-size:0.74rem;font-weight:600;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .feed-txt span{font-size:0.66rem;color:var(--muted);}
-  .feed-time{font-size:0.62rem;color:var(--muted);flex:0 0 auto;}
-
-  /* ═══════════ RIGHT: LOGIN PANEL ═══════════ */
-  .login-panel{flex:0.9;display:flex;align-items:center;justify-content:center;padding:48px 24px;position:relative;}
-  .glass-card{
-    position:relative;width:min(420px,100%);
-    background:linear-gradient(180deg,rgba(16,34,30,0.85),rgba(8,20,18,0.9));
-    border:1px solid var(--line);border-radius:22px;
-    padding:36px 34px 30px;
-    box-shadow:0 24px 70px rgba(0,0,0,0.55), 0 0 50px rgba(43,227,168,0.07);
-    -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
-    animation:gfIn 0.7s cubic-bezier(.22,.61,.36,1) both;
-    overflow:hidden;
-  }
-  @keyframes gfIn{from{opacity:0;transform:translateY(26px) scale(0.97)}to{opacity:1;transform:translateY(0) scale(1)}}
-  .glass-card::before{
-    content:'';position:absolute;top:0;left:0;width:55%;height:100%;pointer-events:none;
-    background:linear-gradient(105deg,transparent,rgba(120,255,210,0.05),transparent);
-    animation:gfShimmer 6s ease-in-out infinite;
-  }
-  @keyframes gfShimmer{0%{transform:translateX(-140%) skewX(-18deg)}100%{transform:translateX(340%) skewX(-18deg)}}
-  .glass-card>*{position:relative;z-index:1;}
-  .lg-orb{position:absolute;border-radius:50%;background:rgba(43,227,168,0.10);pointer-events:none;z-index:0;}
-  .lg-orb.o1{width:120px;height:120px;top:-50px;right:-40px;animation:lgO1 9s ease-in-out infinite;}
-  .lg-orb.o2{width:70px;height:70px;left:-30px;bottom:20px;animation:lgO2 10s ease-in-out infinite;}
-  @keyframes lgO1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-16px,24px) scale(1.15)}}
-  @keyframes lgO2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(14px,-18px) scale(0.88)}}
-
-  .gf-brand{display:flex;align-items:center;gap:12px;margin-bottom:6px;}
-  .gf-logo{
-    width:44px;height:44px;border-radius:13px;font-size:1.15rem;font-weight:800;
-    display:flex;align-items:center;justify-content:center;color:#fff;
-    background:linear-gradient(135deg,rgba(43,227,168,0.25),rgba(29,233,168,0.08));
-    border:1px solid rgba(43,227,168,0.4);animation:gfLogo 2.6s ease-out infinite;
-  }
-  @keyframes gfLogo{0%{box-shadow:0 0 0 0 rgba(43,227,168,0.4)}70%{box-shadow:0 0 0 12px rgba(43,227,168,0)}100%{box-shadow:0 0 0 0 rgba(43,227,168,0)}}
-  .gf-brand h2{font-size:1.22rem;font-weight:800;}
-  .gf-brand h2 small{display:block;color:var(--muted);font-weight:500;font-size:0.66rem;letter-spacing:2.5px;margin-top:2px;}
-  #cardSub{color:var(--muted);font-size:0.8rem;margin:2px 0 18px;}
-
-  #loginName,#loginPass2{display:none;animation:gfield 0.35s ease;}
-  .glass-card.signup-mode #loginName,.glass-card.signup-mode #loginPass2{display:block;}
-  @keyframes gfield{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
-
-  .g-input{
-    width:100%;box-sizing:border-box;
-    padding:13px 14px;margin:8px 0;
-    border:1px solid rgba(43,227,168,0.14);border-radius:11px;
-    background:rgba(4,14,12,0.55);color:#fff;outline:none;font-size:0.92rem;
-    transition:border-color 0.3s, box-shadow 0.3s, transform 0.2s;
-  }
-  .g-input::placeholder{color:#5e8d80;}
-  .g-input:focus{border-color:var(--teal);box-shadow:0 0 16px rgba(43,227,168,0.22);transform:translateY(-1px);}
-
-  .g-error{color:#ff6b6b;font-size:0.8rem;display:none;text-align:center;margin-top:8px;}
   .g-btn{
-    width:100%;padding:13px;margin:14px 0 4px;
-    background:linear-gradient(45deg,#1de9a8,#0fbf82);
-    border:none;color:#04241c;font-weight:800;font-size:0.95rem;
-    border-radius:11px;cursor:pointer;position:relative;overflow:hidden;
-    box-shadow:0 10px 26px rgba(16,185,129,0.35);
-    transition:transform 0.2s ease, box-shadow 0.2s ease;
+    height:44px;margin-top:14px;border:none;border-radius:11px;cursor:pointer;
+    font-family:'Inter',sans-serif;font-size:0.9rem;font-weight:600;color:#04140e;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    box-shadow:0 8px 26px rgba(43,227,168,0.22);
+    transition:filter 0.2s, transform 0.15s, box-shadow 0.2s;
   }
-  .g-btn::after{
-    content:'';position:absolute;top:0;left:0;width:55%;height:100%;pointer-events:none;
-    background:linear-gradient(105deg,transparent,rgba(255,255,255,0.5),transparent);
-    animation:gfShimmer 4.2s ease-in-out infinite;
-  }
-  .g-btn:hover{transform:scale(1.02);box-shadow:0 0 30px rgba(29,233,168,0.45);}
-  .g-btn:active{transform:scale(0.98);}
-  .g-btn:disabled{opacity:0.6;cursor:wait;transform:none;}
+  .g-btn:hover{filter:brightness(1.08);box-shadow:0 10px 34px rgba(43,227,168,0.32);}
+  .g-btn:active{transform:scale(0.985);}
+  .g-btn:disabled{opacity:0.55;cursor:wait;filter:none;}
 
-  .g-signup{font-size:0.8rem;text-align:center;color:var(--muted);margin-top:12px;}
-  .g-signup a{color:var(--teal);text-decoration:none;font-weight:700;cursor:pointer;}
-  .g-signup a:hover{text-decoration:underline;}
+  .divider{display:flex;align-items:center;gap:12px;margin:20px 0 14px;color:var(--muted);font-size:0.7rem;letter-spacing:1px;}
+  .divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--line);}
 
-  .g-chips{display:flex;justify-content:center;gap:7px;flex-wrap:wrap;margin-top:16px;}
-  .g-chip{
-    background:rgba(43,227,168,0.08);border:1px solid rgba(43,227,168,0.18);
-    color:#a7f3d0;font-size:0.64rem;font-weight:600;padding:5px 11px;border-radius:18px;
-    display:inline-flex;align-items:center;gap:5px;
-    animation:gchip 0.5s cubic-bezier(.22,.61,.36,1) both;
+  .oauth{
+    width:100%;height:44px;border-radius:11px;cursor:pointer;
+    background:rgba(255,255,255,0.04);border:1px solid var(--line2);color:var(--fg);
+    display:flex;align-items:center;justify-content:center;gap:10px;font-size:0.85rem;font-weight:500;
+    transition:background 0.2s, border-color 0.2s;
   }
-  .g-chip:nth-child(1){animation-delay:0.1s;}
-  .g-chip:nth-child(2){animation-delay:0.18s;}
-  .g-chip:nth-child(3){animation-delay:0.26s;}
-  @keyframes gchip{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  .oauth:hover{background:rgba(255,255,255,0.07);border-color:rgba(255,255,255,0.2);}
+  .oauth:active{transform:scale(0.99);}
+  .oauth svg{width:18px;height:18px;}
 
-  /* mobile */
-  @media (max-width:920px){
-    .dash-preview{display:none;}
-    .login-shell{justify-content:center;}
-    .login-panel{flex:1;padding:32px 18px;}
-  }
+  .g-signup{font-size:0.8rem;text-align:center;color:var(--muted);margin-top:20px;padding-top:18px;border-top:1px solid var(--line);}
+  .g-signup a{color:var(--fg);font-weight:600;cursor:pointer;text-decoration:none;transition:color 0.15s;}
+  .g-signup a:hover{color:var(--accent);}
+
+  .auth-foot{margin-top:34px;color:#4b4b52;font-size:0.68rem;letter-spacing:0.4px;text-align:center;line-height:1.7;}
+  .auth-foot span{color:#6b6b73;}
+  .auth-foot svg{width:11px;height:11px;vertical-align:-1px;margin:0 2px;}
 
   @media (prefers-reduced-motion: reduce){
-    .aurora span,.ambient i,.pv-live i,.pv-logo,.pv-stat,.pv-stat .ic,.chart div,.pv-card,.feed-row,.glass-card,.glass-card::before,.g-btn,.g-btn::after,.g-chip,.gf-logo,.lg-orb{animation:none !important;}
+    .blob,.brand-logo,.brand-name,.auth-card{animation:none !important;opacity:1 !important;transform:none !important;}
   }
 </style>
 </head>
 <body>
 
-<div class="aurora"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
-<div class="ambient" id="ambient"></div>
+<div class="backdrop"></div>
+<div class="blob b1"></div>
+<div class="blob b2"></div>
 
-<div class="login-shell">
+<div class="auth-shell">
 
-  <!-- LEFT: LIVE DASHBOARD PREVIEW -->
-  <div class="dash-preview">
-    <div class="pv-brand">
-      <div class="pv-logo">P</div>
-      <div class="pv-brand-name">PLATINUMZ<span>IT SUPPORT &amp; SOLUTIONS</span></div>
-      <span class="pv-live"><i></i>LIVE</span>
-    </div>
-
-    <div class="pv-title">
-      <h1>Kituo cha Uendeshaji, Hali ya Juu.</h1>
-      <p>Angalia jinsi PLATINUMZ inadhibiti maelfu ya orders, wateja na shughuli — kisha ingia kwenye dashboard yako.</p>
-    </div>
-
-    <div class="pv-grid">
-      <div class="pv-stat"><div class="ic">📦</div><div class="num" data-count="1284">0</div><div class="lbl">ORDERS TOT</div></div>
-      <div class="pv-stat"><div class="ic">👥</div><div class="num" data-count="342">0</div><div class="lbl">WATEJA</div></div>
-      <div class="pv-stat"><div class="ic">⚡</div><div class="num" data-count="98">0</div><div class="lbl">UPTIME %</div></div>
-      <div class="pv-stat"><div class="ic">🔧</div><div class="num" data-count="46">0</div><div class="lbl">HUDUMA</div></div>
-    </div>
-
-    <div class="pv-panels">
-      <div class="pv-card">
-        <div class="pv-card-head">
-          <div class="pv-card-title">SHUGHULI ZA WIKI<small>Mizigo ya kila siku</small></div>
-          <span class="pv-live" style="font-size:0.6rem;padding:4px 10px;">📈 32%</span>
-        </div>
-        <div class="chart">
-          <div></div><div></div><div></div><div></div><div></div><div></div>
-          <div></div><div></div><div></div><div></div><div></div><div></div>
-        </div>
-      </div>
-      <div class="pv-card">
-        <div class="pv-card-head">
-          <div class="pv-card-title">SHUGHULI ZA HIVI KARIBUNI<small>Mtandao wa moja kwa moja</small></div>
-        </div>
-        <div class="feed">
-          <div class="feed-row"><span class="feed-dot g"></span><div class="feed-txt"><b>Order mpya imepokelewa</b><span>Ukarabati wa Kompyuta</span></div><span class="feed-time">dak 2</span></div>
-          <div class="feed-row"><span class="feed-dot go"></span><div class="feed-txt"><b>Mteja mpya amejiunga</b><span>Amina J. — Dar es Salaam</span></div><span class="feed-time">dak 5</span></div>
-          <div class="feed-row"><span class="feed-dot g"></span><div class="feed-txt"><b>Order imekamilika</b><span>Usanidi wa Mtandao</span></div><span class="feed-time">dak 9</span></div>
-          <div class="feed-row"><span class="feed-dot b"></span><div class="feed-txt"><b>Chat session</b><span>Msaada wa mbali</span></div><span class="feed-time">dak 12</span></div>
-        </div>
-      </div>
-    </div>
+  <div class="brand">
+    <div class="brand-logo">P</div>
+    <div class="brand-name">PLATINUMZ<small>IT SUPPORT &amp; SOLUTIONS</small></div>
   </div>
 
-  <!-- RIGHT: LOGIN -->
-  <div class="login-panel">
-    <div class="glass-card" id="loginFormWrap">
-      <span class="lg-orb o1"></span>
-      <span class="lg-orb o2"></span>
-      <div class="gf-brand">
-        <div class="gf-logo">P</div>
-        <h2>WELCOME BACK<small>PLATINUMZ IT SUPPORT</small></h2>
-      </div>
-      <p class="card-sub" id="cardSub">Ingia kwenye akaunti yako</p>
-
-      <form id="loginForm">
-        <input class="g-input" type="text" id="loginName" placeholder="Jina lako (kwa kujisajili)" autocomplete="name">
-        <input class="g-input" type="email" id="loginEmail" placeholder="Email" required>
-        <input class="g-input" type="password" id="loginPass" placeholder="Password" required>
-        <input class="g-input" type="password" id="loginPass2" placeholder="Rudia Password" autocomplete="new-password">
-        <div class="g-error" id="loginError"></div>
-        <button class="g-btn" type="submit" id="loginBtn">Login</button>
-      </form>
-
-      <p class="g-signup" id="switchModeText">Huna akaunti? <a id="switchModeLink">Jisajili hapa</a></p>
-
-      <div class="g-chips">
-        <span class="g-chip">🛡️ Admin</span>
-        <span class="g-chip">📊 Orders</span>
-        <span class="g-chip">💬 Chat 24/7</span>
-      </div>
+  <div class="auth-card" id="loginFormWrap">
+    <div class="auth-head">
+      <h1>Karibu tena</h1>
+      <p>Ingia kwenye akaunti yako kuendelea na shughuli.</p>
     </div>
+
+    <form id="loginForm">
+      <div class="g-field" id="lgNameField"><label>Jina lako</label><input class="f-input" type="text" id="loginName" placeholder="Jina lako (kwa kujisajili)" autocomplete="name"></div>
+      <div class="g-field"><label>Barua pepe</label><input class="f-input" type="email" id="loginEmail" placeholder="name@example.com" required></div>
+      <div class="g-field"><label>Nenosiri</label><input class="f-input" type="password" id="loginPass" placeholder="Nenosiri lako" required></div>
+      <div class="g-field" id="lgPass2Field"><label>Rudia nenosiri</label><input class="f-input" type="password" id="loginPass2" placeholder="Rudia nenosiri" autocomplete="new-password"></div>
+      <div class="g-error" id="loginError"></div>
+      <button class="g-btn" type="submit" id="loginBtn">Endelea</button>
+    </form>
+
+    <div class="divider">AU</div>
+
+    <button class="oauth" id="googleBtn" type="button">
+      <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.06H2.18A10.97 10.97 0 0 0 1 12c0 1.77.43 3.45 1.18 4.94l2.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+      Endelea na Google
+    </button>
+
+    <p class="g-signup" id="switchModeText">Huna akaunti? <a id="switchModeLink">Jiandikishe</a></p>
+  </div>
+
+  <div class="auth-foot">
+    <span>© 2026 PLATINUMZ IT Support — Inalindwa na <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg> Firebase Auth</span>
   </div>
 </div>
 
@@ -377,24 +237,6 @@ auth.onAuthStateChanged(function(user){
   if(user){ _route(user); }
 });
 
-/* generate twinkling speckles */
-(function(){
-  var amb = document.getElementById('ambient');
-  if(!amb) return;
-  var n = (window.innerWidth < 480) ? 26 : 46;
-  for(var k=0;k<n;k++){
-    var i = document.createElement('i');
-    var s = (Math.random()*3+1).toFixed(1);
-    i.style.width = s+'px';
-    i.style.height = s+'px';
-    i.style.left = (Math.random()*100)+'%';
-    i.style.top = (Math.random()*100)+'%';
-    i.style.animationDelay = (Math.random()*5)+'s';
-    i.style.animationDuration = (Math.random()*3+3.2).toFixed(2)+'s';
-    amb.appendChild(i);
-  }
-})();
-
 /* switch between Login and Signup modes */
 var authMode = 'login';
 function setAuthMode(mode){
@@ -406,17 +248,23 @@ function setAuthMode(mode){
   err.style.display = 'none';
   if(mode === 'signup'){
     wrap.classList.add('signup-mode');
-    btn.textContent = 'Jisajili';
+    btn.textContent = 'Jiandikishe';
     sw.innerHTML = 'Una akaunti? <a id="switchModeLink">Ingia</a>';
   } else {
     wrap.classList.remove('signup-mode');
-    btn.textContent = 'Login';
-    sw.innerHTML = 'Huna akaunti? <a id="switchModeLink">Jisajili hapa</a>';
+    btn.textContent = 'Endelea';
+    sw.innerHTML = 'Huna akaunti? <a id="switchModeLink">Jiandikishe</a>';
   }
   document.getElementById('switchModeLink').addEventListener('click', function(){
     setAuthMode(authMode === 'login' ? 'signup' : 'login');
   });
 }
+
+document.getElementById('googleBtn').addEventListener('click', function(){
+  var err = document.getElementById('loginError');
+  err.textContent = 'Google sign-in inakaribishwa hivi karibuni. Tumia email na nenosiri.';
+  err.style.display = 'block';
+});
 
 document.getElementById('loginForm').addEventListener('submit', function(e){
   e.preventDefault();
@@ -432,13 +280,13 @@ document.getElementById('loginForm').addEventListener('submit', function(e){
   if(authMode === 'signup'){
     var pass2 = document.getElementById('loginPass2').value;
     if(pass.length < 6){
-      err.textContent = 'Password lazima iwe angalau herufi 6.';
+      err.textContent = 'Nenosiri lazima liwe angalau herufi 6.';
       err.style.display = 'block';
       btn.disabled = false;
       return;
     }
     if(pass !== pass2){
-      err.textContent = 'Password hazifanani.';
+      err.textContent = 'Nenosiri hazifanani.';
       err.style.display = 'block';
       btn.disabled = false;
       return;
@@ -466,37 +314,17 @@ document.getElementById('loginForm').addEventListener('submit', function(e){
   }).then(function(){
     /* routed by onAuthStateChanged */
   }).catch(function(error){
-    btn.textContent = authMode === 'signup' ? 'Jisajili' : 'Login';
+    btn.textContent = authMode === 'signup' ? 'Jiandikishe' : 'Endelea';
     btn.disabled = false;
-    var msg = 'Something went wrong.';
+    var msg = 'Kuna tatizo. Jaribu tena.';
     if(error.code==='auth/email-already-in-use') msg='Email hii tayari imetumika.';
     else if(error.code==='auth/invalid-email') msg='Email si sahihi.';
-    else if(error.code==='auth/weak-password') msg='Password ni dhaifu sana.';
-    else if(error.code==='auth/invalid-credential'||error.code==='auth/wrong-password'||error.code==='auth/user-not-found') msg='Email au password si sahihi.';
+    else if(error.code==='auth/weak-password') msg='Nenosiri ni dhaifu sana.';
+    else if(error.code==='auth/invalid-credential'||error.code==='auth/wrong-password'||error.code==='auth/user-not-found') msg='Email au nenosiri si sahihi.';
     err.textContent = msg;
     err.style.display = 'block';
   });
 });
-
-/* count-up for live dashboard stats */
-(function(){
-  function go(el){
-    var target = parseInt(el.getAttribute('data-count'),10) || 0;
-    var dur = 1200, start = null;
-    function step(ts){
-      if(start === null) start = ts;
-      var p = Math.min((ts - start) / dur, 1);
-      var ease = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.floor(ease * target);
-      if(p < 1) requestAnimationFrame(step);
-      else el.textContent = target;
-    }
-    requestAnimationFrame(step);
-  }
-  document.querySelectorAll('.pv-stat .num').forEach(function(el){
-    if(!el.__started){ el.__started = true; go(el); }
-  });
-})();
 
 setAuthMode('login');
 </script>
