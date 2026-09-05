@@ -264,6 +264,108 @@
   .signup{font-size:0.82rem;text-align:center;color:#7fa89c;margin-top:12px;}
   .signup a{color:#2be3a8;text-decoration:none;font-weight:600;cursor:pointer;}
   .signup a:hover{text-decoration:underline;}
+
+  /* ═══════════ LOGIN DASHBOARD-STYLE ANIMATIONS ═══════════ */
+  @keyframes lgHeroShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+  @keyframes lgShimmer{0%{transform:translateX(-140%) skewX(-18deg)}100%{transform:translateX(340%) skewX(-18deg)}}
+  @keyframes lgOrb{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(18px,-22px) scale(1.18)}}
+  @keyframes lgOrb2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-20px,16px) scale(0.85)}}
+  @keyframes lgFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  @keyframes lgBrandPulse{0%{box-shadow:0 8px 22px rgba(99,102,241,0.45),0 0 0 0 rgba(99,102,241,0.45)}70%{box-shadow:0 8px 22px rgba(99,102,241,0.45),0 0 0 16px rgba(99,102,241,0)}100%{box-shadow:0 8px 22px rgba(99,102,241,0.45),0 0 0 0 rgba(99,102,241,0)}}
+  @keyframes lgBgDrift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+  .login-container{
+    background:
+      radial-gradient(600px 400px at 120% 0%, rgba(255,255,255,0.10), transparent 60%),
+      linear-gradient(135deg,#6366f1,#a855f7 35%,#ec4899 60%,#f43f5e) !important;
+    background-size:220% 220% !important;
+    animation:lgHeroShift 12s ease-in-out infinite;
+    border:1px solid rgba(255,255,255,0.16) !important;
+    box-shadow:0 24px 70px rgba(99,102,241,0.35), 0 0 60px rgba(236,72,153,0.18) !important;
+  }
+  .login-container::before{
+    content:'';position:absolute;top:0;left:0;width:55%;height:100%;pointer-events:none;z-index:0;
+    background:linear-gradient(105deg,transparent,rgba(255,255,255,0.20),transparent);
+    animation:lgShimmer 5.5s ease-in-out infinite;
+  }
+  .login-container>*{position:relative;z-index:1;}
+  .lg-orb{position:absolute;border-radius:50%;background:rgba(255,255,255,0.14);pointer-events:none;z-index:0;}
+  .lg-orb.o1{width:96px;height:96px;top:-34px;right:8%;animation:lgOrb 8s ease-in-out infinite;}
+  .lg-orb.o2{width:52px;height:52px;left:6%;bottom:26px;animation:lgOrb2 9s ease-in-out infinite;}
+  .lg-orb.o3{width:22px;height:22px;left:34%;bottom:20px;background:rgba(255,255,255,0.30);animation:lgFloat 5s ease-in-out infinite;}
+
+  .lg-brand{
+    display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:2px;
+  }
+  .lg-brand-logo{
+    width:48px;height:48px;border-radius:14px;font-size:1.35rem;font-weight:800;
+    display:flex;align-items:center;justify-content:center;color:#fff;
+    background:linear-gradient(135deg,rgba(255,255,255,0.28),rgba(255,255,255,0.12));
+    border:1px solid rgba(255,255,255,0.30);
+    animation:lgBrandPulse 2.6s ease-out infinite;
+    transition:transform 0.3s;
+  }
+  .lg-brand-logo:hover{transform:scale(1.1) rotate(4deg);}
+  .lg-brand-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.05rem;letter-spacing:0.5px;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,0.25);}
+  .lg-brand-name span{color:rgba(255,255,255,0.72);font-weight:500;font-size:0.68rem;display:block;letter-spacing:1.5px;}
+
+  .lg-page-title{
+    font-family:'Space Grotesk',sans-serif;font-size:1.45rem;font-weight:700;color:#fff;
+    text-shadow:0 2px 14px rgba(0,0,0,0.28);
+    animation:lgFloat 3.6s ease-in-out infinite;
+  }
+  #cardSub{color:rgba(255,255,255,0.82) !important;}
+  .role-tag{
+    background:rgba(255,255,255,0.16) !important;border-color:rgba(255,255,255,0.28) !important;color:#fff !important;
+  }
+
+  input{
+    background:rgba(15,20,40,0.35) !important;color:#fff !important;
+    border:1px solid rgba(255,255,255,0.30) !important;
+    -webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);
+    transition:border-color 0.3s, box-shadow 0.3s, transform 0.2s;
+  }
+  input::placeholder{color:rgba(255,255,255,0.55) !important;}
+  input:focus{
+    border-color:#fff !important;
+    box-shadow:0 0 16px rgba(255,255,255,0.35), 0 0 34px rgba(216,180,254,0.25);
+    transform:translateY(-1px);
+  }
+
+  button{
+    background:linear-gradient(45deg,#1de9a8,#0fbf82);
+    border:none;color:#04241c;font-weight:800;
+    position:relative;overflow:hidden;
+    box-shadow:0 8px 24px rgba(16,185,129,0.40);
+  }
+  button::after{
+    content:'';position:absolute;top:0;left:0;width:55%;height:100%;pointer-events:none;
+    background:linear-gradient(105deg,transparent,rgba(255,255,255,0.55),transparent);
+    animation:lgShimmer 4.2s ease-in-out infinite;
+  }
+  button:hover{transform:scale(1.03);box-shadow:0 0 30px #1de9a8;}
+  button:active{transform:scale(0.98);}
+
+  .lg-chips{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:14px 0 2px;}
+  .lg-chip{
+    background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.22);
+    color:#fff;font-size:0.68rem;font-weight:600;padding:6px 12px;border-radius:20px;
+    display:inline-flex;align-items:center;gap:5px;
+    animation:lgSlideUp 0.5s cubic-bezier(.22,.61,.36,1) both;
+  }
+  .lg-chip:nth-child(1){animation-delay:0.05s;}
+  .lg-chip:nth-child(2){animation-delay:0.12s;}
+  .lg-chip:nth-child(3){animation-delay:0.19s;}
+  .lg-chip:nth-child(4){animation-delay:0.26s;}
+  @keyframes lgSlideUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+  @media(max-width:520px){
+    .lg-brand{flex-direction:column;gap:6px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .login-container,.login-container::before,.lg-orb,.lg-brand-logo,.lg-page-title,#cardSub,.role-tag,input,button,button::after,.lg-chip,body::after,.robot-head,.spotlight,.under-light,.heading-light,.eye{animation:none !important;}
+    button::after{display:none;}
+  }
 </style>
 </head>
 <body>
@@ -271,6 +373,9 @@
 <div class="ambient" id="ambient"></div>
 
 <div class="login-container" id="loginFormWrap">
+  <span class="lg-orb o1"></span>
+  <span class="lg-orb o2"></span>
+  <span class="lg-orb o3"></span>
   <div class="spotlight"></div>
   <div class="login-row">
     <div class="robot-head">
@@ -284,10 +389,21 @@
     </div>
 
     <div class="form-side">
+      <div class="lg-brand">
+        <div class="lg-brand-logo">P</div>
+        <div class="lg-brand-name">PLATINUMZ<span>IT SUPPORT</span></div>
+      </div>
       <div class="heading-light"></div>
       <span class="role-tag">PLATINUMZ IT Support</span>
-      <h2 id="cardTitle">Welcome Back</h2>
+      <h2 class="lg-page-title" id="cardTitle">Welcome Back</h2>
       <p class="card-sub" id="cardSub">Ingia kwenye akaunti yako</p>
+
+      <div class="lg-chips">
+        <span class="lg-chip">🛡️ Admin</span>
+        <span class="lg-chip">📊 Orders</span>
+        <span class="lg-chip">💬 Chat</span>
+        <span class="lg-chip">📱 Support</span>
+      </div>
 
       <form id="loginForm">
         <input type="text" id="loginName" placeholder="Jina lako (kwa kujisajili)" autocomplete="name">
