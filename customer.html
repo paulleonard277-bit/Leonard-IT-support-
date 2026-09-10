@@ -13,6 +13,7 @@
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="manifest" href="manifest.json">
 <style>#jsErrors{position:fixed;bottom:0;left:0;right:0;background:red;color:#fff;font:11px/1.4 monospace;padding:6px 10px;z-index:99999;max-height:100px;overflow:auto;display:none;}</style>
+<script>window.onerror=function(m,s,l){var d=document.getElementById('jsErrors');if(d){d.style.display='block';d.innerHTML+='ERR:'+m+' @L'+l+'\n';}return true;};</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">

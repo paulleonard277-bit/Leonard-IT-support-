@@ -3679,6 +3679,7 @@ window.onerror=function(msg,src,line,col){
       const visibleMonths = months.slice(0, now.getMonth()+1);
       const ordersData = monthCounts.slice(0, now.getMonth()+1);
       const clientsData = clientMonthCounts.slice(0, now.getMonth()+1);
+      if(!window.Chart){ return; }
       const chartColors = { fiber:'#3cd3c6', gold:'#ffd700', blue:'#4da6ff', green:'#5cb85c', red:'#ff6b6b', purple:'#9b59b6' };
       const fontFamily = "'Inter',sans-serif";
       const defaultOpts = { responsive:true, maintainAspectRatio:true, plugins:{ legend:{ labels:{ color:'var(--text)', font:{family:fontFamily,size:12} } } }, scales:{ x:{ ticks:{color:'var(--muted)',font:{family:fontFamily,size:11}}, grid:{color:'var(--line)'} }, y:{ ticks:{color:'var(--muted)',font:{family:fontFamily,size:11}}, grid:{color:'var(--line)'} } } };
