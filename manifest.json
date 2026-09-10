@@ -1,9 +1,21 @@
 {
-    "theme_color":  "#4f46e5",
-    "name":  "PLATINUMZ IT Support",
-    "display":  "standalone",
-    "short_name":  "PLATINUMZ",
-    "background_color":  "#f4f6fb",
-    "description":  "PLATINUMZ IT Support Dashboard",
-    "start_url":  "./login.html"
+  "id": "./",
+  "name": "PLATINUMZ IT Support",
+  "short_name": "PLATINUMZ",
+  "description": "PLATINUMZ IT Support — Huduma za TEHAMA, tickets, na msaada wa mbali. Sakinisha kwenye simu au kompyuta yako.",
+  "start_url": "./login.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
+  "background_color": "#0a0a0b",
+  "theme_color": "#0a0a0b",
+  "lang": "sw",
+  "categories": ["business", "productivity"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "maskable-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "maskable-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
 }

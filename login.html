@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sign in — PLATINUMZ</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0b">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="PLATINUMZ">
+<link rel="apple-touch-icon" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -144,6 +151,16 @@
   .auth-foot span{color:#6b6b73;}
   .auth-foot svg{width:11px;height:11px;vertical-align:-1px;margin:0 2px;}
 
+  .install-btn{
+    margin-top:18px;background:transparent;border:1px solid var(--line2);color:var(--muted);
+    padding:9px 18px;border-radius:8px;font-size:0.78rem;font-family:'Inter',sans-serif;
+    cursor:pointer;letter-spacing:0.3px;display:inline-flex;align-items:center;gap:8px;
+    transition:border-color 0.15s ease,color 0.15s ease;
+  }
+  .install-btn:hover{border-color:var(--accent);color:var(--accent);}
+  .install-btn svg{width:13px;height:13px;vertical-align:0;}
+  .install-hint{margin-top:10px;font-size:0.7rem;color:#6b6b73;line-height:1.6;}
+
   @media (prefers-reduced-motion: reduce){
     .blob,.brand-logo,.brand-name,.auth-card{animation:none !important;opacity:1 !important;transform:none !important;}
   }
@@ -189,6 +206,12 @@
 
   <div class="auth-foot">
     <span>© 2026 PLATINUMZ IT Support — Inalindwa na <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg> Firebase Auth</span>
+    <br>
+    <button type="button" id="installAppBtn" class="install-btn" style="display:none;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Sakinisha App
+    </button>
+    <div class="install-hint" id="installHint" style="display:none;"></div>
   </div>
 </div>
 
@@ -373,6 +396,62 @@ document.getElementById('loginForm').addEventListener('submit', function(e){
 });
 
 setAuthMode('login');
+
+/* PWA: install app button + service worker */
+(function(){
+  var btn = document.getElementById('installAppBtn');
+  var hint = document.getElementById('installHint');
+  var isApp = window.matchMedia && window.matchMedia('(display-mode: standalone)').matches;
+  var isIos = /iP(hone|ad|od)/.test(navigator.userAgent || '');
+  var promptEvt = null;
+
+  function showBtn(){
+    if(btn) btn.style.display = 'inline-flex';
+  }
+  function hideBtn(){
+    if(btn) btn.style.display = 'none';
+  }
+  function showIosHint(){
+    if(hint && !hint.textContent){
+      hint.style.display = 'block';
+      hint.textContent = 'Kwenye iPhone/iPad: bonyeza ikoni ya "Share" (mraba yenye mshale juu) upande wa chini wa browser, kisha chagua "Ongeza kwenye Nyumbani / Add to Home Screen".';
+    }
+  }
+
+  window.addEventListener('beforeinstallprompt', function(e){
+    e.preventDefault();
+    promptEvt = e;
+    if(!isApp) showBtn();
+  });
+  window.addEventListener('appinstalled', function(){
+    promptEvt = null;
+    hideBtn();
+  });
+
+  if(!isApp && isIos) showBtn();
+
+  if(btn){
+    btn.addEventListener('click', function(){
+      if(promptEvt){
+        promptEvt.prompt();
+        promptEvt.userChoice.then(function(){
+          promptEvt = null;
+          hideBtn();
+        });
+      } else if(isIos) {
+        showIosHint();
+      } else {
+        showIosHint();
+      }
+    });
+  }
+})();
+
+if('serviceWorker' in navigator){
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('service-worker.js').catch(function(){});
+  });
+}
 </script>
 </body>
 </html>
